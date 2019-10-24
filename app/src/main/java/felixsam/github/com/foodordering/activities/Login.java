@@ -32,6 +32,9 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
     User login_user;
     Intent intent;
     ArrayList<User> userlist;
+    //check for users
+    Boolean anyusers = Boolean.FALSE;
+    ArrayAdapter<User> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
             Toast.makeText(Login.this, "The Database is empty  :(.", Toast.LENGTH_LONG).show();
         } else {
             System.out.println("Else Statement");
+            anyusers = Boolean.TRUE;
             Log.d(TAG, "Number of Rows is: " + numRows);
 
             int i = 0;
@@ -73,7 +77,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
 
             }
 
-            ArrayAdapter<User> adapter = new ArrayAdapter<User>(this, android.R.layout.simple_spinner_item, userlist);
+            adapter = new ArrayAdapter<User>(this, android.R.layout.simple_spinner_item, userlist);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             System.out.println("Set Adapter");
 
@@ -120,32 +124,44 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        dropdown.setAdapter(adapter);
+    }
+
+    @Override
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_login:
                 System.out.println("Clicked login button");
 
-                login_user = getSelectedUser();
-                String login_name = login_user.getName();
-                int login_id = login_user.getUserID();
+                if (anyusers == Boolean.TRUE){
+                    login_user = getSelectedUser();
+                    String login_name = login_user.getName();
+                    int login_id = login_user.getUserID();
 
 
-                System.out.println("Login Name: " + login_name + "\n UserID: " + login_id);
+                    System.out.println("Login Name: " + login_name + "\n UserID: " + login_id);
 
-                g.setUser(login_name);
-                g.setUser_ID(login_id);
+                    g.setUser(login_name);
+                    g.setUser_ID(login_id);
 
-                intent = new Intent(Login.this, MainActivity.class);
-                startActivity(intent);
-                //prevent going back to login activity
-                //Destroy login Activity
-                finish();
+                    intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    //prevent going back to login activity
+                    //Destroy login Activity
+                    finish();
+                }else{
+                    Toast.makeText(this, "Cannot login, No users", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
             case R.id.login_btn_register:
                 intent = new Intent(Login.this, Add_Customer.class);
+                intent.putExtra("PARENT_ACTIVITY_CLASS", getClass());
                 startActivity(intent);
-                intent.putExtra("PARENT_ACTIVITY", getClass().getName());
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package felixsam.github.com.foodordering.activities;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,13 +23,15 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
-
+    private Intent intent;
     private EditText editText;
+    Class nextActivityClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent receivedIntent = getIntent();
-        String parent_activity = receivedIntent.getStringExtra("PARENT_ACTIVITY");
+        Bundle extras = getIntent().getExtras();
+        nextActivityClass = (Class<Activity>)extras.getSerializable("PARENT_ACTIVITY_CLASS");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_customer);
@@ -57,14 +60,17 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                 if (editText.length() != 0) {
                     AddData(newEntry);
                     editText.setText("");
+                    intent = new Intent(Add_Customer.this,nextActivityClass);
+                    startActivity(intent);
                     finish();
+
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
                 break;
 
             case R.id.btn_customer_view:
-                Intent intent = new Intent(Add_Customer.this, List_Customers.class);
+                intent = new Intent(Add_Customer.this, List_Customers.class);
                 startActivity(intent);
                 break;
 
@@ -90,5 +96,11 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,getClass());
+        startActivity(intent);
+        super.onBackPressed();
+    }
 
 }

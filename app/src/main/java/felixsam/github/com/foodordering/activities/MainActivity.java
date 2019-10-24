@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     String[] subtitleArray = {
             "Refreshing Drinks",
-            "Yummy Cakes",
+            "Delicious Cakes",
             "Checkout for current User",
             "See active orders",
             "Register new customers"
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_favorite) {
+        if (id == R.id.action_home) {
             Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
             return true;
         }
@@ -86,5 +86,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
