@@ -20,6 +20,7 @@ import felixsam.github.com.foodordering.activities.Drink_Menu;
 import felixsam.github.com.foodordering.activities.List_Customers;
 import felixsam.github.com.foodordering.activities.List_Orders;
 import felixsam.github.com.foodordering.activities.List_Orders_By_ID;
+import felixsam.github.com.foodordering.activities.MainActivity;
 
 public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_DashboardCards.MyViewHolder>{
     private Context mContext;
@@ -82,7 +83,7 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                     mContext.startActivity(intent);
                 }else if (position == 4){
                     Intent intent = new Intent(v.getContext(), Add_Customer.class);
-                    intent.putExtra("PARENT_ACTIVITY", getClass().getName());
+                    intent.putExtra("PARENT_ACTIVITY_CLASS", MainActivity.class);
                     mContext.startActivity(intent);
                 }
 
