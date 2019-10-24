@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="felixsam.github.com.foodordering">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activities.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.MainActivity"
+            android:parentActivityName=".activities.Login">
+        </activity>
+        <activity android:name=".activities.Drink_Menu"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
+        <activity android:name=".activities.Cake_Menu"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
+        <activity android:name=".activities.List_Orders_By_ID"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
+        <activity android:name=".activities.CheckoutActivity"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
+        <activity android:name=".activities.Add_Customer"
+            android:parentActivityName=".activities.Login">
+        </activity>
+        <activity android:name=".activities.List_Added_Drinks"
+            android:parentActivityName=".activities.Drink_Menu">
+        </activity>
+        <activity android:name=".activities.List_Added_Cakes"
+            android:parentActivityName=".activities.Cake_Menu">
+        </activity>
+        <activity android:name=".activities.List_Customers"
+            android:parentActivityName=".activities.Add_Customer">
+        </activity>
+        <activity android:name=".activities.Edit_Customer"
+            android:parentActivityName=".activities.List_Customers">
+        </activity>
+        <activity android:name=".activities.List_Orders"
+            android:parentActivityName=".activities.List_Orders_By_ID">
+        </activity>
+
+    </application>
+
+</manifest>

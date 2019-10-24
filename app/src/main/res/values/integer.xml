@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="btn_plus_view">1</integer>
+    <integer name="btn_plus_pos">2</integer>
+    <integer name="btn_minus_view">3</integer>
+    <integer name="btn_minus_pos">4</integer>
+    <integer name="btn_add_drink_view">5</integer>
+    <integer name="btn_add_drink_pos">6</integer>
+    <integer name="quantity_drink_view">7</integer>
+    <integer name="quantity_drink_pos">8</integer>
+    <integer name="btn_switch_view">9</integer>
+    <integer name="btn_switch_pos">10</integer>
+    <integer name="btn_edit_view">11</integer>
+    <integer name="btn_edit_pos">12</integer>
+</resources>

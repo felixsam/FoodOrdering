@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/custom_dialog_tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:text="Edit Entry"
+            android:textColor="#000"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/custom_dialog_tv_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="10dp"
+                android:text="Item Name" />
+
+            <TextView
+                android:id="@+id/custom_dialog_tv_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Item Price" />
+
+            <EditText
+                android:id="@+id/custom_dialog_tv_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:inputType="number"
+                android:text="Quantity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textColor="#000"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/custom_dialog_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Delete" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Update"
+                android:textColor="#000"
+                android:textSize="19dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

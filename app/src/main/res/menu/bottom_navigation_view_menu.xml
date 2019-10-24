@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item
+        android:id="@+id/bottom_navigation_item_logs"
+        android:icon="@drawable/cake_menu"
+        android:title="logs" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_progress"
+        android:icon="@drawable/drink_menu"
+        android:title="progress" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_profile"
+        android:icon="@drawable/drink_icon_androi"
+        android:title="profile"/>
+
+</menu>
