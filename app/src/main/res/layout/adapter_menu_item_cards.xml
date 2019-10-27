@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     android:background="@android:color/holo_blue_dark"
-    android:clickable="true"
+    android:clickable="false"
     android:elevation="6dp"
-    android:focusable="true"
+    android:focusable="false"
     app:cardCornerRadius="6dp">
 
 

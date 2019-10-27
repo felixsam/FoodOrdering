@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.Add_Customer;
@@ -94,8 +95,8 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
 
         holder.title.setText(mTitle[position]);
         holder.subtitle.setText(msubTitle[position]);
-        Picasso.get().load(mImage[position]).into(holder.imgView);
-
+        //Picasso.get().load(mImage[position]).into(holder.imgView);
+        Glide.with(mContext).load(mImage[position]).into(holder.imgView);
     }
 
     @Override

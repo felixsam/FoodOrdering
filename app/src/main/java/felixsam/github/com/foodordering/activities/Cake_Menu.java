@@ -6,30 +6,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
-import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.CustomAdapter_Item_Menu;
+import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 
 public class Cake_Menu extends AppCompatActivity {
     DatabaseHelper myDB;
-    ArrayList<ItemModel> drinkList;
 
-    private ListView lv;
+    private RecyclerView rv;
     public static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
 
-    private CustomAdapter_Item_Menu customAdapter;
-    private Button btnnext;
+    private Item_Menu_Adapter customAdapter;
+
+    //private Button btnnext;
     private String[] drink_names_list = new String[]{
             "Strawberry Cake",
             "Vanilla Spongecake",
@@ -71,23 +70,24 @@ public class Cake_Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setTitle(" Cake Menu ");
 
-        setContentView(R.layout.layout_item_menu);
+        setContentView(R.layout.layout_item_menu_cards);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         myDB = new DatabaseHelper(this);
 
-        lv = (ListView) findViewById(R.id.lv_item_list);
-        btnnext = (Button) findViewById(R.id.btn_next_item_list);
+        rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
+        Button btnnext = (Button) findViewById(R.id.btn_next_item_list_cards);
         btnnext.setText("Cake Menu");
 
         itemModelDisplayArrayList = getModel();
-        customAdapter = new CustomAdapter_Item_Menu(this, itemModelDisplayArrayList);
-        lv.setAdapter(customAdapter);
+        customAdapter = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards,itemModelDisplayArrayList);
 
-        drinkList = new ArrayList<>();
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setHasFixedSize(true);
+        rv.setAdapter(customAdapter);
 
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override

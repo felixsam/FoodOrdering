@@ -126,8 +126,11 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
     @Override
     public void onResume(){
         super.onResume();
-        adapter.notifyDataSetChanged();
-        dropdown.setAdapter(adapter);
+        if (anyusers == Boolean.TRUE){
+            adapter.notifyDataSetChanged();
+            dropdown.setAdapter(adapter);
+        }
+
     }
 
     @Override
