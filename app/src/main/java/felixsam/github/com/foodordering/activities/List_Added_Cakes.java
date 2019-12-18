@@ -27,9 +27,9 @@ import felixsam.github.com.foodordering.adapters.CustomAdapter_ItemList;
 public class List_Added_Cakes extends AppCompatActivity {
     DatabaseHelper myDB;
     ArrayList<ItemModel> cakeList;
-    ListView lstView2;
+    ListView listview_cakes;
     ItemModel cakes;
-    Button ok,cancel,delete;
+    Button btn_ok, btn_cancel, btn_delete;
     Dialog customDialog;
 
     private String TAG = "ListCakes";
@@ -39,8 +39,8 @@ public class List_Added_Cakes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_added_items);
         this.setTitle("List of Cake Orders");
-        TextView cakename = (TextView) findViewById(R.id.drink_column_header1);
-        cakename.setText("Cake Name");
+        TextView tv_cakename = (TextView) findViewById(R.id.drink_column_header1);
+        tv_cakename.setText("Cake Name");
 
         myDB = new DatabaseHelper(this);
 
@@ -71,10 +71,10 @@ public class List_Added_Cakes extends AppCompatActivity {
                 i++;
             }
             CustomAdapter_ItemList adapter2 =  new CustomAdapter_ItemList(this,R.layout.adapter_item_list_columns, cakeList);
-            lstView2 = (ListView) findViewById(R.id.drink_listView);
-            lstView2.setAdapter(adapter2);
+            listview_cakes = (ListView) findViewById(R.id.drink_listView);
+            listview_cakes.setAdapter(adapter2);
 
-            lstView2.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            listview_cakes.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 @Override
                 public void onItemClick(final AdapterView<?> parent, View view, int position,
@@ -108,8 +108,8 @@ public class List_Added_Cakes extends AppCompatActivity {
                     tv_item_price.setText("Price: $" + item_price.toString());
                     tv_quantity.setText(current_quantity.toString());
 
-                    ok= (Button) customLayout.findViewById(R.id.ok);
-                    ok.setOnClickListener(new View.OnClickListener() {
+                    btn_ok = (Button) customLayout.findViewById(R.id.ok);
+                    btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //done what do you want to do\
@@ -121,8 +121,8 @@ public class List_Added_Cakes extends AppCompatActivity {
                         }
                     });
 
-                    delete = (Button)customLayout.findViewById(R.id.custom_dialog_delete);
-                    delete.setOnClickListener(new View.OnClickListener() {
+                    btn_delete = (Button)customLayout.findViewById(R.id.custom_dialog_delete);
+                    btn_delete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v){
                             Log.d(TAG,"Deleting Data: colID is : " + colID.toString() + "Item Name is: " + item_name);
@@ -132,8 +132,8 @@ public class List_Added_Cakes extends AppCompatActivity {
                         }
 
                     });
-                    cancel=(Button)customLayout.findViewById(R.id.cancel);
-                    cancel.setOnClickListener(new View.OnClickListener() {
+                    btn_cancel =(Button)customLayout.findViewById(R.id.cancel);
+                    btn_cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //done what do you want to do

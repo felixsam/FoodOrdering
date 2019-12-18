@@ -29,6 +29,8 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Get previous Activity
         Bundle extras = getIntent().getExtras();
         nextActivityClass = (Class<Activity>)extras.getSerializable("PARENT_ACTIVITY_CLASS");
 
@@ -41,6 +43,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         //DataBase
         mDatabaseHelper = new DatabaseHelper(this);
         editText = (EditText) findViewById(R.id.et_customer_name_field);
+
         btnAdd = (Button) findViewById(R.id.btn_customer_add);
         btnViewData = (Button) findViewById(R.id.btn_customer_view);
 

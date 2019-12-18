@@ -29,6 +29,8 @@ public class Cake_Menu extends AppCompatActivity {
     private Item_Menu_Adapter customAdapter;
 
     //private Button btnnext;
+
+    //set menu names
     private String[] drink_names_list = new String[]{
             "Strawberry Cake",
             "Vanilla Spongecake",
@@ -40,6 +42,8 @@ public class Cake_Menu extends AppCompatActivity {
             "Angel Cake"
     };
 
+
+    //set menu prices
     private Integer[] pricelist = new Integer[]{
             1,
             2,
@@ -51,6 +55,8 @@ public class Cake_Menu extends AppCompatActivity {
             8
     };
 
+
+    //set menu images
     private int[] myImageList = new int[]{
             R.drawable.cake_strawberry,
             R.drawable.cake_vanilla_sponge,
@@ -63,9 +69,8 @@ public class Cake_Menu extends AppCompatActivity {
     };
 
     private int sizeoflist = myImageList.length;
+
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTitle(" Cake Menu ");
@@ -89,6 +94,8 @@ public class Cake_Menu extends AppCompatActivity {
         rv.setHasFixedSize(true);
         rv.setAdapter(customAdapter);
 
+
+        //Move to Cake Menu Orders
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +105,8 @@ public class Cake_Menu extends AppCompatActivity {
         });
     }
 
+
+    //display menu items
     private ArrayList<Item_Model_Display> getModel(){
         ArrayList<Item_Model_Display> list = new ArrayList<>();
         for(int i = 0; i < sizeoflist; i++){

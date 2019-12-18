@@ -29,6 +29,8 @@ public class Drink_Menu extends AppCompatActivity {
 
     private Item_Menu_Adapter customAdapterItemMenu;
     private Button btnnext;
+
+    //set menu item names
     private String[] drink_names_list = new String[]{
             "Milk",
             "Milk Tea",
@@ -39,6 +41,8 @@ public class Drink_Menu extends AppCompatActivity {
             "Pumpkin Spice Latte"
     };
 
+
+    //set item prices
     private Integer[] pricelist = new Integer[]{
             1,
             2,
@@ -50,6 +54,8 @@ public class Drink_Menu extends AppCompatActivity {
             8
     };
 
+
+    //set item images
     private int[] myImageList = new int[]{
             R.drawable.drink_milk,
             R.drawable.drink_milk_tea,
@@ -102,6 +108,8 @@ public class Drink_Menu extends AppCompatActivity {
 
     }
 
+
+    //Display menu items
     private ArrayList<Item_Model_Display> getModel(){
         ArrayList<Item_Model_Display> list = new ArrayList<>();
         for(int i = 0; i < size_of_list; i++){
