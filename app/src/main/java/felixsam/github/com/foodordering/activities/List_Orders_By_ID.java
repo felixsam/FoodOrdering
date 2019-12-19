@@ -73,10 +73,14 @@ public class List_Orders_By_ID extends AppCompatActivity {
                 @Override
                 public void onItemClick(final AdapterView<?> parent, View view, int position,
                                         long id){
+                    //get orderID and date
                     final Integer OrderID = orderID_list.get(position).getOrderID();
                     final String date = orderID_list.get(position).getDate();
                     Toast.makeText(getApplicationContext(),"OrderID:  " + OrderID.toString() + "\nDate: " + date, Toast.LENGTH_LONG).show();
 
+
+
+                    //Add orderID to pass to List_Orders
                     Bundle extras = new Bundle();
 
                     Intent intent = new Intent(getApplicationContext(),List_Orders.class);

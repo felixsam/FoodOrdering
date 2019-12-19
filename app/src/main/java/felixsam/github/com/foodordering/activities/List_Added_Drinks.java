@@ -30,7 +30,7 @@ public class List_Added_Drinks extends AppCompatActivity {
     ItemModel drnk;
     private String TAG = "ListDrinks";
     Button btn_ok, btn_cancel, btn_delete;
-    Dialog customDialog;
+    Dialog editDrink_dialog;
 
 
     @Override
@@ -89,10 +89,10 @@ public class List_Added_Drinks extends AppCompatActivity {
                     // assuming string and if you want to get the value on click of list item
                     // do what you intend to do on click of listview row
 
-                    customDialog = new Dialog(List_Added_Drinks.this);
+                    editDrink_dialog = new Dialog(List_Added_Drinks.this);
                     LayoutInflater customInflater = (LayoutInflater)List_Added_Drinks.this.getSystemService(LAYOUT_INFLATER_SERVICE);
                     View customLayout=customInflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.root));
-                    customDialog.setContentView(customLayout);
+                    editDrink_dialog.setContentView(customLayout);
                     ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
                     layoutParams2.height=900;
                     layoutParams2.width=900;
@@ -120,7 +120,7 @@ public class List_Added_Drinks extends AppCompatActivity {
                             Integer new_quantity = Integer.valueOf(tv_quantity.getText().toString());
                             Log.d(TAG,"Updating Data: colID is : " + colID.toString() + "Set new quantity as: " + new_quantity.toString());
                             myDB.updateItemQuantity(colID,new_quantity,item_name);
-                            customDialog.dismiss();
+                            editDrink_dialog.dismiss();
                             recreate();
                         }
                     });
@@ -131,7 +131,7 @@ public class List_Added_Drinks extends AppCompatActivity {
                         public void onClick(View v){
                             Log.d(TAG,"Deleting Data: colID is : " + colID.toString() + "Item Name is: " + item_name);
                             myDB.delData_items(colID,item_name);
-                            customDialog.dismiss();
+                            editDrink_dialog.dismiss();
                             recreate();
                         }
 
@@ -141,13 +141,13 @@ public class List_Added_Drinks extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             //done what do you want to do
-                            customDialog.dismiss();
+                            editDrink_dialog.dismiss();
                         }
                     });
 
 
 
-                    customDialog.show();
+                    editDrink_dialog.show();
 
 
                 }

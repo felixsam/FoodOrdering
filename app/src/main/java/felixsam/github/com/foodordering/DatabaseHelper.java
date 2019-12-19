@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ITEMS_COL7_QUANTITY = "QUANTITY";
     public static final String ITEMS_COL8_ORDERID = "ORDER_ID";
 
-    //ORDERS
+    //TABLE: ORDERS
     public static final String TABLE_NAME_ORDERS = "Orders";
     public static final String ORDERS_COL1_ID = "_id";
     public static final String ORDERS_COL2_CUSTOMER_ID = "CUST_ID";
@@ -398,6 +398,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Integer getOrderID(Integer userID,String date){
         SQLiteDatabase db = this.getWritableDatabase();
+
+
+        //placeholder for orderID debugging
         Integer orderID = -1;
         String query = "SELECT " + ORDERS_COL1_ID +
                 " FROM " + TABLE_NAME_ORDERS +

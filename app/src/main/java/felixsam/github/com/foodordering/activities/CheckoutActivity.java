@@ -134,7 +134,7 @@ public class CheckoutActivity extends AppCompatActivity{
                         + " \n PRICE " + add_order.getInt(add_order.getColumnIndex(mDatabaseHelper.ITEMS_COL6_PRICE))
                         );
                         int itemID = add_order.getInt(add_order.getColumnIndex(mDatabaseHelper.ITEMS_COL1_ID));
-                        //mDatabaseHelper.setOrderID(itemID,order_ID);
+
                         i++;
                         mDatabaseHelper.setOrderID(itemID,orderID);
                     }
