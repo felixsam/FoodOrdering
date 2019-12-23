@@ -151,13 +151,18 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
 
                 String customer_name = cust_name.getText().toString();
                 Integer customer_user_id = Integer.valueOf(cust_userid.getText().toString());
-
+                String customer_last_name =  dbHelper.get_customer_last_name(customer_user_id).toString();
+                System.out.println("LastName: " + customer_last_name);
+                String customer_phone_number = dbHelper.get_customer_phone_number(customer_user_id).toString();
+                System.out.println("Phone Number: " + customer_phone_number);
 
                 if(customer_user_id > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + customer_user_id);
                     Intent editScreenIntent = new Intent(context, Edit_Customer.class);
                     editScreenIntent.putExtra("id",customer_user_id);
                     editScreenIntent.putExtra("name",customer_name);
+                    editScreenIntent.putExtra("last_name",customer_last_name);
+                    editScreenIntent.putExtra("phone_number",customer_phone_number);
                     context.startActivity(editScreenIntent);
                 }
                 else{
