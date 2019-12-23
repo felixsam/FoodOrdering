@@ -18,8 +18,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_CUSTOMERS = "customers";
     public static final String CUSTOMERS_COL1_ID = "_id";
     public static final String CUSTOMERS_COL2_FIRST_NAME ="FIRST_NAME";
-    public static final String CUSTOMERS_COL3_PHONE_NUMBER ="PHONE_NUMBER";
-    public static final String CUSTOMERS_COL4_LOGGED_IN = "LOG_IN_STATUS";
+    public static final String CUSTOMERS_COL3_LAST_NAME ="LAST_NAME";
+    public static final String CUSTOMERS_COL4_PHONE_NUMBER ="PHONE_NUMBER";
+    public static final String CUSTOMERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
 
     //TABLE: ITEMS
     public static final String TABLE_NAME_ITEMS = "items";
@@ -55,8 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME_CUSTOMERS + " (" +
                         CUSTOMERS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         CUSTOMERS_COL2_FIRST_NAME + " TEXT, " +
-                        CUSTOMERS_COL3_PHONE_NUMBER + " TEXT, " +
-                        CUSTOMERS_COL4_LOGGED_IN + " TEXT DEFAULT 'FALSE' "
+                        CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
+                        CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
+                        CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE' "
                         + ")";
 
         //DRINKS TABLE
@@ -112,6 +114,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getCustomer_Name(){
+        SQLiteDatabase db_customer = this.getWritableDatabase();
+        Cursor data = db_customer.rawQuery("SELECT " + CUSTOMERS_COL2_FIRST_NAME +
+                " FROM " + TABLE_NAME_CUSTOMERS, null);
+
+        return data;
+    }
+
     public Cursor getCustomer_ID_and_Name(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
         Cursor data = db_customer.rawQuery("SELECT " + CUSTOMERS_COL1_ID
@@ -136,17 +146,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return username;
 
     }
-    public boolean addData_customers(String First_Name) {
+    public String get_customer_last_name(Integer userID){
+        String last_name = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL3_LAST_NAME
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
 
-        contentValues.put(CUSTOMERS_COL2_FIRST_NAME, First_Name);
-        //contentValues.put(CUSTOMERS_COL3_LAST_NAME, Last_Name);
-        //contentValues.put(CUSTOMERS_COL4_PHONE_NUMBER, Phone_Number);
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            last_name = data.getString(data.getColumnIndex(CUSTOMERS_COL3_LAST_NAME));
+            System.out.println(data);
+        }
+        return last_name;
 
-        long result = db.insert(TABLE_NAME_CUSTOMERS, null, contentValues);
+    }
 
-        //if date as inserted incorrectly it will return -1
+    public String get_customer_phone_number(Integer userID){
+        String phone_number = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL4_PHONE_NUMBER
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            phone_number = data.getString(data.getColumnIndex(CUSTOMERS_COL4_PHONE_NUMBER));
+            System.out.println(data);
+        }
+        return phone_number;
+
+    }
+    public boolean addData_customers(String First_Name,String Last_Name, String Phone_Number) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(CUSTOMERS_COL2_FIRST_NAME, First_Name);
+        values.put(CUSTOMERS_COL3_LAST_NAME, Last_Name);
+        values.put(CUSTOMERS_COL4_PHONE_NUMBER, Phone_Number);
+
+        long result = db.insert(TABLE_NAME_CUSTOMERS, null, values);
+
+        //if data as inserted incorrectly it will return -1
         if (result == -1) {
             return false;
         } else {
@@ -160,13 +203,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param id
      * @param oldName
      */
-    public void updateName(String newName, int id, String oldName){
+    public void updateName(String newName, int id, String oldName, String new_last_name, String new_phone_number){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_CUSTOMERS + " SET " + CUSTOMERS_COL2_FIRST_NAME +
-                " = '" + newName + "' WHERE " + CUSTOMERS_COL1_ID + " = '" + id + "'" +
+        String query = "UPDATE " + TABLE_NAME_CUSTOMERS
+                + " SET " + CUSTOMERS_COL2_FIRST_NAME + " = '" + newName + "'"
+                + ", " + CUSTOMERS_COL3_LAST_NAME + " = '" + new_last_name + "'"
+                + ", " + CUSTOMERS_COL4_PHONE_NUMBER + " = '" + new_phone_number
+                + "' WHERE " + CUSTOMERS_COL1_ID + " = '" + id + "'" +
                 " AND " + CUSTOMERS_COL2_FIRST_NAME + " = '" + oldName + "'";
         Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
+        Log.d(TAG, "updateName: Setting name to " + newName + " LastName: " + new_last_name + " Phone Number: " + new_phone_number);
         db.execSQL(query);
     }
 

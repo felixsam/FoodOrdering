@@ -1,18 +1,13 @@
 package felixsam.github.com.foodordering.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
@@ -24,7 +19,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
     private Intent intent;
-    private EditText editText;
+    private EditText et_first_name_field, et_last_name_field, et_phone_number_field;
     Class nextActivityClass;
 
     @Override
@@ -42,7 +37,9 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
 
         //DataBase
         mDatabaseHelper = new DatabaseHelper(this);
-        editText = (EditText) findViewById(R.id.et_customer_name_field);
+        et_first_name_field = (EditText) findViewById(R.id.et_customer_name_field);
+        et_last_name_field = (EditText) findViewById(R.id.et_last_name_field);
+        et_phone_number_field = (EditText) findViewById(R.id.et_phone_number_field);
 
         btnAdd = (Button) findViewById(R.id.btn_customer_add);
         btnViewData = (Button) findViewById(R.id.btn_customer_view);
@@ -59,10 +56,13 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_customer_add:
-                String newEntry = editText.getText().toString();
-                if (editText.length() != 0) {
-                    AddData(newEntry);
-                    editText.setText("");
+                String First_Name_Entry = et_first_name_field.getText().toString();
+                String Last_Name_Entry = et_last_name_field.getText().toString();
+                String Phone_Number_Entry = et_phone_number_field.getText().toString();
+
+                if (et_first_name_field.length() != 0) {
+                    AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry);
+                    et_first_name_field.setText("");
                     intent = new Intent(Add_Customer.this,nextActivityClass);
                     startActivity(intent);
                     finish();
@@ -81,8 +81,8 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData_customers(newEntry);
+    public void AddData(String f_name, String l_name, String p_number) {
+        boolean insertData = mDatabaseHelper.addData_customers(f_name,l_name,p_number);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!\n Added a New User");

@@ -39,7 +39,7 @@ public class List_Customers extends AppCompatActivity {
         //create the list adapter and set the adapter
         ///ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         customer_list = new ArrayList<Customer>();
-        Cursor customer_data = mDatabaseHelper.getCustomerContents();
+        Cursor customer_data = mDatabaseHelper.getCustomer_ID_and_Name();
         int numRows = customer_data.getCount();
         if(numRows == 0){
             Log.d(TAG,"Number of Rows is: " + numRows);
@@ -50,6 +50,7 @@ public class List_Customers extends AppCompatActivity {
 
             int i = 0;
             while(customer_data.moveToNext()){
+                System.out.println("New Entry");
                 System.out.println(customer_data.getInt(0)+" "+customer_data.getString(1));
                 customer = new Customer(customer_data.getInt(0),customer_data.getString(1));
                 customer_list.add(i,customer);
