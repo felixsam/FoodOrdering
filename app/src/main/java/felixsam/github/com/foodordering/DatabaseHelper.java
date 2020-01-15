@@ -290,6 +290,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    public void updateItemPrice(Integer itemID, Integer newPrice, String itemName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL6_PRICE +
+                " = '" + newPrice + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
+                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + itemName + "'";
+        Log.d(TAG, "updateItemPrice: query: " + query);
+        Log.d(TAG, "updateItemPrice: Setting new Price to " + newPrice);
+        db.execSQL(query);
+    }
+
     public Cursor getItemContents(String category) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data_category = db.rawQuery("SELECT * " +
