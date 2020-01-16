@@ -248,7 +248,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ITEMS
      *******************************************************************************************************************************************************/
-    //ADD TO DRINKS TABLE
+    //ADD TO ITEMS TABLE
     public boolean addData_items(String name, String drink, String price, String quantity, Integer userID, String category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -289,6 +289,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "updateItemQuantity: Setting Quantity to " + newQuantity);
         db.execSQL(query);
     }
+
+    public void updateItemCateogry(Integer itemID, String newCategory, String itemName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL7_QUANTITY +
+                " = '" + newCategory + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
+                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + itemName + "'";
+        Log.d(TAG, "updateItemCategory: query: " + query);
+        Log.d(TAG, "updateItemCategory: Setting Category to " + newCategory);
+        db.execSQL(query);
+    }
+
 
     public void updateItemPrice(Integer itemID, Integer newPrice, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
