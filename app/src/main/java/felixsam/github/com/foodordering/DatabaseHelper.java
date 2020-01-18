@@ -444,7 +444,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //ADD TO DRINKS TABLE
+    //ADD TO Orders TABLE
     public boolean addData_newOrder(Integer userID, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -463,6 +463,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //Get orderID
     public Integer getOrderID(Integer userID,String date){
         SQLiteDatabase db = this.getWritableDatabase();
 
