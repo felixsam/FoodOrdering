@@ -112,7 +112,7 @@ public class List_Added_Drinks extends AppCompatActivity {
                     tv_item_price.setText("Price: $" + item_price.toString());
                     tv_quantity.setText(current_quantity.toString());
 
-                    btn_ok = (Button) customLayout.findViewById(R.id.ok);
+                    btn_ok = (Button) customLayout.findViewById(R.id.btn_update_entry);
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
