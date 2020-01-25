@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:id="@+id/btn_next_item_list_cards"
-            android:text="Drink List Orders"/>
+            android:text="Fulfilled Orders List"/>
     </LinearLayout>
 
 </LinearLayout>
