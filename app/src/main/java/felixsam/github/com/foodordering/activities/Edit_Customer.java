@@ -22,11 +22,11 @@ public class Edit_Customer extends AppCompatActivity {
 
     private Button btnSave;
     private Button btnDelete;
-    private EditText et_first_name,et_last_name,et_phone_number;
+    private EditText edit_customer_firstname, edit_customer_lastname, edit_customer_phone_number;
 
     DatabaseHelper mDatabaseHelper;
 
-    private String selectedName,selectedLastName,selectPhoneNumber;
+    private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber;
     private int selectedID;
 
     @Override
@@ -35,9 +35,9 @@ public class Edit_Customer extends AppCompatActivity {
         setContentView(R.layout.edit_customer_data);
         btnSave = (Button) findViewById(R.id.btn_save_customer);
         btnDelete = (Button) findViewById(R.id.btn_delete_customer);
-        et_first_name = (EditText) findViewById(R.id.customer_edit_name);
-        et_last_name = (EditText) findViewById(R.id.customer_edit_lastname);
-        et_phone_number = (EditText) findViewById(R.id.customer_edit_phonenumber);
+        edit_customer_firstname = (EditText) findViewById(R.id.customer_edit_name);
+        edit_customer_lastname = (EditText) findViewById(R.id.customer_edit_lastname);
+        edit_customer_phone_number = (EditText) findViewById(R.id.customer_edit_phonenumber);
 
         mDatabaseHelper = new DatabaseHelper(this);
         this.setTitle("Edit User");
@@ -49,24 +49,24 @@ public class Edit_Customer extends AppCompatActivity {
         selectedID = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
 
         //now get the name we passed as an extra
-        selectedName = receivedIntent.getStringExtra("name");
-        selectedLastName = receivedIntent.getStringExtra("last_name");
-        selectPhoneNumber = receivedIntent.getStringExtra("phone_number");
+        edit_customer_selectedName = receivedIntent.getStringExtra("name");
+        edit_customer_selectLastName = receivedIntent.getStringExtra("last_name");
+        edit_customer_selectPhoneNumber = receivedIntent.getStringExtra("phone_number");
 
         //set the text to show the current selected name
-        et_first_name.setText(selectedName);
-        et_last_name.setText(selectedLastName);
-        et_phone_number.setText(selectPhoneNumber);
+        edit_customer_firstname.setText(edit_customer_selectedName);
+        edit_customer_lastname.setText(edit_customer_selectLastName);
+        edit_customer_phone_number.setText(edit_customer_selectPhoneNumber);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String first_name = et_first_name.getText().toString();
-                String last_name = et_last_name.getText().toString();
-                String phone_number = et_phone_number.getText().toString();
+                String first_name = edit_customer_firstname.getText().toString();
+                String last_name = edit_customer_lastname.getText().toString();
+                String phone_number = edit_customer_phone_number.getText().toString();
 
                 if(!first_name.equals("")){
-                    mDatabaseHelper.updateName(first_name,selectedID,selectedName,last_name,phone_number);
+                    mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
                 }else{
                     toastMessage("You must enter a name");
                 }
@@ -76,8 +76,8 @@ public class Edit_Customer extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabaseHelper.deleteName(selectedID,selectedName);
-                et_first_name.setText("");
+                mDatabaseHelper.deleteName(selectedID, edit_customer_selectedName);
+                edit_customer_firstname.setText("");
                 toastMessage("removed from database");
             }
         });
