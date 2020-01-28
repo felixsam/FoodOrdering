@@ -9,14 +9,14 @@
         android:id="@+id/drink_header_line1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title of Table goes here"
+        android:text="Table Title"
         android:textColor="#f00" />
     <!-- Second header line -->
     <TextView
         android:id="@+id/drink_header_line2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description goes here"
+        android:text="Description of Table"
         android:textColor="#0f0" />
     <!-- Third header line and column headings -->
     <LinearLayout
@@ -26,35 +26,35 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/drink_column_header0"
+            android:id="@+id/item_column_header0"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Name" />
 
         <TextView
-            android:id="@+id/drink_column_header_userID"
+            android:id="@+id/item_column_header_userID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="userID" />
 
         <TextView
-            android:id="@+id/drink_column_header1"
+            android:id="@+id/item_column_header1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Drink Name" />
 
         <TextView
-            android:id="@+id/drink_column_header2"
+            android:id="@+id/item_column_header2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Price" />
 
         <TextView
-            android:id="@+id/drink_column_header3"
+            android:id="@+id/item_column_header3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

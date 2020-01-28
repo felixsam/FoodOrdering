@@ -21,9 +21,9 @@
         android:id="@+id/btn_customer_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="96dp"
         android:layout_marginBottom="224dp"
-        android:text="View "
+        android:text="View Customers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
