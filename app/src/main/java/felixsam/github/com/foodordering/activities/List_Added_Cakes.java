@@ -39,7 +39,7 @@ public class List_Added_Cakes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_added_items);
         this.setTitle("List of Cake Orders");
-        TextView tv_cakename = (TextView) findViewById(R.id.drink_column_header1);
+        TextView tv_cakename = (TextView) findViewById(R.id.item_column_header1);
         tv_cakename.setText("Cake Name");
 
         myDB = new DatabaseHelper(this);
