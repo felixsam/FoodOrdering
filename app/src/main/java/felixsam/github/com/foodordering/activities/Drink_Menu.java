@@ -24,7 +24,7 @@ import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 public class Drink_Menu extends AppCompatActivity {
     DatabaseHelper myDB;
 
-    private RecyclerView rv;
+    private RecyclerView rv_item_list_cards;
     public static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
     private Item_Menu_Adapter customAdapterItemMenu;
@@ -83,7 +83,7 @@ public class Drink_Menu extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
+        rv_item_list_cards = (RecyclerView) findViewById(R.id.rv_item_list_cards);
 
         btnnext = (Button) findViewById(R.id.btn_next_item_list_cards);
 
@@ -91,10 +91,10 @@ public class Drink_Menu extends AppCompatActivity {
         customAdapterItemMenu = new Item_Menu_Adapter(this,R.layout.adapter_menu_item_cards,itemModelDisplayArrayList);
 
         // 6. For performance, tell OS RecyclerView won't change size
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setHasFixedSize(true);
+        rv_item_list_cards.setLayoutManager(new LinearLayoutManager(this));
+        rv_item_list_cards.setHasFixedSize(true);
 
-        rv.setAdapter(customAdapterItemMenu);
+        rv_item_list_cards.setAdapter(customAdapterItemMenu);
 
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
