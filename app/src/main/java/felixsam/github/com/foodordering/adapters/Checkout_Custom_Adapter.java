@@ -16,7 +16,7 @@ import felixsam.github.com.foodordering.R;
 
 public class Checkout_Custom_Adapter extends BaseAdapter {
     private Context context;
-    private DatabaseHelper dbHelper;
+    private DatabaseHelper checkout_dbHelper;
     private ArrayList<Checkout> CheckoutList;
     private int mViewResourceId;
     private LayoutInflater mInflater;
@@ -25,7 +25,7 @@ public class Checkout_Custom_Adapter extends BaseAdapter {
     public Checkout_Custom_Adapter(Context context,int textViewResourceId, ArrayList<Checkout> CheckoutList){
         this.context = context;
         this.CheckoutList = CheckoutList;
-        this.dbHelper = new DatabaseHelper(context.getApplicationContext());
+        this.checkout_dbHelper = new DatabaseHelper(context.getApplicationContext());
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mViewResourceId = textViewResourceId;
 

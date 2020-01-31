@@ -16,7 +16,7 @@ import felixsam.github.com.foodordering.R;
 public class List_OrdersID_Custom_Adapter extends BaseAdapter {
 
     private Context context;
-    private DatabaseHelper dbHelper;
+    private DatabaseHelper orderID_dbHelper;
     private ArrayList<OrderID> OrderIDList;
     private int mViewResourceId;
 
@@ -24,7 +24,7 @@ public class List_OrdersID_Custom_Adapter extends BaseAdapter {
     public List_OrdersID_Custom_Adapter(Context context,int textViewResourceId, ArrayList<OrderID> OrderID_List){
         this.context = context;
         this.OrderIDList = OrderID_List;
-        this.dbHelper = new DatabaseHelper(context.getApplicationContext());
+        this.orderID_dbHelper = new DatabaseHelper(context.getApplicationContext());
         mViewResourceId = textViewResourceId;
 
 
