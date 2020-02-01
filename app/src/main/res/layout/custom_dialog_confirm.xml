@@ -9,28 +9,33 @@
 
     <Button
         android:id="@+id/edit_item_cancel_btn"
-        android:layout_width="206dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@android:string/cancel"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit_item_btn_confirm"
+        app:layout_constraintEnd_toStartOf="@+id/edit_item_btn_confirm"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/edit_item_btn_confirm"
-        android:layout_width="206dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="296dp"
         android:text="Confirm"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_item_cancel_btn" />
 
     <EditText
         android:id="@+id/et_confirm_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="83dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Confirm Text"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="204dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
