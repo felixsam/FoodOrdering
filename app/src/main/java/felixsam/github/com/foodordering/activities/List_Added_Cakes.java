@@ -87,7 +87,7 @@ public class List_Added_Cakes extends AppCompatActivity {
 
                     editCakeDialog = new Dialog(List_Added_Cakes.this);
                     LayoutInflater customInflater = (LayoutInflater)List_Added_Cakes.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View customLayout=customInflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.root));
+                    View customLayout=customInflater.inflate(R.layout.custom_dialog_edit_item, (ViewGroup) findViewById(R.id.root));
                     editCakeDialog.setContentView(customLayout);
                     ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
                     layoutParams2.height=900;

@@ -91,7 +91,7 @@ public class List_Added_Drinks extends AppCompatActivity {
 
                     editDrink_dialog = new Dialog(List_Added_Drinks.this);
                     LayoutInflater customInflater = (LayoutInflater)List_Added_Drinks.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View customLayout=customInflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.root));
+                    View customLayout=customInflater.inflate(R.layout.custom_dialog_edit_item, (ViewGroup) findViewById(R.id.root));
                     editDrink_dialog.setContentView(customLayout);
                     ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
                     layoutParams2.height=900;
