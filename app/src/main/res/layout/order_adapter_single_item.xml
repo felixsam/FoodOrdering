@@ -28,7 +28,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000"
             android:textSize="20sp" />
-        
+
         <TextView
             android:id="@+id/order_user_name"
             android:layout_width="match_parent"
