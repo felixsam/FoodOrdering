@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CUSTOMERS_COL3_LAST_NAME ="LAST_NAME";
     public static final String CUSTOMERS_COL4_PHONE_NUMBER ="PHONE_NUMBER";
     public static final String CUSTOMERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
+    public static final String CUSTOMERS_COL6_ROLE = "ROLE";
 
     //TABLE: ITEMS
     public static final String TABLE_NAME_ITEMS = "items";
@@ -58,7 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         CUSTOMERS_COL2_FIRST_NAME + " TEXT, " +
                         CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
                         CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
-                        CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE' "
+                        CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
+                        CUSTOMERS_COL6_ROLE + " TEXT "
                         + ")";
 
         //DRINKS TABLE
@@ -195,6 +197,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    public void update_customer_role(int id, String ROLE){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME_CUSTOMERS
+                + " SET " + CUSTOMERS_COL6_ROLE + " = '" + ROLE + "'"
+                + " WHERE " + CUSTOMERS_COL1_ID + " = '" + id + "'";
+
+        Log.d(TAG, "updateName: query: " + query);
+        Log.d(TAG, "updateName: Setting ROLE to " + ROLE  + "For USER ID: " + id);
+        db.execSQL(query);
     }
 
     /**
