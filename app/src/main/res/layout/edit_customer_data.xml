@@ -5,8 +5,18 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
 
+
+    <TextView
+        android:id="@+id/edit_customer_tv_role"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="82dp"
+        android:text="Role"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_phonenumber" />
 
     <TextView
         android:id="@+id/edit_customer_tv_phonenumber"
@@ -60,29 +70,29 @@
         android:id="@+id/btn_delete_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="384dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginBottom="248dp"
         android:text="DELETE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_save_customer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_edit_phonenumber" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_customer_spinner" />
 
     <Button
         android:id="@+id/btn_save_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginBottom="384dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="239dp"
         android:text="SAVE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btn_delete_customer"
-        app:layout_constraintTop_toBottomOf="@+id/customer_edit_phonenumber" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_customer_spinner"
+        app:layout_constraintVertical_bias="0.47" />
 
     <TextView
         android:id="@+id/edit_customer_tv_lastname"
@@ -91,6 +101,15 @@
         android:text="Last Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_firstname" />
+
+    <Spinner
+        android:id="@+id/edit_customer_spinner"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="82dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_role"
+        app:layout_constraintTop_toBottomOf="@+id/customer_edit_phonenumber" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

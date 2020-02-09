@@ -3,12 +3,16 @@ package felixsam.github.com.foodordering.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
@@ -23,7 +27,8 @@ public class Edit_Customer extends AppCompatActivity {
     private Button btnSave;
     private Button btnDelete;
     private EditText edit_customer_firstname, edit_customer_lastname, edit_customer_phone_number;
-
+    private Spinner dropdown;
+    private ArrayAdapter<String> adapter;
     DatabaseHelper mDatabaseHelper;
 
     private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber;
@@ -81,6 +86,17 @@ public class Edit_Customer extends AppCompatActivity {
                 toastMessage("removed from database");
             }
         });
+
+        //Spinner
+        dropdown = findViewById(R.id.edit_customer_spinner);
+        String [] items = new String[]{"Admin", "Customer", "Worker"};
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,items);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        dropdown.setAdapter(adapter);
+
+
 
 
     }
