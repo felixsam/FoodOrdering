@@ -3,6 +3,7 @@ package felixsam.github.com.foodordering.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
+import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
 
 public class Edit_Customer extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class Edit_Customer extends AppCompatActivity {
     private EditText edit_customer_firstname, edit_customer_lastname, edit_customer_phone_number;
     private Spinner dropdown;
     private ArrayAdapter<String> adapter;
+    private String current_role;
     DatabaseHelper mDatabaseHelper;
 
     private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber;
@@ -95,11 +98,41 @@ public class Edit_Customer extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                User user = (User) parent.getSelectedItem();
+                displayUserData(user);
+
+                //set as selected item.
+                dropdown.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
 
     }
+
+    public User getSelectedUser(){
+        User user = (User) dropdown.getSelectedItem();
+        return user;
+    }
+
+    public void displayUserData(User user){
+        String name = user.getName();
+        int UserID = user.getUserID();
+
+        String userData = "Name: " + name + "\n UserID: " + UserID;
+
+        Toast.makeText(this,userData,Toast.LENGTH_SHORT).show();
+    }
+
 
     /**
      * customizable toast
