@@ -181,6 +181,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return phone_number;
 
     }
+
+    public String get_customer_role(Integer userID){
+        String role = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL6_ROLE
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            role = data.getString(data.getColumnIndex(CUSTOMERS_COL4_PHONE_NUMBER));
+            System.out.println(data);
+        }
+        return role;
+
+    }
+
     public boolean addData_customers(String First_Name,String Last_Name, String Phone_Number) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
