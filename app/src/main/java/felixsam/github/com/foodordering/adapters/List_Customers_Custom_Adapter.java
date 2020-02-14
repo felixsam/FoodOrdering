@@ -156,6 +156,10 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
                 String customer_phone_number = dbHelper.get_customer_phone_number(customer_user_id).toString();
                 System.out.println("Phone Number: " + customer_phone_number);
 
+                String customer_role = dbHelper.get_customer_role(customer_user_id).toString();
+                System.out.println("Customer Role: " + customer_role);
+
+
                 if(customer_user_id > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + customer_user_id);
                     Intent editScreenIntent = new Intent(context, Edit_Customer.class);
@@ -163,6 +167,7 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
                     editScreenIntent.putExtra("name",customer_name);
                     editScreenIntent.putExtra("last_name",customer_last_name);
                     editScreenIntent.putExtra("phone_number",customer_phone_number);
+                    editScreenIntent.putExtra("role",customer_role);
                     context.startActivity(editScreenIntent);
                 }
                 else{
