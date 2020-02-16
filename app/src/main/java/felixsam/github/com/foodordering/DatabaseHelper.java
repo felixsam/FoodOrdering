@@ -192,7 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
-            role = data.getString(data.getColumnIndex(CUSTOMERS_COL4_PHONE_NUMBER));
+            role = data.getString(data.getColumnIndex(CUSTOMERS_COL6_ROLE));
             System.out.println(data);
         }
         return role;
