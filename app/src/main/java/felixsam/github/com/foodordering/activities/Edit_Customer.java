@@ -86,6 +86,7 @@ public class Edit_Customer extends AppCompatActivity {
             public void onClick(View view) {
                 mDatabaseHelper.deleteName(selectedID, edit_customer_selectedName);
                 edit_customer_firstname.setText("");
+
                 toastMessage("removed from database");
             }
         });
