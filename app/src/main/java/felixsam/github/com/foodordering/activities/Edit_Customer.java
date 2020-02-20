@@ -34,7 +34,7 @@ public class Edit_Customer extends AppCompatActivity {
     private String current_role;
     DatabaseHelper mDatabaseHelper;
 
-    private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber;
+    private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber, edit_customer_selectRole;
     private int selectedID;
 
     @Override
@@ -60,6 +60,7 @@ public class Edit_Customer extends AppCompatActivity {
         edit_customer_selectedName = receivedIntent.getStringExtra("name");
         edit_customer_selectLastName = receivedIntent.getStringExtra("last_name");
         edit_customer_selectPhoneNumber = receivedIntent.getStringExtra("phone_number");
+        edit_customer_selectRole = receivedIntent.getStringExtra("role");
 
         //set the text to show the current selected name
         edit_customer_firstname.setText(edit_customer_selectedName);
