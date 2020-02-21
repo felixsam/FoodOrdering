@@ -33,6 +33,7 @@ public class Edit_Customer extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private String current_role;
     DatabaseHelper mDatabaseHelper;
+    private EditText edit_customer_role;
 
     private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber, edit_customer_selectRole;
     private int selectedID;
@@ -46,6 +47,7 @@ public class Edit_Customer extends AppCompatActivity {
         edit_customer_firstname = (EditText) findViewById(R.id.customer_edit_name);
         edit_customer_lastname = (EditText) findViewById(R.id.customer_edit_lastname);
         edit_customer_phone_number = (EditText) findViewById(R.id.customer_edit_phonenumber);
+        edit_customer_role = (EditText) findViewById(R.id.customer_edit_role);
 
         mDatabaseHelper = new DatabaseHelper(this);
         this.setTitle("Edit User");
@@ -66,6 +68,7 @@ public class Edit_Customer extends AppCompatActivity {
         edit_customer_firstname.setText(edit_customer_selectedName);
         edit_customer_lastname.setText(edit_customer_selectLastName);
         edit_customer_phone_number.setText(edit_customer_selectPhoneNumber);
+        edit_customer_role.setText(edit_customer_selectRole);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

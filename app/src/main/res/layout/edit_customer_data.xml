@@ -9,6 +9,17 @@
     android:background="@drawable/background">
 
 
+    <EditText
+        android:id="@+id/customer_edit_role"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/edit_customer_tv_role"
         android:layout_width="100dp"
