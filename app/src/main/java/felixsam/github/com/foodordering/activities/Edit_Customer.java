@@ -76,6 +76,7 @@ public class Edit_Customer extends AppCompatActivity {
                 String first_name = edit_customer_firstname.getText().toString();
                 String last_name = edit_customer_lastname.getText().toString();
                 String phone_number = edit_customer_phone_number.getText().toString();
+                String role = edit_customer_role.getText().toString();
 
                 if(!first_name.equals("")){
                     mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
@@ -109,8 +110,11 @@ public class Edit_Customer extends AppCompatActivity {
                 User user = (User) parent.getSelectedItem();
                 displayUserData(user);
 
+
                 //set as selected item.
                 dropdown.setSelection(position);
+
+                //
             }
 
             @Override
