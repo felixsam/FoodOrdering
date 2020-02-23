@@ -135,9 +135,10 @@ public class Edit_Customer extends AppCompatActivity {
 
     public void displayUserData(User user){
         String name = user.getName();
+        String role = user.getRole();
         int UserID = user.getUserID();
 
-        String userData = "Name: " + name + "\n UserID: " + UserID;
+        String userData = "Name: " + name + "\n UserID: " + UserID + "role" + role;
 
         Toast.makeText(this,userData,Toast.LENGTH_SHORT).show();
     }
