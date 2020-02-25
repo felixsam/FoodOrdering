@@ -130,6 +130,10 @@ public class Edit_Customer extends AppCompatActivity {
 
     }
 
+    public String getSelectedRole(){
+        String role = (String) dropdown.getSelectedItem();
+        return role;
+    }
     public User getSelectedUser(){
         User user = (User) dropdown.getSelectedItem();
         return user;
