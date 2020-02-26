@@ -76,9 +76,9 @@ public class Edit_Customer extends AppCompatActivity {
                 String first_name = edit_customer_firstname.getText().toString();
                 String last_name = edit_customer_lastname.getText().toString();
                 String phone_number = edit_customer_phone_number.getText().toString();
-                String role = edit_customer_role.getText().toString();
+                String role = getSelectedRole();
 
-                mDatabaseHelper.update_customer_role(getSelectedUser().getUserID(),"TEST_ROLE");
+                mDatabaseHelper.update_customer_role(getSelectedUser().getUserID(),role);
 
                 if(!first_name.equals("")){
                     mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
