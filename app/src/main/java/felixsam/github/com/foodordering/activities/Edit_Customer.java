@@ -38,6 +38,7 @@ public class Edit_Customer extends AppCompatActivity {
     private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber, edit_customer_selectRole;
     private int selectedID;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,8 @@ public class Edit_Customer extends AppCompatActivity {
 
         mDatabaseHelper = new DatabaseHelper(this);
         this.setTitle("Edit User");
+        final Globals g = Globals.getInstance();
+
 
         //get the intent extra from the List_Customers
         Intent receivedIntent = getIntent();
@@ -78,7 +81,8 @@ public class Edit_Customer extends AppCompatActivity {
                 String phone_number = edit_customer_phone_number.getText().toString();
                 String role = getSelectedRole();
 
-                mDatabaseHelper.update_customer_role(getSelectedUser().getUserID(),role);
+                final Integer user_id = g.getUser_ID();
+                mDatabaseHelper.update_customer_role(user_id,role);
 
                 if(!first_name.equals("")){
                     mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
@@ -87,6 +91,7 @@ public class Edit_Customer extends AppCompatActivity {
                 }
             }
         });
+
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +114,8 @@ public class Edit_Customer extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                User user = (User) parent.getSelectedItem();
-                displayUserData(user);
+                //User user = (User) parent.getSelectedItem();
+                //displayUserData(user);
 
 
                 //set as selected item.
