@@ -73,6 +73,7 @@ public class Edit_Customer extends AppCompatActivity {
         edit_customer_phone_number.setText(edit_customer_selectPhoneNumber);
         edit_customer_role.setText(edit_customer_selectRole);
 
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +112,8 @@ public class Edit_Customer extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         dropdown.setAdapter(adapter);
+        setSpinText(dropdown,current_role);
+        
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -161,5 +164,17 @@ public class Edit_Customer extends AppCompatActivity {
      */
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void setSpinText(Spinner spin, String text)
+    {
+        for(int i= 0; i < spin.getAdapter().getCount(); i++)
+        {
+            if(spin.getAdapter().getItem(i).toString().contains(text))
+            {
+                spin.setSelection(i);
+            }
+        }
+
     }
 }
