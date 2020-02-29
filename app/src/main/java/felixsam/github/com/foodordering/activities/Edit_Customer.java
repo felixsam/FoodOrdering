@@ -37,6 +37,7 @@ public class Edit_Customer extends AppCompatActivity {
 
     private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber, edit_customer_selectRole;
     private int selectedID;
+    private String role = "";
 
 
     @Override
@@ -49,6 +50,7 @@ public class Edit_Customer extends AppCompatActivity {
         edit_customer_lastname = (EditText) findViewById(R.id.customer_edit_lastname);
         edit_customer_phone_number = (EditText) findViewById(R.id.customer_edit_phonenumber);
         edit_customer_role = (EditText) findViewById(R.id.customer_edit_role);
+
 
         mDatabaseHelper = new DatabaseHelper(this);
         this.setTitle("Edit User");
@@ -80,7 +82,7 @@ public class Edit_Customer extends AppCompatActivity {
                 String first_name = edit_customer_firstname.getText().toString();
                 String last_name = edit_customer_lastname.getText().toString();
                 String phone_number = edit_customer_phone_number.getText().toString();
-                String role = getSelectedRole();
+                role = getSelectedRole();
 
                 final Integer user_id = g.getUser_ID();
                 mDatabaseHelper.update_customer_role(user_id,role);
@@ -112,8 +114,9 @@ public class Edit_Customer extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         dropdown.setAdapter(adapter);
-        setSpinText(dropdown,current_role);
-        
+
+        dropdown.setPrompt(edit_customer_selectRole);
+
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -166,15 +169,4 @@ public class Edit_Customer extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
-    public void setSpinText(Spinner spin, String text)
-    {
-        for(int i= 0; i < spin.getAdapter().getCount(); i++)
-        {
-            if(spin.getAdapter().getItem(i).toString().contains(text))
-            {
-                spin.setSelection(i);
-            }
-        }
-
-    }
 }
