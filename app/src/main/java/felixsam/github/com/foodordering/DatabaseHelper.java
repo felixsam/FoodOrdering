@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
                         CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
                         CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
-                        CUSTOMERS_COL6_ROLE + " TEXT "
+                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'USER'"
                         + ")";
 
         //DRINKS TABLE
