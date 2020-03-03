@@ -262,19 +262,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    /**
-     * Returns only the ID that matches the name passed in
-     * @param name
-     * @return
-     */
-    public Cursor getItemID(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + CUSTOMERS_COL1_ID + " FROM " + TABLE_NAME_CUSTOMERS +
-                " WHERE " + CUSTOMERS_COL2_FIRST_NAME + " = '" + name + "'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
 
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ITEMS
