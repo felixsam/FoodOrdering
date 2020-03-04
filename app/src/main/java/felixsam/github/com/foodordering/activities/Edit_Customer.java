@@ -116,7 +116,7 @@ public class Edit_Customer extends AppCompatActivity {
 
         dropdown.setAdapter(adapter);
 
-        dropdown.setPrompt(edit_customer_selectRole);
+        dropdown.setPrompt("Current Role: " + edit_customer_selectRole + "\n Select Role");
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
