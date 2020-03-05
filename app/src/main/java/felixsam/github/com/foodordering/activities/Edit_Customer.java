@@ -89,6 +89,7 @@ public class Edit_Customer extends AppCompatActivity {
 
                 if(!first_name.equals("")){
                     mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
+                    toastMessage("Changes Saved!");
                 }else{
                     toastMessage("You must enter a name");
                 }
@@ -116,7 +117,7 @@ public class Edit_Customer extends AppCompatActivity {
 
         dropdown.setAdapter(adapter);
 
-        dropdown.setPrompt("Current Role: " + edit_customer_selectRole + "\n Select Role");
+        dropdown.setPrompt(" Current Role: " + edit_customer_selectRole + "\n Select a new Role");
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
