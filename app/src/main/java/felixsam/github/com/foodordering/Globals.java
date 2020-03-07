@@ -12,7 +12,7 @@ public class Globals {
 
     private String user ="Felix";
     private Integer user_ID = -1;
-
+    private String role = "Customer"; //Default Role
 
     // Restrict the constructor from being instantiated
     private Globals(){}
@@ -38,6 +38,14 @@ public class Globals {
         this.user_ID = new_userID;
     };
 
+
+    public void setRole(String new_role){
+        this.role = new_role;
+    }
+
+    public String getRole(){
+        return this.role;
+    }
 
     ////
 
