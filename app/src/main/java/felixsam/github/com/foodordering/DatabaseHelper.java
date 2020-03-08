@@ -85,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ORDERS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         ORDERS_COL2_CUSTOMER_ID + " INTEGER, " +
                         ORDERS_COL3_DATE + " TEXT, " +
-                        ORDERS_COL4_STATUS + " TEXT"
+                        ORDERS_COL4_STATUS + " TEXT DEFAULT 'TO DO'"
                         + ")";
 
         db.execSQL(createTableCustomers);
