@@ -20,26 +20,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/order_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Order Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/order_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="User Name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000"
-            android:textSize="20sp" />
-
-        <TextView
             android:id="@+id/order_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

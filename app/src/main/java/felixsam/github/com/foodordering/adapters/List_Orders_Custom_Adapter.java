@@ -73,16 +73,13 @@ public class List_Orders_Custom_Adapter extends BaseAdapter {
 
         if (order != null) {
             TextView order_id = (TextView) convertView.findViewById(R.id.order_id);
-            TextView customer_name = (TextView) convertView.findViewById(R.id.order_user_name);
+            //TextView customer_name = (TextView) convertView.findViewById(R.id.order_user_name);
             TextView item_name = (TextView) convertView.findViewById(R.id.order_item_name);
             TextView item_price = (TextView) convertView.findViewById(R.id.order_item_price);
-            TextView order_date = (TextView) convertView.findViewById(R.id.order_date);
+            //TextView order_date = (TextView) convertView.findViewById(R.id.order_date);
 
             if (order_id != null){
                 order_id.setText("Order ID: " + order.getOrderID().toString());
-            }
-            if (customer_name != null){
-                customer_name.setText("Customer Name: " + order.getUserName());
             }
             if (item_name != null){
                 item_name.setText("Combined Item set: "+ (order.get_item_name()));
@@ -90,9 +87,7 @@ public class List_Orders_Custom_Adapter extends BaseAdapter {
             if (item_price != null){
                 item_price.setText("Combined Price: $" + (order.getPrice().toString()));
             }
-            if (order_date != null){
-                order_date.setText("Order Date: " + order.get_date());
-            }
+
         }
 
         return convertView;
