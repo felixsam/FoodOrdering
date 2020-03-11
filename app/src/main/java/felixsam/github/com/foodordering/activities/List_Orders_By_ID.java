@@ -31,12 +31,12 @@ public class List_Orders_By_ID extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_orders_test);
+        setContentView(R.layout.list_orders_id);
         this.setTitle("My Orders");
 
         mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
-        lv_orders_by_id = findViewById(R.id.lv_orders_test);
+        lv_orders_by_id = findViewById(R.id.list_orders_id_lv);
 
 
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
