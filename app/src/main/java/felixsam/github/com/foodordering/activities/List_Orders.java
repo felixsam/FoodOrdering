@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class List_Orders extends AppCompatActivity {
         // Find ListView to populate
         lv_order_items = findViewById(R.id.lv_orders_test);
 
+        TextView order_id = (TextView) findViewById(R.id.tv_order_customer_id);
 
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
