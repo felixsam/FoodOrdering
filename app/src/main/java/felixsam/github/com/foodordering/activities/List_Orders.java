@@ -38,6 +38,10 @@ public class List_Orders extends AppCompatActivity {
         lv_order_items = findViewById(R.id.lv_orders_test);
 
         TextView order_id = (TextView) findViewById(R.id.tv_order_customer_id);
+        TextView customer_name = (TextView) findViewById(R.id.order_tv_customer_name);
+
+        order_id.setText("1");
+        customer_name.setText("Name");
 
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
