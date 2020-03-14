@@ -76,6 +76,8 @@ public class List_Orders_By_ID extends AppCompatActivity {
                     //get orderID and date
                     final Integer OrderID = orderID_list.get(position).getOrderID();
                     final String date = orderID_list.get(position).getDate();
+                    final String user_name = orderID_list.get(position).getUsername();
+
                     Toast.makeText(getApplicationContext(),"OrderID:  " + OrderID.toString() + "\nDate: " + date, Toast.LENGTH_LONG).show();
 
 
@@ -87,6 +89,8 @@ public class List_Orders_By_ID extends AppCompatActivity {
 
                     extras.putInt("ORDER_ID",OrderID);
                     extras.putString("DATE",date);
+                    extras.putString("NAME",user_name);
+
 
                     intent.putExtras(extras);
 

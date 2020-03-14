@@ -40,8 +40,6 @@ public class List_Orders extends AppCompatActivity {
         TextView order_id = (TextView) findViewById(R.id.tv_order_customer_id);
         TextView customer_name = (TextView) findViewById(R.id.order_tv_customer_name);
 
-        order_id.setText("1");
-        customer_name.setText("Name");
 
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
@@ -50,6 +48,11 @@ public class List_Orders extends AppCompatActivity {
 
         order_list = new ArrayList<Order>();
         Integer OrderID = extras.getInt("ORDER_ID");
+        order_id.setText("OrderID: " + OrderID.toString());
+
+        String user_name = extras.getString("NAME");
+        customer_name.setText(user_name);
+
         String date = extras.getString("DATE");
         //get the data and append to a list
         Cursor data = mDatabaseHelper.getData_orders(OrderID);
