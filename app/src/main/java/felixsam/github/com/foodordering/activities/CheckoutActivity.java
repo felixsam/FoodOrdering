@@ -108,7 +108,6 @@ public class CheckoutActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                toastMessage(currentDateTimeString);
                 boolean flag = mDatabaseHelper.addData_newOrder(userID,currentDateTimeString);
                 if (flag == TRUE){
                     Log.d(TAG,"INSERTED CORRECTLY");
@@ -139,6 +138,8 @@ public class CheckoutActivity extends AppCompatActivity{
                         mDatabaseHelper.setOrderID(itemID,orderID);
                     }
                 }
+                toastMessage("Checkout successful");
+
 
             }
         });
