@@ -428,6 +428,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT " + ITEMS_COL8_ORDERID
                 + ", " + ITEMS_COL3_FIRST_NAME
                 + ", " + ITEMS_COL5_ITEM_NAME
+                + ", " + "SUM(" + ITEMS_COL6_PRICE + ") AS " + ITEMS_COL6_PRICE
+                + ", " + ITEMS_COL7_QUANTITY
+                + " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID
+                + " GROUP BY " + ITEMS_COL5_ITEM_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+
+    /*
+    public Cursor getData_orders(Integer OrderID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + ITEMS_COL8_ORDERID
+                + ", " + ITEMS_COL3_FIRST_NAME
+                + ", " + ITEMS_COL5_ITEM_NAME
                 + ", " + ITEMS_COL6_PRICE
                 + ", " + ITEMS_COL7_QUANTITY
                 + " FROM " + TABLE_NAME_ITEMS
@@ -435,6 +451,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
+    */
 
     public Cursor get_allorders(){
         SQLiteDatabase db = this.getWritableDatabase();
