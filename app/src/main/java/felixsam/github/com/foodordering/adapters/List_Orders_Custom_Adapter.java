@@ -82,7 +82,7 @@ public class List_Orders_Custom_Adapter extends BaseAdapter {
                 order_id.setText("Order ID: " + order.getOrderID().toString());
             }
             if (item_name != null){
-                item_name.setText("Combined Item set: "+ (order.get_item_name()));
+                item_name.setText("Item Name: "+ (order.get_item_name()));
             }
             if (item_price != null){
                 item_price.setText("Combined Price: $" + (order.getPrice().toString()));
