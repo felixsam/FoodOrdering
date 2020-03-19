@@ -9,15 +9,7 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/order_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Order ID"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000"
-            android:textSize="20sp" />
+
 
         <TextView
             android:id="@+id/order_item_name"
@@ -35,6 +27,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Item Price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/order_item_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Total Item Price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/order_total_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Item Quantity"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000"
             android:textSize="20sp" />

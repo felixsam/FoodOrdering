@@ -71,8 +71,10 @@ public class List_Orders extends AppCompatActivity {
                 order = new Order(data.getString(data.getColumnIndex(mDatabaseHelper.ITEMS_COL3_FIRST_NAME))
                         ,data.getString(data.getColumnIndex(mDatabaseHelper.ITEMS_COL5_ITEM_NAME))
                         ,data.getInt(data.getColumnIndex(mDatabaseHelper.ITEMS_COL6_PRICE))
+                        ,data.getInt(data.getColumnIndex("TOTAL_ITEMS_PRICE"))
                         ,date
                         ,OrderID
+                        ,data.getInt(data.getColumnIndex(mDatabaseHelper.ITEMS_COL7_QUANTITY))
                 );
                 order_list.add(i,order);
                 //order_list.add(i,data.getString(0));

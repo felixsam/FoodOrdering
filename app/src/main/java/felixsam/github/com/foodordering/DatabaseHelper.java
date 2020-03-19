@@ -428,8 +428,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT " + ITEMS_COL8_ORDERID
                 + ", " + ITEMS_COL3_FIRST_NAME
                 + ", " + ITEMS_COL5_ITEM_NAME
-                + ", " + "SUM(" + ITEMS_COL6_PRICE + ") AS " + ITEMS_COL6_PRICE
-                + ", " + ITEMS_COL7_QUANTITY
+                + ", " + ITEMS_COL6_PRICE
+                + ", " + "SUM(" + ITEMS_COL6_PRICE + ") AS 'TOTAL_ITEMS_PRICE'"
+                + ", " + "SUM(" + ITEMS_COL7_QUANTITY + ") AS " + ITEMS_COL7_QUANTITY
                 + " FROM " + TABLE_NAME_ITEMS
                 + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID
                 + " GROUP BY " + ITEMS_COL5_ITEM_NAME;

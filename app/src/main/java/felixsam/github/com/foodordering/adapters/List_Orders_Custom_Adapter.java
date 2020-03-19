@@ -72,20 +72,25 @@ public class List_Orders_Custom_Adapter extends BaseAdapter {
         Order order = OrderList.get(position);
 
         if (order != null) {
-            TextView order_id = (TextView) convertView.findViewById(R.id.order_id);
+            TextView total_quantity = (TextView) convertView.findViewById(R.id.order_total_quantity);
             //TextView customer_name = (TextView) convertView.findViewById(R.id.order_user_name);
             TextView item_name = (TextView) convertView.findViewById(R.id.order_item_name);
+            TextView total_item_price = (TextView) convertView.findViewById(R.id.order_item_total_price);
             TextView item_price = (TextView) convertView.findViewById(R.id.order_item_price);
+
             //TextView order_date = (TextView) convertView.findViewById(R.id.order_date);
 
-            if (order_id != null){
-                order_id.setText("Order ID: " + order.getOrderID().toString());
+            if (total_quantity != null){
+                total_quantity.setText("Total Quantity: " + order.getQuantity().toString());
             }
             if (item_name != null){
-                item_name.setText("Combined Item set: "+ (order.get_item_name()));
+                item_name.setText("Item Name: "+ (order.get_item_name()));
+            }
+            if (total_item_price != null){
+                total_item_price.setText("Combined Price: $" + (order.get_totalPrice().toString()));
             }
             if (item_price != null){
-                item_price.setText("Combined Price: $" + (order.getPrice().toString()));
+                item_price.setText("Item Price: $" + order.getPrice().toString());
             }
 
         }
