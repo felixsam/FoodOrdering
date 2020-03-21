@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ITEMS_COL5_ITEM_NAME + " INTEGER, " +
                         ITEMS_COL6_PRICE + " TEXT, " +
                         ITEMS_COL7_QUANTITY + " INTEGER," +
-                        ITEMS_COL8_ORDERID + " TEXT," +
+                        ITEMS_COL8_ORDERID + " INTEGER," +
                         " CONSTRAINT FK_USERID" +
                         " FOREIGN KEY " + "(" + ITEMS_COL2_USER_ID + ")" +
                         " REFERENCES " + TABLE_NAME_CUSTOMERS + " (" + CUSTOMERS_COL1_ID + ")"
@@ -413,7 +413,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + ", " + ITEMS_COL5_ITEM_NAME
                         + ", " + ITEMS_COL6_PRICE
                         + " FROM " + TABLE_NAME_ITEMS
-                        + " WHERE " + ITEMS_COL3_FIRST_NAME + " = " + "'" + username + "'" + " AND " + ITEMS_COL2_USER_ID + " = " + user_id;
+                        + " WHERE " + ITEMS_COL3_FIRST_NAME + " = " + "'" + username + "'" + " AND " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL8_ORDERID + " IS NULL";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
@@ -434,6 +434,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_ITEMS
                 + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID
                 + " GROUP BY " + ITEMS_COL5_ITEM_NAME;
+        Log.d("Get_DATA_ORDERS QUERY", query);
         Cursor data = db.rawQuery(query, null);
         return data;
     }

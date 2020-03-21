@@ -75,6 +75,7 @@ public class List_Orders_By_ID extends AppCompatActivity {
                                         long id){
                     //get orderID and date
                     final Integer OrderID = orderID_list.get(position).getOrderID();
+                    Log.d(TAG, "ORDER ID: " + OrderID.toString());
                     final String date = orderID_list.get(position).getDate();
                     final String user_name = orderID_list.get(position).getUsername();
 

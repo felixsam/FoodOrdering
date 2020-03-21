@@ -48,6 +48,7 @@ public class List_Orders extends AppCompatActivity {
 
         order_list = new ArrayList<Order>();
         Integer OrderID = extras.getInt("ORDER_ID");
+        Log.d(TAG, "ORDER ID: " + OrderID.toString());
         order_id.setText("OrderID: " + OrderID.toString());
 
         String user_name = extras.getString("NAME");
