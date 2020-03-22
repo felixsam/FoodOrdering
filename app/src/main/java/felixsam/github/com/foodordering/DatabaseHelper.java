@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'USER'"
                         + ")";
 
-        //DRINKS TABLE
+        //ITEMS TABLE
         String createTableItems =
                 "CREATE TABLE " + TABLE_NAME_ITEMS + " (" +
                         ITEMS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -1,6 +1,7 @@
 package felixsam.github.com.foodordering.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
 import felixsam.github.com.foodordering.R;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -104,11 +107,17 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                 String item_quantity = this.tv_item_quantity.getText().toString();
 
                 String item_name = this.tv_item_name.getText().toString();
-                Toast.makeText(this.mcontext,"Added ItemModel"
-                        + "\n ItemModel Name: " + item_name
-                        + "\n ItemModel Price: " + item_price
-                        + "\n ItemModel Quantity: " + item_quantity
-                        + "\n ItemModel Category: " + category, Toast.LENGTH_LONG).show();
+
+                Toast.makeText(this.mcontext,"Added " + item_name
+                        + "\n Price: " + item_price
+                        + "\n Quantity: " + item_quantity
+                        + "\n Category: " + category, Toast.LENGTH_LONG).show();
+
+                Log.d(TAG,"Added " + item_name
+                        + "\n Price: " + item_price
+                        + "\n Quantity: " + item_quantity
+                        + "\n Category: " + category);
+
                 dbHelper.addData_items(user_to_add,item_name,item_price,item_quantity,userID_to_add,category);
                 break;
         }
