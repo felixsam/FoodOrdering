@@ -11,22 +11,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Objects;
+
 import felixsam.github.com.foodordering.adapters.Adapter_DashboardCards;
 import felixsam.github.com.foodordering.R;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    Integer[] drawableArray = {
+    private final Integer[] drawableArray = {
             R.drawable.drink_menu,
             R.drawable.cake_menu,
             R.drawable.checkout_menu,
             R.drawable.order_menu,
             R.drawable.customer_list
     };
-    String[] titleArray = {
+    private final String[] titleArray = {
             "Drink Menu",
             "Cake Menu",
             "Checkout",
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             "Register"
     };
 
-    String[] subtitleArray = {
+    private final String[] subtitleArray = {
             "Refreshing Drinks",
             "Delicious Cakes",
             "Checkout for current User",
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             "Register new customers"
     };
 
-    Adapter_DashboardCards dashboard_cards;
+    private Adapter_DashboardCards dashboard_cards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +52,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        recyclerView = (RecyclerView)findViewById(R.id.rv);
+        recyclerView = findViewById(R.id.rv);
+
+
         dashboard_cards = new Adapter_DashboardCards(MainActivity.this,drawableArray,titleArray,subtitleArray);
         recyclerView.setAdapter(dashboard_cards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
     }
 
@@ -77,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
             Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
             return true;
