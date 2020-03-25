@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.ItemModel;
@@ -24,13 +25,15 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.CustomAdapter_ItemList;
 
 public class List_Added_Drinks extends AppCompatActivity {
-    DatabaseHelper myDB;
-    ArrayList<ItemModel> drinkList;
-    ListView listView_drinks;
-    ItemModel drnk;
-    private String TAG = "ListDrinks";
-    Button btn_ok, btn_cancel, btn_delete;
-    Dialog editDrink_dialog;
+    private DatabaseHelper myDB;
+    private ArrayList<ItemModel> drinkList;
+    private ListView listView_drinks;
+    private ItemModel drnk;
+    private final String TAG = "ListDrinks";
+    private Button btn_ok;
+    private Button btn_cancel;
+    private Button btn_delete;
+    private Dialog editDrink_dialog;
 
 
     @Override
@@ -54,20 +57,20 @@ public class List_Added_Drinks extends AppCompatActivity {
             int i=0;
             while(data.moveToNext()){
                 //cakes = new ItemModel(data.getString(1),data.getString(2),data.getString(3));
-                drnk = new ItemModel(data.getInt(data.getColumnIndex(myDB.ITEMS_COL1_ID)),data.getString(data.getColumnIndex(myDB.ITEMS_COL3_FIRST_NAME)),
-                        data.getString(data.getColumnIndex(myDB.ITEMS_COL5_ITEM_NAME)),
-                        data.getInt(data.getColumnIndex(myDB.ITEMS_COL6_PRICE)),
-                        data.getInt(data.getColumnIndex(myDB.ITEMS_COL7_QUANTITY)),
-                        data.getInt(data.getColumnIndex(myDB.ITEMS_COL2_USER_ID))
+                drnk = new ItemModel(data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
+                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
+                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
+                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)),
+                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
-                Log.d(TAG, "onCreate: colID is: " + data.getString(data.getColumnIndex(myDB.ITEMS_COL1_ID)));
+                Log.d(TAG, "onCreate: colID is: " + data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
 
                 drinkList.add(i,drnk);
-                System.out.println(data.getString(data.getColumnIndex(myDB.ITEMS_COL3_FIRST_NAME))+" "
-                        +data.getString(data.getColumnIndex(myDB.ITEMS_COL5_ITEM_NAME)) +" "
-                        +data.getInt(data.getColumnIndex(myDB.ITEMS_COL6_PRICE)) + " "
-                        +data.getInt(data.getColumnIndex(myDB.ITEMS_COL7_QUANTITY)) + " " +
-                        +data.getInt(data.getColumnIndex(myDB.ITEMS_COL2_USER_ID))
+                System.out.println(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))+" "
+                        +data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)) +" "
+                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)) + " "
+                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)) + " " +
+                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
                 System.out.println(drinkList.get(i).getName());
                 i++;
@@ -91,7 +94,7 @@ public class List_Added_Drinks extends AppCompatActivity {
 
                     editDrink_dialog = new Dialog(List_Added_Drinks.this);
                     LayoutInflater customInflater = (LayoutInflater)List_Added_Drinks.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View customLayout=customInflater.inflate(R.layout.custom_dialog_edit_item, (ViewGroup) findViewById(R.id.root));
+                    View customLayout= Objects.requireNonNull(customInflater).inflate(R.layout.custom_dialog_edit_item, (ViewGroup) findViewById(R.id.root));
                     editDrink_dialog.setContentView(customLayout);
                     ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
                     layoutParams2.height=900;
