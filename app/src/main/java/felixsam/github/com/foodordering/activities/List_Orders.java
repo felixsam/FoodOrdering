@@ -19,12 +19,10 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.List_Orders_Custom_Adapter;
 
 public class List_Orders extends AppCompatActivity {
-    DatabaseHelper mDatabaseHelper;
-    private ListView lv_order_items;
-    Order order;
-    private String TAG = "Orders_TAG";
+    private DatabaseHelper mDatabaseHelper;
+    private Order order;
     //ArrayList<String> order_list;
-    ArrayList<Order> order_list;
+    private ArrayList<Order> order_list;
 
 
     @Override
@@ -35,12 +33,13 @@ public class List_Orders extends AppCompatActivity {
 
         mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
-        lv_order_items = findViewById(R.id.lv_orders_test);
+        ListView lv_order_items = findViewById(R.id.lv_orders_test);
 
         TextView order_id = (TextView) findViewById(R.id.tv_order_customer_id);
         TextView customer_name = (TextView) findViewById(R.id.order_tv_customer_name);
 
 
+        String TAG = "Orders_TAG";
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
         Intent intent = getIntent();
@@ -69,13 +68,13 @@ public class List_Orders extends AppCompatActivity {
             int i = 0;
             while(data.moveToNext()){
                 //System.out.println(data.getString(1)+" "+data.getString(2)+" "+data.getInt(3)+ " " +data.getInt(4)+" " + data.getString(8) + " " + data.getString(9));
-                order = new Order(data.getString(data.getColumnIndex(mDatabaseHelper.ITEMS_COL3_FIRST_NAME))
-                        ,data.getString(data.getColumnIndex(mDatabaseHelper.ITEMS_COL5_ITEM_NAME))
-                        ,data.getInt(data.getColumnIndex(mDatabaseHelper.ITEMS_COL6_PRICE))
+                order = new Order(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))
+                        ,data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME))
+                        ,data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
                         ,data.getInt(data.getColumnIndex("TOTAL_ITEMS_PRICE"))
                         ,date
                         ,OrderID
-                        ,data.getInt(data.getColumnIndex(mDatabaseHelper.ITEMS_COL7_QUANTITY))
+                        ,data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY))
                 );
                 order_list.add(i,order);
                 //order_list.add(i,data.getString(0));
@@ -86,12 +85,14 @@ public class List_Orders extends AppCompatActivity {
         }
     }
 
-    /**
-     * customizable toast
-     * @param message
-     */
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
+// --Commented out by Inspection START (3/25/2020 11:05 PM):
+//    /**
+//     * customizable toast
+//     * @param message
+//     */
+//    private void toastMessage(String message){
+//        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+//    }
+// --Commented out by Inspection STOP (3/25/2020 11:05 PM)
 
 }
