@@ -111,26 +111,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getCustomerContents() {
         SQLiteDatabase db_customer = this.getWritableDatabase();
-        Cursor data = db_customer.rawQuery("SELECT * FROM " + TABLE_NAME_CUSTOMERS, null);
 
-        return data;
+        return db_customer.rawQuery("SELECT * FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
     public Cursor getCustomer_Name(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
-        Cursor data = db_customer.rawQuery("SELECT " + CUSTOMERS_COL2_FIRST_NAME +
-                " FROM " + TABLE_NAME_CUSTOMERS, null);
 
-        return data;
+        return db_customer.rawQuery("SELECT " + CUSTOMERS_COL2_FIRST_NAME +
+                " FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
     public Cursor getCustomer_ID_and_Name(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
-        Cursor data = db_customer.rawQuery("SELECT " + CUSTOMERS_COL1_ID
+
+        return db_customer.rawQuery("SELECT " + CUSTOMERS_COL1_ID
                 + ", " + CUSTOMERS_COL2_FIRST_NAME +
                 " FROM " + TABLE_NAME_CUSTOMERS, null);
-
-        return data;
     }
 
 
@@ -398,8 +395,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + " GROUP BY " + ITEMS_COL5_ITEM_NAME + "," + ITEMS_COL2_USER_ID;
 
 
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        return db.rawQuery(query, null);
 
     }
 
@@ -414,8 +410,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + ", " + ITEMS_COL6_PRICE
                         + " FROM " + TABLE_NAME_ITEMS
                         + " WHERE " + ITEMS_COL3_FIRST_NAME + " = " + "'" + username + "'" + " AND " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL8_ORDERID + " IS NULL";
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        return db.rawQuery(query, null);
     }
 
 
@@ -435,8 +430,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID
                 + " GROUP BY " + ITEMS_COL5_ITEM_NAME;
         Log.d("Get_DATA_ORDERS QUERY", query);
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        return db.rawQuery(query, null);
     }
 
 
@@ -461,8 +455,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ", " + ORDERS_COL2_CUSTOMER_ID
                 + ", " + ORDERS_COL3_DATE
                 + " FROM " + TABLE_NAME_ORDERS;
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        return db.rawQuery(query, null);
     }
     public String getorderDate(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
