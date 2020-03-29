@@ -26,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.cake_menu,
             R.drawable.checkout_menu,
             R.drawable.order_menu,
-            R.drawable.customer_list
+            R.drawable.customer_list,
+            R.drawable.drink_menu
     };
     private final String[] titleArray = {
             "Drink Menu",
             "Cake Menu",
             "Checkout",
             "Orders",
-            "Register"
+            "Register",
+            "Cocktails"
     };
 
     private final String[] subtitleArray = {
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
             "Delicious Cakes",
             "Checkout for current User",
             "See active orders",
-            "Register new customers"
+            "Register new customers",
+            "Make cocktails"
     };
 
     private Adapter_DashboardCards dashboard_cards;
