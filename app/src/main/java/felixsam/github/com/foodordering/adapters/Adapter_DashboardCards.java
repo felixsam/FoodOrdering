@@ -17,6 +17,7 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.Add_Customer;
 import felixsam.github.com.foodordering.activities.Cake_Menu;
 import felixsam.github.com.foodordering.activities.CheckoutActivity;
+import felixsam.github.com.foodordering.activities.Cocktail_Menu;
 import felixsam.github.com.foodordering.activities.Drink_Menu;
 import felixsam.github.com.foodordering.activities.List_Customers;
 import felixsam.github.com.foodordering.activities.List_Orders;
@@ -85,6 +86,9 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                 }else if (position == 4){
                     Intent intent = new Intent(v.getContext(), Add_Customer.class);
                     intent.putExtra("PARENT_ACTIVITY_CLASS", MainActivity.class);
+                    mContext.startActivity(intent);
+                }else if (position == 5){
+                    Intent intent = new Intent(v.getContext(), Cocktail_Menu.class);
                     mContext.startActivity(intent);
                 }
 
