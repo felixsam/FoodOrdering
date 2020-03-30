@@ -3,7 +3,9 @@ package felixsam.github.com.foodordering.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,9 @@ public class Cocktail_Menu extends AppCompatActivity {
 
     private TextView tv_cocktail;
     private RequestQueue mQueue;
+    private SearchView search_cocktail;
+    private Button buttonParse;
+    private String search_item;
 
     @Override
     protected  void onCreate(Bundle savedInstance){
@@ -31,21 +36,42 @@ public class Cocktail_Menu extends AppCompatActivity {
         setContentView(R.layout.activity_cocktail);
 
         tv_cocktail = findViewById(R.id.tv_cocktail_text);
-        Button buttonParse = findViewById(R.id.button_parse);
+        search_item = "";
+        buttonParse = findViewById(R.id.button_parse);
+        search_cocktail = findViewById(R.id.sv_cocktail_search);
+
+        search_cocktail.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(Cocktail_Menu.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
+                json_search_cocktail(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search_item = newText;
+                return false;
+            }
+        });
 
         mQueue = Volley.newRequestQueue(this);
 
         buttonParse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jsonParse();
+                json_search_cocktail(search_item);
             }
         });
 
     }
 
-    private void jsonParse(){
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+
+
+    private void json_search_cocktail(String search_item){
+
+        //String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -53,16 +79,16 @@ public class Cocktail_Menu extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("drinks");
-
+                            String result = "";
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject drink = jsonArray.getJSONObject(i);
 
                                 String drink_name = drink.getString("strDrink");
                                 int drink_id = drink.getInt("idDrink");
                                 String drink_glass = drink.getString("strGlass");
-
-                                tv_cocktail.append(drink_name + ", " + String.valueOf(drink_id) + ", " + drink_glass + "\n\n");
+                                result = result + drink_name + ", " + String.valueOf(drink_id) + ", " + drink_glass + "\n\n";
                             }
+                            tv_cocktail.setText(result);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
