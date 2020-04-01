@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,7 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
     private Integer cocktail_id;
     private String cocktail_glass;
     private ArrayList<Cocktail> cocktail_list;
+    private Context context;
 
     public Adapter_Cocktail(ArrayList<Cocktail> cocktail_list, Context context){
         this.cocktail_list = cocktail_list;
@@ -29,15 +29,29 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        // this method will be called whenever our ViewHolder is created
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_cocktail, parent, false);
+                .inflate(R.layout.adapter_single_cocktail, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        // this method will bind the data to the ViewHolder from whence it'll be shown to other Views
+
         final Cocktail cocktail = cocktail_list.get(position);
+
+        if (holder.tv_cocktail_name != null){
+            holder.tv_cocktail_name.setText((cocktail.getCocktail_name()));
+        }
+        if (holder.tv_cocktail_id != null){
+            holder.tv_cocktail_id.setText((cocktail.getCocktail_ID().toString()));
+        }
+        if (holder.tv_cocktail_glass != null){
+            holder.tv_cocktail_glass.setText((cocktail.getGlass_name()));
+        }
 
     }
 
@@ -45,6 +59,26 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
     public int getItemCount() {
 
         return cocktail_list.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder  {
+
+        // define the View objects
+
+        TextView tv_cocktail_name;
+        TextView tv_cocktail_id;
+        TextView tv_cocktail_glass;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            // initialize the View objects
+            this.tv_cocktail_name = itemView.findViewById(R.id.tv_cocktail_name);
+            this.tv_cocktail_id = itemView.findViewById(R.id.tv_cocktail_id);
+            this.tv_cocktail_glass = itemView.findViewById(R.id.tv_cocktail_glass);
+
+        }
+
     }
 
 }

@@ -8,6 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,7 +23,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
+import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
 
 public class Cocktail_Menu extends AppCompatActivity {
 
@@ -29,22 +36,35 @@ public class Cocktail_Menu extends AppCompatActivity {
     private SearchView search_cocktail;
     private Button buttonParse;
     private String search_item;
+    private RecyclerView recyclerView;
+    private Adapter_Cocktail adapter_cocktail;
+    private ArrayList<Cocktail> cocktail_list;
 
     @Override
     protected  void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_cocktail);
 
+        cocktail_list = new ArrayList<Cocktail>();
+
+        recyclerView = findViewById(R.id.rv_cocktail_search_results);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
         tv_cocktail = findViewById(R.id.tv_cocktail_text);
         search_item = "";
         buttonParse = findViewById(R.id.button_parse);
         search_cocktail = findViewById(R.id.sv_cocktail_search);
 
+        //adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
+
         search_cocktail.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(Cocktail_Menu.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
-                json_search_cocktail(query);
+                //json_search_cocktail(query);
+                load_cocktail_json(query);
+
                 return false;
             }
 
@@ -101,6 +121,45 @@ public class Cocktail_Menu extends AppCompatActivity {
         });
 
         mQueue.add(request);
+    }
+
+    private void load_cocktail_json(String search_item){
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("drinks");
+                            String result = "";
+                            cocktail_list.clear();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject drink = jsonArray.getJSONObject(i);
+
+                                String drink_name = drink.getString("strDrink");
+                                int drink_id = drink.getInt("idDrink");
+                                String drink_glass = drink.getString("strGlass");
+
+                                Cocktail new_cocktail = new Cocktail(drink_name,drink_id,drink_glass);
+                                cocktail_list.add(new_cocktail);
+                            }
+                            adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
+                            recyclerView.setAdapter(adapter_cocktail);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request);
+
+
     }
 
 
