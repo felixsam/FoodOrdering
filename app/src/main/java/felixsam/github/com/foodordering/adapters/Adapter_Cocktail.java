@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -53,6 +56,8 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
             holder.tv_cocktail_glass.setText((cocktail.getGlass_name()));
         }
 
+        Glide.with(context).load(cocktail.getImage_url()).into(holder.iv_cocktail_thumb);
+
     }
 
     @Override
@@ -68,6 +73,7 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
         TextView tv_cocktail_name;
         TextView tv_cocktail_id;
         TextView tv_cocktail_glass;
+        ImageView iv_cocktail_thumb;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +82,7 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
             this.tv_cocktail_name = itemView.findViewById(R.id.tv_cocktail_name);
             this.tv_cocktail_id = itemView.findViewById(R.id.tv_cocktail_id);
             this.tv_cocktail_glass = itemView.findViewById(R.id.tv_cocktail_glass);
+            this.iv_cocktail_thumb = itemView.findViewById(R.id.iv_cocktail_thumb);
 
         }
 

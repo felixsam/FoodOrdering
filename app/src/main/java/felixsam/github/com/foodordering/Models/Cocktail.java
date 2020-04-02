@@ -4,7 +4,7 @@ public class Cocktail {
     private String cocktail_name;
     private Integer cocktail_ID;
     private String glass_name;
-
+    private String image_url;
 
     public Cocktail(String name, Integer ID, String glass){
         cocktail_name = name;
@@ -36,6 +36,12 @@ public class Cocktail {
     }
 
 
+    public String getImage_url() {
+        return image_url;
+    }
 
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
 
 }
