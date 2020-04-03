@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
->
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="3dp"
         android:layout_marginTop="3dp"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_cocktail_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cocktail ID"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Cocktail ID" />
 
             <TextView
                 android:id="@+id/tv_cocktail_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cocktail Name"
-                app:layout_constraintStart_toStartOf="@+id/tv_cocktail_id"
-                app:layout_constraintTop_toBottomOf="@+id/tv_cocktail_id" />
+                android:text="Cocktail Name" />
 
             <TextView
                 android:id="@+id/tv_cocktail_glass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
-                android:text="Cocktail Glass"
-                app:layout_constraintEnd_toStartOf="@+id/iv_cocktail_thumb"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Cocktail Glass" />
 
             <ImageView
                 android:id="@+id/iv_cocktail_thumb"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_cocktail_glass"
                 app:srcCompat="@drawable/drink_menu" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>
+</LinearLayout>
