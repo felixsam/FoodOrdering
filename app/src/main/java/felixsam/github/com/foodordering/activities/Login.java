@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
@@ -23,61 +22,54 @@ import felixsam.github.com.foodordering.R;
 
 public class Login extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private DatabaseHelper login_db;
-    private String TAG = "Login";
     private Spinner dropdown;
-    private Button btn_login,btn_register;
-    Globals g = Globals.getInstance();
-    User user;
-    User login_user;
-    Intent intent;
-    ArrayList<User> userlist;
+    private final Globals g = Globals.getInstance();
     //check for users
-    Boolean anyusers = Boolean.FALSE;
-    ArrayAdapter<User> adapter;
+    private Boolean anyusers = Boolean.FALSE;
+    private ArrayAdapter<User> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        login_db = new DatabaseHelper(this);
-        userlist = new ArrayList<>();
+        DatabaseHelper login_db = new DatabaseHelper(this);
+        ArrayList<User> userlist = new ArrayList<>();
 
         dropdown = findViewById(R.id.spinner);
-        String[] items = new String[]{"1", "2", "3"};
-
 
         Cursor data = login_db.getCustomer_ID_and_Name();
         int numRows = data.getCount();
+        String TAG = Login.class.getSimpleName();
+
         if (numRows == 0) {
-            Log.d(TAG, "Number of Rows is: " + numRows);
+            Log.i(TAG, "Number of Rows is: " + numRows);
 
             Toast.makeText(Login.this, "The Database is empty  :(.", Toast.LENGTH_LONG).show();
         } else {
             System.out.println("Else Statement");
             anyusers = Boolean.TRUE;
-            Log.d(TAG, "Number of Rows is: " + numRows);
+            Log.i(TAG, "Number of Rows is: " + numRows);
 
             int i = 0;
             while (data.moveToNext()) {
                 System.out.println("New User");
-                user = new User(data.getInt(data.getColumnIndex(login_db.CUSTOMERS_COL1_ID)),
-                        data.getString(data.getColumnIndex(login_db.CUSTOMERS_COL2_FIRST_NAME))
+                User user = new User(data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)),
+                        data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
                 );
 
                 System.out.println("Adding user");
 
-                userlist.add(i,user);
-                System.out.println(data.getInt(data.getColumnIndex(login_db.CUSTOMERS_COL1_ID)) + " "
-                        + data.getString(data.getColumnIndex(login_db.CUSTOMERS_COL2_FIRST_NAME))
+                userlist.add(i, user);
+                System.out.println(data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)) + " "
+                        + data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
                 );
                 System.out.println(userlist.get(i).getName());
                 i++;
 
             }
 
-            adapter = new ArrayAdapter<User>(this, android.R.layout.simple_spinner_item, userlist);
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userlist);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             System.out.println("Set Adapter");
 
@@ -87,20 +79,19 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
         }
         System.out.println("Set Button");
 
-        btn_login = (Button) findViewById(R.id.btn_login);
+        Button btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        btn_register = (Button) findViewById(R.id.login_btn_register);
+        Button btn_register = findViewById(R.id.login_btn_register);
         btn_register.setOnClickListener(this);
     }
 
 
-    public User getSelectedUser(){
-            User user = (User) dropdown.getSelectedItem();
-            return user;
+    private User getSelectedUser(){
+        return (User) dropdown.getSelectedItem();
         }
 
 
-    public void displayUserData(User user){
+    private void displayUserData(User user){
         String name = user.getName();
         int UserID = user.getUserID();
 
@@ -135,12 +126,13 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
 
     @Override
     public void onClick(View v){
+        Intent intent;
         switch (v.getId()){
             case R.id.btn_login:
                 System.out.println("Clicked login button");
 
                 if (anyusers == Boolean.TRUE){
-                    login_user = getSelectedUser();
+                    User login_user = getSelectedUser();
                     String login_name = login_user.getName();
                     int login_id = login_user.getUserID();
 
