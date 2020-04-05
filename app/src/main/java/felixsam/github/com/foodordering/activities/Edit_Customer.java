@@ -13,8 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.User;
@@ -43,7 +41,7 @@ public class Edit_Customer extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_customer_data);
+        setContentView(R.layout.activity_edit_customer);
         btnSave = (Button) findViewById(R.id.btn_save_customer);
         btnDelete = (Button) findViewById(R.id.btn_delete_customer);
         edit_customer_firstname = (EditText) findViewById(R.id.customer_edit_name);

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.Login">
+        <activity android:name=".activities.Login_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity"
-            android:parentActivityName=".activities.Login">
+            android:parentActivityName=".activities.Login_Activity">
         </activity>
         <activity android:name=".activities.Drink_Menu"
             android:parentActivityName=".activities.MainActivity">
@@ -35,7 +35,7 @@
             android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.Add_Customer"
-            android:parentActivityName=".activities.Login">
+            android:parentActivityName=".activities.Login_Activity">
         </activity>
         <activity android:name=".activities.List_Added_Drinks"
             android:parentActivityName=".activities.Drink_Menu">

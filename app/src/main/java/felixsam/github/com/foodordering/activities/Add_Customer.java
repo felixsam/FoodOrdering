@@ -31,7 +31,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_customer);
+        setContentView(R.layout.activity_add_customer);
         this.setTitle("Add Customer");
 
 

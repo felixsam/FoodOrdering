@@ -20,64 +20,62 @@ import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
 
-public class Login extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class Login_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private Spinner dropdown;
+    private String TAG = Login_Activity.class.getSimpleName();
+
+    private Spinner dropdown_users;
     private final Globals g = Globals.getInstance();
-    //check for users
-    private Boolean anyusers = Boolean.FALSE;
-    private ArrayAdapter<User> adapter;
+    private Boolean flag_users_exist = Boolean.FALSE;
+    private ArrayAdapter<User> adapter_dropdown_users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_login);
+        setContentView(R.layout.activity_login);
 
-        DatabaseHelper login_db = new DatabaseHelper(this);
-        ArrayList<User> userlist = new ArrayList<>();
+        DatabaseHelper database = new DatabaseHelper(this);
+        ArrayList<User> list_users = new ArrayList<>();
 
-        dropdown = findViewById(R.id.spinner);
+        dropdown_users = findViewById(R.id.spinner);
 
-        Cursor data = login_db.getCustomer_ID_and_Name();
+        Cursor data = database.getCustomer_ID_and_Name();
         int numRows = data.getCount();
-        String TAG = Login.class.getSimpleName();
 
         if (numRows == 0) {
             Log.i(TAG, "Number of Rows is: " + numRows);
 
-            Toast.makeText(Login.this, "The Database is empty  :(.", Toast.LENGTH_LONG).show();
+            Toast.makeText(Login_Activity.this, "The Database is empty  :(.", Toast.LENGTH_LONG).show();
         } else {
             System.out.println("Else Statement");
-            anyusers = Boolean.TRUE;
+            flag_users_exist = Boolean.TRUE;
             Log.i(TAG, "Number of Rows is: " + numRows);
 
             int i = 0;
             while (data.moveToNext()) {
-                System.out.println("New User");
+                Log.i(TAG,"New User");
                 User user = new User(data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)),
                         data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
                 );
 
-                System.out.println("Adding user");
-
-                userlist.add(i, user);
-                System.out.println(data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)) + " "
+                Log.i(TAG,"Adding user: " + data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)) + " "
                         + data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
                 );
-                System.out.println(userlist.get(i).getName());
+                list_users.add(i, user);
+
+                Log.i(TAG,"User added: " + list_users.get(i).getName());
                 i++;
 
             }
 
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, userlist);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            System.out.println("Set Adapter");
 
-            dropdown.setAdapter(adapter);
-            dropdown.setOnItemSelectedListener(this);
+            adapter_dropdown_users = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
+            adapter_dropdown_users.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            dropdown_users.setAdapter(adapter_dropdown_users);
+            dropdown_users.setOnItemSelectedListener(this);
 
         }
-        System.out.println("Set Button");
 
         Button btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
@@ -87,7 +85,8 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
 
 
     private User getSelectedUser(){
-        return (User) dropdown.getSelectedItem();
+
+        return (User) dropdown_users.getSelectedItem();
         }
 
 
@@ -97,7 +96,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
 
         String userData = "Name: " + name + "\n UserID: " + UserID;
 
-        Toast.makeText(this,userData,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Logged in: " + userData,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -106,20 +105,15 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
         displayUserData(user);
 
         //set as selected item.
-        dropdown.setSelection(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // TODO Auto-generated method stub
+        dropdown_users.setSelection(position);
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        if (anyusers == Boolean.TRUE){
-            adapter.notifyDataSetChanged();
-            dropdown.setAdapter(adapter);
+        if (flag_users_exist == Boolean.TRUE){
+            adapter_dropdown_users.notifyDataSetChanged();
+            dropdown_users.setAdapter(adapter_dropdown_users);
         }
 
     }
@@ -131,33 +125,41 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
             case R.id.btn_login:
                 System.out.println("Clicked login button");
 
-                if (anyusers == Boolean.TRUE){
+                if (flag_users_exist == Boolean.TRUE){
                     User login_user = getSelectedUser();
                     String login_name = login_user.getName();
                     int login_id = login_user.getUserID();
 
 
-                    System.out.println("Login Name: " + login_name + "\n UserID: " + login_id);
+                    Log.i(TAG,"Setting global user - Login Name: " + login_name + "\n UserID: " + login_id);
 
                     g.setUser(login_name);
                     g.setUser_ID(login_id);
 
-                    intent = new Intent(Login.this, MainActivity.class);
+                    intent = new Intent(Login_Activity.this, MainActivity.class);
                     startActivity(intent);
+
                     //prevent going back to login activity
                     //Destroy login Activity
                     finish();
                 }else{
-                    Toast.makeText(this, "Cannot login, No users", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Cannot login, No users registered", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
 
             case R.id.login_btn_register:
-                intent = new Intent(Login.this, Add_Customer.class);
+                intent = new Intent(Login_Activity.this, Add_Customer.class);
                 intent.putExtra("PARENT_ACTIVITY_CLASS", getClass());
                 startActivity(intent);
                 break;
         }
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO Auto-generated method stub
+    }
+
+
 }

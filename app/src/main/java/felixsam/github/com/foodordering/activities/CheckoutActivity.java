@@ -43,7 +43,7 @@ public class CheckoutActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTitle("Checkout");
-        setContentView(R.layout.layout_checkout);
+        setContentView(R.layout.activity_checkout);
 
         btn_submit = (Button) findViewById(R.id.btn_checkout_submit);
         mDatabaseHelper = new DatabaseHelper(this);
