@@ -12,15 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
+
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.Add_Customer;
 import felixsam.github.com.foodordering.activities.Cake_Menu;
 import felixsam.github.com.foodordering.activities.CheckoutActivity;
 import felixsam.github.com.foodordering.activities.Cocktail_Menu;
-import felixsam.github.com.foodordering.activities.Drink_Menu;
-import felixsam.github.com.foodordering.activities.List_Customers;
-import felixsam.github.com.foodordering.activities.List_Orders;
+import felixsam.github.com.foodordering.activities.Drink_Menu_Activity;
 import felixsam.github.com.foodordering.activities.List_Orders_By_ID;
 import felixsam.github.com.foodordering.activities.MainActivity;
 
@@ -72,7 +70,7 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                 //implement onClick
 
                 if (position == 0 ){
-                    Intent intent = new Intent(v.getContext(), Drink_Menu.class);
+                    Intent intent = new Intent(v.getContext(), Drink_Menu_Activity.class);
                     mContext.startActivity(intent);
                 }else if (position == 1) {
                     Intent intent = new Intent(v.getContext(), Cake_Menu.class);

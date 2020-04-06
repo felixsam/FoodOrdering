@@ -21,17 +21,13 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 
 
-public class Drink_Menu extends AppCompatActivity {
-    DatabaseHelper myDB;
+public class Drink_Menu_Activity extends AppCompatActivity {
+    private DatabaseHelper myDB;
 
-    private RecyclerView rv_item_list_cards;
-    public static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
-
-    private Item_Menu_Adapter customAdapterItemMenu;
-    private Button btnnext;
+    private static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
     //set menu item names
-    private String[] drink_names_list = new String[]{
+    private final String[] drink_names_list = new String[]{
             "Milk",
             "Milk Tea",
             "Orange Juice",
@@ -43,7 +39,7 @@ public class Drink_Menu extends AppCompatActivity {
 
 
     //set item prices
-    private Integer[] pricelist = new Integer[]{
+    private final Integer[] drink_price_list = new Integer[]{
             1,
             2,
             3,
@@ -56,7 +52,7 @@ public class Drink_Menu extends AppCompatActivity {
 
 
     //set item images
-    private int[] myImageList = new int[]{
+    private final int[] myImageList = new int[]{
             R.drawable.drink_milk,
             R.drawable.drink_milk_tea,
             R.drawable.drink_orange,
@@ -67,7 +63,7 @@ public class Drink_Menu extends AppCompatActivity {
             R.drawable.drink_pumpkin_spice
     };
 
-    private int size_of_list = myImageList.length;
+    private final int size_of_list = myImageList.length;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +79,12 @@ public class Drink_Menu extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        rv_item_list_cards = (RecyclerView) findViewById(R.id.rv_item_list_cards);
+        RecyclerView rv_item_list_cards = findViewById(R.id.rv_item_list_cards);
 
-        btnnext = (Button) findViewById(R.id.btn_next_item_list_cards);
+        Button btnnext = findViewById(R.id.btn_next_item_list_cards);
 
         itemModelDisplayArrayList = getModel();
-        customAdapterItemMenu = new Item_Menu_Adapter(this,R.layout.adapter_menu_item_cards,itemModelDisplayArrayList);
+        Item_Menu_Adapter customAdapterItemMenu = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
         // 6. For performance, tell OS RecyclerView won't change size
         rv_item_list_cards.setLayoutManager(new LinearLayoutManager(this));
@@ -99,7 +95,7 @@ public class Drink_Menu extends AppCompatActivity {
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Drink_Menu.this, List_Added_Drinks.class);
+                Intent intent = new Intent(Drink_Menu_Activity.this, List_Added_Drinks.class);
                 startActivity(intent);
             }
         });
@@ -117,7 +113,7 @@ public class Drink_Menu extends AppCompatActivity {
             Item_Model_Display itemModelDisplay = new Item_Model_Display();
             itemModelDisplay.setQuantity(1);
             itemModelDisplay.setItem_Name(drink_names_list[i]);
-            itemModelDisplay.setPrice(pricelist[i]);
+            itemModelDisplay.setPrice(drink_price_list[i]);
             itemModelDisplay.setImage_drawable(myImageList[i]);
             itemModelDisplay.setCategory("DRINK");
             list.add(itemModelDisplay);
@@ -141,7 +137,7 @@ public class Drink_Menu extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
-            Toast.makeText(Drink_Menu.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(Drink_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
             return true;
         }
 
