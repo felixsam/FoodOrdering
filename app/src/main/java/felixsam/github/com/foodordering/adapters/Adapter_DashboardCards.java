@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.Add_Customer;
-import felixsam.github.com.foodordering.activities.Cake_Menu;
+import felixsam.github.com.foodordering.activities.Cake_Menu_Activity;
 import felixsam.github.com.foodordering.activities.CheckoutActivity;
 import felixsam.github.com.foodordering.activities.Cocktail_Menu;
 import felixsam.github.com.foodordering.activities.Drink_Menu_Activity;
@@ -73,7 +73,7 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                     Intent intent = new Intent(v.getContext(), Drink_Menu_Activity.class);
                     mContext.startActivity(intent);
                 }else if (position == 1) {
-                    Intent intent = new Intent(v.getContext(), Cake_Menu.class);
+                    Intent intent = new Intent(v.getContext(), Cake_Menu_Activity.class);
                     mContext.startActivity(intent);
                 }else if (position == 2) {
                     Intent intent = new Intent(v.getContext(), CheckoutActivity.class);

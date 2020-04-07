@@ -19,19 +19,14 @@ import felixsam.github.com.foodordering.Models.Item_Model_Display;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 
-public class Cake_Menu extends AppCompatActivity {
-    DatabaseHelper myDB;
+public class Cake_Menu_Activity extends AppCompatActivity {
+    private DatabaseHelper myDB;
 
-    private RecyclerView rv;
-    public static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
+    private static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
-
-    private Item_Menu_Adapter customAdapter;
-
-    //private Button btnnext;
 
     //set menu names
-    private String[] drink_names_list = new String[]{
+    private final String[] list_cake_names = new String[]{
             "Strawberry Cake",
             "Vanilla Spongecake",
             "Chocolate Cake",
@@ -44,7 +39,7 @@ public class Cake_Menu extends AppCompatActivity {
 
 
     //set menu prices
-    private Integer[] pricelist = new Integer[]{
+    private final Integer[] list_cake_prices = new Integer[]{
             1,
             2,
             3,
@@ -57,7 +52,7 @@ public class Cake_Menu extends AppCompatActivity {
 
 
     //set menu images
-    private int[] myImageList = new int[]{
+    private final int[] list_cake_thumbnails = new int[]{
             R.drawable.cake_strawberry,
             R.drawable.cake_vanilla_sponge,
             R.drawable.cake_chocolate,
@@ -68,7 +63,7 @@ public class Cake_Menu extends AppCompatActivity {
             R.drawable.cake_angel
     };
 
-    private int sizeoflist = myImageList.length;
+    private final int size_cake_list = list_cake_thumbnails.length;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +78,12 @@ public class Cake_Menu extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
-        Button btnnext = (Button) findViewById(R.id.btn_next_item_list_cards);
-        btnnext.setText("Cake Menu");
+        RecyclerView rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
+        Button btn_to_cake_orders = (Button) findViewById(R.id.btn_next_item_list_cards);
+        btn_to_cake_orders.setText("Cake Orders");
 
         itemModelDisplayArrayList = getModel();
-        customAdapter = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards,itemModelDisplayArrayList);
+        Item_Menu_Adapter customAdapter = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setHasFixedSize(true);
@@ -96,10 +91,10 @@ public class Cake_Menu extends AppCompatActivity {
 
 
         //Move to Cake Menu Orders
-        btnnext.setOnClickListener(new View.OnClickListener() {
+        btn_to_cake_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Cake_Menu.this, List_Added_Cakes.class);
+                Intent intent = new Intent(Cake_Menu_Activity.this, List_Added_Cakes.class);
                 startActivity(intent);
             }
         });
@@ -109,13 +104,13 @@ public class Cake_Menu extends AppCompatActivity {
     //display menu items
     private ArrayList<Item_Model_Display> getModel(){
         ArrayList<Item_Model_Display> list = new ArrayList<>();
-        for(int i = 0; i < sizeoflist; i++){
+        for(int i = 0; i < size_cake_list; i++){
 
             Item_Model_Display itemModelDisplay = new Item_Model_Display();
             itemModelDisplay.setQuantity(1);
-            itemModelDisplay.setItem_Name(drink_names_list[i]);
-            itemModelDisplay.setPrice(pricelist[i]);
-            itemModelDisplay.setImage_drawable(myImageList[i]);
+            itemModelDisplay.setItem_Name(list_cake_names[i]);
+            itemModelDisplay.setPrice(list_cake_prices[i]);
+            itemModelDisplay.setImage_drawable(list_cake_thumbnails[i]);
             itemModelDisplay.setCategory("CAKE");
             list.add(itemModelDisplay);
         }
@@ -138,7 +133,7 @@ public class Cake_Menu extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
-            Toast.makeText(Cake_Menu.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(Cake_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
             return true;
         }
 
