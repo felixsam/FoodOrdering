@@ -18,22 +18,18 @@ import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
 
-public class Edit_Customer extends AppCompatActivity {
+public class Edit_Customer_Activity extends AppCompatActivity {
 
     Globals g = Globals.getInstance();
 
     private static final String TAG = "Edit_Customer";
 
-    private Button btnSave;
-    private Button btnDelete;
     private EditText edit_customer_firstname, edit_customer_lastname, edit_customer_phone_number;
     private Spinner dropdown;
-    private ArrayAdapter<String> adapter;
     private String current_role;
-    DatabaseHelper mDatabaseHelper;
-    private EditText edit_customer_role;
+    private DatabaseHelper mDatabaseHelper;
 
-    private String edit_customer_selectedName, edit_customer_selectLastName, edit_customer_selectPhoneNumber, edit_customer_selectRole;
+    private String edit_customer_selectedName;
     private int selectedID;
     private String role = "";
 
@@ -42,12 +38,12 @@ public class Edit_Customer extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_customer);
-        btnSave = (Button) findViewById(R.id.btn_save_customer);
-        btnDelete = (Button) findViewById(R.id.btn_delete_customer);
-        edit_customer_firstname = (EditText) findViewById(R.id.customer_edit_name);
-        edit_customer_lastname = (EditText) findViewById(R.id.customer_edit_lastname);
-        edit_customer_phone_number = (EditText) findViewById(R.id.customer_edit_phonenumber);
-        edit_customer_role = (EditText) findViewById(R.id.customer_edit_role);
+        Button btnSave = findViewById(R.id.btn_save_customer);
+        Button btnDelete = findViewById(R.id.btn_delete_customer);
+        edit_customer_firstname = findViewById(R.id.customer_edit_name);
+        edit_customer_lastname = findViewById(R.id.customer_edit_lastname);
+        edit_customer_phone_number = findViewById(R.id.customer_edit_phonenumber);
+        EditText edit_customer_role = findViewById(R.id.customer_edit_role);
 
 
         mDatabaseHelper = new DatabaseHelper(this);
@@ -63,9 +59,9 @@ public class Edit_Customer extends AppCompatActivity {
 
         //now get the name we passed as an extra
         edit_customer_selectedName = receivedIntent.getStringExtra("name");
-        edit_customer_selectLastName = receivedIntent.getStringExtra("last_name");
-        edit_customer_selectPhoneNumber = receivedIntent.getStringExtra("phone_number");
-        edit_customer_selectRole = receivedIntent.getStringExtra("role");
+        String edit_customer_selectLastName = receivedIntent.getStringExtra("last_name");
+        String edit_customer_selectPhoneNumber = receivedIntent.getStringExtra("phone_number");
+        String edit_customer_selectRole = receivedIntent.getStringExtra("role");
 
         //set the text to show the current selected name
         edit_customer_firstname.setText(edit_customer_selectedName);
@@ -109,7 +105,7 @@ public class Edit_Customer extends AppCompatActivity {
         //Spinner
         dropdown = findViewById(R.id.edit_customer_spinner);
         String [] items = new String[]{"Admin", "Customer", "Worker"};
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -141,13 +137,11 @@ public class Edit_Customer extends AppCompatActivity {
 
     }
 
-    public String getSelectedRole(){
-        String role = (String) dropdown.getSelectedItem();
-        return role;
+    private String getSelectedRole(){
+        return (String) dropdown.getSelectedItem();
     }
     public User getSelectedUser(){
-        User user = (User) dropdown.getSelectedItem();
-        return user;
+        return (User) dropdown.getSelectedItem();
     }
 
     public void displayUserData(User user){

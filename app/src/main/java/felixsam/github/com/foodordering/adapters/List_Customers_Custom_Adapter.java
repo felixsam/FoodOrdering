@@ -17,7 +17,7 @@ import felixsam.github.com.foodordering.Models.Customer;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.activities.Edit_Customer;
+import felixsam.github.com.foodordering.activities.Edit_Customer_Activity;
 
 public class List_Customers_Custom_Adapter extends BaseAdapter {
 
@@ -166,7 +166,7 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
 
                 if(customer_user_id > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + customer_user_id);
-                    Intent editScreenIntent = new Intent(context, Edit_Customer.class);
+                    Intent editScreenIntent = new Intent(context, Edit_Customer_Activity.class);
                     editScreenIntent.putExtra("id",customer_user_id);
                     editScreenIntent.putExtra("name",customer_name);
                     editScreenIntent.putExtra("last_name",customer_last_name);

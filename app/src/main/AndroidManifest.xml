@@ -19,13 +19,13 @@
         <activity android:name=".activities.MainActivity"
             android:parentActivityName=".activities.Login_Activity">
         </activity>
-        <activity android:name=".activities.Drink_Menu"
+        <activity android:name=".activities.Drink_Menu_Activity"
             android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.Cocktail_Menu"
             android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".activities.Cake_Menu"
+        <activity android:name=".activities.Cake_Menu_Activity"
             android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.List_Orders_By_ID"
@@ -38,15 +38,15 @@
             android:parentActivityName=".activities.Login_Activity">
         </activity>
         <activity android:name=".activities.List_Added_Drinks"
-            android:parentActivityName=".activities.Drink_Menu">
+            android:parentActivityName=".activities.Drink_Menu_Activity">
         </activity>
         <activity android:name=".activities.List_Added_Cakes"
-            android:parentActivityName=".activities.Cake_Menu">
+            android:parentActivityName=".activities.Cake_Menu_Activity">
         </activity>
         <activity android:name=".activities.List_Customers"
             android:parentActivityName=".activities.Add_Customer">
         </activity>
-        <activity android:name=".activities.Edit_Customer"
+        <activity android:name=".activities.Edit_Customer_Activity"
             android:parentActivityName=".activities.List_Customers">
         </activity>
         <activity android:name=".activities.List_Orders"
