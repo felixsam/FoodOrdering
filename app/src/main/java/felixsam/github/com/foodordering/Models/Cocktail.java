@@ -1,10 +1,16 @@
 package felixsam.github.com.foodordering.Models;
 
+import java.util.ArrayList;
+
 public class Cocktail {
     private String cocktail_name;
     private Integer cocktail_ID;
     private String glass_name;
     private String image_url;
+    private String instructions;
+    private ArrayList<String> ingredients;
+    private String category;
+    private String alcoholic;
 
     public Cocktail(String name, Integer ID, String glass){
         cocktail_name = name;
@@ -44,4 +50,40 @@ public class Cocktail {
         this.image_url = image_url;
     }
 
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getAlcoholic() {
+        return alcoholic;
+    }
+
+    public void setAlcoholic(String alcoholic) {
+        this.alcoholic = alcoholic;
+    }
+
+    public ArrayList<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(ArrayList<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getIngredients_single_string(){
+        String result = "";
+        ArrayList<String> items =  getIngredients();
+
+        for (String ingredient : items){
+            if (ingredient != "null"){
+                result  = result + "\n" + ingredient;
+            }
+        }
+
+        return result;
+    }
 }

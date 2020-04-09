@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,10 +24,8 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
     private String cocktail_glass;
     private ArrayList<Cocktail> cocktail_list;
     private Context context;
-
     public Adapter_Cocktail(ArrayList<Cocktail> cocktail_list, Context context){
         this.cocktail_list = cocktail_list;
-
         this.context = context;
 
     }
@@ -56,7 +56,17 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
             holder.tv_cocktail_glass.setText((cocktail.getGlass_name()));
         }
 
+
         Glide.with(context).load(cocktail.getImage_url()).into(holder.iv_cocktail_thumb);
+
+        holder.cv_cocktail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, cocktail.getCocktail_name() + "\n Instructions: \n"
+                        + cocktail.getInstructions()
+                        + "\n Ingredients: " + cocktail.getIngredients_single_string(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -74,11 +84,13 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
         TextView tv_cocktail_id;
         TextView tv_cocktail_glass;
         ImageView iv_cocktail_thumb;
+        CardView cv_cocktail;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             // initialize the View objects
+            this.cv_cocktail = itemView.findViewById(R.id.cv_cocktail_item);
             this.tv_cocktail_name = itemView.findViewById(R.id.tv_cocktail_name);
             this.tv_cocktail_id = itemView.findViewById(R.id.tv_cocktail_id);
             this.tv_cocktail_glass = itemView.findViewById(R.id.tv_cocktail_glass);

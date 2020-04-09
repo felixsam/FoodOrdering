@@ -142,12 +142,29 @@ public class Cocktail_Menu extends AppCompatActivity {
                                 String drink_glass = drink.getString("strGlass");
                                 //get drink thumbnail 100x100 size
                                 String drink_thumbnail = drink.getString("strDrinkThumb") + "/preview";
+                                String instructions = drink.getString("strInstructions");
+                                String alcoholic  = drink.getString("strAlcoholic");
+                                ArrayList<String> ingredients = new ArrayList<>();
+
+                                //Add all the ingredients
+                                for (int k = 1; k < 16; k++ ){
+                                    String ingredient_index = "strIngredient" + String.valueOf(k);
+                                    String ingredient = drink.getString(ingredient_index);
+
+                                    ingredients.add(ingredient);
+                                }
+
 
                                 Cocktail new_cocktail = new Cocktail(drink_name,drink_id,drink_glass);
 
                                 if (drink_thumbnail != null){
                                     new_cocktail.setImage_url(drink_thumbnail);
                                 }
+
+                                new_cocktail.setInstructions(instructions);
+                                new_cocktail.setAlcoholic(alcoholic);
+                                new_cocktail.setIngredients(ingredients);
+
                                 cocktail_list.add(new_cocktail);
                             }
                             adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
