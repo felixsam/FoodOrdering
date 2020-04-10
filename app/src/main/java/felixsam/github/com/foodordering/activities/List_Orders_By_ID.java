@@ -86,7 +86,7 @@ public class List_Orders_By_ID extends AppCompatActivity {
                     //Add orderID to pass to List_Orders
                     Bundle extras = new Bundle();
 
-                    Intent intent = new Intent(getApplicationContext(),List_Orders.class);
+                    Intent intent = new Intent(getApplicationContext(), List_Orders_Activity.class);
 
                     extras.putInt("ORDER_ID",OrderID);
                     extras.putString("DATE",date);

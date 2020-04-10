@@ -49,7 +49,7 @@
         <activity android:name=".activities.Edit_Customer_Activity"
             android:parentActivityName=".activities.List_Customers">
         </activity>
-        <activity android:name=".activities.List_Orders"
+        <activity android:name=".activities.List_Orders_Activity"
             android:parentActivityName=".activities.List_Orders_By_ID">
         </activity>
 

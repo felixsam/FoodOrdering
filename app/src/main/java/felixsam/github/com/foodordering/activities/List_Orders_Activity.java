@@ -18,11 +18,7 @@ import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.List_Orders_Custom_Adapter;
 
-public class List_Orders extends AppCompatActivity {
-    private DatabaseHelper mDatabaseHelper;
-    private Order order;
-    //ArrayList<String> order_list;
-    private ArrayList<Order> order_list;
+public class List_Orders_Activity extends AppCompatActivity {
 
 
     @Override
@@ -31,12 +27,12 @@ public class List_Orders extends AppCompatActivity {
         setContentView(R.layout.list_orders_test);
         this.setTitle("My Orders");
 
-        mDatabaseHelper = new DatabaseHelper(this);
+        DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
         ListView lv_order_items = findViewById(R.id.lv_orders_test);
 
-        TextView order_id = (TextView) findViewById(R.id.tv_order_customer_id);
-        TextView customer_name = (TextView) findViewById(R.id.order_tv_customer_name);
+        TextView order_id = findViewById(R.id.tv_order_customer_id);
+        TextView customer_name = findViewById(R.id.order_tv_customer_name);
 
 
         String TAG = "Orders_TAG";
@@ -45,7 +41,8 @@ public class List_Orders extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
-        order_list = new ArrayList<Order>();
+        //ArrayList<String> order_list;
+        ArrayList<Order> order_list = new ArrayList<>();
         Integer OrderID = extras.getInt("ORDER_ID");
         Log.d(TAG, "ORDER ID: " + OrderID.toString());
         order_id.setText("OrderID: " + OrderID.toString());
@@ -61,22 +58,22 @@ public class List_Orders extends AppCompatActivity {
 
         if(numRows == 0){
             Log.d(TAG,"Number of Rows is: " + numRows);
-            Toast.makeText(List_Orders.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
+            Toast.makeText(List_Orders_Activity.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
         }else{
             Log.d(TAG,"Number of Rows is: " + numRows);
 
             int i = 0;
             while(data.moveToNext()){
                 //System.out.println(data.getString(1)+" "+data.getString(2)+" "+data.getInt(3)+ " " +data.getInt(4)+" " + data.getString(8) + " " + data.getString(9));
-                order = new Order(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))
-                        ,data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME))
-                        ,data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
-                        ,data.getInt(data.getColumnIndex("TOTAL_ITEMS_PRICE"))
-                        ,date
-                        ,OrderID
-                        ,data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY))
+                Order order = new Order(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))
+                        , data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME))
+                        , data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
+                        , data.getInt(data.getColumnIndex("TOTAL_ITEMS_PRICE"))
+                        , date
+                        , OrderID
+                        , data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY))
                 );
-                order_list.add(i,order);
+                order_list.add(i, order);
                 //order_list.add(i,data.getString(0));
                 i++;
             }
