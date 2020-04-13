@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,8 +84,20 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
                 layoutParams2.height=900;
                 layoutParams2.width=900;
 
-                final TextView tv_cocktail_name = customLayout.findViewById(R.id.tv_cocktail_name);
-                tv_cocktail_name.setText(cocktail.getCocktail_name());
+                final TextView dialog_cocktail_name = customLayout.findViewById(R.id.dialog_tv_cocktail_name);
+                final TextView dialog_cocktail_glass = customLayout.findViewById(R.id.dialog_tv_cocktail_glass);
+                final TextView dialog_cocktail_alcoholic = customLayout.findViewById(R.id.dialog_tv_cocktail_alcoholic);
+                //final ImageView dialog_cocktail_thumb = customLayout.findViewById(R.id.dialog_iv_cocktail_thumb);
+                final TextView dialog_cocktail_instructions = customLayout.findViewById(R.id.dialog_tv_cocktail_instructions);
+                final TextView dialog_cocktail_ingredients = customLayout.findViewById(R.id.dialog_tv_cocktail_instructions);
+                final Button btn_dialog_cocktail_ok = customLayout.findViewById(R.id.custom_dialog_cocktail_btn_ok);
+
+                dialog_cocktail_name.setText(cocktail.getCocktail_name());
+                dialog_cocktail_glass.setText(cocktail.getGlass_name());
+                dialog_cocktail_alcoholic.setText(cocktail.getAlcoholic());
+                dialog_cocktail_instructions.setText(cocktail.getInstructions());
+                dialog_cocktail_ingredients.setText(cocktail.getIngredients_single_string());
+
 
 
 
