@@ -167,7 +167,7 @@ public class Cocktail_Menu extends AppCompatActivity {
 
                                 cocktail_list.add(new_cocktail);
                             }
-                            adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
+                            adapter_cocktail = new Adapter_Cocktail(cocktail_list,Cocktail_Menu.this);
                             recyclerView.setAdapter(adapter_cocktail);
                         } catch (JSONException e) {
                             e.printStackTrace();

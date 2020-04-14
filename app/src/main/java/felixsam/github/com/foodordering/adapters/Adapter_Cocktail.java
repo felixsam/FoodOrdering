@@ -70,13 +70,13 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
         holder.cv_cocktail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, cocktail.getCocktail_name() + "\n Instructions: \n"
+                /*Toast.makeText(context, cocktail.getCocktail_name() + "\n Instructions: \n"
                         + cocktail.getInstructions()
                         + "\n Ingredients: " + cocktail.getIngredients_single_string(), Toast.LENGTH_LONG).show();
-
+                 */
 
                 LayoutInflater customInflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-                Dialog cocktail_dialog = new Dialog(context);
+                final Dialog cocktail_dialog = new Dialog(context);
 
                 View customLayout = Objects.requireNonNull(customInflater.inflate(R.layout.custom_dialog_cocktail, holder.cocktail_dialog_root));
                 cocktail_dialog.setContentView(customLayout);
@@ -85,20 +85,28 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
                 layoutParams2.width=900;
 
                 final TextView dialog_cocktail_name = customLayout.findViewById(R.id.dialog_tv_cocktail_name);
+                final TextView dialog_cocktail_id = customLayout.findViewById(R.id.dialog_tv_cocktail_id);
                 final TextView dialog_cocktail_glass = customLayout.findViewById(R.id.dialog_tv_cocktail_glass);
                 final TextView dialog_cocktail_alcoholic = customLayout.findViewById(R.id.dialog_tv_cocktail_alcoholic);
                 //final ImageView dialog_cocktail_thumb = customLayout.findViewById(R.id.dialog_iv_cocktail_thumb);
                 final TextView dialog_cocktail_instructions = customLayout.findViewById(R.id.dialog_tv_cocktail_instructions);
-                final TextView dialog_cocktail_ingredients = customLayout.findViewById(R.id.dialog_tv_cocktail_instructions);
+                final TextView dialog_cocktail_ingredients = customLayout.findViewById(R.id.dialog_tv_cocktail_ingredients);
                 final Button btn_dialog_cocktail_ok = customLayout.findViewById(R.id.custom_dialog_cocktail_btn_ok);
 
-                dialog_cocktail_name.setText(cocktail.getCocktail_name());
-                dialog_cocktail_glass.setText(cocktail.getGlass_name());
+
+                dialog_cocktail_name.setText("Name: " + cocktail.getCocktail_name());
+                dialog_cocktail_id.setText("ID: " + cocktail.getCocktail_ID().toString());
+                dialog_cocktail_glass.setText("Glass: " + cocktail.getGlass_name());
                 dialog_cocktail_alcoholic.setText(cocktail.getAlcoholic());
-                dialog_cocktail_instructions.setText(cocktail.getInstructions());
-                dialog_cocktail_ingredients.setText(cocktail.getIngredients_single_string());
+                dialog_cocktail_instructions.setText("Instructions: " + cocktail.getInstructions());
+                dialog_cocktail_ingredients.setText("Ingredients: " + cocktail.getIngredients_single_string());
 
-
+                btn_dialog_cocktail_ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cocktail_dialog.dismiss();
+                    }
+                });
 
 
                 cocktail_dialog.show();
@@ -130,7 +138,6 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
             super(itemView);
 
             // initialize the View objects
-            Dialog cocktail_dialog = new Dialog(context);
             this.cv_cocktail = itemView.findViewById(R.id.cv_cocktail_item);
             this.tv_cocktail_name = itemView.findViewById(R.id.tv_cocktail_name);
             this.tv_cocktail_id = itemView.findViewById(R.id.tv_cocktail_id);
