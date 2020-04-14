@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:text="Cocktail Glass" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_cocktail_thumb"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

@@ -31,10 +31,8 @@ import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
 
 public class Cocktail_Menu extends AppCompatActivity {
 
-    private TextView tv_cocktail;
     private RequestQueue mQueue;
     private SearchView search_cocktail;
-    private Button buttonParse;
     private String search_item;
     private RecyclerView recyclerView;
     private Adapter_Cocktail adapter_cocktail;
@@ -51,9 +49,7 @@ public class Cocktail_Menu extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        tv_cocktail = findViewById(R.id.tv_cocktail_text);
         search_item = "";
-        buttonParse = findViewById(R.id.button_parse);
         search_cocktail = findViewById(R.id.sv_cocktail_search);
 
         //adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
@@ -77,51 +73,9 @@ public class Cocktail_Menu extends AppCompatActivity {
 
         mQueue = Volley.newRequestQueue(this);
 
-        buttonParse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                json_search_cocktail(search_item);
-            }
-        });
 
     }
 
-
-
-    private void json_search_cocktail(String search_item){
-
-        //String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("drinks");
-                            String result = "";
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject drink = jsonArray.getJSONObject(i);
-
-                                String drink_name = drink.getString("strDrink");
-                                int drink_id = drink.getInt("idDrink");
-                                String drink_glass = drink.getString("strGlass");
-                                result = result + drink_name + ", " + String.valueOf(drink_id) + ", " + drink_glass + "\n\n";
-                            }
-                            tv_cocktail.setText(result);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mQueue.add(request);
-    }
 
     private void load_cocktail_json(String search_item){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
@@ -185,5 +139,41 @@ public class Cocktail_Menu extends AppCompatActivity {
 
     }
 
+    /*
+    private void json_search_cocktail(String search_item){
 
+        //String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("drinks");
+                            String result = "";
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject drink = jsonArray.getJSONObject(i);
+
+                                String drink_name = drink.getString("strDrink");
+                                int drink_id = drink.getInt("idDrink");
+                                String drink_glass = drink.getString("strGlass");
+                                result = result + drink_name + ", " + String.valueOf(drink_id) + ", " + drink_glass + "\n\n";
+                            }
+                            tv_cocktail.setText(result);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request);
+    }
+
+     */
 }

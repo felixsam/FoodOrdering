@@ -81,14 +81,14 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
                 View customLayout = Objects.requireNonNull(customInflater.inflate(R.layout.custom_dialog_cocktail, holder.cocktail_dialog_root));
                 cocktail_dialog.setContentView(customLayout);
                 ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
-                layoutParams2.height=900;
-                layoutParams2.width=900;
+                //layoutParams2.height=900;
+                //layoutParams2.width=900;
 
                 final TextView dialog_cocktail_name = customLayout.findViewById(R.id.dialog_tv_cocktail_name);
                 final TextView dialog_cocktail_id = customLayout.findViewById(R.id.dialog_tv_cocktail_id);
                 final TextView dialog_cocktail_glass = customLayout.findViewById(R.id.dialog_tv_cocktail_glass);
                 final TextView dialog_cocktail_alcoholic = customLayout.findViewById(R.id.dialog_tv_cocktail_alcoholic);
-                //final ImageView dialog_cocktail_thumb = customLayout.findViewById(R.id.dialog_iv_cocktail_thumb);
+                final ImageView dialog_cocktail_thumb = customLayout.findViewById(R.id.dialog_iv_cocktail_thumb);
                 final TextView dialog_cocktail_instructions = customLayout.findViewById(R.id.dialog_tv_cocktail_instructions);
                 final TextView dialog_cocktail_ingredients = customLayout.findViewById(R.id.dialog_tv_cocktail_ingredients);
                 final Button btn_dialog_cocktail_ok = customLayout.findViewById(R.id.custom_dialog_cocktail_btn_ok);
@@ -98,8 +98,10 @@ public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.View
                 dialog_cocktail_id.setText("ID: " + cocktail.getCocktail_ID().toString());
                 dialog_cocktail_glass.setText("Glass: " + cocktail.getGlass_name());
                 dialog_cocktail_alcoholic.setText(cocktail.getAlcoholic());
-                dialog_cocktail_instructions.setText("Instructions: " + cocktail.getInstructions());
+                dialog_cocktail_instructions.setText("Instructions: \n" + cocktail.getInstructions());
                 dialog_cocktail_ingredients.setText("Ingredients: " + cocktail.getIngredients_single_string());
+
+                Glide.with(context).load(cocktail.getImage_url()).into(dialog_cocktail_thumb);
 
                 btn_dialog_cocktail_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
