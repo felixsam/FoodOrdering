@@ -1,16 +1,12 @@
 package felixsam.github.com.foodordering.activities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +25,7 @@ import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
 
-public class Cocktail_Menu extends AppCompatActivity {
+public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     private RequestQueue mQueue;
     private SearchView search_cocktail;
@@ -57,7 +53,7 @@ public class Cocktail_Menu extends AppCompatActivity {
         search_cocktail.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(Cocktail_Menu.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
+                Toast.makeText(Cocktail_Menu_Activity.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
                 //json_search_cocktail(query);
                 load_cocktail_json(query);
 
@@ -102,7 +98,7 @@ public class Cocktail_Menu extends AppCompatActivity {
 
                                 //Add all the ingredients
                                 for (int k = 1; k < 16; k++ ){
-                                    String ingredient_index = "strIngredient" + String.valueOf(k);
+                                    String ingredient_index = "strIngredient" + k;
                                     String ingredient = drink.getString(ingredient_index);
 
                                     ingredients.add(ingredient);
@@ -121,7 +117,7 @@ public class Cocktail_Menu extends AppCompatActivity {
 
                                 cocktail_list.add(new_cocktail);
                             }
-                            adapter_cocktail = new Adapter_Cocktail(cocktail_list,Cocktail_Menu.this);
+                            adapter_cocktail = new Adapter_Cocktail(cocktail_list, Cocktail_Menu_Activity.this);
                             recyclerView.setAdapter(adapter_cocktail);
                         } catch (JSONException e) {
                             e.printStackTrace();
