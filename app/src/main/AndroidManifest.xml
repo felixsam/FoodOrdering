@@ -22,7 +22,7 @@
         <activity android:name=".activities.Drink_Menu_Activity"
             android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".activities.Cocktail_Menu"
+        <activity android:name=".activities.Cocktail_Menu_Activity"
             android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.Cake_Menu_Activity"

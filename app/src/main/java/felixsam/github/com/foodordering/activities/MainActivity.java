@@ -2,6 +2,7 @@ package felixsam.github.com.foodordering.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import net.steamcrafted.materialiconlib.MaterialMenuInflater;
 
 import java.util.Objects;
 
@@ -73,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        MaterialMenuInflater
+                .with(this)
+                .setDefaultColor(Color.BLACK)
+                .inflate(R.menu.menu_main,menu);
         return true;
     }
 

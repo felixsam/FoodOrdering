@@ -6,16 +6,16 @@
 
     <item
         android:id="@+id/action_home"
-        android:orderInCategory="0"
-        android:title="User"
-        android:icon="@drawable/ic_home"
+        android:orderInCategory="1"
+        android:title="Home"
+        app:materialIcon="home"
         app:showAsAction="ifRoom"></item>
 
     <item
         android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:orderInCategory="1"
-        android:title="User"
+        app:materialIcon="view_list"
+        android:orderInCategory="2"
+        android:title="list"
         app:showAsAction="ifRoom"></item>
 
 </menu>

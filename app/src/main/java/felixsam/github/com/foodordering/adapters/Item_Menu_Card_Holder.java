@@ -1,6 +1,8 @@
 package felixsam.github.com.foodordering.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
+
+import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
@@ -26,6 +30,7 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
     private TextView tv_item_name, tv_item_quantity, item_price, text_quantity;
     private ImageButton btn_plus_quantity,btn_minus_quantity, btn_add_item;
     private String category;
+    private Drawable drawable_add_item,drawable_plus_quantity,drawable_minus_quantity;
 
     private Context mcontext;
     private Item_Model_Display item_model;
@@ -40,9 +45,30 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
         this.mcontext = context;
         this.item_image = (ImageView) itemView.findViewById(R.id.iv_item_image);
 
+
         this.btn_plus_quantity = (ImageButton) itemView.findViewById(R.id.plus_quantity);
+        this.drawable_plus_quantity = MaterialDrawableBuilder.with(mcontext)
+                .setIcon(MaterialDrawableBuilder.IconValue.PLUS)
+                .setColor(Color.BLACK)
+                .setToActionbarSize()
+                .build();
+        this.btn_plus_quantity.setImageDrawable(drawable_plus_quantity);
+
         this.btn_minus_quantity = (ImageButton) itemView.findViewById(R.id.minus_quantity);
+        this.drawable_minus_quantity = MaterialDrawableBuilder.with(mcontext)
+                .setIcon(MaterialDrawableBuilder.IconValue.MINUS)
+                .setColor(Color.BLACK)
+                .setToActionbarSize()
+                .build();
+        this.btn_minus_quantity.setImageDrawable(drawable_minus_quantity);
+
+        this.drawable_add_item = MaterialDrawableBuilder.with(mcontext)
+                .setIcon(MaterialDrawableBuilder.IconValue.CART_PLUS)
+                .setColor(Color.BLACK)
+                .setToActionbarSize()
+                .build();
         this.btn_add_item = (ImageButton) itemView.findViewById(R.id.btn_add_item);
+        this.btn_add_item.setImageDrawable(drawable_add_item);
 
         this.tv_item_name = (TextView) itemView.findViewById(R.id.item_name);
         this.tv_item_quantity = (TextView) itemView.findViewById(R.id.et_item_quantity);
