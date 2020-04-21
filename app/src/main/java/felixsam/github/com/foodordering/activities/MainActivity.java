@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.checkout_menu,
             R.drawable.order_menu,
             R.drawable.customer_list,
-            R.drawable.drink_menu
+            R.drawable.cocktail_menu
     };
     private final String[] titleArray = {
             "Drink Menu",
