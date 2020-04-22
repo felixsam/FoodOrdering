@@ -10,16 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_cocktail_constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background">
-
-        <include
-            android:id="@+id/toolbar_cocktail"
-            layout="@layout/toolbar"
-            app:layout_constraintBottom_toTopOf="@+id/sv_cocktail_search"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
         <SearchView
             android:id="@+id/sv_cocktail_search"
@@ -28,20 +19,17 @@
             app:layout_constraintBottom_toTopOf="@+id/rv_cocktail_search_results"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_cocktail" />
+            app:layout_constraintTop_toBottomOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cocktail_search_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sv_cocktail_search" />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

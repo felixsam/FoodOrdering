@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import felixsam.github.com.foodordering.Models.User;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     Globals g = Globals.getInstance();
 
@@ -133,6 +135,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
+    public User getUser(String username){
+        User user;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL1_ID
+                + ", " + CUSTOMERS_COL2_FIRST_NAME
+                + ", " + CUSTOMERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "''" ,null);
+
+        if (data.moveToFirst()){
+            return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
+                    data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)),
+                    data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+                    );
+        }
+
+        //TO DO
+        //Handle case when username doesn't exist
+        return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
+                data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)),
+                data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+        );
+
+    }
+
+    //check for existence of username
+    public boolean exists_username(String username){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT 1"
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" + username + "'" ,null);
+
+        if (data.getCount() == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     public String getUserName(Integer userID){
         //String userID_str = userID.toString();

@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">FoodMan</string>
+    <string name="app_name">Food Delivery</string>
+
+    <!-- Activity Login -->
+    <string name="text_login">Sign In</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Sign Up</string>
+    <string name="hint_username">User Name</string>
+    <string name="desc_image_login">Login Image</string>
+    <string name="hint_password">Password</string>
+    <!-- Activity Login -->
+
+
 </resources>

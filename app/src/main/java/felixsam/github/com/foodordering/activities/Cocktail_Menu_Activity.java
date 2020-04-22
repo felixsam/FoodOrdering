@@ -76,11 +76,6 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
         mQueue = Volley.newRequestQueue(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_cocktail);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-
-
     }
 
     @Override

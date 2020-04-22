@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="146dp"
+        android:layout_marginBottom="1dp"
         android:dropDownWidth="wrap_content"
         android:popupBackground="@color/colorPrimaryDark"
         android:textAlignment="center"
@@ -27,11 +28,50 @@
         android:layout_marginStart="181dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="176dp"
-        android:text="Sign In"
+        android:text="@string/text_login"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <AutoCompleteTextView
+            android:id="@+id/dropdown_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_username"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_login"
@@ -41,7 +81,7 @@
         android:layout_marginStart="154dp"
         android:layout_marginEnd="169dp"
         android:layout_marginBottom="8dp"
-        android:text="Login"
+        android:text="@string/btn_login"
         app:layout_constraintBottom_toTopOf="@+id/login_btn_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,10 +94,11 @@
         android:layout_marginStart="154dp"
         android:layout_marginEnd="169dp"
         android:layout_marginBottom="117dp"
-        android:text="Sign Up"
+        android:text="@string/btn_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -66,8 +107,10 @@
         android:layout_marginStart="170dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="169dp"
+        android:contentDescription="@string/desc_image_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_login"
         app:srcCompat="@mipmap/ic_launcher_foodman_round" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

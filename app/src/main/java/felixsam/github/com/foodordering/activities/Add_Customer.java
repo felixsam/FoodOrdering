@@ -19,7 +19,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
     private Intent intent;
-    private EditText et_first_name_field, et_last_name_field, et_phone_number_field;
+    private EditText et_first_name_field, et_last_name_field, et_phone_number_field, et_user_name_field;
     Class nextActivityClass;
 
     @Override
@@ -40,6 +40,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         et_first_name_field = (EditText) findViewById(R.id.et_customer_name_field);
         et_last_name_field = (EditText) findViewById(R.id.et_last_name_field);
         et_phone_number_field = (EditText) findViewById(R.id.et_phone_number_field);
+        et_user_name_field = findViewById(R.id.et_username_field);
 
         btnAdd = (Button) findViewById(R.id.btn_customer_add);
         btnViewData = (Button) findViewById(R.id.btn_customer_view);
@@ -59,9 +60,10 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                 String First_Name_Entry = et_first_name_field.getText().toString();
                 String Last_Name_Entry = et_last_name_field.getText().toString();
                 String Phone_Number_Entry = et_phone_number_field.getText().toString();
+                String User_Name_Entry = et_user_name_field.getText().toString();
 
-                if (et_first_name_field.length() != 0) {
-                    AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry);
+                if (et_first_name_field.length() != 0 && et_user_name_field.length() != 0) {
+                    AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry,User_Name_Entry);
                     et_first_name_field.setText("");
                     intent = new Intent(Add_Customer.this,nextActivityClass);
                     startActivity(intent);
@@ -81,8 +83,8 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void AddData(String f_name, String l_name, String p_number) {
-        boolean insertData = mDatabaseHelper.addData_customers(f_name,l_name,p_number);
+    public void AddData(String f_name, String l_name, String p_number, String user_name) {
+        boolean insertData = mDatabaseHelper.addData_customers(f_name,l_name,p_number,user_name);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!\n Added a New User");

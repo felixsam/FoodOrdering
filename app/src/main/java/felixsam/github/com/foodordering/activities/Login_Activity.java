@@ -3,15 +3,20 @@ package felixsam.github.com.foodordering.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
@@ -25,19 +30,26 @@ public class Login_Activity extends AppCompatActivity implements AdapterView.OnI
     private String TAG = Login_Activity.class.getSimpleName();
 
     private Spinner dropdown_users;
+    private AutoCompleteTextView autocomplete_text;
     private final Globals g = Globals.getInstance();
     private Boolean flag_users_exist = Boolean.FALSE;
     private ArrayAdapter<User> adapter_dropdown_users;
+    private ArrayAdapter<User> adapter_dropdown_usrs;
+    private TextInputEditText et_password;
+    private DatabaseHelper database;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        DatabaseHelper database = new DatabaseHelper(this);
+        database = new DatabaseHelper(this);
         ArrayList<User> list_users = new ArrayList<>();
 
         dropdown_users = findViewById(R.id.spinner);
+        autocomplete_text = findViewById(R.id.dropdown_username);
+        et_password = findViewById(R.id.text_password);
 
         Cursor data = database.getCustomer_ID_and_Name();
         int numRows = data.getCount();
@@ -55,11 +67,13 @@ public class Login_Activity extends AppCompatActivity implements AdapterView.OnI
             while (data.moveToNext()) {
                 Log.i(TAG,"New User");
                 User user = new User(data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)),
-                        data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
+                        data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME)),
+                        data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL7_USERNAME))
                 );
 
                 Log.i(TAG,"Adding user: " + data.getInt(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)) + " "
-                        + data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME))
+                        + data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME)) + " "
+                        + data.getString(data.getColumnIndex(DatabaseHelper.CUSTOMERS_COL7_USERNAME))
                 );
                 list_users.add(i, user);
 
@@ -70,10 +84,31 @@ public class Login_Activity extends AppCompatActivity implements AdapterView.OnI
 
 
             adapter_dropdown_users = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
-            adapter_dropdown_users.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            adapter_dropdown_usrs = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
+            //adapter_dropdown_users.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            autocomplete_text.setAdapter(adapter_dropdown_usrs);
 
             dropdown_users.setAdapter(adapter_dropdown_users);
             dropdown_users.setOnItemSelectedListener(this);
+
+            autocomplete_text.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
 
         }
 
@@ -124,9 +159,15 @@ public class Login_Activity extends AppCompatActivity implements AdapterView.OnI
         switch (v.getId()){
             case R.id.btn_login:
                 System.out.println("Clicked login button");
+                username = autocomplete_text.getText().toString();
 
-                if (flag_users_exist == Boolean.TRUE){
-                    User login_user = getSelectedUser();
+                if (!database.exists_username(username)){
+                Toast.makeText(this, "Cannot login, No users registered", Toast.LENGTH_SHORT).show();
+                }
+
+                if (flag_users_exist == Boolean.TRUE && database.exists_username(username)){
+                    //User login_user = getSelectedUser();
+                    User login_user = database.getUser(username);
                     String login_name = login_user.getName();
                     int login_id = login_user.getUserID();
 
