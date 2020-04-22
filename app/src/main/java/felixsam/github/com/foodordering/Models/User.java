@@ -4,12 +4,14 @@ public class User {
 
     private String name;
     private int UserID;
+    private String user_name;
     private String role;
 
 
-    public User (int userID, String username){
+    public User (int userID, String Name, String user){
         UserID = userID;
-        name = username;
+        name = Name;
+        user_name = user;
     }
 
     public String getName() {
@@ -35,6 +37,15 @@ public class User {
     public String getRole(){
         return role;
     }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
 
     //Show name as values in spinner when calling toString()
     @Override

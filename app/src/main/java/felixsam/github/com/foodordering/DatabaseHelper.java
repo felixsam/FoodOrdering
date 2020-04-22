@@ -22,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CUSTOMERS_COL4_PHONE_NUMBER ="PHONE_NUMBER";
     public static final String CUSTOMERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
     public static final String CUSTOMERS_COL6_ROLE = "ROLE";
+    public static final String CUSTOMERS_COL7_USERNAME = "USERNAME";
 
     //TABLE: ITEMS
     public static final String TABLE_NAME_ITEMS = "items";
@@ -60,7 +61,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
                         CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
                         CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
-                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'USER'"
+                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'USER', " +
+                        CUSTOMERS_COL7_USERNAME + " TEXT, " +
+                        "UNIQUE (" + CUSTOMERS_COL7_USERNAME + ")"
                         + ")";
 
         //ITEMS TABLE
@@ -196,13 +199,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addData_customers(String First_Name,String Last_Name, String Phone_Number) {
+    public boolean addData_customers(String First_Name,String Last_Name, String Phone_Number, String User_Name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(CUSTOMERS_COL2_FIRST_NAME, First_Name);
         values.put(CUSTOMERS_COL3_LAST_NAME, Last_Name);
         values.put(CUSTOMERS_COL4_PHONE_NUMBER, Phone_Number);
+        values.put(CUSTOMERS_COL7_USERNAME, User_Name);
 
         long result = db.insert(TABLE_NAME_CUSTOMERS, null, values);
 
