@@ -5,130 +5,105 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:orientation="vertical">
 
-
-    <EditText
-        android:id="@+id/customer_edit_role"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_current_role"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/edit_customer_tv_role"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="82dp"
-        android:text="Role"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_edit_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:hint="@string/edit_customer_text_first_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_phonenumber" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/edit_customer_tv_phonenumber"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="Phone Number"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_edit_last_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/edit_customer_text_last_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_lastname" />
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_edit_name">
 
-    <EditText
-        android:id="@+id/customer_edit_name"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="79dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_firstname"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_edit_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/customer_edit_lastname"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_lastname"
-        app:layout_constraintTop_toBottomOf="@+id/customer_edit_name" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/customer_edit_phonenumber"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="number|phone"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_phonenumber"
-        app:layout_constraintTop_toBottomOf="@+id/customer_edit_lastname" />
-
-    <TextView
-        android:id="@+id/edit_customer_tv_firstname"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="39dp"
-        android:text="First Name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_edit_phone_number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/edit_customer_text_phone_number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_current_role" />
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_edit_last_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_edit_phonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_edit_role"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/edit_customer_text_role"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_edit_phone_number">
+
+        <AutoCompleteTextView
+            android:id="@+id/customer_edit_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_delete_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginBottom="248dp"
-        android:text="DELETE"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="@string/edit_customer_text_btn_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_customer" />
 
     <Button
         android:id="@+id/btn_save_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="239dp"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        android:text="@string/edit_customer_text_btn_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_delete_customer"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_spinner"
-        app:layout_constraintVertical_bias="0.47" />
-
-    <TextView
-        android:id="@+id/edit_customer_tv_lastname"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="Last Name"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_customer_tv_firstname" />
-
-    <Spinner
-        android:id="@+id/edit_customer_spinner"
-        android:spinnerMode="dialog"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="82dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edit_customer_tv_role"
-        app:layout_constraintTop_toBottomOf="@+id/customer_edit_phonenumber" />
-
-    <TextView
-        android:id="@+id/edit_customer_tv_current_role"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="Current Role"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_edit_role" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,23 @@
     <string name="hint_password">Password</string>
     <!-- Activity Login -->
 
+    <!-- Activity Add_Customer -->
+    <string name="add_customer_text_username">User Name</string>
+    <string name="add_customer_text_first_name">First Name</string>
+    <string name="add_customer_text_last_name">Last Name</string>
+    <string name="add_customer_text_phone_number">Phone Number</string>
+    <string name="btn_customer_list">User List</string>
+    <string name="btn_add_customer">Add User</string>
+    <!-- Activity Add_Customer -->
+
+    <!-- Activity Edit_Customer -->
+    <string name="edit_customer_text_role">Role</string>
+    <string name="edit_customer_text_first_name">First Name</string>
+    <string name="edit_customer_text_last_name">Last Name</string>
+    <string name="edit_customer_text_phone_number">Phone Number</string>
+    <string name="edit_customer_text_btn_save">Save</string>
+    <string name="edit_customer_text_btn_delete">Delete</string>
+    <!-- Activity Edit_Customer -->
+
 
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
@@ -24,8 +27,8 @@ public class Edit_Customer_Activity extends AppCompatActivity {
 
     private static final String TAG = "Edit_Customer";
 
-    private EditText edit_customer_firstname, edit_customer_lastname, edit_customer_phone_number;
-    private Spinner dropdown;
+    private TextInputEditText edit_customer_first_name, edit_customer_last_name, edit_customer_phone_number;
+    private AutoCompleteTextView autocomplete_user_role;
     private String current_role;
     private DatabaseHelper mDatabaseHelper;
 
@@ -37,19 +40,18 @@ public class Edit_Customer_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Globals g = Globals.getInstance();
+        this.setTitle("Edit User");
         setContentView(R.layout.activity_edit_customer);
         Button btnSave = findViewById(R.id.btn_save_customer);
         Button btnDelete = findViewById(R.id.btn_delete_customer);
-        edit_customer_firstname = findViewById(R.id.customer_edit_name);
-        edit_customer_lastname = findViewById(R.id.customer_edit_lastname);
+        edit_customer_first_name = findViewById(R.id.customer_edit_name);
+        edit_customer_last_name = findViewById(R.id.customer_edit_lastname);
         edit_customer_phone_number = findViewById(R.id.customer_edit_phonenumber);
-        EditText edit_customer_role = findViewById(R.id.customer_edit_role);
+        autocomplete_user_role = findViewById(R.id.customer_edit_role);
 
 
         mDatabaseHelper = new DatabaseHelper(this);
-        this.setTitle("Edit User");
-        final Globals g = Globals.getInstance();
-
 
         //get the intent extra from the List_Customers
         Intent receivedIntent = getIntent();
@@ -64,19 +66,23 @@ public class Edit_Customer_Activity extends AppCompatActivity {
         String edit_customer_selectRole = receivedIntent.getStringExtra("role");
 
         //set the text to show the current selected name
-        edit_customer_firstname.setText(edit_customer_selectedName);
-        edit_customer_lastname.setText(edit_customer_selectLastName);
+        edit_customer_first_name.setText(edit_customer_selectedName);
+        edit_customer_last_name.setText(edit_customer_selectLastName);
         edit_customer_phone_number.setText(edit_customer_selectPhoneNumber);
-        edit_customer_role.setText(edit_customer_selectRole);
+        autocomplete_user_role.setText(edit_customer_selectRole);
+
+        String [] items = new String[]{"Admin", "Customer", "Worker"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        autocomplete_user_role.setAdapter(adapter);
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String first_name = edit_customer_firstname.getText().toString();
-                String last_name = edit_customer_lastname.getText().toString();
+                String first_name = edit_customer_first_name.getText().toString();
+                String last_name = edit_customer_last_name.getText().toString();
                 String phone_number = edit_customer_phone_number.getText().toString();
-                role = getSelectedRole();
+                role = autocomplete_user_role.getText().toString();
 
                 final Integer user_id = g.getUser_ID();
                 mDatabaseHelper.update_customer_role(user_id,role);
@@ -90,70 +96,17 @@ public class Edit_Customer_Activity extends AppCompatActivity {
             }
         });
 
-
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mDatabaseHelper.deleteName(selectedID, edit_customer_selectedName);
-                edit_customer_firstname.setText("");
-                edit_customer_lastname.setText("");
+                edit_customer_first_name.setText("");
+                edit_customer_last_name.setText("");
 
                 toastMessage("removed from database");
             }
         });
-
-        //Spinner
-        dropdown = findViewById(R.id.edit_customer_spinner);
-        String [] items = new String[]{"Admin", "Customer", "Worker"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        dropdown.setAdapter(adapter);
-
-        dropdown.setPrompt(" Current Role: " + edit_customer_selectRole + "\n Select a new Role");
-
-        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //User user = (User) parent.getSelectedItem();
-                //displayUserData(user);
-
-
-                //set as selected item.
-                dropdown.setSelection(position);
-
-                //
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
     }
-
-    private String getSelectedRole(){
-        return (String) dropdown.getSelectedItem();
-    }
-    public User getSelectedUser(){
-        return (User) dropdown.getSelectedItem();
-    }
-
-    public void displayUserData(User user){
-        String name = user.getName();
-        String role = user.getRole();
-        int UserID = user.getUserID();
-
-        String userData = "Name: " + name + "\n UserID: " + UserID + "role" + role;
-
-        Toast.makeText(this,userData,Toast.LENGTH_SHORT).show();
-    }
-
 
     /**
      * customizable toast

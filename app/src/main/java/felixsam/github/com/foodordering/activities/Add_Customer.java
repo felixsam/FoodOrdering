@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.R;
 
@@ -19,7 +21,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
     private Intent intent;
-    private EditText et_first_name_field, et_last_name_field, et_phone_number_field, et_user_name_field;
+    private TextInputEditText et_first_name_field, et_last_name_field, et_phone_number_field, et_user_name_field;
     Class nextActivityClass;
 
     @Override
@@ -37,9 +39,9 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
 
         //DataBase
         mDatabaseHelper = new DatabaseHelper(this);
-        et_first_name_field = (EditText) findViewById(R.id.et_customer_name_field);
-        et_last_name_field = (EditText) findViewById(R.id.et_last_name_field);
-        et_phone_number_field = (EditText) findViewById(R.id.et_phone_number_field);
+        et_first_name_field = findViewById(R.id.et_customer_name_field);
+        et_last_name_field = findViewById(R.id.et_last_name_field);
+        et_phone_number_field = findViewById(R.id.et_phone_number_field);
         et_user_name_field = findViewById(R.id.et_username_field);
 
         btnAdd = (Button) findViewById(R.id.btn_customer_add);

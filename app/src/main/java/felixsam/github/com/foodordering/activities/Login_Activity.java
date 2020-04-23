@@ -35,7 +35,13 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         autocomplete_text_username = findViewById(R.id.dropdown_username);
+
+        //For development
+        //pre-fill username for quick login
+        autocomplete_text_username.setText("felix_user");
+
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.login_btn_signup);
 
@@ -82,6 +88,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             adapter_dropdown_username = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
             autocomplete_text_username.setAdapter(adapter_dropdown_username);
         }
+
 
 
     }
