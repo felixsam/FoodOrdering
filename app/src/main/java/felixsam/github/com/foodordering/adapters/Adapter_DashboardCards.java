@@ -75,29 +75,26 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                 }else if (position == 1) {
                     Intent intent = new Intent(v.getContext(), Cake_Menu_Activity.class);
                     mContext.startActivity(intent);
-                }else if (position == 2) {
+                }else if (position == 2){
+                    Intent intent = new Intent(v.getContext(), Cocktail_Menu_Activity.class);
+                    mContext.startActivity(intent);
+                }else if (position == 3) {
                     Intent intent = new Intent(v.getContext(), CheckoutActivity.class);
                     mContext.startActivity(intent);
-                }else if (position == 3){
+                }else if (position == 4){
                     Intent intent = new Intent(v.getContext(), List_Orders_By_ID.class);
                     mContext.startActivity(intent);
-                }else if (position == 4){
+                }else if (position == 5) {
                     Intent intent = new Intent(v.getContext(), Add_Customer.class);
                     intent.putExtra("PARENT_ACTIVITY_CLASS", MainActivity.class);
                     mContext.startActivity(intent);
-                }else if (position == 5){
-                    Intent intent = new Intent(v.getContext(), Cocktail_Menu_Activity.class);
-                    mContext.startActivity(intent);
                 }
-
-                System.out.println("Clicked");
             }
         });
 
 
         holder.title.setText(mTitle[position]);
         holder.subtitle.setText(msubTitle[position]);
-        //Picasso.get().load(mImage[position]).into(holder.imgView);
         Glide.with(mContext).load(mImage[position]).into(holder.imgView);
     }
 

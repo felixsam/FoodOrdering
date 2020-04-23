@@ -27,27 +27,28 @@ public class MainActivity extends AppCompatActivity {
     private final Integer[] drawableArray = {
             R.drawable.drink_menu,
             R.drawable.cake_menu,
+            R.drawable.cocktail_menu,
             R.drawable.checkout_menu,
             R.drawable.order_menu,
-            R.drawable.customer_list,
-            R.drawable.cocktail_menu
+            R.drawable.customer_list
+
     };
     private final String[] titleArray = {
             "Drink Menu",
             "Cake Menu",
+            "Cocktails",
             "Checkout",
             "Orders",
-            "Register",
-            "Cocktails"
+            "Register"
     };
 
     private final String[] subtitleArray = {
             "Refreshing Drinks",
             "Delicious Cakes",
+            "Make cocktails",
             "Checkout for current User",
             "See active orders",
-            "Register new customers",
-            "Make cocktails"
+            "Register new customers"
     };
 
     private Adapter_DashboardCards dashboard_cards;

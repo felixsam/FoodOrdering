@@ -2,13 +2,13 @@ package felixsam.github.com.foodordering.Models;
 
 public class User {
 
+    private String user_name;
     private String name;
     private int UserID;
-    private String user_name;
     private String role;
 
 
-    public User (int userID, String Name, String user){
+    public User(int userID, String Name, String user){
         UserID = userID;
         name = Name;
         user_name = user;
@@ -47,10 +47,10 @@ public class User {
     }
 
 
-    //Show name as values in spinner when calling toString()
+    //Show name as dropdown options in spinner when calling toString()
     @Override
     public String toString(){
-        return name;
+        return user_name;
     }
 
 }

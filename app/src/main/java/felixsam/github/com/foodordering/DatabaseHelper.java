@@ -131,8 +131,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db_customer = this.getWritableDatabase();
 
         return db_customer.rawQuery("SELECT " + CUSTOMERS_COL1_ID
-                + ", " + CUSTOMERS_COL2_FIRST_NAME +
-                " FROM " + TABLE_NAME_CUSTOMERS, null);
+                + ", " + CUSTOMERS_COL2_FIRST_NAME
+                + ", " + CUSTOMERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
     public User getUser(String username){
@@ -143,20 +144,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ", " + CUSTOMERS_COL2_FIRST_NAME
                 + ", " + CUSTOMERS_COL7_USERNAME
                 + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "''" ,null);
+                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "'" ,null);
 
         if (data.moveToFirst()){
             return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
-                    data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)),
-                    data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
-                    );
+                    data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+            );
         }
 
         //TO DO
         //Handle case when username doesn't exist
         return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
-                data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)),
-                data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+                data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
         );
 
     }
