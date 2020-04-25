@@ -31,9 +31,6 @@ public class List_Orders_Activity extends AppCompatActivity {
         // Find ListView to populate
         ListView lv_order_items = findViewById(R.id.lv_orders_test);
 
-        TextView order_id = findViewById(R.id.tv_order_customer_id);
-        TextView customer_name = findViewById(R.id.order_tv_customer_name);
-
 
         String TAG = "Orders_TAG";
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
@@ -45,10 +42,8 @@ public class List_Orders_Activity extends AppCompatActivity {
         ArrayList<Order> order_list = new ArrayList<>();
         Integer OrderID = extras.getInt("ORDER_ID");
         Log.d(TAG, "ORDER ID: " + OrderID.toString());
-        order_id.setText("OrderID: " + OrderID.toString());
 
         String user_name = extras.getString("NAME");
-        customer_name.setText(user_name);
 
         String date = extras.getString("DATE");
         //get the data and append to a list

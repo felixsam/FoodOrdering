@@ -63,7 +63,7 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
         this.btn_minus_quantity.setImageDrawable(drawable_minus_quantity);
 
         this.drawable_add_item = MaterialDrawableBuilder.with(mcontext)
-                .setIcon(MaterialDrawableBuilder.IconValue.CART_PLUS)
+                .setIcon(MaterialDrawableBuilder.IconValue.ARROW_DOWN_BOLD_BOX_OUTLINE)
                 .setColor(Color.BLACK)
                 .setToActionbarSize()
                 .build();

@@ -12,7 +12,7 @@
         app:showAsAction="ifRoom"></item>
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_list"
         app:materialIcon="view_list"
         android:orderInCategory="2"
         android:title="list"

@@ -1,5 +1,6 @@
 package felixsam.github.com.foodordering.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,6 +46,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_cocktail);
+        this.setTitle("Cocktail Search");
 
         cocktail_list = new ArrayList<Cocktail>();
 
@@ -97,7 +99,8 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_home) {
-            Toast.makeText(Cocktail_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
             return true;
         }
 

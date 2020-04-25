@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Food Delivery</string>
+    <string name="app_name">Foodíí</string>
 
     <!-- Activity Login -->
     <string name="text_login">Sign In</string>
@@ -29,4 +29,13 @@
     <!-- Activity Edit_Customer -->
 
 
+
+    <!-- Full Screen Dialog Edit Item -->
+    <string name="full_screen_dialog_edit_item_name">Item Name</string>
+    <string name="full_screen_dialog_edit_item_price">Item Price</string>
+    <string name="full_screen_dialog_edit_item_quantity">Item Quantity</string>
+    <string name="full_screen_dialog_edit_item_supportBar_title">Edit Item Entry</string>
+    <string name="full_screen_dialog_btn_update">Update</string>
+    <string name="full_screen_dialog_btn_delete">Delete</string>
+    <!-- Full Screen Dialog Edit Item -->
 </resources>

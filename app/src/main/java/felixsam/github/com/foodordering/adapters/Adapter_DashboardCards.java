@@ -1,6 +1,5 @@
 package felixsam.github.com.foodordering.adapters;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.card.MaterialCardView;
 
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.Add_Customer;
@@ -33,15 +33,15 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
         TextView title;
         TextView subtitle;
         ImageView imgView;
-        CardView cardview;
+        MaterialCardView cardview;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            this.cardview = (CardView) itemView.findViewById(R.id.cv_dashboard_item);
-            this.title = (TextView) itemView.findViewById(R.id.title);
-            this.subtitle = (TextView) itemView.findViewById(R.id.subtitle);
-            this.imgView = (ImageView) itemView.findViewById(R.id.imgcar);
+            this.cardview = itemView.findViewById(R.id.cv_dashboard_item);
+            this.title = itemView.findViewById(R.id.title);
+            this.subtitle = itemView.findViewById(R.id.subtitle);
+            this.imgView = itemView.findViewById(R.id.imgcar);
         }
     }
 

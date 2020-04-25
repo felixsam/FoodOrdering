@@ -1,6 +1,9 @@
 package felixsam.github.com.foodordering.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.steamcrafted.materialiconlib.MaterialMenuInflater;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
@@ -81,8 +87,6 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
         RecyclerView rv_item_list_cards = findViewById(R.id.rv_item_list_cards);
 
-        Button btnnext = findViewById(R.id.btn_next_item_list_cards);
-
         itemModelDisplayArrayList = getModel();
         Item_Menu_Adapter customAdapterItemMenu = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
@@ -92,13 +96,7 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
         rv_item_list_cards.setAdapter(customAdapterItemMenu);
 
-        btnnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Drink_Menu_Activity.this, List_Added_Drinks.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 
@@ -124,7 +122,10 @@ public class Drink_Menu_Activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MaterialMenuInflater
+                .with(this)
+                .setDefaultColor(Color.BLACK)
+                .inflate(R.menu.menu_main,menu);
         return true;
     }
 
@@ -137,7 +138,14 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
-            Toast.makeText(Drink_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Drink_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_list){
+            Intent intent = new Intent(this, List_Added_Drinks.class);
+            this.startActivity(intent);
             return true;
         }
 

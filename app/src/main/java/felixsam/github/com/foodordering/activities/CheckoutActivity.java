@@ -1,5 +1,6 @@
 package felixsam.github.com.foodordering.activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -138,6 +139,8 @@ public class CheckoutActivity extends AppCompatActivity{
                     }
                 }
                 toastMessage("Checkout successful");
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                getApplicationContext().startActivity(intent);
 
 
             }

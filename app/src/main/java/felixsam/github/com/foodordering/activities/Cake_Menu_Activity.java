@@ -1,6 +1,7 @@
 package felixsam.github.com.foodordering.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import net.steamcrafted.materialiconlib.MaterialMenuInflater;
 
 import java.util.ArrayList;
 
@@ -27,14 +30,14 @@ public class Cake_Menu_Activity extends AppCompatActivity {
 
     //set menu names
     private final String[] list_cake_names = new String[]{
-            "Strawberry Cake",
-            "Vanilla Spongecake",
-            "Chocolate Cake",
-            "Lemon Blueberry Cake",
-            "Mango Cake",
-            "Oreo Cake",
+            "Strawberry",
+            "Vanilla",
+            "Chocolate",
+            "Lemon Blueberry",
+            "Mango",
+            "Oreo",
             "Cheesecake",
-            "Angel Cake"
+            "Angel"
     };
 
 
@@ -79,8 +82,6 @@ public class Cake_Menu_Activity extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
-        Button btn_to_cake_orders = (Button) findViewById(R.id.btn_next_item_list_cards);
-        btn_to_cake_orders.setText("Cake Orders");
 
         itemModelDisplayArrayList = getModel();
         Item_Menu_Adapter customAdapter = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
@@ -90,14 +91,6 @@ public class Cake_Menu_Activity extends AppCompatActivity {
         rv.setAdapter(customAdapter);
 
 
-        //Move to Cake Menu Orders
-        btn_to_cake_orders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Cake_Menu_Activity.this, List_Added_Cakes.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -120,7 +113,10 @@ public class Cake_Menu_Activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MaterialMenuInflater
+                .with(this)
+                .setDefaultColor(Color.BLACK)
+                .inflate(R.menu.menu_main,menu);
         return true;
     }
 
@@ -131,9 +127,15 @@ public class Cake_Menu_Activity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
-            Toast.makeText(Cake_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Drink_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_list){
+            Intent intent = new Intent(this, List_Added_Cakes.class);
+            this.startActivity(intent);
             return true;
         }
 

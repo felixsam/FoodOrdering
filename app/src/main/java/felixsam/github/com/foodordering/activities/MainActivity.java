@@ -34,17 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
     };
     private final String[] titleArray = {
-            "Drink Menu",
-            "Cake Menu",
+            "Drinks",
+            "Cakes",
             "Cocktails",
             "Checkout",
             "Orders",
-            "Register"
+            "Sign Up"
     };
 
     private final String[] subtitleArray = {
-            "Refreshing Drinks",
-            "Delicious Cakes",
+            "Open Drinks Menu",
+            "Open Cakes Menu",
             "Make cocktails",
             "Checkout for current User",
             "See active orders",
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //hide support bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         recyclerView = findViewById(R.id.rv);
 

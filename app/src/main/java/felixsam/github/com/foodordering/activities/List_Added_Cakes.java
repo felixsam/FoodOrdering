@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,17 +13,21 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
+import felixsam.github.com.foodordering.DialogFragment_Edit_ItemEntry;
 import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.CustomAdapter_ItemList;
 
 
 public class List_Added_Cakes extends AppCompatActivity {
+    private final String TAG = "ListCakes";
     private DatabaseHelper myDB;
     private ArrayList<ItemModel> cakeList;
     private ListView listview_cakes;
@@ -35,120 +37,86 @@ public class List_Added_Cakes extends AppCompatActivity {
     private Button btn_delete;
     private Dialog editCakeDialog;
 
-    private final String TAG = "ListCakes";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_added_items);
         this.setTitle("List of Cake Orders");
-        TextView tv_cakename = findViewById(R.id.item_column_header1);
-        tv_cakename.setText("Cake Name");
+        TextView tv_cake_column = findViewById(R.id.item_column_header1);
+        TextView tv_title_header = findViewById(R.id.tv_list_added_items_title);
+        TextView tv_description_header = findViewById(R.id.tv_list_added_items_description);
+
+        tv_title_header.setText("Cakes");
+        tv_description_header.setText("List of Added Cakes");
+
+        tv_cake_column.setText("Cake Name");
 
         myDB = new DatabaseHelper(this);
 
+        //hide support bar
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         cakeList = new ArrayList<>();
-        Cursor data = myDB.getItemContents("CAKE");
-        int numRows = data.getCount();
-        if(numRows == 0){
-            Toast.makeText(List_Added_Cakes.this,"The Database is empty  :(.",Toast.LENGTH_LONG).show();
+
+        //Populate list of added cakes
+        Cursor data_cakes = myDB.getItemContents("CAKE");
+        int cake_entries = data_cakes.getCount();
+        if(cake_entries == 0){
+            Toast.makeText(List_Added_Cakes.this,"List is Empty",Toast.LENGTH_LONG).show();
         }else{
-            Log.d(TAG,"Number of Rows is: " + numRows);
+            Log.d(TAG,"Number of Rows is: " + cake_entries);
             int i=0;
-            while(data.moveToNext()){
-                //cakes = new ItemModel(data.getString(1),data.getString(2),data.getString(3));
-                cakes = new ItemModel(data.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID),data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
-                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
-                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
-                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)),
-                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
+            while(data_cakes.moveToNext()){
+                cakes = new ItemModel(data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),
+                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
+                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
+                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
+                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)),
+                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
+                Log.d(TAG, "onCreate: colID is: " + data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
+
                 cakeList.add(i, cakes);
-                System.out.println(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))+" "
-                        +data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)) +" "
-                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)) + " "
-                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)) + " " +
-                        +data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
+               Log.i(TAG,data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))+" "
+                        +data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)) +" "
+                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)) + " "
+                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)) + " " +
+                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
-                System.out.println(cakeList.get(i).getName());
+                Log.i(TAG,cakeList.get(i).getName());
                 i++;
             }
-            CustomAdapter_ItemList adapter2 =  new CustomAdapter_ItemList(this,R.layout.adapter_item_list_columns, cakeList);
-            listview_cakes = findViewById(R.id.drink_listView);
-            listview_cakes.setAdapter(adapter2);
 
+            CustomAdapter_ItemList customAdapterItemList_cakes =  new CustomAdapter_ItemList(this,R.layout.adapter_item_list_columns, cakeList);
+            listview_cakes = findViewById(R.id.lv_itemlist);
+            listview_cakes.setAdapter(customAdapterItemList_cakes);
+
+            //Open Dialog to edit Cake Details
             listview_cakes.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
                 @Override
                 public void onItemClick(final AdapterView<?> parent, View view, int position,
-                                        long id)
-                {
-                    //String value = (String)adapter.getItemAtPosition(position);
-                    //Toast.makeText(getApplicationContext(),"Testing ", Toast.LENGTH_LONG).show();
-                    // assuming string and if you want to get the value on click of list item
-                    // do what you intend to do on click of listview row
+                                        long id) {
 
-                    editCakeDialog = new Dialog(List_Added_Cakes.this);
-                    LayoutInflater customInflater = (LayoutInflater)List_Added_Cakes.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View customLayout= Objects.requireNonNull(customInflater).inflate(R.layout.custom_dialog_edit_item, (ViewGroup) findViewById(R.id.root));
-                    editCakeDialog.setContentView(customLayout);
-                    ViewGroup.LayoutParams layoutParams2= customLayout.getLayoutParams();
-                    layoutParams2.height=900;
-                    layoutParams2.width=900;
-
-
-
-                    final TextView tv_quantity = customLayout.findViewById(R.id.custom_dialog_tv_quantity);
-                    TextView tv_item_name = customLayout.findViewById(R.id.custom_dialog_tv_item_name);
-                    TextView tv_item_price = customLayout.findViewById(R.id.custom_dialog_tv_item_price);
-
-                    Integer current_quantity = cakeList.get(position).getQuantity();
-                    final String item_name = cakeList.get(position).getName();
+                    //Pass details to dialog fragment
+                    Bundle bundle = new Bundle();
+                    String item_name = cakeList.get(position).getName();
                     Integer item_price = cakeList.get(position).getPrice();
-                    final Integer colID = cakeList.get(position).getColID();
+                    Integer colID = cakeList.get(position).getColID();
+                    Integer quantity = cakeList.get(position).getQuantity();
 
-                    tv_item_name.setText("Item Name: " + item_name);
-                    tv_item_price.setText("Price: $" + item_price.toString());
-                    tv_quantity.setText(current_quantity.toString());
+                    bundle.putString("ITEM_NAME",item_name);
+                    bundle.putInt("ITEM_PRICE",item_price);
+                    bundle.putInt("COL_ID",colID);
+                    bundle.putInt("QUANTITY", quantity);
 
-                    btn_ok = customLayout.findViewById(R.id.btn_update_entry);
-                    btn_ok.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //done what do you want to do\
-                            Integer new_quantity = Integer.valueOf(tv_quantity.getText().toString());
-                            Log.d(TAG,"Updating Data: colID is : " + colID.toString() + "Set new quantity as: " + new_quantity.toString());
-                            myDB.updateItemQuantity(colID,new_quantity,item_name);
-                            editCakeDialog.dismiss();
-                            recreate();
-                        }
-                    });
-
-                    btn_delete = customLayout.findViewById(R.id.custom_dialog_delete);
-                    btn_delete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v){
-                            Log.d(TAG,"Deleting Data: colID is : " + colID.toString() + "Item Name is: " + item_name);
-                            myDB.delData_items(colID,item_name);
-                            editCakeDialog.dismiss();
-                            recreate();
-                        }
-
-                    });
-                    btn_cancel = customLayout.findViewById(R.id.cancel);
-                    btn_cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //done what do you want to do
-                            editCakeDialog.dismiss();
-                        }
-                    });
-
-
-
-                    editCakeDialog.show();
-
-
+                    FragmentManager fragmentManger = getSupportFragmentManager();
+                    DialogFragment_Edit_ItemEntry newFragment = new DialogFragment_Edit_ItemEntry();
+                    newFragment.setArguments(bundle);
+                    FragmentTransaction transaction = fragmentManger.beginTransaction();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    transaction.add(android.R.id.content,newFragment).addToBackStack(null).commit();
                 }
             });
 

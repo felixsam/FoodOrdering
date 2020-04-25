@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
                         CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
                         CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
-                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'USER', " +
+                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'Admin', " +
                         CUSTOMERS_COL7_USERNAME + " TEXT, " +
                         "UNIQUE (" + CUSTOMERS_COL7_USERNAME + ")"
                         + ")";
@@ -501,6 +501,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_ORDERS;
         return db.rawQuery(query, null);
     }
+
+
+
     public String getorderDate(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
         String date = "";
