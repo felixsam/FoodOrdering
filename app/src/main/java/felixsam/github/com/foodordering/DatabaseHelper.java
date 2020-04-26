@@ -10,7 +10,6 @@ import android.util.Log;
 import felixsam.github.com.foodordering.Models.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    Globals g = Globals.getInstance();
 
     private static final String TAG = "DatabaseHelper";
 
@@ -146,6 +145,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "'" ,null);
 
+        db.close();
+
         if (data.moveToFirst()){
             return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
                     data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
@@ -158,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
         );
 
+
     }
 
     //check for existence of username
@@ -167,11 +169,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" + username + "'" ,null);
 
-        if (data.getCount() == 0){
-            return false;
-        }else{
-            return true;
-        }
+        db.close();
+
+        return data.getCount() != 0;
     }
 
     public String getUserName(Integer userID){
@@ -194,7 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL3_LAST_NAME
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
-        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
+        System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
@@ -211,7 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL4_PHONE_NUMBER
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
-        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
+        System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
@@ -228,7 +228,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL6_ROLE
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
-        System.out.println("cursor.getcount()= " + String.valueOf(data.getCount()));
+        System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
@@ -251,11 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME_CUSTOMERS, null, values);
 
         //if data as inserted incorrectly it will return -1
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public void update_customer_role(int id, String ROLE){
@@ -322,11 +318,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME_ITEMS, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public void delData_items(Integer itemID,String ITEM_NAME){
@@ -533,11 +525,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAME_ORDERS, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     //Get orderID
