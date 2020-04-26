@@ -16,7 +16,7 @@ public class DialogFragment_Edit_ItemEntry extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dialog_edit_item_fullScreen, container, false);
+        View rootView = inflater.inflate(R.layout.dialog_edit_item_fullscreen, container, false);
         final DatabaseHelper dbHelper = new DatabaseHelper(getActivity());
 
         final String item_name = this.getArguments().getString("ITEM_NAME");

@@ -145,8 +145,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "'" ,null);
 
-        db.close();
-
         if (data.moveToFirst()){
             return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
                     data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
@@ -168,8 +166,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery("SELECT 1"
                 + " FROM " + TABLE_NAME_CUSTOMERS
                 + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" + username + "'" ,null);
-
-        db.close();
 
         return data.getCount() != 0;
     }
