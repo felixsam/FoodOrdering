@@ -20,12 +20,12 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/full_screen_dialog_btn_close"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:text="X"
+                android:text="@string/full_screen_dialog_btn_close"
                 android:tint="@android:color/white" />
 
             <TextView

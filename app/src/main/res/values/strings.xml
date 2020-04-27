@@ -37,5 +37,6 @@
     <string name="full_screen_dialog_edit_item_supportBar_title">Edit Item Entry</string>
     <string name="full_screen_dialog_btn_update">Update</string>
     <string name="full_screen_dialog_btn_delete">Delete</string>
+    <string name="full_screen_dialog_btn_close">Close</string>
     <!-- Full Screen Dialog Edit Item -->
 </resources>
