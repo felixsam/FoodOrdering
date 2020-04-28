@@ -39,4 +39,15 @@
     <string name="full_screen_dialog_btn_delete">Delete</string>
     <string name="full_screen_dialog_btn_close">Close</string>
     <!-- Full Screen Dialog Edit Item -->
+
+    <!-- Adapter Order Single Item Card -->
+    <string name="adapter_order_single_item_name">Item Name</string>
+    <string name="adapter_order_single_item_total_price">Total Item Price</string>
+    <string name="adapter_order_single_item_total_quantity">Total Quantity</string>
+    <string name="adapter_order_single_item_btn_edit">Edit</string>
+    <string name="adapter_order_single_item_btn_delete">Delete</string>
+    <string name="adapter_order_single_item_image">Item Image</string>
+    <!-- Adapter Order Single Item Card -->
+
+
 </resources>
