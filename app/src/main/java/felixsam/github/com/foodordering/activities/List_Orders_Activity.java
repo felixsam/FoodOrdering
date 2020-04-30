@@ -5,11 +5,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class List_Orders_Activity extends AppCompatActivity {
 
         DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
-        ListView lv_order_items = findViewById(R.id.lv_orders_test);
+        RecyclerView rv_order_items = findViewById(R.id.rv_orders);
 
 
         String TAG = "Orders_TAG";
@@ -72,19 +73,10 @@ public class List_Orders_Activity extends AppCompatActivity {
                 //order_list.add(i,data.getString(0));
                 i++;
             }
-            List_Orders_Custom_Adapter adapter = new List_Orders_Custom_Adapter(this, R.layout.order_adapter_single_item, order_list);
-            lv_order_items.setAdapter(adapter);
+            List_Orders_Custom_Adapter adapter = new List_Orders_Custom_Adapter(this, R.layout.adapter_order_single_item_card, order_list);
+            rv_order_items.setLayoutManager(new LinearLayoutManager(this));
+            rv_order_items.setHasFixedSize(true);
+            rv_order_items.setAdapter(adapter);
         }
     }
-
-// --Commented out by Inspection START (3/25/2020 11:05 PM):
-//    /**
-//     * customizable toast
-//     * @param message
-//     */
-//    private void toastMessage(String message){
-//        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-//    }
-// --Commented out by Inspection STOP (3/25/2020 11:05 PM)
-
 }
