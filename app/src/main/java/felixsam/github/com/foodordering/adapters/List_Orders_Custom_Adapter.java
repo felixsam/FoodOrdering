@@ -18,7 +18,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.R;
 
-public class List_Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Custom_Adapter.MyViewHolder> {
+public class List_Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Card_Holder> {
 
     private Context context;
     private DatabaseHelper dbHelper;
@@ -26,38 +26,28 @@ public class List_Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders
     private int mViewResourceId;
     private LayoutInflater mInflater;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView total_quantity;
-        TextView item_name;
-        TextView total_item_price;
-        ImageView imgView;
-
-        public MyViewHolder(View itemView){
-            super(itemView);
-
-            this.total_quantity = itemView.findViewById(R.id.adapter_order_single_text_total_quantity);
-            this.item_name = itemView.findViewById(R.id.adapter_order_single_text_item_name);
-            this.total_item_price = itemView.findViewById(R.id.adapter_order_single_text_total_price);
-            this.imgView = itemView.findViewById(R.id.adapter_order_single_item_image);
-        }
+    public List_Orders_Custom_Adapter(Context context, int itemResource, ArrayList<Order> order){
+        this.OrderList = order;
+        this.context = context;
+        this.mViewResourceId = itemResource;
     }
 
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                           int viewType){
-        View view =
-                LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.adapter_order_single_item_card,parent,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
+    public List_Orders_Card_Holder onCreateViewHolder(ViewGroup parent, int viewType){
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(this.mViewResourceId,parent,false);
+        return new List_Orders_Card_Holder(this.context,view);
     }
 
+
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position){
-        holder.item_name.setText(OrderList.get(position).get_item_name());
-        holder.total_item_price.setText(OrderList.get(position).get_totalPrice().toString());
-        holder.total_quantity.setText(OrderList.get(position).getQuantity().toString());
+    public void onBindViewHolder(List_Orders_Card_Holder holder,int position){
+
+        Order order_item = this.OrderList.get(position);
+
+        holder.bind_List_Orders(order_item);
+
     }
 
 
@@ -65,7 +55,7 @@ public class List_Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders
 
     @Override
     public int getItemCount() {
-        return OrderList.size();
+        return this.OrderList.size();
     }
 
 
