@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -138,7 +140,8 @@ public class CheckoutActivity extends AppCompatActivity{
                         i++;
                     }
                 }
-                toastMessage("Checkout successful");
+                //toastMessage("Checkout successful");
+                Snackbar.make(findViewById(R.id.checkout_layout),"Checkout successful",Snackbar.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 getApplicationContext().startActivity(intent);
 
