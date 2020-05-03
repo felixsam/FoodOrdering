@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
@@ -134,10 +135,14 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
 
                 String item_name = this.tv_item_name.getText().toString();
 
-                Toast.makeText(this.mcontext,"Added " + item_name
-                        + "\n Price: " + item_price
-                        + "\n Quantity: " + item_quantity
-                        + "\n Category: " + category, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this.mcontext,"Added " + item_name
+//                        + "\n Price: " + item_price
+//                        + "\n Quantity: " + item_quantity
+//                        + "\n Category: " + category, Toast.LENGTH_LONG).show();
+
+                Snackbar.make(v,"Added " + item_name
+                                + " ,Quantity: " + item_quantity
+                        ,Snackbar.LENGTH_SHORT).show();
 
                 Log.d(TAG,"Added " + item_name
                         + "\n Price: " + item_price

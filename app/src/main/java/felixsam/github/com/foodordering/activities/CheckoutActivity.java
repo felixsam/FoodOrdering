@@ -141,7 +141,7 @@ public class CheckoutActivity extends AppCompatActivity{
                     }
                 }
                 //toastMessage("Checkout successful");
-                Snackbar.make(findViewById(R.id.checkout_layout),"Checkout successful",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(android.R.id.content),"Checkout successful",Snackbar.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 getApplicationContext().startActivity(intent);
 
