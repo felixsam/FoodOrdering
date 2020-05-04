@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -29,7 +30,7 @@ import static java.lang.Boolean.TRUE;
 
 public class CheckoutActivity extends AppCompatActivity{
     DatabaseHelper mDatabaseHelper;
-    private ListView lv_checkout;
+    private RecyclerView rv_checkout;
     Checkout checkout;
     private String TAG = "Checkout_Activity";
     ArrayList<Checkout> checkout_list;
@@ -50,7 +51,7 @@ public class CheckoutActivity extends AppCompatActivity{
 
         btn_submit = (Button) findViewById(R.id.btn_checkout_submit);
         mDatabaseHelper = new DatabaseHelper(this);
-        lv_checkout = findViewById(R.id.lv_checkout);
+        rv_checkout = findViewById(R.id.rv_checkout);
 
         Log.d(TAG,"Displaying data in the listView");
 
@@ -102,7 +103,9 @@ public class CheckoutActivity extends AppCompatActivity{
             tv_tax.setText("Tax (12%): $" + df.format(tax).toString());
             tv_total.setText("Total Price: $" + df.format(grand_total).toString());
             Checkout_Custom_Adapter adapter = new Checkout_Custom_Adapter(this, R.layout.adapter_checkout_single_item, checkout_list);
-            lv_checkout.setAdapter(adapter);
+            rv_checkout.setLayoutManager(new LinearLayoutManager(this));
+            rv_checkout.setHasFixedSize(true);
+            rv_checkout.setAdapter(adapter);
 
         }
 

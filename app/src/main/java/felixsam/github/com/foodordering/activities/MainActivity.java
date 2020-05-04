@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +20,6 @@ import felixsam.github.com.foodordering.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private RecyclerView recyclerView;
 
     private final Integer[] drawableArray = {
             R.drawable.drink_menu,
@@ -51,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             "Register new customers"
     };
 
-    private Adapter_DashboardCards dashboard_cards;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,18 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
         //hide support bar
         Objects.requireNonNull(getSupportActionBar()).hide();
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        recyclerView = findViewById(R.id.rv);
+        RecyclerView recyclerView = findViewById(R.id.rv);
 
 
-        dashboard_cards = new Adapter_DashboardCards(MainActivity.this,drawableArray,titleArray,subtitleArray);
+        Adapter_DashboardCards dashboard_cards = new Adapter_DashboardCards(MainActivity.this, drawableArray, titleArray, subtitleArray);
         recyclerView.setAdapter(dashboard_cards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
     }
 
