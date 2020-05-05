@@ -8,13 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
@@ -28,14 +26,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final ImageView item_image;
-    private TextView tv_item_name, tv_item_quantity, item_price, text_quantity;
-    private ImageButton btn_plus_quantity,btn_minus_quantity, btn_add_item;
+    private final TextView tv_item_name;
+    private final TextView tv_item_quantity;
+    private final TextView item_price;
     private String category;
-    private Drawable drawable_add_item,drawable_plus_quantity,drawable_minus_quantity;
 
-    private Context mcontext;
-    private Item_Model_Display item_model;
-    private DatabaseHelper dbHelper;
+    private final Context mContext;
+    private final DatabaseHelper dbHelper;
 
 
 
@@ -43,38 +40,37 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
         super(itemView);
 
         //set the context
-        this.mcontext = context;
-        this.item_image = (ImageView) itemView.findViewById(R.id.iv_item_image);
+        this.mContext = context;
+        this.item_image = itemView.findViewById(R.id.iv_item_image);
 
 
-        this.btn_plus_quantity = (ImageButton) itemView.findViewById(R.id.plus_quantity);
-        this.drawable_plus_quantity = MaterialDrawableBuilder.with(mcontext)
+        ImageButton btn_plus_quantity = itemView.findViewById(R.id.plus_quantity);
+        Drawable drawable_plus_quantity = MaterialDrawableBuilder.with(mContext)
                 .setIcon(MaterialDrawableBuilder.IconValue.PLUS)
                 .setColor(Color.BLACK)
                 .setToActionbarSize()
                 .build();
-        this.btn_plus_quantity.setImageDrawable(drawable_plus_quantity);
+        btn_plus_quantity.setImageDrawable(drawable_plus_quantity);
 
-        this.btn_minus_quantity = (ImageButton) itemView.findViewById(R.id.minus_quantity);
-        this.drawable_minus_quantity = MaterialDrawableBuilder.with(mcontext)
+        ImageButton btn_minus_quantity = itemView.findViewById(R.id.minus_quantity);
+        Drawable drawable_minus_quantity = MaterialDrawableBuilder.with(mContext)
                 .setIcon(MaterialDrawableBuilder.IconValue.MINUS)
                 .setColor(Color.BLACK)
                 .setToActionbarSize()
                 .build();
-        this.btn_minus_quantity.setImageDrawable(drawable_minus_quantity);
+        btn_minus_quantity.setImageDrawable(drawable_minus_quantity);
 
-        this.drawable_add_item = MaterialDrawableBuilder.with(mcontext)
+        Drawable drawable_add_item = MaterialDrawableBuilder.with(mContext)
                 .setIcon(MaterialDrawableBuilder.IconValue.ARROW_DOWN_BOLD_BOX_OUTLINE)
                 .setColor(Color.BLACK)
                 .setToActionbarSize()
                 .build();
-        this.btn_add_item = (ImageButton) itemView.findViewById(R.id.btn_add_item);
-        this.btn_add_item.setImageDrawable(drawable_add_item);
+        ImageButton btn_add_item = itemView.findViewById(R.id.btn_add_item);
+        btn_add_item.setImageDrawable(drawable_add_item);
 
-        this.tv_item_name = (TextView) itemView.findViewById(R.id.item_name);
-        this.tv_item_quantity = (TextView) itemView.findViewById(R.id.et_item_quantity);
-        this.item_price = (TextView) itemView.findViewById(R.id.item_price);
-        this.text_quantity = (TextView) itemView.findViewById(R.id.tv_item_menu_text_quantity);
+        this.tv_item_name = itemView.findViewById(R.id.item_name);
+        this.tv_item_quantity = itemView.findViewById(R.id.et_item_quantity);
+        this.item_price = itemView.findViewById(R.id.item_price);
         this.dbHelper = new DatabaseHelper(context.getApplicationContext());
 
 
@@ -89,9 +85,8 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
     public void bindItemMenu(Item_Model_Display item_model){
 
         //bind the data to the ViewHolder
-        this.item_model = item_model;
         //Picasso.get().load(item_model.getImage_drawable()).into(this.item_image);
-        Glide.with(mcontext).load(item_model.getImage_drawable()).into(this.item_image);
+        Glide.with(mContext).load(item_model.getImage_drawable()).into(this.item_image);
 
         this.tv_item_name.setText(item_model.getItem_Name());
         this.tv_item_quantity.setText(String.valueOf(item_model.getQuantity()));
@@ -134,11 +129,6 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                 String item_quantity = this.tv_item_quantity.getText().toString();
 
                 String item_name = this.tv_item_name.getText().toString();
-
-//                Toast.makeText(this.mcontext,"Added " + item_name
-//                        + "\n Price: " + item_price
-//                        + "\n Quantity: " + item_quantity
-//                        + "\n Category: " + category, Toast.LENGTH_LONG).show();
 
                 Snackbar.make(v,"Added " + item_name
                                 + " ,Quantity: " + item_quantity

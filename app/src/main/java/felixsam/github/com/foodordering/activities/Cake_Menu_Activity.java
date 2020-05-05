@@ -5,9 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,9 +20,6 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 
 public class Cake_Menu_Activity extends AppCompatActivity {
-    private DatabaseHelper myDB;
-
-    private static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
 
     //set menu names
@@ -79,11 +73,11 @@ public class Cake_Menu_Activity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        myDB = new DatabaseHelper(this);
+        DatabaseHelper myDB = new DatabaseHelper(this);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.rv_item_list_cards);
+        RecyclerView rv = findViewById(R.id.rv_item_list_cards);
 
-        itemModelDisplayArrayList = getModel();
+        ArrayList<Item_Model_Display> itemModelDisplayArrayList = getModel();
         Item_Menu_Adapter customAdapter = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
         rv.setLayoutManager(new LinearLayoutManager(this));

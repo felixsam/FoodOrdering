@@ -14,8 +14,8 @@ import felixsam.github.com.foodordering.Models.Item_Model_Display;
 public class Item_Menu_Adapter extends RecyclerView.Adapter<Item_Menu_Card_Holder> {
 
     private final ArrayList<Item_Model_Display> item_menu;
-    private Context context;
-    private int itemResource;
+    private final Context context;
+    private final int itemResource;
 
     public Item_Menu_Adapter(Context context, int itemResource, ArrayList<Item_Model_Display> item_menu){
         // 1. Initialize our adapter

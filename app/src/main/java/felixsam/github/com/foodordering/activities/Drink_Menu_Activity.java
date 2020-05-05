@@ -1,15 +1,10 @@
 package felixsam.github.com.foodordering.activities;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.steamcrafted.materialiconlib.MaterialMenuInflater;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
@@ -28,9 +22,6 @@ import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
 
 
 public class Drink_Menu_Activity extends AppCompatActivity {
-    private DatabaseHelper myDB;
-
-    private static ArrayList<Item_Model_Display> itemModelDisplayArrayList;
 
     //set menu item names
     private final String[] drink_names_list = new String[]{
@@ -76,18 +67,17 @@ public class Drink_Menu_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setTitle(" Drink Menu ");
 
-
         setContentView(R.layout.layout_item_menu_cards);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        myDB = new DatabaseHelper(this);
+        DatabaseHelper myDB = new DatabaseHelper(this);
 
         RecyclerView rv_item_list_cards = findViewById(R.id.rv_item_list_cards);
 
-        itemModelDisplayArrayList = getModel();
+        ArrayList<Item_Model_Display> itemModelDisplayArrayList = getModel();
         Item_Menu_Adapter customAdapterItemMenu = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
         // 6. For performance, tell OS RecyclerView won't change size
@@ -95,10 +85,6 @@ public class Drink_Menu_Activity extends AppCompatActivity {
         rv_item_list_cards.setHasFixedSize(true);
 
         rv_item_list_cards.setAdapter(customAdapterItemMenu);
-
-
-
-
 
     }
 
@@ -136,7 +122,6 @@ public class Drink_Menu_Activity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_home) {
             //Toast.makeText(Drink_Menu_Activity.this, "Action clicked", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
