@@ -20,17 +20,16 @@ public class List_Customers extends AppCompatActivity {
     //For logging
     private static final String TAG = "List_Customers";
 
-    DatabaseHelper mDatabaseHelper;
-    Customer customer;
-    private ListView mListView;
-    ArrayList<Customer> customer_list;
-    List_Customers_Custom_Adapter adapter;
+    private DatabaseHelper mDatabaseHelper;
+    private Customer customer;
+    private ArrayList<Customer> customer_list;
+    private List_Customers_Custom_Adapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_customers);
-        mListView = findViewById(R.id.lv_customers);
+        ListView mListView = findViewById(R.id.lv_customers);
         mDatabaseHelper = new DatabaseHelper(this);
         this.setTitle("List of Customers");
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
@@ -38,7 +37,7 @@ public class List_Customers extends AppCompatActivity {
 
         //create the list adapter and set the adapter
         ///ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
-        customer_list = new ArrayList<Customer>();
+        customer_list = new ArrayList<>();
         Cursor customer_data = mDatabaseHelper.getCustomer_ID_and_Name();
         int numRows = customer_data.getCount();
         if(numRows == 0){
@@ -56,7 +55,7 @@ public class List_Customers extends AppCompatActivity {
                 customer_list.add(i,customer);
                 i++;
             }
-            adapter = new List_Customers_Custom_Adapter(this, R.layout.adapter_single_customer, customer_list);
+            adapter = new List_Customers_Custom_Adapter(this, customer_list);
             mListView.setAdapter(adapter);
         }
 

@@ -3,12 +3,9 @@ package felixsam.github.com.foodordering.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,14 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Objects;
+
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
-import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
 
 public class Edit_Customer_Activity extends AppCompatActivity {
-
-    Globals g = Globals.getInstance();
 
     private static final String TAG = "Edit_Customer";
 
@@ -72,16 +68,16 @@ public class Edit_Customer_Activity extends AppCompatActivity {
         autocomplete_user_role.setText(edit_customer_selectRole);
 
         String [] items = new String[]{"Admin", "Customer", "Worker"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         autocomplete_user_role.setAdapter(adapter);
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String first_name = edit_customer_first_name.getText().toString();
-                String last_name = edit_customer_last_name.getText().toString();
-                String phone_number = edit_customer_phone_number.getText().toString();
+                String first_name = Objects.requireNonNull(edit_customer_first_name.getText()).toString();
+                String last_name = Objects.requireNonNull(edit_customer_last_name.getText()).toString();
+                String phone_number = Objects.requireNonNull(edit_customer_phone_number.getText()).toString();
                 role = autocomplete_user_role.getText().toString();
 
                 final Integer user_id = g.getUser_ID();

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import felixsam.github.com.foodordering.Models.Customer;
 import felixsam.github.com.foodordering.DatabaseHelper;
@@ -21,20 +22,17 @@ import felixsam.github.com.foodordering.activities.Edit_Customer_Activity;
 
 public class List_Customers_Custom_Adapter extends BaseAdapter {
 
-    private Context context;
-    private DatabaseHelper dbHelper;
-    private ArrayList<Customer> CustomerList;
-    private int mViewResourceId;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final DatabaseHelper dbHelper;
+    private final ArrayList<Customer> CustomerList;
     private static final String TAG = "List Customers Custom Adapter";
 
 
-    public List_Customers_Custom_Adapter(Context context,int textViewResourceId, ArrayList<Customer> CustomerList){
+    public List_Customers_Custom_Adapter(Context context, ArrayList<Customer> CustomerList){
         this.context = context;
         this.CustomerList = CustomerList;
         this.dbHelper = new DatabaseHelper(context.getApplicationContext());
         //mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mViewResourceId = textViewResourceId;
 
 
     }
@@ -77,9 +75,10 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
     }
 
 
-    private class ViewHolder{
+    private static class ViewHolder{
         private TextView tv_name, tv_userID;
-        protected Button btn_switch, btn_edit;
+        Button btn_switch;
+        Button btn_edit;
     }
 
     @Override
@@ -91,14 +90,14 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.adapter_single_customer, null, true);
+            convertView = Objects.requireNonNull(inflater).inflate(R.layout.adapter_single_customer, null, true);
 
 
 
-            holder.tv_userID = (TextView) convertView.findViewById(R.id.tv_customer_userID);
-            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_customer_name);
-            holder.btn_switch = (Button) convertView.findViewById(R.id.customer_switch_button);
-            holder.btn_edit = (Button) convertView.findViewById(R.id.customer_edit_button);
+            holder.tv_userID = convertView.findViewById(R.id.tv_customer_userID);
+            holder.tv_name = convertView.findViewById(R.id.tv_customer_name);
+            holder.btn_switch = convertView.findViewById(R.id.customer_switch_button);
+            holder.btn_edit = convertView.findViewById(R.id.customer_edit_button);
 
 
             convertView.setTag(holder);
@@ -152,14 +151,14 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
                 String customer_name = cust_name.getText().toString();
                 Integer customer_user_id = Integer.valueOf(cust_userid.getText().toString());
                 System.out.println("User id: " + customer_user_id.toString());
-                String customer_last_name =  dbHelper.get_customer_last_name(customer_user_id).toString();
+                String customer_last_name = dbHelper.get_customer_last_name(customer_user_id);
                 System.out.println("LastName: " + customer_last_name);
-                String customer_phone_number = dbHelper.get_customer_phone_number(customer_user_id).toString();
+                String customer_phone_number = dbHelper.get_customer_phone_number(customer_user_id);
                 System.out.println("Phone Number: " + customer_phone_number);
 
                 String customer_role = "";
                 if (dbHelper.get_customer_role(customer_user_id) != null ){
-                    customer_role = dbHelper.get_customer_role(customer_user_id).toString();
+                    customer_role = dbHelper.get_customer_role(customer_user_id);
                     System.out.println("Customer Role: " + customer_role);
                 }
 
