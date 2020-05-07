@@ -20,13 +20,10 @@ import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.List_OrdersID_Custom_Adapter;
 
 public class List_Orders_By_ID extends AppCompatActivity {
-    DatabaseHelper mDatabaseHelper;
-    private ListView lv_orders_by_id;
-    private String TAG = "List_Orders_By_ID";
-    private String username  = "username";
-    private Integer userID = -1;
-    OrderID order_ID;
-    ArrayList<OrderID> orderID_list;
+    private DatabaseHelper mDatabaseHelper;
+    private final String TAG = "List_Orders_By_ID";
+    private OrderID order_ID;
+    private ArrayList<OrderID> orderID_list;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +33,7 @@ public class List_Orders_By_ID extends AppCompatActivity {
 
         mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
-        lv_orders_by_id = findViewById(R.id.list_orders_id_lv);
+        ListView lv_orders_by_id = findViewById(R.id.list_orders_id_lv);
 
 
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
@@ -55,12 +52,12 @@ public class List_Orders_By_ID extends AppCompatActivity {
             while(data.moveToNext()){
                 //System.out.println(data.getString(1)+" "+data.getString(2)+" "+data.getInt(3)+ " " +data.getInt(4)+" " + data.getString(8) + " " + data.getString(9));
 
-                userID = data.getInt(data.getColumnIndex(mDatabaseHelper.ORDERS_COL2_CUSTOMER_ID));
-                username = mDatabaseHelper.getUserName(userID);
+                Integer userID = data.getInt(data.getColumnIndex(DatabaseHelper.ORDERS_COL2_CUSTOMER_ID));
+                String username = mDatabaseHelper.getUserName(userID);
 
-                order_ID = new OrderID(data.getInt(data.getColumnIndex(mDatabaseHelper.ORDERS_COL1_ID))
-                        ,username
-                        ,data.getString(data.getColumnIndex(mDatabaseHelper.ORDERS_COL3_DATE))
+                order_ID = new OrderID(data.getInt(data.getColumnIndex(DatabaseHelper.ORDERS_COL1_ID))
+                        , username
+                        ,data.getString(data.getColumnIndex(DatabaseHelper.ORDERS_COL3_DATE))
                 );
                 orderID_list.add(i,order_ID);
                 //order_list.add(i,data.getString(0));

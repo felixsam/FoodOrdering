@@ -17,11 +17,12 @@ import felixsam.github.com.foodordering.R;
 
 public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
 
-    private TextView text_item_name, text_total_item_price, text_total_item_quantity;
-    private ImageView item_image;
-    private Context mcontext;
-    private Order order;
-    private Map<String,Integer> item_ImageMap;
+    private final TextView text_item_name;
+    private final TextView text_total_item_price;
+    private final TextView text_total_item_quantity;
+    private final ImageView item_image;
+    private final Context mcontext;
+    private final Map<String,Integer> item_ImageMap;
 
     public List_Orders_Card_Holder(Context context, View itemView){
         super(itemView);
@@ -54,7 +55,6 @@ public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
     }
 
     public void bind_List_Orders(Order order){
-        this.order = order;
 
         Glide.with(mcontext).load(item_ImageMap.get(order.get_item_name())).into(this.item_image);
         this.text_item_name.setText(order.get_item_name());

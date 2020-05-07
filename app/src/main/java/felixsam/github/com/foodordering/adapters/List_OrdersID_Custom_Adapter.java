@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.OrderID;
@@ -15,17 +16,14 @@ import felixsam.github.com.foodordering.R;
 
 public class List_OrdersID_Custom_Adapter extends BaseAdapter {
 
-    private Context context;
-    private DatabaseHelper orderID_dbHelper;
-    private ArrayList<OrderID> OrderIDList;
-    private int mViewResourceId;
+    private final Context context;
+    private final ArrayList<OrderID> OrderIDList;
 
 
     public List_OrdersID_Custom_Adapter(Context context,int textViewResourceId, ArrayList<OrderID> OrderID_List){
         this.context = context;
         this.OrderIDList = OrderID_List;
-        this.orderID_dbHelper = new DatabaseHelper(context.getApplicationContext());
-        mViewResourceId = textViewResourceId;
+        DatabaseHelper orderID_dbHelper = new DatabaseHelper(context.getApplicationContext());
 
 
     }
@@ -59,7 +57,7 @@ public class List_OrdersID_Custom_Adapter extends BaseAdapter {
     }
 
 
-    private class ViewHolder{
+    private static class ViewHolder{
         private TextView order_id,customer_name,date;
     }
 
@@ -71,11 +69,11 @@ public class List_OrdersID_Custom_Adapter extends BaseAdapter {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.orderid_adapter_single_item,null,true);
+            convertView = Objects.requireNonNull(inflater).inflate(R.layout.orderid_adapter_single_item,null,true);
 
-            holder.order_id = (TextView) convertView.findViewById(R.id.tv_orderid_ID);
-            holder.customer_name = (TextView) convertView.findViewById(R.id.tv_orderid_username);
-            holder.date = (TextView) convertView.findViewById(R.id.tv_orderid_date);
+            holder.order_id = convertView.findViewById(R.id.tv_orderid_ID);
+            holder.customer_name = convertView.findViewById(R.id.tv_orderid_username);
+            holder.date = convertView.findViewById(R.id.tv_orderid_date);
 
             convertView.setTag(holder);
         }else{
