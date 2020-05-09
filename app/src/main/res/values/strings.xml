@@ -28,8 +28,6 @@
     <string name="edit_customer_text_btn_delete">Delete</string>
     <!-- Activity Edit_Customer -->
 
-
-
     <!-- Full Screen Dialog Edit Item -->
     <string name="full_screen_dialog_edit_item_name">Item Name</string>
     <string name="full_screen_dialog_edit_item_price">Item Price</string>
@@ -48,6 +46,14 @@
     <string name="adapter_order_single_item_btn_delete">Delete</string>
     <string name="adapter_order_single_item_image">Item Image</string>
     <!-- Adapter Order Single Item Card -->
+
+    <!-- Adapter Menu Item Card -->
+    <string name="adapter_item_menu_item_name">Item Name</string>
+    <string name="adapter_item_menu_item_price">Item Price</string>
+    <string name="adapter_item_menu_item_quantity">Quantity</string>
+    <string name="adapter_item_menu_btn_addToCart">Add</string>
+    <!-- Adapter Menu Item Card -->
+
 
 
 </resources>

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,8 +66,9 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                 .setColor(Color.BLACK)
                 .setToActionbarSize()
                 .build();
-        ImageButton btn_add_item = itemView.findViewById(R.id.btn_add_item);
-        btn_add_item.setImageDrawable(drawable_add_item);
+        Button btn_add_item = itemView.findViewById(R.id.btn_add_item);
+        //btn_add_item.setImageDrawable(drawable_add_item);
+        //btn_add_item.setImageDrawable(null);
 
         this.tv_item_name = itemView.findViewById(R.id.item_name);
         this.tv_item_quantity = itemView.findViewById(R.id.et_item_quantity);

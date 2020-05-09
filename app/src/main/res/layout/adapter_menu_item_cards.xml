@@ -2,20 +2,19 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_menu_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:background="#F3E3E9"
     android:clickable="true"
     android:elevation="6dp"
     android:focusable="false"
     app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="36dp">
+    app:cardCornerRadius="24dp">
 
 
         <LinearLayout
@@ -41,73 +40,69 @@
 
                 <TextView
                     android:id="@+id/item_name"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Item Name"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/adapter_item_menu_item_name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/item_price"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintBottom_toTopOf="@+id/btn_add_item"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_name" />
-
-                <ImageButton
-                    android:id="@+id/btn_add_item"
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-
-                    android:background="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_note_add"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="@string/adapter_item_menu_item_price"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_item_menu_text_quantity"
+                <Button
+                    android:id="@+id/btn_add_item"
+                    android:minHeight="8dp"
+                    android:minWidth="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="Quantity"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="fitCenter"
+                    android:text="@string/adapter_item_menu_btn_addToCart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/et_item_quantity" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_item_quantity"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:clickable="true"
                     android:ems="10"
-                    android:gravity="right"
+                    android:gravity="center"
                     android:inputType="number"
+                    android:text="@string/adapter_item_menu_item_quantity"
+                    android:textSize="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_item_menu_text_quantity" />
+                    app:layout_constraintTop_toBottomOf="@+id/plus_quantity" />
 
                 <ImageButton
                     android:id="@+id/plus_quantity"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_add"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/minus_quantity"
-                    app:layout_constraintTop_toBottomOf="@+id/et_item_quantity" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
                     android:id="@+id/minus_quantity"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_minus"
