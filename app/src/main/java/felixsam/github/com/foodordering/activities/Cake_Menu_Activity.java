@@ -36,15 +36,15 @@ public class Cake_Menu_Activity extends AppCompatActivity {
 
 
     //set menu prices
-    private final Integer[] list_cake_prices = new Integer[]{
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
+    private final double[] list_cake_prices = new double[]{
+            1.99,
+            2.99,
+            3.99,
+            4.99,
+            5.99,
+            6.99,
+            7.99,
+            8.99
     };
 
 

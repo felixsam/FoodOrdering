@@ -23,6 +23,7 @@ import felixsam.github.com.foodordering.Models.Item_Model_Display;
 import felixsam.github.com.foodordering.R;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static java.lang.String.valueOf;
 
 public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -91,8 +92,8 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
         Glide.with(mContext).load(item_model.getImage_drawable()).into(this.item_image);
 
         this.tv_item_name.setText(item_model.getItem_Name());
-        this.tv_item_quantity.setText(String.valueOf(item_model.getQuantity()));
-        this.item_price.setText("$" + item_model.getPrice().toString());
+        this.tv_item_quantity.setText(valueOf(item_model.getQuantity()));
+        this.item_price.setText("$" + valueOf(item_model.getPrice()));
         this.category = item_model.getCategory();
     }
 
@@ -102,10 +103,10 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
             case R.id.plus_quantity:
                 int add_one = Integer.parseInt(this.tv_item_quantity.getText().toString()) + 1;
                 if (add_one < 0){
-                this.tv_item_quantity.setText(String.valueOf(0));
+                this.tv_item_quantity.setText(valueOf(0));
                     add_one = 0;
                 }else{
-                this.tv_item_quantity.setText(String.valueOf(add_one));
+                this.tv_item_quantity.setText(valueOf(add_one));
                 }
 
 
@@ -114,10 +115,10 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
             case R.id.minus_quantity:
                 int minus_one = Integer.parseInt(this.tv_item_quantity.getText().toString()) - 1;
                 if (minus_one < 0){
-                    this.tv_item_quantity.setText(String.valueOf(0));
+                    this.tv_item_quantity.setText(valueOf(0));
                     minus_one = 0;
                 }else{
-                    this.tv_item_quantity.setText(String.valueOf(minus_one));
+                    this.tv_item_quantity.setText(valueOf(minus_one));
                 }
                 break;
 
@@ -127,7 +128,8 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                 String user_to_add = g.getUser();
                 Integer userID_to_add = g.getUser_ID();
 
-                String item_price = this.item_price.getText().toString().replaceAll("[^a-zA-Z0-9]", "");
+                String item_price = this.item_price.getText().toString().replaceAll("[^0-9.]", "");
+                double item_price_double = Double.valueOf(item_price);
                 String item_quantity = this.tv_item_quantity.getText().toString();
 
                 String item_name = this.tv_item_name.getText().toString();
@@ -141,7 +143,7 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                         + "\n Quantity: " + item_quantity
                         + "\n Category: " + category);
 
-                dbHelper.addData_items(user_to_add,item_name,item_price,item_quantity,userID_to_add,category);
+                dbHelper.addData_items(user_to_add,item_name,item_price_double,item_quantity,userID_to_add,category);
                 break;
         }
     }

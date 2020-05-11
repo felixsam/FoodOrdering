@@ -4,14 +4,14 @@ public class Order {
 
     private String user;
     private String item_name;
-    private Integer Price;
+    private double Price;
     private Integer Quantity;
     private Integer OrderID;
     private Integer Total_Amount;
     private String order_date;
-    private Integer total_price;
+    private double total_price;
 
-    public Order(String username,String name_items, Integer price_item,Integer totalprice,String date,Integer order_ID, Integer quantity_item){
+    public Order(String username,String name_items, double price_item,double totalprice,String date,Integer order_ID, Integer quantity_item){
         OrderID = order_ID;
         user = username;
         item_name = name_items;
@@ -29,6 +29,7 @@ public class Order {
     public void setDate(String new_date){
         order_date = new_date;
     }
+
     public String get_item_name(){
 
         return item_name;
@@ -38,23 +39,23 @@ public class Order {
         item_name = new_name;
     }
 
-    public Integer get_totalPrice(){
+    public double get_totalPrice(){
 
         return total_price;
     }
 
-    public void set_totalPrice(Integer new_price){
+    public void set_totalPrice(double new_price){
         total_price = new_price;
     }
 
 
 
-    public Integer getPrice(){
+    public double getPrice(){
 
         return Price;
     }
 
-    public void setPrice(Integer new_price){
+    public void setPrice(double new_price){
         Price = new_price;
     }
 

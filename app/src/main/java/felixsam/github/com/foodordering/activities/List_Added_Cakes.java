@@ -102,12 +102,12 @@ public class List_Added_Cakes extends AppCompatActivity {
                     //Pass details to dialog fragment
                     Bundle bundle = new Bundle();
                     String item_name = cakeList.get(position).getName();
-                    Integer item_price = cakeList.get(position).getPrice();
+                    double item_price = cakeList.get(position).getPrice();
                     Integer colID = cakeList.get(position).getColID();
                     Integer quantity = cakeList.get(position).getQuantity();
 
                     bundle.putString("ITEM_NAME",item_name);
-                    bundle.putInt("ITEM_PRICE",item_price);
+                    bundle.putDouble("ITEM_PRICE",item_price);
                     bundle.putInt("COL_ID",colID);
                     bundle.putInt("QUANTITY", quantity);
 

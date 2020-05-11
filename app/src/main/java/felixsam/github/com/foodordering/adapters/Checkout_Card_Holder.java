@@ -28,8 +28,8 @@ public class Checkout_Card_Holder extends RecyclerView.ViewHolder{
         this.checkout_model = checkout;
 
         this.tv_item_name.setText(checkout_model.getItem_name());
-        this.tv_item_price.setText("Price: $"+ checkout_model.getPrice().toString());
+        this.tv_item_price.setText("Price: $"+ String.valueOf(checkout_model.getPrice()));
         this.tv_item_quantity.setText("Quantity: " +checkout_model.getTotal_quantity().toString());
-        this.tv_total_item_price.setText("Total Price: $" + checkout_model.getTotal_Amount().toString());
+        this.tv_total_item_price.setText("Total Price: $" + String.valueOf(checkout_model.getTotal_Amount()));
     }
 }

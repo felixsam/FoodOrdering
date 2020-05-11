@@ -4,7 +4,7 @@ public class Item_Model_Display {
     private int quantity;
     private String item_name;
     private int image_drawable;
-    private Integer price;
+    private double price;
     private String category;
 
 
@@ -32,11 +32,11 @@ public class Item_Model_Display {
         this.image_drawable = image_drawable;
     }
 
-    public Integer getPrice(){
+    public double getPrice(){
         return price;
     }
 
-    public void setPrice(Integer new_price){
+    public void setPrice(double new_price){
         this.price = new_price;
     }
 

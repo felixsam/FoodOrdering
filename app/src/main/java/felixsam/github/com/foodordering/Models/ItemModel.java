@@ -5,14 +5,14 @@ import felixsam.github.com.foodordering.Globals;
 public class ItemModel {
     private String user;
     private String Name;
-    private Integer Price;
+    private double Price;
     private Integer Quantity;
     private Integer userID;
     private Integer colID;
 
     Globals g = Globals.getInstance();
 
-    public ItemModel(Integer ID, String username, String name_drink, Integer price_drink, Integer quantity_drink, Integer user_ID){
+    public ItemModel(Integer ID, String username, String name_drink, double price_drink, Integer quantity_drink, Integer user_ID){
         colID = ID;
         user = username;
         Name = name_drink;
@@ -29,11 +29,11 @@ public class ItemModel {
         Name = new_name;
     }
 
-    public Integer getPrice(){
+    public double getPrice(){
         return Price;
     }
 
-    public void setPrice(Integer new_price){
+    public void setPrice(double new_price){
         Price = new_price;
     }
 

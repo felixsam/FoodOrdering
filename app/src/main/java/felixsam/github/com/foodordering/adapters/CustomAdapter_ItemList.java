@@ -46,7 +46,7 @@ public class CustomAdapter_ItemList extends ArrayAdapter<ItemModel> {
                 item_name.setText(item.getName());
             }
             if (item_price != null) {
-                item_price.setText("$" + (item.getPrice()).toString());
+                item_price.setText("$" + String.valueOf(item.getPrice()));
             }
             if (item_quantity != null) {
                 item_quantity.setText((item.getQuantity()).toString());

@@ -36,15 +36,15 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
 
     //set item prices
-    private final Integer[] drink_price_list = new Integer[]{
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
+    private final double[] drink_price_list = new double[]{
+            1.99,
+            2.99,
+            3.99,
+            4.99,
+            5.99,
+            6.99,
+            7.99,
+            8.99
     };
 
 

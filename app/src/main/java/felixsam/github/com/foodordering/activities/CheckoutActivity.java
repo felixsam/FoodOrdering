@@ -80,10 +80,10 @@ public class CheckoutActivity extends AppCompatActivity{
                 Checkout checkout = new Checkout(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
                         data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
                         data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
-                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
+                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
                         data.getInt(data.getColumnIndex("total_quantity")),
-                        data.getInt(data.getColumnIndex("total_price")));
-                sub_total += data.getInt(data.getColumnIndex("total_price"));
+                        data.getDouble(data.getColumnIndex("total_price")));
+                sub_total += data.getDouble(data.getColumnIndex("total_price"));
                 checkout_list.add(i, checkout);
                 i++;
             }
@@ -132,7 +132,7 @@ public class CheckoutActivity extends AppCompatActivity{
                         + " \n FIRST_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))
                         + " \n USER_ID " + add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                         + " \n ITEM_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME))
-                        + " \n PRICE " + add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
+                        + " \n PRICE " + add_order.getDouble(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
                         );
                         int itemID = add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID));
                         mDatabaseHelper.setOrderID(itemID,orderID);

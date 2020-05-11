@@ -58,7 +58,7 @@ public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
 
         Glide.with(mcontext).load(item_ImageMap.get(order.get_item_name())).into(this.item_image);
         this.text_item_name.setText(order.get_item_name());
-        this.text_total_item_price.setText("Total Price: $" + order.get_totalPrice().toString());
+        this.text_total_item_price.setText("Total Price: $" + String.valueOf(order.get_totalPrice()));
         this.text_total_item_quantity.setText("Total Quantity: " + order.getQuantity().toString());
     }
 }

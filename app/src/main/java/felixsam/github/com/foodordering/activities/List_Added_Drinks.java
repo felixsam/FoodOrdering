@@ -103,12 +103,12 @@ public class List_Added_Drinks extends AppCompatActivity {
                     //Pass details to dialog fragment
                     Bundle bundle = new Bundle();
                     String item_name = drinkList.get(position).getName();
-                    Integer item_price = drinkList.get(position).getPrice();
+                    double item_price = drinkList.get(position).getPrice();
                     Integer colID = drinkList.get(position).getColID();
                     Integer quantity = drinkList.get(position).getQuantity();
 
                     bundle.putString("ITEM_NAME",item_name);
-                    bundle.putInt("ITEM_PRICE",item_price);
+                    bundle.putDouble("ITEM_PRICE",item_price);
                     bundle.putInt("COL_ID",colID);
                     bundle.putInt("QUANTITY", quantity);
 

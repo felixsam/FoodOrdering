@@ -74,8 +74,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ITEMS_COL2_USER_ID + " INTEGER," +
                         ITEMS_COL3_FIRST_NAME + " TEXT, " +
                         ITEMS_COL4_CATEGORY + " TEXT, " +
-                        ITEMS_COL5_ITEM_NAME + " INTEGER, " +
-                        ITEMS_COL6_PRICE + " TEXT, " +
+                        ITEMS_COL5_ITEM_NAME + " TEXT, " +
+                        ITEMS_COL6_PRICE + " DOUBLE, " +
                         ITEMS_COL7_QUANTITY + " INTEGER," +
                         ITEMS_COL8_ORDERID + " INTEGER," +
                         " CONSTRAINT FK_USERID" +
@@ -300,7 +300,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      SQL QUERIES FOR ITEMS
      *******************************************************************************************************************************************************/
     //ADD TO ITEMS TABLE
-    public boolean addData_items(String name, String drink, String price, String quantity, Integer userID, String category) {
+    public boolean addData_items(String name, String drink, double price, String quantity, Integer userID, String category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -348,7 +348,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void updateItemPrice(Integer itemID, Integer newPrice, String itemName){
+    public void updateItemPrice(Integer itemID, double newPrice, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL6_PRICE +
                 " = '" + newPrice + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +

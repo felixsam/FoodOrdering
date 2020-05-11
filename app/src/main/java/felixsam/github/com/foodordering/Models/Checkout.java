@@ -4,11 +4,11 @@ public class Checkout {
     private String user;
     private Integer user_id;
     private String item_name;
-    private Integer item_price;
+    private double item_price;
     private Integer total_quantity;
-    private Integer Total_Amount;
+    private double Total_Amount;
 
-    public Checkout(String username,Integer userid, String name_item, Integer price_item,Integer total_item_quantity,Integer total_price){
+    public Checkout(String username,Integer userid, String name_item, double price_item,Integer total_item_quantity,double total_price){
         user = username;
         user_id = userid;
         item_name = name_item;
@@ -51,11 +51,11 @@ public class Checkout {
 
 
     //Item Price for 1 item
-    public Integer getPrice(){
+    public double getPrice(){
         return item_price;
     }
 
-    public void setPrice(Integer new_price){
+    public void setPrice(double new_price){
         item_price = new_price;
     }
 
@@ -71,11 +71,11 @@ public class Checkout {
 
 
     //Total Amount
-    public Integer getTotal_Amount(){
+    public double getTotal_Amount(){
         return Total_Amount;
     }
 
-    public void setTotalAmount(Integer new_totalamount){
+    public void setTotalAmount(double new_totalamount){
 
         Total_Amount = new_totalamount;
     }
