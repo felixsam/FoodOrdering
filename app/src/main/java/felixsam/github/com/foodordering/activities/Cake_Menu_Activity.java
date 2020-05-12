@@ -24,14 +24,14 @@ public class Cake_Menu_Activity extends AppCompatActivity {
 
     //set menu names
     private final String[] list_cake_names = new String[]{
-            "Strawberry",
-            "Vanilla",
-            "Chocolate",
-            "Lemon Blueberry",
-            "Mango",
-            "Oreo",
+            "Strawberry Cake",
+            "Vanilla Cake",
+            "Chocolate Cake",
+            "Blueberry Cake",
+            "Mango Cake",
+            "Oreo Cake",
             "Cheesecake",
-            "Angel"
+            "Angel Cake"
     };
 
 

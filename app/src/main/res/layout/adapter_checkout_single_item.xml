@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/adapter_checkout_root_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,50 +16,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_checkout_item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Item Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            app:layout_constraintBottom_toTopOf="@+id/tv_checkout_item_price"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
 
-        <TextView
-            android:id="@+id/tv_checkout_item_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Item Price"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            app:layout_constraintBottom_toTopOf="@+id/tv_checkout_item_total_quantity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_checkout_item_name" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/adapter_checkout_item_image"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/adapter_order_single_item_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icons8_restaurant" />
 
-        <TextView
-            android:id="@+id/tv_checkout_item_total_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Total Quantity"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/tv_checkout_item_total_price"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_checkout_item_price" />
+            <TextView
+                android:id="@+id/tv_checkout_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="Item Name"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/adapter_checkout_item_image"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tv_checkout_item_total_price"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_checkout_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:text="Item Price"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintStart_toEndOf="@+id/adapter_checkout_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_checkout_item_name" />
+
+            <TextView
+                android:id="@+id/tv_checkout_item_total_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textSize="20dp"
+                android:text="Total Quantity"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/tv_checkout_item_total_price"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_checkout_item_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Price"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Total Price"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_checkout_item_total_quantity" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/adapter_checkout_btn_edit"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/adapter_order_single_item_btn_edit" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/adapter_checkout_btn_delete"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/adapter_order_single_item_btn_delete" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </com.google.android.material.card.MaterialCardView>

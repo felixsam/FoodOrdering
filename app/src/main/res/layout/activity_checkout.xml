@@ -10,6 +10,7 @@
         android:id="@+id/btn_checkout_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UserID"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Price"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rv_checkout"
         app:layout_constraintHorizontal_bias="0.0"
@@ -64,7 +68,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sub Total"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/tv_checkout_tax"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -73,7 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tax"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_checkout_total_price"
         app:layout_constraintStart_toStartOf="parent" />
 

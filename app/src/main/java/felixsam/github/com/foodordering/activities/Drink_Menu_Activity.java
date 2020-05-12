@@ -25,13 +25,14 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
     //set menu item names
     private final String[] drink_names_list = new String[]{
-            "Milk",
+            "Pumpkin Spice Latte",
             "Milk Tea",
+            "Frappuccino",
             "Orange Juice",
-            "Coke","Green Tea",
-            "Frappucino",
+            "Coke",
+            "Green Tea",
             "Mocha",
-            "Pumpkin Spice Latte"
+            "Milk"
     };
 
 
@@ -50,14 +51,14 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
     //set item images
     private final int[] myImageList = new int[]{
-            R.drawable.drink_milk,
+            R.drawable.drink_pumpkin_spice,
             R.drawable.drink_milk_tea,
+            R.drawable.drink_frappuccino,
             R.drawable.drink_orange,
             R.drawable.drink_coke,
             R.drawable.drink_green_tea,
-            R.drawable.drink_frappuccino,
             R.drawable.drink_mocha,
-            R.drawable.drink_pumpkin_spice
+            R.drawable.drink_milk
     };
 
     private final int size_of_list = myImageList.length;

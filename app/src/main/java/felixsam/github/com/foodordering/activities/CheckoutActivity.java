@@ -95,7 +95,7 @@ public class CheckoutActivity extends AppCompatActivity{
 
 
 
-            tv_subtotal.setText("Subtotal: $" + sub_total.toString());
+            tv_subtotal.setText("Subtotal: $" + df.format(sub_total));
             tv_tax.setText("Tax (12%): $" + df.format(tax));
             tv_total.setText("Total Price: $" + df.format(grand_total));
             Checkout_Custom_Adapter adapter = new Checkout_Custom_Adapter(this, R.layout.adapter_checkout_single_item, checkout_list);
