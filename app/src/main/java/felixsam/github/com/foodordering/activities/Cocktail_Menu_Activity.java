@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
@@ -36,8 +34,6 @@ import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
 public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     private RequestQueue mQueue;
-    private SearchView search_cocktail;
-    private String search_item;
     private RecyclerView recyclerView;
     private Adapter_Cocktail adapter_cocktail;
     private ArrayList<Cocktail> cocktail_list;
@@ -54,8 +50,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        search_item = "";
-        search_cocktail = findViewById(R.id.sv_cocktail_search);
+        SearchView search_cocktail = findViewById(R.id.sv_cocktail_search);
 
         //adapter_cocktail = new Adapter_Cocktail(cocktail_list,getApplicationContext());
 
@@ -64,14 +59,13 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(Cocktail_Menu_Activity.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
                 //json_search_cocktail(query);
-                load_cocktail_json(query);
+                search_cocktail_name(query);
 
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search_item = newText;
                 return false;
             }
         });
@@ -109,7 +103,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
 
 
-    private void load_cocktail_json(String search_item){
+    private void search_cocktail_name(String search_item){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -143,9 +137,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
                                 Cocktail new_cocktail = new Cocktail(drink_name,drink_id,drink_glass);
 
-                                if (drink_thumbnail != null){
-                                    new_cocktail.setImage_url(drink_thumbnail);
-                                }
+                                new_cocktail.setImage_url(drink_thumbnail);
 
                                 new_cocktail.setInstructions(instructions);
                                 new_cocktail.setAlcoholic(alcoholic);
@@ -171,41 +163,4 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     }
 
-    /*
-    private void json_search_cocktail(String search_item){
-
-        //String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("drinks");
-                            String result = "";
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject drink = jsonArray.getJSONObject(i);
-
-                                String drink_name = drink.getString("strDrink");
-                                int drink_id = drink.getInt("idDrink");
-                                String drink_glass = drink.getString("strGlass");
-                                result = result + drink_name + ", " + String.valueOf(drink_id) + ", " + drink_glass + "\n\n";
-                            }
-                            tv_cocktail.setText(result);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mQueue.add(request);
-    }
-
-     */
 }
