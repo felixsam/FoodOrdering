@@ -4,29 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.Models.Checkout;
-import felixsam.github.com.foodordering.DatabaseHelper;
-import felixsam.github.com.foodordering.R;
 
 public class Checkout_Custom_Adapter extends RecyclerView.Adapter<Checkout_Card_Holder> {
-    private Context context;
-    private ArrayList<Checkout> CheckoutList;
-    private int mViewResourceId;
-    private LayoutInflater mInflater;
+    private final Context context;
+    private final ArrayList<Checkout> CheckoutList;
+    private final int mViewResourceId;
 
 
     public Checkout_Custom_Adapter(Context context,int textViewResourceId, ArrayList<Checkout> CheckoutList){
         this.context = context;
         this.CheckoutList = CheckoutList;
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mViewResourceId = textViewResourceId;
 
     }

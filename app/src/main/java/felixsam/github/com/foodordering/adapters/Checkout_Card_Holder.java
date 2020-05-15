@@ -16,8 +16,11 @@ import felixsam.github.com.foodordering.Models.Checkout;
 import felixsam.github.com.foodordering.R;
 
 public class Checkout_Card_Holder extends RecyclerView.ViewHolder{
-    private Context mcontext;
-    private TextView tv_item_name, tv_item_quantity, tv_item_price,tv_total_item_price;
+    private final Context mcontext;
+    private final TextView tv_item_name;
+    private final TextView tv_item_quantity;
+    private final TextView tv_item_price;
+    private final TextView tv_total_item_price;
     private Checkout checkout_model;
     private final Map<String,Integer> item_ImageMap;
     private final ImageView item_image;
@@ -58,8 +61,8 @@ public class Checkout_Card_Holder extends RecyclerView.ViewHolder{
         Glide.with(mcontext).load(item_ImageMap.get(checkout.getItem_name())).into(this.item_image);
 
         this.tv_item_name.setText(checkout_model.getItem_name());
-        this.tv_item_price.setText("Price: $"+ String.valueOf(checkout_model.getPrice()));
+        this.tv_item_price.setText("Price: $"+ checkout_model.getPrice());
         this.tv_item_quantity.setText("Quantity: " +checkout_model.getTotal_quantity().toString());
-        this.tv_total_item_price.setText("Total Price: $" + String.valueOf(checkout_model.getTotal_Amount()));
+        this.tv_total_item_price.setText("Total Price: $" + checkout_model.getTotal_Amount());
     }
 }
