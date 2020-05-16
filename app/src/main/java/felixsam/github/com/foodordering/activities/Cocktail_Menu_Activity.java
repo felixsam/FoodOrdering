@@ -163,4 +163,64 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     }
 
+    private void search_cocktail_by_letter(String search_item_letter){
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f" + search_item_letter;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("drinks");
+                            String result = "";
+                            cocktail_list.clear();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject drink = jsonArray.getJSONObject(i);
+
+                                String drink_name = drink.getString("strDrink");
+                                int drink_id = drink.getInt("idDrink");
+                                String drink_glass = drink.getString("strGlass");
+                                //get drink thumbnail 100x100 size
+                                String drink_thumbnail = drink.getString("strDrinkThumb") + "/preview";
+                                String instructions = drink.getString("strInstructions");
+                                String alcoholic  = drink.getString("strAlcoholic");
+                                ArrayList<String> ingredients = new ArrayList<>();
+
+                                //Add all the ingredients
+                                for (int k = 1; k < 16; k++ ){
+                                    String ingredient_index = "strIngredient" + k;
+                                    String ingredient = drink.getString(ingredient_index);
+
+                                    ingredients.add(ingredient);
+                                }
+
+
+                                Cocktail new_cocktail = new Cocktail(drink_name,drink_id,drink_glass);
+
+                                new_cocktail.setImage_url(drink_thumbnail);
+
+                                new_cocktail.setInstructions(instructions);
+                                new_cocktail.setAlcoholic(alcoholic);
+                                new_cocktail.setIngredients(ingredients);
+
+                                cocktail_list.add(new_cocktail);
+                            }
+                            adapter_cocktail = new Adapter_Cocktail(cocktail_list, Cocktail_Menu_Activity.this);
+                            recyclerView.setAdapter(adapter_cocktail);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request);
+
+
+    }
+
 }
