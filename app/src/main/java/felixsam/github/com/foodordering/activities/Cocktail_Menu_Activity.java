@@ -37,18 +37,28 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Adapter_Cocktail adapter_cocktail;
     private ArrayList<Cocktail> cocktail_list;
+    private ArrayList<Cocktail> cocktail_list_default;
 
     @Override
     protected  void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_cocktail);
         this.setTitle("Cocktail Search");
+        mQueue = Volley.newRequestQueue(this);
 
         cocktail_list = new ArrayList<Cocktail>();
+        cocktail_list_default = new ArrayList<Cocktail>();
+
 
         recyclerView = findViewById(R.id.rv_cocktail_search_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
+
+        for (char letter = 'a'; letter <= 'z' ; letter++){
+            search_cocktail_by_letter(letter);
+        }
+        adapter_cocktail = new Adapter_Cocktail(cocktail_list_default, Cocktail_Menu_Activity.this);
+        recyclerView.setAdapter(adapter_cocktail);
 
         SearchView search_cocktail = findViewById(R.id.sv_cocktail_search);
 
@@ -70,7 +80,6 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
             }
         });
 
-        mQueue = Volley.newRequestQueue(this);
 
     }
 
@@ -163,8 +172,8 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     }
 
-    private void search_cocktail_by_letter(String search_item_letter){
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f" + search_item_letter;
+    private void search_cocktail_by_letter(char search_item_letter){
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(search_item_letter);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -173,7 +182,6 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("drinks");
                             String result = "";
-                            cocktail_list.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject drink = jsonArray.getJSONObject(i);
 
@@ -203,10 +211,9 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
                                 new_cocktail.setAlcoholic(alcoholic);
                                 new_cocktail.setIngredients(ingredients);
 
-                                cocktail_list.add(new_cocktail);
+                                cocktail_list_default.add(new_cocktail);
                             }
-                            adapter_cocktail = new Adapter_Cocktail(cocktail_list, Cocktail_Menu_Activity.this);
-                            recyclerView.setAdapter(adapter_cocktail);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
