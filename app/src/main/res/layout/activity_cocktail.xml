@@ -16,20 +16,28 @@
             android:id="@+id/sv_cocktail_search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_cocktail_search_results"
+            app:layout_constraintBottom_toTopOf="@+id/cocktail_rv_fastScroller"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_cocktail_search_results"
+        <com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
+            android:id="@+id/cocktail_rv_fastScroller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sv_cocktail_search" />
+            app:layout_constraintTop_toBottomOf="@+id/sv_cocktail_search">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cocktail_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background" />
+
+        </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

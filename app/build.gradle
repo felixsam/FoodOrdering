@@ -35,5 +35,5 @@ dependencies {
     implementation 'net.steamcrafted:materialiconlib:1.1.5'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.google.android.material:material:1.1.0'
-
+    implementation 'com.quiph.ui:recyclerviewfastscroller:0.1.3'
 }
