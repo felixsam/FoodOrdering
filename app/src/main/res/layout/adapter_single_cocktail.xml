@@ -33,6 +33,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:text="Cocktail ID"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -43,6 +44,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="Cocktail Glass"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_cocktail_thumb" />
 
@@ -53,6 +55,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="Cocktail Name"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toEndOf="@+id/iv_cocktail_thumb"
                     app:layout_constraintTop_toTopOf="parent" />
 
