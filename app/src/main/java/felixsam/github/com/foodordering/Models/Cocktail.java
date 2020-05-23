@@ -2,7 +2,7 @@ package felixsam.github.com.foodordering.Models;
 
 import java.util.ArrayList;
 
-public class Cocktail {
+public class Cocktail implements Comparable{
     private String cocktail_name;
     private Integer cocktail_ID;
     private String glass_name;
@@ -85,5 +85,10 @@ public class Cocktail {
         }
 
         return result;
+    }
+
+    @Override
+    public int compareTo(Object o){
+        return this.getCocktail_name().compareTo(((Cocktail) o).getCocktail_name());
     }
 }
