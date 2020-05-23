@@ -54,11 +54,8 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        for (char letter = 'a'; letter <= 'z' ; letter++){
-            search_cocktail_by_letter(letter);
-        }
-        adapter_cocktail = new Adapter_Cocktail(cocktail_list_default, Cocktail_Menu_Activity.this);
-        recyclerView.setAdapter(adapter_cocktail);
+        load_default_cocktail_list();
+
 
         SearchView search_cocktail = findViewById(R.id.sv_cocktail_search);
 
@@ -172,6 +169,14 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     }
 
+
+    private void load_default_cocktail_list(){
+        for (char letter = 'a'; letter <= 'z' ; letter++){
+            search_cocktail_by_letter(letter);
+        }
+        adapter_cocktail = new Adapter_Cocktail(cocktail_list_default, Cocktail_Menu_Activity.this);
+        recyclerView.setAdapter(adapter_cocktail);
+    }
     private void search_cocktail_by_letter(char search_item_letter){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(search_item_letter);
 
