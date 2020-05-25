@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 
 import net.steamcrafted.materialiconlib.MaterialMenuInflater;
@@ -26,6 +27,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
@@ -34,6 +38,7 @@ import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
 public class Cocktail_Menu_Activity extends AppCompatActivity {
 
     private RequestQueue mQueue;
+    private RequestFuture<JSONObject> future;
     private RecyclerView recyclerView;
     private Adapter_Cocktail adapter_cocktail;
     private ArrayList<Cocktail> cocktail_list;
@@ -110,6 +115,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
 
     private void search_cocktail_name(String search_item){
+
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + search_item;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -166,7 +172,30 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
         mQueue.add(request);
 
+        /*
+        JsonObjectRequest request  = new JsonObjectRequest(url, null, future, future);
 
+        mQueue.add(request);
+
+        try{
+
+            JSONObject response = null;
+            while (response == null){
+                try {
+                    //Blocks thread for 30 seconds
+                    response = future.get(30,TimeUnit.SECONDS);
+                } catch (InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
+            }
+
+
+        } catch (ExecutionException e){
+
+        } catch (TimeoutException e){
+
+        }
+*/
     }
 
 
