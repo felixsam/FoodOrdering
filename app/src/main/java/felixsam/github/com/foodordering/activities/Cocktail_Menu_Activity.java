@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -60,7 +61,6 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         load_default_cocktail_list();
-
 
         SearchView search_cocktail = findViewById(R.id.sv_cocktail_search);
 
@@ -107,6 +107,9 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             this.startActivity(intent);
             return true;
+        }
+        if (id == R.id.action_list){
+            adapter_cocktail.notifyDataSetChanged();
         }
 
         return super.onOptionsItemSelected(item);
@@ -205,6 +208,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         }
         adapter_cocktail = new Adapter_Cocktail(cocktail_list_default, Cocktail_Menu_Activity.this);
         recyclerView.setAdapter(adapter_cocktail);
+        recyclerView.smoothScrollToPosition(0);
     }
     private void search_cocktail_by_letter(char search_item_letter){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(search_item_letter);
@@ -247,7 +251,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
                                 cocktail_list_default.add(new_cocktail);
                             }
-
+                            Collections.sort(cocktail_list_default);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
