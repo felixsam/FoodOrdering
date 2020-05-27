@@ -76,7 +76,7 @@ public class List_Orders_By_ID extends AppCompatActivity {
                     final String date = orderID_list.get(position).getDate();
                     final String user_name = orderID_list.get(position).getUsername();
 
-                    Toast.makeText(getApplicationContext(),"OrderID:  " + OrderID.toString() + "\nDate: " + date, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),"OrderID:  " + OrderID.toString() + "\nDate: " + date, Toast.LENGTH_LONG).show();
 
 
 

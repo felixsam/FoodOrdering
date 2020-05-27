@@ -53,7 +53,7 @@ public class List_Orders_Activity extends AppCompatActivity {
 
         if(numRows == 0){
             Log.d(TAG,"Number of Rows is: " + numRows);
-            Toast.makeText(List_Orders_Activity.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(List_Orders_Activity.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
         }else{
             Log.d(TAG,"Number of Rows is: " + numRows);
 
