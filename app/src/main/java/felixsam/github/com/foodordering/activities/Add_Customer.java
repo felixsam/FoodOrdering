@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
@@ -89,9 +90,9 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         boolean insertData = mDatabaseHelper.addData_customers(f_name,l_name,p_number,user_name);
 
         if (insertData) {
-            toastMessage("Data Successfully Inserted!\n Added a New User");
+            Snackbar.make(findViewById(android.R.id.content),"Successfully added a new user",Snackbar.LENGTH_LONG).show();
         } else {
-            toastMessage("Something went wrong");
+            Snackbar.make(findViewById(android.R.id.content),"Something went wrong",Snackbar.LENGTH_LONG).show();
         }
     }
 

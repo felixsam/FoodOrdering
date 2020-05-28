@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -85,9 +86,9 @@ public class Edit_Customer_Activity extends AppCompatActivity {
 
                 if(!first_name.equals("")){
                     mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
-                    toastMessage("Changes Saved!");
+                    Snackbar.make(findViewById(android.R.id.content),"Changes Saved!",Snackbar.LENGTH_LONG).show();
                 }else{
-                    toastMessage("You must enter a name");
+                    Snackbar.make(findViewById(android.R.id.content),"You must enter a name",Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -99,7 +100,7 @@ public class Edit_Customer_Activity extends AppCompatActivity {
                 edit_customer_first_name.setText("");
                 edit_customer_last_name.setText("");
 
-                toastMessage("removed from database");
+                Snackbar.make(findViewById(android.R.id.content),"Removed from the Database!",Snackbar.LENGTH_LONG).show();
             }
         });
     }
