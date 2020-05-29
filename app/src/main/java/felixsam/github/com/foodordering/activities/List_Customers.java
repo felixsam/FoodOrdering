@@ -42,7 +42,7 @@ public class List_Customers extends AppCompatActivity {
         int numRows = customer_data.getCount();
         if(numRows == 0){
             Log.d(TAG,"Number of Rows is: " + numRows);
-            Toast.makeText(List_Customers.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(List_Customers.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
         }else{
             Log.d(TAG,"Hello");
             Log.d(TAG,"Number of Rows is: " + numRows);

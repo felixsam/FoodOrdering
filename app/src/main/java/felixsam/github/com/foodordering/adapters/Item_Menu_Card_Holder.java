@@ -135,7 +135,7 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
                 String item_name = this.tv_item_name.getText().toString();
 
                 Snackbar.make(v,"Added " + item_name
-                                + " ,Quantity: " + item_quantity
+                                + "\nQuantity: " + item_quantity
                         ,Snackbar.LENGTH_SHORT).show();
 
                 Log.d(TAG,"Added " + item_name

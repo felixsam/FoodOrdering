@@ -29,19 +29,20 @@ public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
 
         this.item_ImageMap = new HashMap<>();
 
-        item_ImageMap.put("Strawberry",R.drawable.cake_strawberry);
-        item_ImageMap.put("Vanilla",R.drawable.cake_vanilla_sponge);
-        item_ImageMap.put("Chocolate",R.drawable.cake_chocolate);
-        item_ImageMap.put("Lemon Blueberry",R.drawable.cake_lemon_blueberry);
-        item_ImageMap.put("Mango",R.drawable.cake_mango);
-        item_ImageMap.put("Oreo",R.drawable.cake_oreo);
+        item_ImageMap.put("Strawberry Cake",R.drawable.cake_strawberry);
+        item_ImageMap.put("Vanilla Cake",R.drawable.cake_vanilla_sponge);
+        item_ImageMap.put("Chocolate Cake",R.drawable.cake_chocolate);
+        item_ImageMap.put("Blueberry Cake",R.drawable.cake_lemon_blueberry);
+        item_ImageMap.put("Mango Cake",R.drawable.cake_mango);
+        item_ImageMap.put("Oreo Cake",R.drawable.cake_oreo);
         item_ImageMap.put("Cheesecake",R.drawable.cake_cheesecake);
+        item_ImageMap.put("Angel Cake",R.drawable.cake_angel);
         item_ImageMap.put("Milk",R.drawable.drink_milk);
         item_ImageMap.put("Milk Tea",R.drawable.drink_milk_tea);
         item_ImageMap.put("Orange Juice",R.drawable.drink_orange);
         item_ImageMap.put("Coke",R.drawable.drink_coke);
         item_ImageMap.put("Green Tea",R.drawable.drink_green_tea);
-        item_ImageMap.put("Frappucino",R.drawable.drink_frappuccino);
+        item_ImageMap.put("Frappuccino",R.drawable.drink_frappuccino);
         item_ImageMap.put("Mocha",R.drawable.drink_mocha);
         item_ImageMap.put("Pumpkin Spice Latte",R.drawable.drink_pumpkin_spice);
 
