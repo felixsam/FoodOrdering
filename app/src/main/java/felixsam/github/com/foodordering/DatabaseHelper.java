@@ -135,6 +135,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
+    //get username of first entry in customers table
+    public String getTopUserName(){
+        String username = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " LIMIT 3 ",null);
+        if (data.moveToFirst()){
+            username = data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME));
+        }
+        return username;
+    }
+
     public User getUser(String username){
         User user;
 

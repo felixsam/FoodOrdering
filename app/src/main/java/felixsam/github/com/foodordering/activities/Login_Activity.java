@@ -38,14 +38,17 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
         autocomplete_text_username = findViewById(R.id.dropdown_username);
 
-        //For development
-        //pre-fill username for quick login
-        autocomplete_text_username.setText("felix_user");
+
 
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.login_btn_signup);
 
         database = new DatabaseHelper(this);
+
+        //For development
+        //pre-fill username for quick login
+        autocomplete_text_username.setText(database.getTopUserName());
+
         ArrayList<User> list_users = new ArrayList<>();
 
         btn_login.setOnClickListener(this);
