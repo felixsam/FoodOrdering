@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -37,8 +39,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_login);
 
         autocomplete_text_username = findViewById(R.id.dropdown_username);
-
-
 
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.login_btn_signup);
@@ -115,11 +115,11 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
 
             case R.id.btn_login:
-                System.out.println("Clicked login button");
                 String username = autocomplete_text_username.getText().toString();
 
                 if (!database.exists_username(username)){
-                Toast.makeText(this, "Cannot login, Username doesn't exist", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Cannot login, username does not exist",Snackbar.LENGTH_LONG).show();
+                    break;
                 }
 
                 if (flag_users_exist == Boolean.TRUE && database.exists_username(username)){
@@ -138,7 +138,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     //Destroy login Activity
                     finish();
                 }else{
-                    Toast.makeText(this, "Cannot login, No users registered", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Cannot login, no users registered", Snackbar.LENGTH_LONG).show();
                 }
 
                 break;
