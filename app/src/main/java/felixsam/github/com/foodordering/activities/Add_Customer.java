@@ -17,7 +17,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.R;
 
 public class Add_Customer extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "Add_Customer";
+    private static final String TAG = Add_Customer.class.getSimpleName();
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
@@ -37,7 +37,6 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_add_customer);
         this.setTitle("Add Customer");
 
-
         //DataBase
         mDatabaseHelper = new DatabaseHelper(this);
         et_first_name_field = findViewById(R.id.et_customer_name_field);
@@ -48,13 +47,9 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         btnAdd = (Button) findViewById(R.id.btn_customer_add);
         btnViewData = (Button) findViewById(R.id.btn_customer_view);
 
-
         btnAdd.setOnClickListener(this);
         btnViewData.setOnClickListener(this);
-
-
     }
-
 
     @Override
     public void onClick(View v){
@@ -71,9 +66,8 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                     intent = new Intent(Add_Customer.this,nextActivityClass);
                     startActivity(intent);
                     finish();
-
                 } else {
-                    toastMessage("You must put something in the text field!");
+                    Snackbar.make(findViewById(android.R.id.content),"You must put something in the text field!", Snackbar.LENGTH_LONG).show();
                 }
                 break;
 
@@ -96,13 +90,6 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /**
-     * customizable toast
-     * @param message
-     */
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onBackPressed() {
