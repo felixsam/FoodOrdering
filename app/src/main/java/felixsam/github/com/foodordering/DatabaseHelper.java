@@ -494,6 +494,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     */
 
+
+
     public Cursor get_allorders(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + ORDERS_COL1_ID
@@ -535,6 +537,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //if date as inserted incorrectly it will return -1
         return result != -1;
+    }
+
+    public void deleteOrder(Integer OrderID){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME_ITEMS +
+                " SET " + ITEMS_COL8_ORDERID + " = NULL" +
+                " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID + "'";
+
+        db.execSQL(query);
     }
 
     //Get orderID
