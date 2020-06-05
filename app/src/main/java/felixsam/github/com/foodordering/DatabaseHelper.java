@@ -113,19 +113,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      SQL QUERIES FOR CUSTOMERS
      *******************************************************************************************************************************************************/
 
-    public Cursor getCustomerContents() {
-        SQLiteDatabase db_customer = this.getWritableDatabase();
-
-        return db_customer.rawQuery("SELECT * FROM " + TABLE_NAME_CUSTOMERS, null);
-    }
-
-    public Cursor getCustomer_Name(){
-        SQLiteDatabase db_customer = this.getWritableDatabase();
-
-        return db_customer.rawQuery("SELECT " + CUSTOMERS_COL2_FIRST_NAME +
-                " FROM " + TABLE_NAME_CUSTOMERS, null);
-    }
-
     public Cursor getCustomer_ID_and_Name(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
 
@@ -326,7 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME_ITEMS, null, contentValues);
 
-        //if date as inserted incorrectly it will return -1
+        //if date as inserted incorrectly it will return false
         return result != -1;
     }
 
@@ -477,23 +464,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("Get_DATA_ORDERS QUERY", query);
         return db.rawQuery(query, null);
     }
-
-
-    /*
-    public Cursor getData_orders(Integer OrderID){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + ITEMS_COL8_ORDERID
-                + ", " + ITEMS_COL3_FIRST_NAME
-                + ", " + ITEMS_COL5_ITEM_NAME
-                + ", " + ITEMS_COL6_PRICE
-                + ", " + ITEMS_COL7_QUANTITY
-                + " FROM " + TABLE_NAME_ITEMS
-                + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID ;
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-    */
-
 
 
     public Cursor get_allorders(){
