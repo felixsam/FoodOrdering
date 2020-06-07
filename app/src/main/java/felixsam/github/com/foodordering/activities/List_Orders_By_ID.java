@@ -21,7 +21,7 @@ import felixsam.github.com.foodordering.adapters.List_OrdersID_Custom_Adapter;
 
 public class List_Orders_By_ID extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
-    private final String TAG = "List_Orders_By_ID";
+    private final String TAG = List_Orders_By_ID.class.getSimpleName();
     private OrderID order_ID;
     private ArrayList<OrderID> orderID_list;
 
@@ -29,24 +29,21 @@ public class List_Orders_By_ID extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_orders_id);
-        this.setTitle("My Orders");
+        this.setTitle("All Orders");
 
         mDatabaseHelper = new DatabaseHelper(this);
         // Find ListView to populate
         ListView lv_orders_by_id = findViewById(R.id.list_orders_id_lv);
 
-
-        Log.d(TAG, "populateListView: Displaying data in the ListView.");
-
         orderID_list = new ArrayList<OrderID>();
+
         //get the data and append to a list
         Cursor data = mDatabaseHelper.get_allorders();
         int numRows = data.getCount();
         if(numRows == 0){
-            Log.d(TAG,"Number of Rows is: " + numRows);
-            Toast.makeText(List_Orders_By_ID.this,"The Database is empty :( ", Toast.LENGTH_LONG).show();
+            Log.i(TAG,"Database is empty" + numRows);
         }else{
-            Log.d(TAG,"Number of Rows is: " + numRows);
+            Log.i(TAG,"Number of Rows is: " + numRows);
 
             int i = 0;
             while(data.moveToNext()){
@@ -72,7 +69,7 @@ public class List_Orders_By_ID extends AppCompatActivity {
                                         long id){
                     //get orderID and date
                     final Integer OrderID = orderID_list.get(position).getOrderID();
-                    Log.d(TAG, "ORDER ID: " + OrderID.toString());
+                    Log.i(TAG, "ORDER ID: " + OrderID.toString());
                     final String date = orderID_list.get(position).getDate();
                     final String user_name = orderID_list.get(position).getUsername();
 
