@@ -337,7 +337,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public void updateItemCateogry(Integer itemID, String newCategory, String itemName){
+    public void updateItemCategory(Integer itemID, String newCategory, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL7_QUANTITY +
                 " = '" + newCategory + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
