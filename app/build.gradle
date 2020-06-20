@@ -11,9 +11,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            buildConfigField 'String', 'ApiKey', Maps_APIKEY
+            resValue 'string', "api_key", Maps_APIKEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'ApiKey', Maps_APIKEY
+            resValue 'string', "api_key", Maps_APIKEY
         }
     }
 }
@@ -36,4 +42,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.quiph.ui:recyclerviewfastscroller:0.1.3'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.reddit:indicator-fast-scroll:1.3.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+
 }

@@ -52,7 +52,17 @@
         <activity android:name=".activities.List_Orders_Activity"
             android:parentActivityName=".activities.List_Orders_By_ID">
         </activity>
+        <activity android:name=".activities.MapActivity"
+            android:parentActivityName=".activities.MainActivity">
+        </activity>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/api_key"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

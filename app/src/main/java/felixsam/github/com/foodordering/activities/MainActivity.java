@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.cocktail_menu,
             R.drawable.checkout_menu,
             R.drawable.order_menu,
-            R.drawable.customer_list
+            R.drawable.customer_list,
+            R.drawable.delivery_menu
 
     };
     private final String[] titleArray = {
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
             "Cocktails",
             "Checkout",
             "Orders",
-            "Sign Up"
+            "Sign Up",
+            "Directions"
     };
 
     private final String[] subtitleArray = {
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
             "Make cocktails",
             "Checkout for current User",
             "See active orders",
-            "Register new customers"
+            "Register new customers",
+            "Open Directions Menu"
     };
 
     @Override

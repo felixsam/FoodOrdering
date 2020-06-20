@@ -12,4 +12,5 @@
     <integer name="btn_switch_pos">10</integer>
     <integer name="btn_edit_view">11</integer>
     <integer name="btn_edit_pos">12</integer>
+    <integer name="google_play_services_version">12451000</integer>
 </resources>
