@@ -1,5 +1,6 @@
 package felixsam.github.com.foodordering.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,18 +20,22 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
+import java.util.Locale;
 
 import felixsam.github.com.foodordering.R;
 
@@ -40,6 +46,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Location location;
     private double latitude;
     private double longitude;
+    Marker currentLocationMarker;
 
     /****/
 
@@ -76,9 +83,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     /****/
 
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
@@ -97,6 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
+
         // getting GPS status
         isGPSEnabled = mLocationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -105,12 +114,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         isNetworkEnabled = mLocationManager
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
+        //Fused Location Client
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000,10,this);
     }
 
     @Override
-    public void onMapReady(GoogleMap map){
+    public void onMapReady(GoogleMap map) {
 
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(0, 0))
@@ -118,180 +128,53 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         this.map = map;
 
-        // Prompt the user for permission.
-        getLocationPermission();
-        // [END_EXCLUDE]
-
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
-
-        // Get the current location of the device and set the position of the map.
-        getDeviceLocation();
     }
 
     @Override
-    public void onLocationChanged(Location location){
-        handleNewLocation(location);
+    public void onLocationChanged(Location location) {
+        //handleNewLocation(location);
+        lastKnownLocation = location;
+
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras){
-        Log.d(TAG,"Status changed : " + status);
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d(TAG, "Status changed : " + status);
     }
 
     @Override
-    public void onProviderEnabled(String provider){
-        Log.d(TAG,"Provider Enabled");
+    public void onProviderEnabled(String provider) {
+        Log.d(TAG, "Provider Enabled");
     }
 
     @Override
-    public void onProviderDisabled(String provider){
-        Log.d(TAG,"Provider Disabled");
+    public void onProviderDisabled(String provider) {
+        Log.d(TAG, "Provider Disabled");
 
     }
-    private void handleNewLocation(Location location){
-        Log.d(TAG,location.toString());
+
+    private void handleNewLocation(Location location) {
+        Log.d(TAG, location.toString());
     }
 
-    /**
-     * Gets the current location of the device, and positions the map's camera.
-     */
-    // [START maps_current_place_get_device_location]
-    private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
-        try {
-            if (locationPermissionGranted) {
-                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
-                            lastKnownLocation = task.getResult();
-                            if (lastKnownLocation != null) {
-                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(lastKnownLocation.getLatitude(),
-                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                            }
-                        } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
-                            map.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-                            map.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                    }
-                });
-            }
-        } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage(), e);
-        }
-    }
-    // [END maps_current_place_get_device_location]
 
+    private void getLastKnownLocation() {
+        Log.d(TAG, "getLastKnownLocation: called");
 
-    /**
-     * Prompts the user for permission to use the device location.
-     */
-    // [START maps_current_place_location_permission]
-    private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
-    // [END maps_current_place_location_permission]
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-    /**
-     * Handles the result of the request for location permissions.
-     */
-    // [START maps_current_place_on_request_permissions_result]
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        locationPermissionGranted = false;
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionGranted = true;
-                }
-            }
-        }
-        updateLocationUI();
-    }
-    // [END maps_current_place_on_request_permissions_result]
-
-
-    /**
-     * Displays a form allowing the user to select a place from a list of likely places.
-     */
-    // [START maps_current_place_open_places_dialog]
-    private void openPlacesDialog() {
-        // Ask the user to choose the place where they are now.
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // The "which" argument contains the position of the selected item.
-                LatLng markerLatLng = likelyPlaceLatLngs[which];
-                String markerSnippet = likelyPlaceAddresses[which];
-                if (likelyPlaceAttributions[which] != null) {
-                    markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
-                }
-
-                // Add a marker for the selected place, with an info window
-                // showing information about that place.
-                map.addMarker(new MarkerOptions()
-                        .title(likelyPlaceNames[which])
-                        .position(markerLatLng)
-                        .snippet(markerSnippet));
-
-                // Position the map's camera at the location of the marker.
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
-                        DEFAULT_ZOOM));
-            }
-        };
-
-    }
-    // [END maps_current_place_open_places_dialog]
-
-
-
-    /**
-     * Updates the map's UI settings based on whether the user has granted location permission.
-     */
-    private void updateLocationUI() {
-        if (map == null) {
             return;
         }
-        try {
-            if (locationPermissionGranted) {
-                map.setMyLocationEnabled(true);
-                map.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                map.setMyLocationEnabled(false);
-                map.getUiSettings().setMyLocationButtonEnabled(false);
-                lastKnownLocation = null;
-                getLocationPermission();
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                if (task.isSuccessful()) {
+                    Location location = task.getResult();
+                    //GeoPoint geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+                    //Log.d(TAG, "onComplete: latitude: " + geoPoint.getLatitude());
+                    //Log.d(TAG, "onComplete: latitude: " + geoPoint.getLongitude());
+                }
             }
-        } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
-        }
+        });
     }
-
 }
