@@ -23,6 +23,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -50,6 +51,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     /****/
 
+    private MapView mapView;
     private GoogleMap map;
     private CameraPosition cameraPosition;
 
@@ -128,6 +130,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         this.map = map;
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        map.setMyLocationEnabled(true);
+
     }
 
     @Override
@@ -176,5 +184,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
         });
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
     }
 }
