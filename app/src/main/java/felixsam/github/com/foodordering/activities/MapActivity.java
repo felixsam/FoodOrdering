@@ -97,21 +97,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        setContentView(R.layout.activity_map);
-
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        }
-
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
-
         boolean canGetLocation = false;
         boolean isNetworkEnabled = false;
         boolean isGPSEnabled = false;
+        mapView = findViewById(R.id.mapView);
+        setContentView(R.layout.activity_map);
 
+        initGoogleMap(savedInstanceState);
 
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -146,6 +138,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
+    private void initGoogleMap(Bundle savedInstanceState){
+        // ** IMPORTANT **
+        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK objects or sub-Bundles
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
+
+        mapView.onCreate(mapViewBundle);
+
+        mapView.getMapAsync(this);
+    }
     @Override
     public void onLocationChanged(Location location) {
         //handleNewLocation(location);
