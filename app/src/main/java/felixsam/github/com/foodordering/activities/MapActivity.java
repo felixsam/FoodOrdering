@@ -100,10 +100,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         boolean canGetLocation = false;
         boolean isNetworkEnabled = false;
         boolean isGPSEnabled = false;
-        mapView = findViewById(R.id.mapView);
         setContentView(R.layout.activity_map);
 
-        initGoogleMap(savedInstanceState);
+        // ** IMPORTANT **
+        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK objects or sub-Bundles
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
+
+        mapView = findViewById(R.id.mapView);
+
+        mapView.onCreate(mapViewBundle);
+
+        mapView.getMapAsync(this);
 
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -118,6 +128,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         //Fused Location Client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        getLastKnownLocation();
 
     }
 
@@ -138,18 +150,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
-    private void initGoogleMap(Bundle savedInstanceState){
-        // ** IMPORTANT **
-        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK objects or sub-Bundles
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+    private void getLastKnownLocation() {
+        Log.d(TAG, "getLastKnownLocation: called.");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<android.location.Location>() {
+            @Override
+            public void onComplete(@NonNull Task<android.location.Location> task) {
+                if (task.isSuccessful()) {
+                    Location location = task.getResult();
+                    String latitude = String.valueOf(location.getLatitude());
+                    String longitude = String.valueOf(location.getLongitude());
+                    Log.d(TAG, "onComplete: latitude: " + latitude);
+                    Log.d(TAG, "onComplete: longitude: " + longitude);
+                }
+            }
+        });
 
-        mapView.onCreate(mapViewBundle);
-
-        mapView.getMapAsync(this);
     }
+
     @Override
     public void onLocationChanged(Location location) {
         //handleNewLocation(location);
@@ -175,27 +195,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void handleNewLocation(Location location) {
         Log.d(TAG, location.toString());
-    }
-
-
-    private void getLastKnownLocation() {
-        Log.d(TAG, "getLastKnownLocation: called");
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    Location location = task.getResult();
-                    //GeoPoint geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
-                    //Log.d(TAG, "onComplete: latitude: " + geoPoint.getLatitude());
-                    //Log.d(TAG, "onComplete: latitude: " + geoPoint.getLongitude());
-                }
-            }
-        });
     }
 
     @Override
