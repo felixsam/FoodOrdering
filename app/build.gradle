@@ -3,6 +3,10 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
+    compileOptions{
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
     defaultConfig {
         applicationId "felixsam.github.com.foodordering"
         minSdkVersion 24

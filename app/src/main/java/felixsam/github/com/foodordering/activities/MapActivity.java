@@ -34,10 +34,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.GeoApiContext;
 
 import java.util.List;
 import java.util.Locale;
 
+import felixsam.github.com.foodordering.BuildConfig;
 import felixsam.github.com.foodordering.R;
 
 //https://github.com/googlemaps/android-samples/blob/776869140865253ecd516c475e048f4d19ac9f7c/tutorials/java/CurrentPlaceDetailsOnMap/app/src/main/java/com/example/currentplacedetailsonmap/MapsActivityCurrentPlace.java#L126-L128
@@ -67,6 +69,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
 
+
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
@@ -83,6 +86,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
+    private GeoApiContext mGeoApiContext = null;
 
     /****/
 
@@ -130,7 +134,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         getLastKnownLocation();
+/*
 
+        //GeoApiContext
+        if (mGeoApiContext == null){
+            mGeoApiContext = new GeoApiContext.Builder().apiKey(BuildConfig.ApiKey).build();
+        }
+*/
     }
 
     @Override
