@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -35,14 +37,6 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
         //mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-    }
-
-    /**
-     * customizable toast
-     * @param message
-     */
-    private void toastMessage(String message){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -174,8 +168,8 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
                     context.startActivity(editScreenIntent);
                 }
                 else{
-                    toastMessage("No ID associated with that name");
-                }
+                    Snackbar.make(v,"No ID Associated with that name"
+                            ,Snackbar.LENGTH_SHORT).show();                }
 
             }
 
