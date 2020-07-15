@@ -5,31 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/text_input_map_start"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_map_start_position"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Starting Point"
->
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_map_start"
+            android:id="@+id/et_map_start_position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Start Position"
             android:inputType="text" />
-    </com.google.android.material.textfield.TextInputEditText>
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/text_input_map_dest"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_map_dest_position"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Starting Point"
->
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_map_start_position">
+
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_map_dest"
+            android:id="@+id/et_map_dest_position"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="End Position"
             android:inputType="text" />
-    </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
         android:id="@+id/map_container"
