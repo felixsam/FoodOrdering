@@ -1,23 +1,16 @@
 package felixsam.github.com.foodordering.activities;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -25,138 +18,72 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
-
-import java.util.List;
-import java.util.Locale;
+import com.google.maps.PendingResult;
+import com.google.maps.model.DirectionsResult;
 
 import felixsam.github.com.foodordering.BuildConfig;
 import felixsam.github.com.foodordering.R;
+
+import static felixsam.github.com.foodordering.Constants.MAPVIEW_BUNDLE_KEY;
 
 //https://github.com/googlemaps/android-samples/blob/776869140865253ecd516c475e048f4d19ac9f7c/tutorials/java/CurrentPlaceDetailsOnMap/app/src/main/java/com/example/currentplacedetailsonmap/MapsActivityCurrentPlace.java#L126-L128
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
     private final String TAG = MapActivity.class.getSimpleName();
-    private Location location;
-    private double latitude;
-    private double longitude;
-    Marker currentLocationMarker;
-
-    /****/
 
     private MapView mapView;
     private GoogleMap map;
-    private CameraPosition cameraPosition;
 
-    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
-    // The entry point to the Fused Location Provider.
-    private FusedLocationProviderClient fusedLocationProviderClient;
 
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
     private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 15;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private boolean locationPermissionGranted;
-
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
 
     // Keys for storing activity state.
-    // [START maps_current_place_state_keys]
-    private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-    // [END maps_current_place_state_keys]
 
-    // Used for selecting the current place.
-    private static final int M_MAX_ENTRIES = 5;
-    private String[] likelyPlaceNames;
-    private String[] likelyPlaceAddresses;
-    private List[] likelyPlaceAttributions;
-    private LatLng[] likelyPlaceLatLngs;
     private GeoApiContext mGeoApiContext = null;
-
-    /****/
 
     private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_map);
+
+        Bundle mapViewBundle = null;
+        mapView = findViewById(R.id.mapView);
 
         if (savedInstanceState != null) {
             lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+            // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK objects or sub-Bundles
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
 
-        boolean canGetLocation = false;
-        boolean isNetworkEnabled = false;
-        boolean isGPSEnabled = false;
-        setContentView(R.layout.activity_map);
-
-        // ** IMPORTANT **
-        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK objects or sub-Bundles
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        if (mGeoApiContext == null){
+            mGeoApiContext = new GeoApiContext.Builder().apiKey(BuildConfig.ApiKey).build();
         }
-
-        mapView = findViewById(R.id.mapView);
 
         mapView.onCreate(mapViewBundle);
-
         mapView.getMapAsync(this);
 
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-
-        // getting GPS status
-        isGPSEnabled = mLocationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        // getting network status
-        isNetworkEnabled = mLocationManager
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
         //Fused Location Client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         getLastKnownLocation();
-/*
-
-        //GeoApiContext
-        if (mGeoApiContext == null){
-            mGeoApiContext = new GeoApiContext.Builder().apiKey(BuildConfig.ApiKey).build();
-        }
-*/
-    }
-
-    @Override
-    public void onMapReady(GoogleMap map) {
-
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
-
-        this.map = map;
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        map.setMyLocationEnabled(true);
 
     }
 
@@ -169,22 +96,92 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onComplete(@NonNull Task<android.location.Location> task) {
                 if (task.isSuccessful()) {
-                    Location location = task.getResult();
-                    String latitude = String.valueOf(location.getLatitude());
-                    String longitude = String.valueOf(location.getLongitude());
-                    Log.d(TAG, "onComplete: latitude: " + latitude);
-                    Log.d(TAG, "onComplete: longitude: " + longitude);
+                    lastKnownLocation = task.getResult();
+                    Log.d(TAG, "lastKnownLocation: latitude: " + String.valueOf(lastKnownLocation.getLatitude()));
+                    Log.d(TAG, "lastKnownLocation: longitude: " + String.valueOf(lastKnownLocation.getLongitude()));
                 }
             }
         });
 
     }
 
+    private void calculateDirections(LatLng start,LatLng dest){
+        Log.d(TAG, "calculateDirections: calculating directions.");
+
+        com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
+                dest.latitude,
+                dest.longitude
+        );
+        DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
+
+        directions.alternatives(true);
+        directions.origin(
+                new com.google.maps.model.LatLng(
+                        start.latitude,
+                        start.longitude
+                )
+        );
+        Log.d(TAG, "calculateDirections: destination: " + destination.toString());
+        directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+                Log.d(TAG,"calculateDirections: duration: " + result.routes[0].legs[0].duration);
+                Log.d(TAG,"calculateDirections: distance: " + result.routes[0].legs[0].distance);
+                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                Log.e(TAG, "onFailure: " + e.getMessage() );
+
+            }
+        });
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+
+        /*
+        //Add a marker
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(0, 0))
+                .title("Marker"));
+        */
+        this.map = map;
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        map.setMyLocationEnabled(true);
+        setCameraView();
+
+    }
+
+    private void setCameraView(){
+
+        // Overall map view window: 0.2 * 0.2 = 0.04
+        double bottomBoundary = defaultLocation.latitude - .1;
+        double leftBoundary = defaultLocation.longitude - .1 ;
+        double topBoundary = defaultLocation.latitude + .1;
+        double rightBoundary = defaultLocation.longitude + .1;
+
+
+        LatLngBounds mMapBoundary = new LatLngBounds(
+                new LatLng(bottomBoundary, leftBoundary),
+                new LatLng(topBoundary, rightBoundary)
+        );
+
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(mMapBoundary,0));
+    }
+
     @Override
     public void onLocationChanged(Location location) {
-        //handleNewLocation(location);
         lastKnownLocation = location;
-
     }
 
     @Override
@@ -200,11 +197,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onProviderDisabled(String provider) {
         Log.d(TAG, "Provider Disabled");
-
-    }
-
-    private void handleNewLocation(Location location) {
-        Log.d(TAG, location.toString());
     }
 
     @Override
