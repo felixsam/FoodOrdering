@@ -122,6 +122,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_CUSTOMERS, null);
     }
 
+    public int getUserID(String username){
+        int userID = -1;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL1_ID
+                + " FROM " + TABLE_NAME_CUSTOMERS
+                + " WHERE " + CUSTOMERS_COL7_USERNAME + " = '" +  username + "'",null);
+        if (data.moveToFirst()){
+            userID = data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID));
+        }
+
+        return userID;
+
+    }
+
     //get username of first entry in customers table
     public String getTopUserName(){
         String username = "";
