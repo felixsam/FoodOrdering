@@ -16,14 +16,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "myDatabase";
 
     //TABLE: CUSTOMERS
-    public static final String TABLE_NAME_CUSTOMERS = "customers";
-    public static final String CUSTOMERS_COL1_ID = "_id";
-    public static final String CUSTOMERS_COL2_FIRST_NAME ="FIRST_NAME";
-    public static final String CUSTOMERS_COL3_LAST_NAME ="LAST_NAME";
-    public static final String CUSTOMERS_COL4_PHONE_NUMBER ="PHONE_NUMBER";
-    public static final String CUSTOMERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
-    public static final String CUSTOMERS_COL6_ROLE = "ROLE";
-    public static final String CUSTOMERS_COL7_USERNAME = "USERNAME";
+    public static final String TABLE_NAME_USERS = "users";
+    public static final String USERS_COL1_ID = "_id";
+    public static final String USERS_COL2_FIRST_NAME ="FIRST_NAME";
+    public static final String USERS_COL3_LAST_NAME ="LAST_NAME";
+    public static final String USERS_COL4_PHONE_NUMBER ="PHONE_NUMBER";
+    public static final String USERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
+    public static final String USERS_COL6_ROLE = "ROLE";
+    public static final String USERS_COL7_USERNAME = "USERNAME";
 
     //TABLE: ITEMS
     public static final String TABLE_NAME_ITEMS = "items";
@@ -56,15 +56,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //CUSTOMERS TABLE
         String createTableCustomers =
-                "CREATE TABLE " + TABLE_NAME_CUSTOMERS + " (" +
-                        CUSTOMERS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        CUSTOMERS_COL2_FIRST_NAME + " TEXT, " +
-                        CUSTOMERS_COL3_LAST_NAME + " TEXT, " +
-                        CUSTOMERS_COL4_PHONE_NUMBER + " TEXT, " +
-                        CUSTOMERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
-                        CUSTOMERS_COL6_ROLE + " TEXT DEFAULT 'Admin', " +
-                        CUSTOMERS_COL7_USERNAME + " TEXT, " +
-                        "UNIQUE (" + CUSTOMERS_COL7_USERNAME + ")"
+                "CREATE TABLE " + TABLE_NAME_USERS + " (" +
+                        USERS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        USERS_COL2_FIRST_NAME + " TEXT, " +
+                        USERS_COL3_LAST_NAME + " TEXT, " +
+                        USERS_COL4_PHONE_NUMBER + " TEXT, " +
+                        USERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
+                        USERS_COL6_ROLE + " TEXT DEFAULT 'Admin', " +
+                        USERS_COL7_USERNAME + " TEXT, " +
+                        "UNIQUE (" + USERS_COL7_USERNAME + ")"
                         + ")";
 
         //ITEMS TABLE
@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ITEMS_COL8_ORDERID + " INTEGER," +
                         " CONSTRAINT FK_USERID" +
                         " FOREIGN KEY " + "(" + ITEMS_COL2_USER_ID + ")" +
-                        " REFERENCES " + TABLE_NAME_CUSTOMERS + " (" + CUSTOMERS_COL1_ID + ")"
+                        " REFERENCES " + TABLE_NAME_USERS + " (" + USERS_COL1_ID + ")"
                         + ")";
 
         //ORDERS TABLE
@@ -100,7 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CUSTOMERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ITEMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_ORDERS);
 
@@ -113,13 +113,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      SQL QUERIES FOR CUSTOMERS
      *******************************************************************************************************************************************************/
 
-    public Cursor getCustomer_ID_and_Name(){
+    public Cursor getUserIdAndName(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
 
-        return db_customer.rawQuery("SELECT " + CUSTOMERS_COL1_ID
-                + ", " + CUSTOMERS_COL2_FIRST_NAME
-                + ", " + CUSTOMERS_COL7_USERNAME
-                + " FROM " + TABLE_NAME_CUSTOMERS, null);
+        return db_customer.rawQuery("SELECT " + USERS_COL1_ID
+                + ", " + USERS_COL2_FIRST_NAME
+                + ", " + USERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_USERS, null);
     }
 
     public int getUserID(String username){
@@ -127,11 +127,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL1_ID
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " + CUSTOMERS_COL7_USERNAME + " = '" +  username + "'",null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL1_ID
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL7_USERNAME + " = '" +  username + "'",null);
         if (data.moveToFirst()){
-            userID = data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID));
+            userID = data.getInt(data.getColumnIndex(USERS_COL1_ID));
         }
 
         return userID;
@@ -142,11 +142,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String getTopUserName(){
         String username = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL7_USERNAME
-                + " FROM " + TABLE_NAME_CUSTOMERS
+        Cursor data = db.rawQuery("SELECT " + USERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_USERS
                 + " LIMIT 3 ",null);
         if (data.moveToFirst()){
-            username = data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME));
+            username = data.getString(data.getColumnIndex(USERS_COL7_USERNAME));
         }
         return username;
     }
@@ -155,22 +155,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         User user;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL1_ID
-                + ", " + CUSTOMERS_COL2_FIRST_NAME
-                + ", " + CUSTOMERS_COL7_USERNAME
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" +  username + "'" ,null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL1_ID
+                + ", " + USERS_COL2_FIRST_NAME
+                + ", " + USERS_COL7_USERNAME
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL7_USERNAME + " = '" +  username + "'" ,null);
 
         if (data.moveToFirst()){
-            return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
-                    data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+            return new User(data.getInt(data.getColumnIndex(USERS_COL1_ID)),
+                    data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(USERS_COL7_USERNAME))
             );
         }
 
         //TO DO
         //Handle case when username doesn't exist
-        return new User(data.getInt(data.getColumnIndex(CUSTOMERS_COL1_ID)),
-                data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(CUSTOMERS_COL7_USERNAME))
+        return new User(data.getInt(data.getColumnIndex(USERS_COL1_ID)),
+                data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME)), data.getString(data.getColumnIndex(USERS_COL7_USERNAME))
         );
 
 
@@ -180,8 +180,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean exists_username(String username){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT 1"
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL7_USERNAME + " = '" + username + "'" ,null);
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL7_USERNAME + " = '" + username + "'" ,null);
 
         return data.getCount() != 0;
     }
@@ -190,87 +190,87 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //String userID_str = userID.toString();
         String username = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL2_FIRST_NAME
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL2_FIRST_NAME
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
         if (data.moveToFirst()){
-            username = data.getString(data.getColumnIndex(CUSTOMERS_COL2_FIRST_NAME));
+            username = data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME));
             System.out.println(data);
         }
         return username;
 
     }
-    public String get_customer_last_name(Integer userID){
+    public String getUserLastName(Integer userID){
         String last_name = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL3_LAST_NAME
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL3_LAST_NAME
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
         System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
-            last_name = data.getString(data.getColumnIndex(CUSTOMERS_COL3_LAST_NAME));
+            last_name = data.getString(data.getColumnIndex(USERS_COL3_LAST_NAME));
             System.out.println(data);
         }
         return last_name;
 
     }
 
-    public String get_customer_phone_number(Integer userID){
+    public String getUserPhoneNumber(Integer userID){
         String phone_number = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL4_PHONE_NUMBER
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL4_PHONE_NUMBER
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
         System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
-            phone_number = data.getString(data.getColumnIndex(CUSTOMERS_COL4_PHONE_NUMBER));
+            phone_number = data.getString(data.getColumnIndex(USERS_COL4_PHONE_NUMBER));
             System.out.println(data);
         }
         return phone_number;
 
     }
 
-    public String get_customer_role(Integer userID){
+    public String getUserRole(Integer userID){
         String role = "";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT " + CUSTOMERS_COL6_ROLE
-                + " FROM " + TABLE_NAME_CUSTOMERS
-                + " WHERE " +  CUSTOMERS_COL1_ID + " = " + userID ,null);
+        Cursor data = db.rawQuery("SELECT " + USERS_COL6_ROLE
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
         System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
-            role = data.getString(data.getColumnIndex(CUSTOMERS_COL6_ROLE));
+            role = data.getString(data.getColumnIndex(USERS_COL6_ROLE));
             System.out.println(data);
         }
         return role;
 
     }
 
-    public boolean addData_customers(String First_Name,String Last_Name, String Phone_Number, String User_Name) {
+    public boolean addNewUser(String First_Name, String Last_Name, String Phone_Number, String User_Name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(CUSTOMERS_COL2_FIRST_NAME, First_Name);
-        values.put(CUSTOMERS_COL3_LAST_NAME, Last_Name);
-        values.put(CUSTOMERS_COL4_PHONE_NUMBER, Phone_Number);
-        values.put(CUSTOMERS_COL7_USERNAME, User_Name);
+        values.put(USERS_COL2_FIRST_NAME, First_Name);
+        values.put(USERS_COL3_LAST_NAME, Last_Name);
+        values.put(USERS_COL4_PHONE_NUMBER, Phone_Number);
+        values.put(USERS_COL7_USERNAME, User_Name);
 
-        long result = db.insert(TABLE_NAME_CUSTOMERS, null, values);
+        long result = db.insert(TABLE_NAME_USERS, null, values);
 
         //if data as inserted incorrectly it will return -1
         return result != -1;
     }
 
-    public void update_customer_role(int id, String ROLE){
+    public void updateUserRole(int id, String ROLE){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_CUSTOMERS
-                + " SET " + CUSTOMERS_COL6_ROLE + " = '" + ROLE + "'"
-                + " WHERE " + CUSTOMERS_COL1_ID + " = '" + id + "'";
+        String query = "UPDATE " + TABLE_NAME_USERS
+                + " SET " + USERS_COL6_ROLE + " = '" + ROLE + "'"
+                + " WHERE " + USERS_COL1_ID + " = '" + id + "'";
 
         Log.d(TAG, "updateName: query: " + query);
         Log.d(TAG, "updateName: Setting ROLE to " + ROLE  + "For USER ID: " + id);
@@ -283,14 +283,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param id
      * @param oldName
      */
-    public void updateName(String newName, int id, String oldName, String new_last_name, String new_phone_number){
+    public void updateUserFullName(String newName, int id, String oldName, String new_last_name, String new_phone_number){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_CUSTOMERS
-                + " SET " + CUSTOMERS_COL2_FIRST_NAME + " = '" + newName + "'"
-                + ", " + CUSTOMERS_COL3_LAST_NAME + " = '" + new_last_name + "'"
-                + ", " + CUSTOMERS_COL4_PHONE_NUMBER + " = '" + new_phone_number
-                + "' WHERE " + CUSTOMERS_COL1_ID + " = '" + id + "'" +
-                " AND " + CUSTOMERS_COL2_FIRST_NAME + " = '" + oldName + "'";
+        String query = "UPDATE " + TABLE_NAME_USERS
+                + " SET " + USERS_COL2_FIRST_NAME + " = '" + newName + "'"
+                + ", " + USERS_COL3_LAST_NAME + " = '" + new_last_name + "'"
+                + ", " + USERS_COL4_PHONE_NUMBER + " = '" + new_phone_number
+                + "' WHERE " + USERS_COL1_ID + " = '" + id + "'" +
+                " AND " + USERS_COL2_FIRST_NAME + " = '" + oldName + "'";
         Log.d(TAG, "updateName: query: " + query);
         Log.d(TAG, "updateName: Setting name to " + newName + " LastName: " + new_last_name + " Phone Number: " + new_phone_number);
         db.execSQL(query);
@@ -301,11 +301,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param id
      * @param name
      */
-    public void deleteName(int id, String name){
+    public void deleteUser(int id, String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME_CUSTOMERS + " WHERE "
-                + CUSTOMERS_COL1_ID + " = '" + id + "'" +
-                " AND " + CUSTOMERS_COL2_FIRST_NAME + " = '" + name + "'";
+        String query = "DELETE FROM " + TABLE_NAME_USERS + " WHERE "
+                + USERS_COL1_ID + " = '" + id + "'" +
+                " AND " + USERS_COL2_FIRST_NAME + " = '" + name + "'";
         Log.d(TAG, "deleteName: query: " + query);
         Log.d(TAG, "deleteName: Deleting " + name + " from database.");
         db.execSQL(query);

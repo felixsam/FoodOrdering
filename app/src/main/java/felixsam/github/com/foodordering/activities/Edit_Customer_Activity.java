@@ -82,10 +82,10 @@ public class Edit_Customer_Activity extends AppCompatActivity {
                 role = autocomplete_user_role.getText().toString();
 
                 final Integer user_id = g.getUser_ID();
-                mDatabaseHelper.update_customer_role(user_id,role);
+                mDatabaseHelper.updateUserRole(user_id,role);
 
                 if(!first_name.equals("")){
-                    mDatabaseHelper.updateName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
+                    mDatabaseHelper.updateUserFullName(first_name,selectedID, edit_customer_selectedName,last_name,phone_number);
                     Snackbar.make(findViewById(android.R.id.content),"Changes Saved!",Snackbar.LENGTH_LONG).show();
                 }else{
                     Snackbar.make(findViewById(android.R.id.content),"You must enter a name",Snackbar.LENGTH_LONG).show();
@@ -96,7 +96,7 @@ public class Edit_Customer_Activity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabaseHelper.deleteName(selectedID, edit_customer_selectedName);
+                mDatabaseHelper.deleteUser(selectedID, edit_customer_selectedName);
                 edit_customer_first_name.setText("");
                 edit_customer_last_name.setText("");
 

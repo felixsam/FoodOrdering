@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -81,7 +79,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
     }
 
     public void AddData(String f_name, String l_name, String p_number, String user_name) {
-        boolean insertData = mDatabaseHelper.addData_customers(f_name,l_name,p_number,user_name);
+        boolean insertData = mDatabaseHelper.addNewUser(f_name,l_name,p_number,user_name);
 
         if (insertData) {
             Snackbar.make(findViewById(android.R.id.content),"Successfully added a new user",Snackbar.LENGTH_LONG).show();

@@ -145,14 +145,14 @@ public class List_Customers_Custom_Adapter extends BaseAdapter {
                 String customer_name = cust_name.getText().toString();
                 Integer customer_user_id = Integer.valueOf(cust_userid.getText().toString());
                 System.out.println("User id: " + customer_user_id.toString());
-                String customer_last_name = dbHelper.get_customer_last_name(customer_user_id);
+                String customer_last_name = dbHelper.getUserLastName(customer_user_id);
                 System.out.println("LastName: " + customer_last_name);
-                String customer_phone_number = dbHelper.get_customer_phone_number(customer_user_id);
+                String customer_phone_number = dbHelper.getUserPhoneNumber(customer_user_id);
                 System.out.println("Phone Number: " + customer_phone_number);
 
                 String customer_role = "";
-                if (dbHelper.get_customer_role(customer_user_id) != null ){
-                    customer_role = dbHelper.get_customer_role(customer_user_id);
+                if (dbHelper.getUserRole(customer_user_id) != null ){
+                    customer_role = dbHelper.getUserRole(customer_user_id);
                     System.out.println("Customer Role: " + customer_role);
                 }
 

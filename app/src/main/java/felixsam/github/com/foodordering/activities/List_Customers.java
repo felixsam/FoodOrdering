@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +37,7 @@ public class List_Customers extends AppCompatActivity {
 
         //create the list adapter and set the adapter
         customer_list = new ArrayList<>();
-        Cursor customer_data = mDatabaseHelper.getCustomer_ID_and_Name();
+        Cursor customer_data = mDatabaseHelper.getUserIdAndName();
         int numRows = customer_data.getCount();
         if(numRows == 0){
             Log.d(TAG,"No rows to populate list " + numRows);

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,7 +58,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
 
         //populate username dropdown
-        Cursor data_customers = database.getCustomer_ID_and_Name();
+        Cursor data_customers = database.getUserIdAndName();
         int data_entries = data_customers.getCount();
 
         if (data_entries == 0) {
@@ -73,14 +72,14 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
             int i = 0;
             while (data_customers.moveToNext()) {
                 Log.i(TAG,"New User");
-                User user = new User(data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)),
-                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME)),
-                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL7_USERNAME))
+                User user = new User(data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.USERS_COL1_ID)),
+                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL2_FIRST_NAME)),
+                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL7_USERNAME))
                 );
 
-                Log.i(TAG,"Adding user: " + data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL1_ID)) + " \n"
-                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL2_FIRST_NAME)) + " \n"
-                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.CUSTOMERS_COL7_USERNAME))
+                Log.i(TAG,"Adding user: " + data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.USERS_COL1_ID)) + " \n"
+                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL2_FIRST_NAME)) + " \n"
+                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL7_USERNAME))
                 );
 
                 list_users.add(i, user);
