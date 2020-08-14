@@ -1,4 +1,4 @@
-package felixsam.github.com.foodordering;
+package felixsam.github.com.foodordering.DatabaseTests;
 
 import android.os.Build;
 
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import felixsam.github.com.foodordering.activities.MapActivity;
+import felixsam.github.com.foodordering.DatabaseHelper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk={Build.VERSION_CODES.O_MR1})
-public class DatabaseUnitTest {
+public class UsernameUserIdTest {
 
     private DatabaseHelper dbHelper;
 
@@ -31,8 +31,8 @@ public class DatabaseUnitTest {
 
     @Test
     public void testGetTopUserName(){
-        dbHelper.addData_customers("First","Last","123","username1");
-        dbHelper.addData_customers("First","Last","123","username2");
+        dbHelper.addNewUser("First","Last","123","username1");
+        dbHelper.addNewUser("First","Last","123","username2");
 
         String topUserName = dbHelper.getTopUserName();
         System.out.println("The top username is : " + topUserName);
@@ -41,8 +41,8 @@ public class DatabaseUnitTest {
 
     @Test
     public void testGetUserID(){
-        dbHelper.addData_customers("First","Last","123","userId");
-        dbHelper.addData_customers("First","Last","123","userIdTwo");
+        dbHelper.addNewUser("First","Last","123","userId");
+        dbHelper.addNewUser("First","Last","123","userIdTwo");
         int userId = dbHelper.getUserID("userId");
         int userIdTwo = dbHelper.getUserID("userIdTwo");
         System.out.println("UserID: " + userId);
@@ -52,7 +52,7 @@ public class DatabaseUnitTest {
 
     @Test
     public void testUsernameExists(){
-        dbHelper.addData_customers("First","Last","123","usernameExists");
+        dbHelper.addNewUser("First","Last","123","usernameExists");
         assertTrue( dbHelper.exists_username("usernameExists") );
     }
 
