@@ -83,7 +83,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 );
 
                 list_users.add(i, user);
-                Log.i(TAG,"Username added to list_users: " + list_users.get(i).getUser_name());
+                Log.i(TAG,"Username added to list_users: " + list_users.get(i).getUserName());
                 i++;
             }
 
@@ -123,7 +123,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
                 if (flag_users_exist == Boolean.TRUE && database.exists_username(username)){
                     User login_user = database.getUser(username);
-                    String login_name = login_user.getName();
+                    String login_name = login_user.getFirstName();
                     int login_id = login_user.getUserID();
 
                     Log.i(TAG,"Setting global user - Login Name: " + login_name + "\n UserID: " + login_id);

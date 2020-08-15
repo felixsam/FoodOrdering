@@ -70,7 +70,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_customer_view:
-                intent = new Intent(Add_Customer.this, List_Customers.class);
+                intent = new Intent(Add_Customer.this, List_Users.class);
                 startActivity(intent);
                 break;
 

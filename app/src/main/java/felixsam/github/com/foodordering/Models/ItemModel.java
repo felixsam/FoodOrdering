@@ -10,8 +10,6 @@ public class ItemModel {
     private Integer userID;
     private Integer colID;
 
-    Globals g = Globals.getInstance();
-
     public ItemModel(Integer ID, String username, String name_drink, double price_drink, Integer quantity_drink, Integer user_ID){
         colID = ID;
         user = username;

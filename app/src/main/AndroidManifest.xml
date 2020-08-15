@@ -43,11 +43,11 @@
         <activity android:name=".activities.List_Added_Cakes"
             android:parentActivityName=".activities.Cake_Menu_Activity">
         </activity>
-        <activity android:name=".activities.List_Customers"
+        <activity android:name=".activities.List_Users"
             android:parentActivityName=".activities.Add_Customer">
         </activity>
         <activity android:name=".activities.Edit_Customer_Activity"
-            android:parentActivityName=".activities.List_Customers">
+            android:parentActivityName=".activities.List_Users">
         </activity>
         <activity android:name=".activities.List_Orders_Activity"
             android:parentActivityName=".activities.List_Orders_By_ID">

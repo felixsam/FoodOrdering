@@ -2,24 +2,35 @@ package felixsam.github.com.foodordering.Models;
 
 public class User {
 
-    private String user_name;
-    private String name;
+    private String userName;
+    private String firstName;
+
+
+    private String lastName;
     private int UserID;
     private String role;
 
 
     public User(int userID, String Name, String user){
         UserID = userID;
-        name = Name;
-        user_name = user;
+        firstName = Name;
+        userName = user;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getUserID() {
@@ -38,19 +49,19 @@ public class User {
         return role;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
 
-    //Show name as dropdown options in spinner when calling toString()
+    //Show userName as dropdown options in spinner when calling toString()
     @Override
     public String toString(){
-        return user_name;
+        return userName;
     }
 
 }

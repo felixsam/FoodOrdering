@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ListView
-        android:id="@+id/lv_customers"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_users"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
