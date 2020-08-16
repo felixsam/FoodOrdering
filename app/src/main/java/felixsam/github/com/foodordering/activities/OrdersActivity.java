@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,22 +15,22 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.List_Orders_Custom_Adapter;
+import felixsam.github.com.foodordering.adapters.Orders_Custom_Adapter;
 
-public class List_Orders_Activity extends AppCompatActivity {
+public class OrdersActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_orders_test);
+        setContentView(R.layout.activity_orders);
         this.setTitle("My Orders");
 
         DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
         RecyclerView rv_order_items = findViewById(R.id.rv_orders);
 
 
-        String TAG = List_Orders_Activity.class.getSimpleName();
+        String TAG = OrdersActivity.class.getSimpleName();
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -65,7 +64,7 @@ public class List_Orders_Activity extends AppCompatActivity {
                 order_list.add(i, order);
                 i++;
             }
-            List_Orders_Custom_Adapter adapter = new List_Orders_Custom_Adapter(this, R.layout.adapter_order_single_item_card, order_list);
+            Orders_Custom_Adapter adapter = new Orders_Custom_Adapter(this, R.layout.adapter_order_single_item_card, order_list);
             rv_order_items.setLayoutManager(new LinearLayoutManager(this));
             rv_order_items.setHasFixedSize(true);
             rv_order_items.setAdapter(adapter);

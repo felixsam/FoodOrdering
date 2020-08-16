@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ListView
-        android:id="@+id/list_orders_id_lv"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_listOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

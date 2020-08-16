@@ -28,7 +28,7 @@
         <activity android:name=".activities.Cake_Menu_Activity"
             android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".activities.List_Orders_By_ID"
+        <activity android:name=".activities.List_Orders"
             android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.CheckoutActivity"
@@ -49,8 +49,8 @@
         <activity android:name=".activities.Edit_Customer_Activity"
             android:parentActivityName=".activities.List_Users">
         </activity>
-        <activity android:name=".activities.List_Orders_Activity"
-            android:parentActivityName=".activities.List_Orders_By_ID">
+        <activity android:name=".activities.OrdersActivity"
+            android:parentActivityName=".activities.List_Orders">
         </activity>
         <activity android:name=".activities.MapActivity"
             android:parentActivityName=".activities.MainActivity">
