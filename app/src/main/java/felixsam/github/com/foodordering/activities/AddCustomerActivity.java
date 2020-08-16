@@ -3,6 +3,7 @@ package felixsam.github.com.foodordering.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +21,7 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
     private Intent intent;
-    private TextInputEditText et_first_name_field, et_last_name_field, et_phone_number_field, et_user_name_field;
+    private TextInputEditText et_first_name_field, et_last_name_field, et_phone_number_field, et_user_name_field,et_password_field;
     Class nextActivityClass;
 
     @Override
@@ -41,6 +42,7 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
         et_last_name_field = findViewById(R.id.et_last_name_field);
         et_phone_number_field = findViewById(R.id.et_phone_number_field);
         et_user_name_field = findViewById(R.id.et_username_field);
+        et_password_field = findViewById(R.id.et_password_field);
 
         btnAdd = (Button) findViewById(R.id.btn_customer_add);
         btnViewData = (Button) findViewById(R.id.btn_customer_view);
@@ -57,9 +59,11 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
                 String Last_Name_Entry = et_last_name_field.getText().toString();
                 String Phone_Number_Entry = et_phone_number_field.getText().toString();
                 String User_Name_Entry = et_user_name_field.getText().toString();
+                String Password_Entry = et_password_field.getText().toString();
+                Log.d(TAG,"Password to be entered is : " + Password_Entry);
 
                 if (et_first_name_field.length() != 0 && et_user_name_field.length() != 0) {
-                    AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry,User_Name_Entry);
+                    AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry,User_Name_Entry,Password_Entry);
                     et_first_name_field.setText("");
                     intent = new Intent(AddCustomerActivity.this,nextActivityClass);
                     startActivity(intent);
@@ -78,8 +82,8 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    public void AddData(String f_name, String l_name, String p_number, String user_name) {
-        boolean insertData = mDatabaseHelper.addNewUser(f_name,l_name,p_number,user_name);
+    public void AddData(String f_name, String l_name, String p_number, String user_name,String password) {
+        boolean insertData = mDatabaseHelper.addNewUser(f_name,l_name,p_number,user_name,password);
 
         if (insertData) {
             Snackbar.make(findViewById(android.R.id.content),"Successfully added a new user",Snackbar.LENGTH_LONG).show();

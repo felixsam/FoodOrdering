@@ -12,6 +12,7 @@
 
     <!-- Activity Add_Customer -->
     <string name="add_customer_text_username">User Name</string>
+    <string name="add_customer_text_password">Password</string>
     <string name="add_customer_text_first_name">First Name</string>
     <string name="add_customer_text_last_name">Last Name</string>
     <string name="add_customer_text_phone_number">Phone Number</string>

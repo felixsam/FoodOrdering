@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,6 +28,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     private final String TAG = Login_Activity.class.getSimpleName();
 
     private AutoCompleteTextView autocomplete_text_username;
+    private TextInputEditText autocomplete_text_password;
     private final Globals g = Globals.getInstance();
     private Boolean flag_users_exist = Boolean.FALSE;
     private ArrayAdapter<User> adapter_dropdown_username;
@@ -38,6 +40,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_login);
 
         autocomplete_text_username = findViewById(R.id.dropdown_username);
+        autocomplete_text_password = findViewById(R.id.text_password);
 
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.login_btn_signup);
@@ -47,6 +50,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         //For development
         //pre-fill username for quick login
         autocomplete_text_username.setText(database.getTopUserName());
+        autocomplete_text_password.setText(database.getPassword(database.getTopUserName()));
 
         ArrayList<User> list_users = new ArrayList<>();
 

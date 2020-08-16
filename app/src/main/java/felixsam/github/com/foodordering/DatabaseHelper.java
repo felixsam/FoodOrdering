@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String USERS_COL5_LOGGED_IN = "LOG_IN_STATUS";
     public static final String USERS_COL6_ROLE = "ROLE";
     public static final String USERS_COL7_USERNAME = "USERNAME";
+    public static final String USERS_COL8_PASSWORD = "PASSWORD";
 
     //TABLE: ITEMS
     public static final String TABLE_NAME_ITEMS = "items";
@@ -64,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         USERS_COL5_LOGGED_IN + " TEXT DEFAULT 'FALSE', " +
                         USERS_COL6_ROLE + " TEXT DEFAULT 'Admin', " +
                         USERS_COL7_USERNAME + " TEXT, " +
+                        USERS_COL8_PASSWORD + " TEXT, " +
                         "UNIQUE (" + USERS_COL7_USERNAME + ")"
                         + ")";
 
@@ -149,6 +151,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             username = data.getString(data.getColumnIndex(USERS_COL7_USERNAME));
         }
         return username;
+    }
+
+    public String getPassword(String username){
+        String password = "";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + USERS_COL8_PASSWORD
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL7_USERNAME + " = '" + username + "'",null);
+        if (data.moveToFirst()){
+            password = data.getString(data.getColumnIndex(USERS_COL8_PASSWORD));
+        }
+
+        return password;
     }
 
     public User getUser(String username){
@@ -251,14 +267,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addNewUser(String First_Name, String Last_Name, String Phone_Number, String User_Name) {
+    public boolean addNewUser(String First_Name, String Last_Name, String Phone_Number, String User_Name, String Password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        Log.d(TAG,"PASSWORD TO INSERT IS : " + Password);
         values.put(USERS_COL2_FIRST_NAME, First_Name);
         values.put(USERS_COL3_LAST_NAME, Last_Name);
         values.put(USERS_COL4_PHONE_NUMBER, Phone_Number);
         values.put(USERS_COL7_USERNAME, User_Name);
+        values.put(USERS_COL8_PASSWORD,Password);
 
         long result = db.insert(TABLE_NAME_USERS, null, values);
 
