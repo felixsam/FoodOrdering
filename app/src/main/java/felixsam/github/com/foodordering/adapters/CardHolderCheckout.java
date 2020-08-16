@@ -15,7 +15,7 @@ import java.util.Map;
 import felixsam.github.com.foodordering.Models.Checkout;
 import felixsam.github.com.foodordering.R;
 
-public class Checkout_Card_Holder extends RecyclerView.ViewHolder{
+public class CardHolderCheckout extends RecyclerView.ViewHolder{
     private final Context mcontext;
     private final TextView tv_item_name;
     private final TextView tv_item_quantity;
@@ -25,7 +25,7 @@ public class Checkout_Card_Holder extends RecyclerView.ViewHolder{
     private final Map<String,Integer> item_ImageMap;
     private final ImageView item_image;
 
-    public Checkout_Card_Holder(Context context, View itemView){
+    public CardHolderCheckout(Context context, View itemView){
         super(itemView);
         this.item_ImageMap = new HashMap<>();
 

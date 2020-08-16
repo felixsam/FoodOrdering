@@ -29,7 +29,7 @@ import net.steamcrafted.materialiconlib.MaterialMenuInflater;
 
 import java.util.Objects;
 
-import felixsam.github.com.foodordering.adapters.Adapter_DashboardCards;
+import felixsam.github.com.foodordering.adapters.AdapterDashboardCards;
 import felixsam.github.com.foodordering.R;
 
 import static felixsam.github.com.foodordering.Constants.ERROR_DIALOG_REQUEST;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv);
 
 
-        Adapter_DashboardCards dashboard_cards = new Adapter_DashboardCards(MainActivity.this, drawableArray, titleArray, subtitleArray);
+        AdapterDashboardCards dashboard_cards = new AdapterDashboardCards(MainActivity.this, drawableArray, titleArray, subtitleArray);
         recyclerView.setAdapter(dashboard_cards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);

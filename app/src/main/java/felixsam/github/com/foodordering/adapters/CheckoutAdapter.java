@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.Models.Checkout;
 
-public class Checkout_Custom_Adapter extends RecyclerView.Adapter<Checkout_Card_Holder> {
+public class CheckoutAdapter extends RecyclerView.Adapter<CardHolderCheckout> {
     private final Context context;
     private final ArrayList<Checkout> CheckoutList;
     private final int mViewResourceId;
 
 
-    public Checkout_Custom_Adapter(Context context,int textViewResourceId, ArrayList<Checkout> CheckoutList){
+    public CheckoutAdapter(Context context, int textViewResourceId, ArrayList<Checkout> CheckoutList){
         this.context = context;
         this.CheckoutList = CheckoutList;
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -26,15 +26,15 @@ public class Checkout_Custom_Adapter extends RecyclerView.Adapter<Checkout_Card_
     }
 
     @Override
-    public Checkout_Card_Holder onCreateViewHolder(ViewGroup parent, int viewType){
+    public CardHolderCheckout onCreateViewHolder(ViewGroup parent, int viewType){
 
         View view = LayoutInflater.from(parent.getContext()).
                 inflate(mViewResourceId, parent, false);
-        return new Checkout_Card_Holder(this.context,view);
+        return new CardHolderCheckout(this.context,view);
     }
 
     @Override
-    public void onBindViewHolder(Checkout_Card_Holder holder, int position){
+    public void onBindViewHolder(CardHolderCheckout holder, int position){
 
         Checkout checkout_item = this.CheckoutList.get(position);
 

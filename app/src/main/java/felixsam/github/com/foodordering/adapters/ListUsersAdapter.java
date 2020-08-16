@@ -18,11 +18,11 @@ import java.util.List;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.activities.Edit_Customer_Activity;
+import felixsam.github.com.foodordering.activities.EditCustomerActivity;
 
-public class ListUsersCustomAdapter extends RecyclerView.Adapter<ListUsersCustomAdapter.ViewHolder>{
+public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.ViewHolder>{
 
-    private String TAG = ListUsersCustomAdapter.class.getSimpleName();
+    private String TAG = ListUsersAdapter.class.getSimpleName();
 
     private List<User> mUsers;
     private String userName;
@@ -30,7 +30,7 @@ public class ListUsersCustomAdapter extends RecyclerView.Adapter<ListUsersCustom
     private int userId;
     private Context mContext;
 
-    public ListUsersCustomAdapter(List<User> users,Context context){
+    public ListUsersAdapter(List<User> users, Context context){
         mUsers = users;
         mContext = context;
 
@@ -97,7 +97,7 @@ public class ListUsersCustomAdapter extends RecyclerView.Adapter<ListUsersCustom
                 Log.i(TAG,"Edit User Button Clicked");
                 int userId = user.getUserID();
                 if (userId > -1){
-                    Intent editScreenIntent = new Intent(mContext, Edit_Customer_Activity.class);
+                    Intent editScreenIntent = new Intent(mContext, EditCustomerActivity.class);
                     editScreenIntent.putExtra("id",user.getUserID());
                     editScreenIntent.putExtra("name",user.getFirstName());
                     mContext.startActivity(editScreenIntent);

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.Orders_Custom_Adapter;
+import felixsam.github.com.foodordering.adapters.AdapterOrders;
 
 public class OrdersActivity extends AppCompatActivity {
 
@@ -64,7 +64,7 @@ public class OrdersActivity extends AppCompatActivity {
                 order_list.add(i, order);
                 i++;
             }
-            Orders_Custom_Adapter adapter = new Orders_Custom_Adapter(this, R.layout.adapter_order_single_item_card, order_list);
+            AdapterOrders adapter = new AdapterOrders(this, R.layout.adapter_order_single_item_card, order_list);
             rv_order_items.setLayoutManager(new LinearLayoutManager(this));
             rv_order_items.setHasFixedSize(true);
             rv_order_items.setAdapter(adapter);

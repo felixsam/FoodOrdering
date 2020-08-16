@@ -20,14 +20,14 @@ import felixsam.github.com.foodordering.Models.OrderID;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.OrdersActivity;
 
-public class List_Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Custom_Adapter.ViewHolder> {
+public class ListOrdersAdapter extends RecyclerView.Adapter<ListOrdersAdapter.ViewHolder> {
 
-    private String TAG = List_Orders_Custom_Adapter.class.getSimpleName();
+    private String TAG = ListOrdersAdapter.class.getSimpleName();
 
     private List<OrderID> mOrders;
     private Context mContext;
 
-    public List_Orders_Custom_Adapter(List<OrderID> orders,Context context){
+    public ListOrdersAdapter(List<OrderID> orders, Context context){
         mOrders = orders;
         mContext = context;
     }

@@ -13,13 +13,13 @@ import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.R;
 
-public class CustomAdapter_ItemList extends ArrayAdapter<ItemModel> {
+public class ItemListAdapter extends ArrayAdapter<ItemModel> {
     Globals g = Globals.getInstance();
     private LayoutInflater mInflater;
     private ArrayList<ItemModel> arrayList_itemList;
     private int mViewResourceId;
 
-    public CustomAdapter_ItemList(Context context, int textViewResourceId, ArrayList<ItemModel> arrayList_itemList){
+    public ItemListAdapter(Context context, int textViewResourceId, ArrayList<ItemModel> arrayList_itemList){
         super(context, textViewResourceId, arrayList_itemList);
         this.arrayList_itemList = arrayList_itemList;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

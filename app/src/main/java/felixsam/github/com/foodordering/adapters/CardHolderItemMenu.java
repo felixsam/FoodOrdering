@@ -25,7 +25,7 @@ import felixsam.github.com.foodordering.R;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static java.lang.String.valueOf;
 
-public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CardHolderItemMenu extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final ImageView item_image;
     private final TextView tv_item_name;
@@ -38,7 +38,7 @@ public class Item_Menu_Card_Holder extends RecyclerView.ViewHolder implements Vi
 
 
 
-    public Item_Menu_Card_Holder(Context context, View itemView){
+    public CardHolderItemMenu(Context context, View itemView){
         super(itemView);
 
         //set the context

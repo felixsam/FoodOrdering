@@ -23,7 +23,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.DialogFragment_Edit_ItemEntry;
 import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.CustomAdapter_ItemList;
+import felixsam.github.com.foodordering.adapters.ItemListAdapter;
 
 public class List_Added_Drinks extends AppCompatActivity {
     private final String TAG = "ListDrinks";
@@ -86,7 +86,7 @@ public class List_Added_Drinks extends AppCompatActivity {
                 Log.i(TAG,drinkList.get(i).getName());
                 i++;
             }
-            CustomAdapter_ItemList customAdapterItemList_drinks =  new CustomAdapter_ItemList(this, R.layout.adapter_item_list_columns, drinkList);
+            ItemListAdapter customAdapterItemList_drinks =  new ItemListAdapter(this, R.layout.adapter_item_list_columns, drinkList);
             listView_drinks = (ListView) findViewById(R.id.lv_itemlist);
             listView_drinks.setAdapter(customAdapterItemList_drinks);
 

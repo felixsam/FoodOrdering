@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
 
-public class Item_Menu_Adapter extends RecyclerView.Adapter<Item_Menu_Card_Holder> {
+public class ItemMenuAdapter extends RecyclerView.Adapter<CardHolderItemMenu> {
 
     private final ArrayList<Item_Model_Display> item_menu;
     private final Context context;
     private final int itemResource;
 
-    public Item_Menu_Adapter(Context context, int itemResource, ArrayList<Item_Model_Display> item_menu){
+    public ItemMenuAdapter(Context context, int itemResource, ArrayList<Item_Model_Display> item_menu){
         // 1. Initialize our adapter
         this.item_menu = item_menu;
         this.context = context;
@@ -26,17 +26,17 @@ public class Item_Menu_Adapter extends RecyclerView.Adapter<Item_Menu_Card_Holde
 
     // 2. Override the onCreateViewHolder method
     @Override
-    public Item_Menu_Card_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardHolderItemMenu onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // 3. Inflate the view and return the new ViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(this.itemResource, parent, false);
-        return new Item_Menu_Card_Holder(this.context, view);
+        return new CardHolderItemMenu(this.context, view);
     }
 
     // 4. Override the onBindViewHolder method
     @Override
-    public void onBindViewHolder(Item_Menu_Card_Holder holder, int position) {
+    public void onBindViewHolder(CardHolderItemMenu holder, int position) {
 
         // 5. Use position to access the correct menu item
         Item_Model_Display item_menu = this.item_menu.get(position);

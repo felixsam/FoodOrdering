@@ -143,7 +143,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.login_btn_signup:
-                intent = new Intent(Login_Activity.this, Add_Customer.class);
+                intent = new Intent(Login_Activity.this, AddCustomerActivity.class);
                 intent.putExtra("PARENT_ACTIVITY_CLASS", getClass());
                 startActivity(intent);
                 break;

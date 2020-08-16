@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.User;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.ListUsersCustomAdapter;
+import felixsam.github.com.foodordering.adapters.ListUsersAdapter;
 
 public class List_Users extends AppCompatActivity {
     private static final String TAG = List_Users.class.getSimpleName();
@@ -22,7 +22,7 @@ public class List_Users extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private User user;
     private ArrayList<User> usersList;
-    private ListUsersCustomAdapter adapter;
+    private ListUsersAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -58,7 +58,7 @@ public class List_Users extends AppCompatActivity {
                 usersList.add(i, user);
                 i++;
             }
-            adapter = new ListUsersCustomAdapter(usersList,List_Users.this);
+            adapter = new ListUsersAdapter(usersList,List_Users.this);
             rv_users.setAdapter(adapter);
             rv_users.setLayoutManager(new LinearLayoutManager(this));
         }

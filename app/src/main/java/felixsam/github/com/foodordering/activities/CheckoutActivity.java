@@ -1,6 +1,5 @@
 package felixsam.github.com.foodordering.activities;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import felixsam.github.com.foodordering.Models.Checkout;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.Checkout_Custom_Adapter;
+import felixsam.github.com.foodordering.adapters.CheckoutAdapter;
 
 import static java.lang.Boolean.TRUE;
 
@@ -98,7 +95,7 @@ public class CheckoutActivity extends AppCompatActivity{
             tv_subtotal.setText("Subtotal: $" + df.format(sub_total));
             tv_tax.setText("Tax (12%): $" + df.format(tax));
             tv_total.setText("Total Price: $" + df.format(grand_total));
-            Checkout_Custom_Adapter adapter = new Checkout_Custom_Adapter(this, R.layout.adapter_checkout_single_item, checkout_list);
+            CheckoutAdapter adapter = new CheckoutAdapter(this, R.layout.adapter_checkout_single_item, checkout_list);
             rv_checkout.setLayoutManager(new LinearLayoutManager(this));
             rv_checkout.setHasFixedSize(true);
             rv_checkout.setAdapter(adapter);

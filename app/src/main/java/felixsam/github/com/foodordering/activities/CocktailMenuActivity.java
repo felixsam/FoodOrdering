@@ -28,20 +28,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.Adapter_Cocktail;
+import felixsam.github.com.foodordering.adapters.AdapterCocktail;
 
-public class Cocktail_Menu_Activity extends AppCompatActivity {
+public class CocktailMenuActivity extends AppCompatActivity {
 
     private RequestQueue mQueue;
     private RequestFuture<JSONObject> future;
     private RecyclerView recyclerView;
-    private Adapter_Cocktail adapter_cocktail;
+    private AdapterCocktail adapter_cocktail;
     private ArrayList<Cocktail> cocktail_list;
     private ArrayList<Cocktail> cocktail_list_default;
 
@@ -69,7 +66,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         search_cocktail.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(Cocktail_Menu_Activity.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
+                Toast.makeText(CocktailMenuActivity.this,"Search item is: " + query,Toast.LENGTH_LONG).show();
                 //json_search_cocktail(query);
                 search_cocktail_name(query);
 
@@ -160,7 +157,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
 
                                 cocktail_list.add(new_cocktail);
                             }
-                            adapter_cocktail = new Adapter_Cocktail(cocktail_list, Cocktail_Menu_Activity.this);
+                            adapter_cocktail = new AdapterCocktail(cocktail_list, CocktailMenuActivity.this);
                             recyclerView.setAdapter(adapter_cocktail);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -206,7 +203,7 @@ public class Cocktail_Menu_Activity extends AppCompatActivity {
         for (char letter = 'a'; letter <= 'z' ; letter++){
             search_cocktail_by_letter(letter);
         }
-        adapter_cocktail = new Adapter_Cocktail(cocktail_list_default, Cocktail_Menu_Activity.this);
+        adapter_cocktail = new AdapterCocktail(cocktail_list_default, CocktailMenuActivity.this);
         recyclerView.setAdapter(adapter_cocktail);
         recyclerView.smoothScrollToPosition(0);
     }

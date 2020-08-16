@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,26 +17,26 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Item_Model_Display;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.Item_Menu_Adapter;
+import felixsam.github.com.foodordering.adapters.ItemMenuAdapter;
+
+public class CakeMenuActivity extends AppCompatActivity {
 
 
-public class Drink_Menu_Activity extends AppCompatActivity {
-
-    //set menu item names
-    private final String[] drink_names_list = new String[]{
-            "Pumpkin Spice Latte",
-            "Milk Tea",
-            "Frappuccino",
-            "Orange Juice",
-            "Coke",
-            "Green Tea",
-            "Mocha",
-            "Milk"
+    //set menu names
+    private final String[] list_cake_names = new String[]{
+            "Strawberry Cake",
+            "Vanilla Cake",
+            "Chocolate Cake",
+            "Blueberry Cake",
+            "Mango Cake",
+            "Oreo Cake",
+            "Cheesecake",
+            "Angel Cake"
     };
 
 
-    //set item prices
-    private final double[] drink_price_list = new double[]{
+    //set menu prices
+    private final double[] list_cake_prices = new double[]{
             1.99,
             2.99,
             3.99,
@@ -49,24 +48,24 @@ public class Drink_Menu_Activity extends AppCompatActivity {
     };
 
 
-    //set item images
-    private final int[] myImageList = new int[]{
-            R.drawable.drink_pumpkin_spice,
-            R.drawable.drink_milk_tea,
-            R.drawable.drink_frappuccino,
-            R.drawable.drink_orange,
-            R.drawable.drink_coke,
-            R.drawable.drink_green_tea,
-            R.drawable.drink_mocha,
-            R.drawable.drink_milk
+    //set menu images
+    private final int[] list_cake_thumbnails = new int[]{
+            R.drawable.cake_strawberry,
+            R.drawable.cake_vanilla_sponge,
+            R.drawable.cake_chocolate,
+            R.drawable.cake_lemon_blueberry,
+            R.drawable.cake_mango,
+            R.drawable.cake_oreo,
+            R.drawable.cake_cheesecake,
+            R.drawable.cake_angel
     };
 
-    private final int size_of_list = myImageList.length;
+    private final int size_cake_list = list_cake_thumbnails.length;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setTitle(" Drink Menu ");
+        this.setTitle(" Cake Menu ");
 
         setContentView(R.layout.layout_item_menu_cards);
 
@@ -76,31 +75,30 @@ public class Drink_Menu_Activity extends AppCompatActivity {
 
         DatabaseHelper myDB = new DatabaseHelper(this);
 
-        RecyclerView rv_item_list_cards = findViewById(R.id.rv_item_list_cards);
+        RecyclerView rv = findViewById(R.id.rv_item_list_cards);
 
         ArrayList<Item_Model_Display> itemModelDisplayArrayList = getModel();
-        Item_Menu_Adapter customAdapterItemMenu = new Item_Menu_Adapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
+        ItemMenuAdapter customAdapter = new ItemMenuAdapter(this, R.layout.adapter_menu_item_cards, itemModelDisplayArrayList);
 
-        // 6. For performance, tell OS RecyclerView won't change size
-        rv_item_list_cards.setLayoutManager(new LinearLayoutManager(this));
-        rv_item_list_cards.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setHasFixedSize(true);
+        rv.setAdapter(customAdapter);
 
-        rv_item_list_cards.setAdapter(customAdapterItemMenu);
 
     }
 
 
-    //Display menu items
+    //display menu items
     private ArrayList<Item_Model_Display> getModel(){
         ArrayList<Item_Model_Display> list = new ArrayList<>();
-        for(int i = 0; i < size_of_list; i++){
+        for(int i = 0; i < size_cake_list; i++){
 
             Item_Model_Display itemModelDisplay = new Item_Model_Display();
             itemModelDisplay.setQuantity(1);
-            itemModelDisplay.setItem_Name(drink_names_list[i]);
-            itemModelDisplay.setPrice(drink_price_list[i]);
-            itemModelDisplay.setImage_drawable(myImageList[i]);
-            itemModelDisplay.setCategory("DRINK");
+            itemModelDisplay.setItem_Name(list_cake_names[i]);
+            itemModelDisplay.setPrice(list_cake_prices[i]);
+            itemModelDisplay.setImage_drawable(list_cake_thumbnails[i]);
+            itemModelDisplay.setCategory("CAKE");
             list.add(itemModelDisplay);
         }
         return list;
@@ -130,7 +128,7 @@ public class Drink_Menu_Activity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_list){
-            Intent intent = new Intent(this, List_Added_Drinks.class);
+            Intent intent = new Intent(this, List_Added_Cakes.class);
             this.startActivity(intent);
             return true;
         }

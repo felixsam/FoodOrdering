@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 
-public class Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Card_Holder> {
+public class AdapterOrders extends RecyclerView.Adapter<CardHolderListOrders> {
 
     private final Context context;
     private DatabaseHelper dbHelper;
@@ -20,7 +20,7 @@ public class Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Card
     private final int mViewResourceId;
     private LayoutInflater mInflater;
 
-    public Orders_Custom_Adapter(Context context, int itemResource, ArrayList<Order> order){
+    public AdapterOrders(Context context, int itemResource, ArrayList<Order> order){
         this.OrderList = order;
         this.context = context;
         this.mViewResourceId = itemResource;
@@ -28,15 +28,15 @@ public class Orders_Custom_Adapter extends RecyclerView.Adapter<List_Orders_Card
 
 
     @Override
-    public List_Orders_Card_Holder onCreateViewHolder(ViewGroup parent, int viewType){
+    public CardHolderListOrders onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(this.mViewResourceId,parent,false);
-        return new List_Orders_Card_Holder(this.context,view);
+        return new CardHolderListOrders(this.context,view);
     }
 
 
     @Override
-    public void onBindViewHolder(List_Orders_Card_Holder holder,int position){
+    public void onBindViewHolder(CardHolderListOrders holder, int position){
 
         Order order_item = this.OrderList.get(position);
 

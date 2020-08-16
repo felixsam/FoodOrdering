@@ -20,7 +20,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Globals;
 import felixsam.github.com.foodordering.R;
 
-public class Edit_Customer_Activity extends AppCompatActivity {
+public class EditCustomerActivity extends AppCompatActivity {
 
     private static final String TAG = "Edit_Customer";
 

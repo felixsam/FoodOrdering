@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,13 +22,13 @@ import felixsam.github.com.foodordering.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
-public class Adapter_Cocktail extends RecyclerView.Adapter<Adapter_Cocktail.ViewHolder> {
+public class AdapterCocktail extends RecyclerView.Adapter<AdapterCocktail.ViewHolder> {
     private String cocktail_name;
     private Integer cocktail_id;
     private String cocktail_glass;
     private ArrayList<Cocktail> cocktail_list;
     private Context context;
-    public Adapter_Cocktail(ArrayList<Cocktail> cocktail_list, Context context){
+    public AdapterCocktail(ArrayList<Cocktail> cocktail_list, Context context){
         this.cocktail_list = cocktail_list;
         this.context = context;
 

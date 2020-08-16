@@ -23,7 +23,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.DialogFragment_Edit_ItemEntry;
 import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.CustomAdapter_ItemList;
+import felixsam.github.com.foodordering.adapters.ItemListAdapter;
 
 
 public class List_Added_Cakes extends AppCompatActivity {
@@ -88,7 +88,7 @@ public class List_Added_Cakes extends AppCompatActivity {
                 i++;
             }
 
-            CustomAdapter_ItemList customAdapterItemList_cakes =  new CustomAdapter_ItemList(this,R.layout.adapter_item_list_columns, cakeList);
+            ItemListAdapter customAdapterItemList_cakes =  new ItemListAdapter(this,R.layout.adapter_item_list_columns, cakeList);
             listview_cakes = findViewById(R.id.lv_itemlist);
             listview_cakes.setAdapter(customAdapterItemList_cakes);
 

@@ -14,16 +14,16 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.activities.Add_Customer;
-import felixsam.github.com.foodordering.activities.Cake_Menu_Activity;
+import felixsam.github.com.foodordering.activities.AddCustomerActivity;
+import felixsam.github.com.foodordering.activities.CakeMenuActivity;
 import felixsam.github.com.foodordering.activities.CheckoutActivity;
-import felixsam.github.com.foodordering.activities.Cocktail_Menu_Activity;
-import felixsam.github.com.foodordering.activities.Drink_Menu_Activity;
+import felixsam.github.com.foodordering.activities.CocktailMenuActivity;
+import felixsam.github.com.foodordering.activities.DrinkMenuActivity;
 import felixsam.github.com.foodordering.activities.List_Orders;
 import felixsam.github.com.foodordering.activities.MainActivity;
 import felixsam.github.com.foodordering.activities.MapActivity;
 
-public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_DashboardCards.MyViewHolder>{
+public class AdapterDashboardCards extends RecyclerView.Adapter<AdapterDashboardCards.MyViewHolder>{
     private Context mContext;
     private Integer[] mImage;
     private String[] mTitle;
@@ -46,7 +46,7 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
         }
     }
 
-    public Adapter_DashboardCards(Context mContext, Integer[] image, String[] title, String[] subTitle) {
+    public AdapterDashboardCards(Context mContext, Integer[] image, String[] title, String[] subTitle) {
         this.mContext = mContext;
         this.mImage = image;
         this.mTitle = title;
@@ -71,13 +71,13 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                 //implement onClick
 
                 if (position == 0 ){
-                    Intent intent = new Intent(v.getContext(), Drink_Menu_Activity.class);
+                    Intent intent = new Intent(v.getContext(), DrinkMenuActivity.class);
                     mContext.startActivity(intent);
                 }else if (position == 1) {
-                    Intent intent = new Intent(v.getContext(), Cake_Menu_Activity.class);
+                    Intent intent = new Intent(v.getContext(), CakeMenuActivity.class);
                     mContext.startActivity(intent);
                 }else if (position == 2){
-                    Intent intent = new Intent(v.getContext(), Cocktail_Menu_Activity.class);
+                    Intent intent = new Intent(v.getContext(), CocktailMenuActivity.class);
                     mContext.startActivity(intent);
                 }else if (position == 3) {
                     Intent intent = new Intent(v.getContext(), CheckoutActivity.class);
@@ -86,7 +86,7 @@ public class Adapter_DashboardCards extends RecyclerView.Adapter<Adapter_Dashboa
                     Intent intent = new Intent(v.getContext(), List_Orders.class);
                     mContext.startActivity(intent);
                 }else if (position == 5) {
-                    Intent intent = new Intent(v.getContext(), Add_Customer.class);
+                    Intent intent = new Intent(v.getContext(), AddCustomerActivity.class);
                     intent.putExtra("PARENT_ACTIVITY_CLASS", MainActivity.class);
                     mContext.startActivity(intent);
                 }else if (position == 6){

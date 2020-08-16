@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.R;
 
-public class Add_Customer extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = Add_Customer.class.getSimpleName();
+public class AddCustomerActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = AddCustomerActivity.class.getSimpleName();
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
@@ -61,7 +61,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                 if (et_first_name_field.length() != 0 && et_user_name_field.length() != 0) {
                     AddData(First_Name_Entry,Last_Name_Entry,Phone_Number_Entry,User_Name_Entry);
                     et_first_name_field.setText("");
-                    intent = new Intent(Add_Customer.this,nextActivityClass);
+                    intent = new Intent(AddCustomerActivity.this,nextActivityClass);
                     startActivity(intent);
                     finish();
                 } else {
@@ -70,7 +70,7 @@ public class Add_Customer extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_customer_view:
-                intent = new Intent(Add_Customer.this, List_Users.class);
+                intent = new Intent(AddCustomerActivity.this, List_Users.class);
                 startActivity(intent);
                 break;
 

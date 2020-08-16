@@ -15,7 +15,7 @@ import java.util.Map;
 import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.R;
 
-public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
+public class CardHolderListOrders extends RecyclerView.ViewHolder{
 
     private final TextView text_item_name;
     private final TextView text_total_item_price;
@@ -24,7 +24,7 @@ public class List_Orders_Card_Holder extends RecyclerView.ViewHolder{
     private final Context mcontext;
     private final Map<String,Integer> item_ImageMap;
 
-    public List_Orders_Card_Holder(Context context, View itemView){
+    public CardHolderListOrders(Context context, View itemView){
         super(itemView);
 
         this.item_ImageMap = new HashMap<>();

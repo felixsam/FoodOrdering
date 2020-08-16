@@ -1,11 +1,8 @@
 package felixsam.github.com.foodordering.activities;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.OrderID;
 import felixsam.github.com.foodordering.R;
-import felixsam.github.com.foodordering.adapters.List_Orders_Custom_Adapter;
+import felixsam.github.com.foodordering.adapters.ListOrdersAdapter;
 
 public class List_Orders extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
@@ -59,7 +56,7 @@ public class List_Orders extends AppCompatActivity {
                 //order_list.add(i,data.getString(0));
                 i++;
             }
-            List_Orders_Custom_Adapter adapter = new List_Orders_Custom_Adapter(orderID_list,this);
+            ListOrdersAdapter adapter = new ListOrdersAdapter(orderID_list,this);
             rv_listOrders.setAdapter(adapter);
             rv_listOrders.setLayoutManager(new LinearLayoutManager(this));
 
