@@ -29,7 +29,7 @@ public class UserRoleTest {
 
     @Test
     public void testDefaultUserRole(){
-        dbHelper.addNewUser("First","Last","123","username1");
+        dbHelper.addNewUser("First","Last","123","username1","password");
         String userRole = dbHelper.getUserRole(1);
         System.out.println("userRole: " + userRole);
 
@@ -38,7 +38,7 @@ public class UserRoleTest {
 
     @Test
     public void testUpdateUserRole(){
-        dbHelper.addNewUser("First","Last","123","username1");
+        dbHelper.addNewUser("First","Last","123","username1","password");
         String userRole = dbHelper.getUserRole(1);
         System.out.println("userRole before: " + userRole);
 

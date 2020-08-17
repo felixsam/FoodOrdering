@@ -31,8 +31,8 @@ public class UsernameUserIdTest {
 
     @Test
     public void testGetTopUserName(){
-        dbHelper.addNewUser("First","Last","123","username1");
-        dbHelper.addNewUser("First","Last","123","username2");
+        dbHelper.addNewUser("First","Last","123","username1","password");
+        dbHelper.addNewUser("First","Last","123","username2","password");
 
         String topUserName = dbHelper.getTopUserName();
         System.out.println("The top username is : " + topUserName);
@@ -41,8 +41,8 @@ public class UsernameUserIdTest {
 
     @Test
     public void testGetUserID(){
-        dbHelper.addNewUser("First","Last","123","userId");
-        dbHelper.addNewUser("First","Last","123","userIdTwo");
+        dbHelper.addNewUser("First","Last","123","userId","password");
+        dbHelper.addNewUser("First","Last","123","userIdTwo","password");
         int userId = dbHelper.getUserID("userId");
         int userIdTwo = dbHelper.getUserID("userIdTwo");
         System.out.println("UserID: " + userId);
@@ -52,7 +52,7 @@ public class UsernameUserIdTest {
 
     @Test
     public void testUsernameExists(){
-        dbHelper.addNewUser("First","Last","123","usernameExists");
+        dbHelper.addNewUser("First","Last","123","usernameExists","password");
         assertTrue( dbHelper.exists_username("usernameExists") );
     }
 
