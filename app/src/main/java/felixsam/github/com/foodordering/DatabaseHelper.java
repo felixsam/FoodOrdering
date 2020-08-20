@@ -167,6 +167,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return password;
     }
 
+    public void updatePassword(String username,String oldPassword, String newPassword){
+
+        if (!oldPassword.equals(getPassword(username))){
+            Log.d(TAG,"Old password does not match");
+        }else {
+            SQLiteDatabase db = this.getWritableDatabase();
+            String query = "UPDATE " + TABLE_NAME_USERS
+                    + " SET " + USERS_COL8_PASSWORD + " = '" + newPassword + "'"
+                    + " WHERE " + USERS_COL7_USERNAME + " = '" + username + "'";
+
+            Log.d(TAG, "updatePassword: query: " + query);
+            Log.d(TAG, "updatePassword: Setting password to " + newPassword  + "For username: " + username);
+            db.execSQL(query);
+        }
+    }
+
     public User getUser(String username){
         User user;
 
