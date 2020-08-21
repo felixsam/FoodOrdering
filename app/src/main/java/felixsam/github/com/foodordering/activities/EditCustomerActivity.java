@@ -96,7 +96,7 @@ public class EditCustomerActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabaseHelper.deleteUser(selectedID, edit_customer_selectedName);
+                mDatabaseHelper.deleteUser(selectedID);
                 edit_customer_first_name.setText("");
                 edit_customer_last_name.setText("");
 

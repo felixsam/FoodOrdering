@@ -232,29 +232,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return username;
 
     }
-    public String getUserLastName(Integer userID){
+    public String getUserLastName(String username){
         String last_name = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT " + USERS_COL3_LAST_NAME
                 + " FROM " + TABLE_NAME_USERS
-                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
-        System.out.println("cursor.getcount()= " + data.getCount());
+                + " WHERE " + USERS_COL7_USERNAME + " = " + username,null);
+        Log.d(TAG,"Number of entries: " + data.getCount());
 
         if (data.getCount() > 0 ){
             data.moveToFirst();
             last_name = data.getString(data.getColumnIndex(USERS_COL3_LAST_NAME));
-            System.out.println(data);
         }
         return last_name;
 
     }
 
-    public String getUserPhoneNumber(Integer userID){
+    public String getUserFirstName(String username){
+        String last_name = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + USERS_COL2_FIRST_NAME
+                + " FROM " + TABLE_NAME_USERS
+                + " WHERE " + USERS_COL7_USERNAME + " = " + username,null);
+        Log.d(TAG,"Number of entries: " + data.getCount());
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            last_name = data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME));
+        }
+        return last_name;
+
+    }
+
+
+    public String getUserPhoneNumber(String username){
         String phone_number = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT " + USERS_COL4_PHONE_NUMBER
                 + " FROM " + TABLE_NAME_USERS
-                + " WHERE " + USERS_COL1_ID + " = " + userID ,null);
+                + " WHERE " + USERS_COL7_USERNAME + " = " + username,null);
         System.out.println("cursor.getcount()= " + data.getCount());
 
         if (data.getCount() > 0 ){
@@ -333,15 +349,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Delete from database
      * @param id
-     * @param name
+     *
      */
-    public void deleteUser(int id, String name){
+    public void deleteUser(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME_USERS + " WHERE "
-                + USERS_COL1_ID + " = '" + id + "'" +
-                " AND " + USERS_COL2_FIRST_NAME + " = '" + name + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + name + " from database.");
+                + USERS_COL1_ID + " = '" + id + "'";
+        Log.d(TAG, "deleteUser: query: " + query);
         db.execSQL(query);
     }
 

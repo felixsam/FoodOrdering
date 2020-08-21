@@ -14,6 +14,7 @@ import org.robolectric.annotation.Config;
 import felixsam.github.com.foodordering.DatabaseHelper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -51,6 +52,7 @@ public class UsernameUserIdTest {
 
     }
 
+
     @Test
     public void testUsernameExists(){
         dbHelper.addNewUser("First","Last","123","usernameExists","password");
@@ -58,28 +60,15 @@ public class UsernameUserIdTest {
     }
 
 
-    @Test
-    public void testPasswordIsCorrect(){
-        dbHelper.addNewUser("First","Last","123","username","password");
-        String password = dbHelper.getPassword("username");
-        assertEquals("password",password);
-    }
 
     @Test
-    public void testUpdatedPassword(){
-        dbHelper.addNewUser("First","Last","123","username","oldPassword");
-        dbHelper.updatePassword("username","oldPassword","new");
-        String newPassword = dbHelper.getPassword("username");
-        assertEquals("new",newPassword);
+    public void testDeleteUsername(){
+        dbHelper.addNewUser("First","Last","123","usernameExists","password");
+        int userId = dbHelper.getUserID("username");
+        dbHelper.deleteUser(userId);
+        assertFalse(dbHelper.exists_username("username"));
     }
 
-    @Test
-    public void testPasswordUpdateFail(){
-        dbHelper.addNewUser("First","Last","123","username","oldPassword");
-        dbHelper.updatePassword("username","new","newPassword");
-        String newPassword = dbHelper.getPassword("username");
-        assertNotEquals("newPassword",newPassword);
-    }
 
 
     @After
