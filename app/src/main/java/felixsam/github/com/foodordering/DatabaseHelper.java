@@ -30,12 +30,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME_ITEMS = "items";
     public static final String ITEMS_COL1_ID = "_id";
     public static final String ITEMS_COL2_USER_ID = "USER_ID";
-    public static final String ITEMS_COL3_FIRST_NAME = "FIRST_NAME";
-    public static final String ITEMS_COL4_CATEGORY = "CATEGORY";
-    public static final String ITEMS_COL5_ITEM_NAME = "ITEM_NAME";
-    public static final String ITEMS_COL6_PRICE = "PRICE";
-    public static final String ITEMS_COL7_QUANTITY = "QUANTITY";
-    public static final String ITEMS_COL8_ORDERID = "ORDER_ID";
+    public static final String ITEMS_COL3_ITEM_NAME = "ITEM_NAME";
+    public static final String ITEMS_COL4_PRICE = "PRICE";
+    public static final String ITEMS_COL5_QUANTITY = "QUANTITY";
+    public static final String ITEMS_COL6_CATEGORY = "CATEGORY";
+    public static final String ITEMS_COL7_ORDERID = "ORDER_ID";
 
     //TABLE: ORDERS
     public static final String TABLE_NAME_ORDERS = "Orders";
@@ -74,12 +73,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME_ITEMS + " (" +
                         ITEMS_COL1_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         ITEMS_COL2_USER_ID + " INTEGER," +
-                        ITEMS_COL3_FIRST_NAME + " TEXT, " +
-                        ITEMS_COL4_CATEGORY + " TEXT, " +
-                        ITEMS_COL5_ITEM_NAME + " TEXT, " +
-                        ITEMS_COL6_PRICE + " DOUBLE, " +
-                        ITEMS_COL7_QUANTITY + " INTEGER," +
-                        ITEMS_COL8_ORDERID + " INTEGER," +
+                        ITEMS_COL3_ITEM_NAME + " TEXT, " +
+                        ITEMS_COL4_PRICE + " DOUBLE, " +
+                        ITEMS_COL5_QUANTITY + " INTEGER," +
+                        ITEMS_COL6_CATEGORY + " TEXT, " +
+                        ITEMS_COL7_ORDERID + " INTEGER," +
                         " CONSTRAINT FK_USERID" +
                         " FOREIGN KEY " + "(" + ITEMS_COL2_USER_ID + ")" +
                         " REFERENCES " + TABLE_NAME_USERS + " (" + USERS_COL1_ID + ")"
@@ -364,16 +362,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      SQL QUERIES FOR ITEMS
      *******************************************************************************************************************************************************/
     //ADD TO ITEMS TABLE
-    public boolean addData_items(String name, String drink, double price, String quantity, Integer userID, String category) {
+    public boolean addData_items(int userId, String itemName, double price, int quantity, String itemCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(ITEMS_COL2_USER_ID, userID);
-        contentValues.put(ITEMS_COL3_FIRST_NAME, name);
-        contentValues.put(ITEMS_COL4_CATEGORY, category);
-        contentValues.put(ITEMS_COL5_ITEM_NAME, drink);
-        contentValues.put(ITEMS_COL6_PRICE, price);
-        contentValues.put(ITEMS_COL7_QUANTITY, quantity);
+        contentValues.put(ITEMS_COL2_USER_ID, userId);
+        contentValues.put(ITEMS_COL6_CATEGORY, itemCategory);
+        contentValues.put(ITEMS_COL3_ITEM_NAME, itemName);
+        contentValues.put(ITEMS_COL4_PRICE, price);
+        contentValues.put(ITEMS_COL5_QUANTITY, quantity);
 
         long result = db.insert(TABLE_NAME_ITEMS, null, contentValues);
 
@@ -385,7 +382,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME_ITEMS + " WHERE "
                 + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + ITEM_NAME + "'";
+                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + ITEM_NAME + "'";
         Log.d(TAG, "delData_items: query: " + query);
         Log.d(TAG, "delData_items: Deleting " + ITEM_NAME + " from database.");
         db.execSQL(query);
@@ -393,9 +390,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateItemQuantity(Integer itemID, Integer newQuantity, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL7_QUANTITY +
+        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL5_QUANTITY +
                 " = '" + newQuantity + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + itemName + "'";
+                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + itemName + "'";
         Log.d(TAG, "updateItemQuantity: query: " + query);
         Log.d(TAG, "updateItemQuantity: Setting Quantity to " + newQuantity);
         db.execSQL(query);
@@ -403,9 +400,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateItemCategory(Integer itemID, String newCategory, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL7_QUANTITY +
+        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL5_QUANTITY +
                 " = '" + newCategory + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + itemName + "'";
+                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + itemName + "'";
         Log.d(TAG, "updateItemCategory: query: " + query);
         Log.d(TAG, "updateItemCategory: Setting Category to " + newCategory);
         db.execSQL(query);
@@ -414,9 +411,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateItemPrice(Integer itemID, double newPrice, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL6_PRICE +
+        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL4_PRICE +
                 " = '" + newPrice + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL5_ITEM_NAME + " = '" + itemName + "'";
+                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + itemName + "'";
         Log.d(TAG, "updateItemPrice: query: " + query);
         Log.d(TAG, "updateItemPrice: Setting new Price to " + newPrice);
         db.execSQL(query);
@@ -426,8 +423,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data_category = db.rawQuery("SELECT * " +
                 "FROM " + TABLE_NAME_ITEMS +
-                " WHERE " + ITEMS_COL4_CATEGORY + " = " + "'" + category + "'"
-                + " AND " + ITEMS_COL8_ORDERID + " IS NULL", null);
+                " WHERE " + ITEMS_COL6_CATEGORY + " = " + "'" + category + "'"
+                + " AND " + ITEMS_COL7_ORDERID + " IS NULL", null);
         if (data_category.getCount()==0){
             System.out.println("Zero Count");
         }
@@ -448,7 +445,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void setOrderID(Integer itemID, Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS
-                + " SET " + ITEMS_COL8_ORDERID + " = " + OrderID
+                + " SET " + ITEMS_COL7_ORDERID + " = " + OrderID
                 + " WHERE " + ITEMS_COL1_ID + " = " + "'" + itemID + "'";
 
         Log.d(TAG, "updateItemQuantity: query: " + query);
@@ -469,43 +466,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     GROUP BY drink,name_id
 
     */
-    public Cursor getData_checkout(String username, Integer user_id){
+    public Cursor getData_checkout(Integer userId){
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query =
-                "SELECT " + ITEMS_COL3_FIRST_NAME
-                        + ", " + ITEMS_COL2_USER_ID
-                        + ", " + ITEMS_COL5_ITEM_NAME
-                        + ", " + ITEMS_COL6_PRICE
+                "SELECT " + ITEMS_COL2_USER_ID
+                        + ", " + ITEMS_COL3_ITEM_NAME
+                        + ", " + ITEMS_COL4_PRICE
                         + ", total_quantity"
                         + ", total_price"
                         + " FROM "
-                            + "(SELECT *, SUM(" + ITEMS_COL7_QUANTITY + ") AS total_quantity"
-                            + ", SUM(" + ITEMS_COL6_PRICE + "*" + ITEMS_COL7_QUANTITY + ") AS total_price"
+                            + "(SELECT *, SUM(" + ITEMS_COL5_QUANTITY + ") AS total_quantity"
+                            + ", SUM(" + ITEMS_COL4_PRICE + "*" + ITEMS_COL5_QUANTITY + ") AS total_price"
                                 + " FROM " + TABLE_NAME_ITEMS
-                                + " WHERE " + ITEMS_COL8_ORDERID + " IS NULL"
-                                + " GROUP BY " + ITEMS_COL2_USER_ID + "," + ITEMS_COL5_ITEM_NAME + ")"
-                        + " WHERE " + ITEMS_COL3_FIRST_NAME + " = " + "'" + username + "'"
-                            + " AND " + ITEMS_COL2_USER_ID + " = " + user_id
-                            + " AND " + ITEMS_COL8_ORDERID + " IS NULL"
-                        + " GROUP BY " + ITEMS_COL5_ITEM_NAME + "," + ITEMS_COL2_USER_ID;
+                                + " WHERE " + ITEMS_COL7_ORDERID + " IS NULL"
+                                + " GROUP BY " + ITEMS_COL2_USER_ID + "," + ITEMS_COL3_ITEM_NAME + ")"
+                        + " WHERE " + ITEMS_COL2_USER_ID + " = " + "'" + userId + "'"
+                            + " AND " + ITEMS_COL7_ORDERID + " IS NULL"
+                        + " GROUP BY " + ITEMS_COL3_ITEM_NAME + "," + ITEMS_COL2_USER_ID;
 
 
         return db.rawQuery(query, null);
 
     }
 
-    public Cursor getData_foodid_checkout(String username, Integer user_id){
+    public Cursor getData_foodid_checkout(Integer user_id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query =
                 "SELECT " + ITEMS_COL1_ID
-                        + "," + ITEMS_COL3_FIRST_NAME
                         + ", " + ITEMS_COL2_USER_ID
-                        + ", " + ITEMS_COL5_ITEM_NAME
-                        + ", " + ITEMS_COL6_PRICE
+                        + ", " + ITEMS_COL3_ITEM_NAME
+                        + ", " + ITEMS_COL4_PRICE
                         + " FROM " + TABLE_NAME_ITEMS
-                        + " WHERE " + ITEMS_COL3_FIRST_NAME + " = " + "'" + username + "'" + " AND " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL8_ORDERID + " IS NULL";
+                        + " WHERE " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL7_ORDERID + " IS NULL";
         return db.rawQuery(query, null);
     }
 
@@ -516,15 +510,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getData_orders(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + ITEMS_COL8_ORDERID
-                + ", " + ITEMS_COL3_FIRST_NAME
-                + ", " + ITEMS_COL5_ITEM_NAME
-                + ", " + ITEMS_COL6_PRICE
-                + ", " + "SUM(" + ITEMS_COL6_PRICE + ") AS 'TOTAL_ITEMS_PRICE'"
-                + ", " + "SUM(" + ITEMS_COL7_QUANTITY + ") AS " + ITEMS_COL7_QUANTITY
+        String query = "SELECT " + ITEMS_COL7_ORDERID
+                + ", " + ITEMS_COL3_ITEM_NAME
+                + ", " + ITEMS_COL4_PRICE
+                + ", " + "SUM(" + ITEMS_COL4_PRICE + ") AS 'TOTAL_ITEMS_PRICE'"
+                + ", " + "SUM(" + ITEMS_COL5_QUANTITY + ") AS " + ITEMS_COL5_QUANTITY
                 + " FROM " + TABLE_NAME_ITEMS
-                + " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID
-                + " GROUP BY " + ITEMS_COL5_ITEM_NAME;
+                + " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderID
+                + " GROUP BY " + ITEMS_COL3_ITEM_NAME;
         Log.d("Get_DATA_ORDERS QUERY", query);
         return db.rawQuery(query, null);
     }
@@ -577,8 +570,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query = "UPDATE " + TABLE_NAME_ITEMS +
-                " SET " + ITEMS_COL8_ORDERID + " = NULL" +
-                " WHERE " + ITEMS_COL8_ORDERID + " = " + OrderID + "'";
+                " SET " + ITEMS_COL7_ORDERID + " = NULL" +
+                " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderID + "'";
 
         db.execSQL(query);
     }

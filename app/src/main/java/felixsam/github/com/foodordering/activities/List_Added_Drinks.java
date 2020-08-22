@@ -68,19 +68,18 @@ public class List_Added_Drinks extends AppCompatActivity {
             int i=0;
             while(data_drinks.moveToNext()){
                 drnk = new ItemModel(data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),
-                        data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
-                        data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
-                        data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
-                        data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)),
+                        "FIRST_NAME",
+                        data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
+                        data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
+                        data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)),
                         data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
                 Log.d(TAG, "onCreate: colID is: " + data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
 
                 drinkList.add(i,drnk);
-                Log.i(TAG,data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)) + " "
-                        + data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)) + " "
-                        + data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)) + " "
-                        + data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)) + " " +
+                Log.i(TAG, data_drinks.getString(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)) + " "
+                        + data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)) + " "
+                        + data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)) + " " +
                         + data_drinks.getInt(data_drinks.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
                 Log.i(TAG,drinkList.get(i).getName());

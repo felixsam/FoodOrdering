@@ -125,12 +125,11 @@ public class CardHolderItemMenu extends RecyclerView.ViewHolder implements View.
             case R.id.btn_add_item:
                 Globals g = Globals.getInstance();
 
-                String user_to_add = g.getUser();
                 Integer userID_to_add = g.getUser_ID();
 
                 String item_price = this.item_price.getText().toString().replaceAll("[^0-9.]", "");
                 double item_price_double = Double.valueOf(item_price);
-                String item_quantity = this.tv_item_quantity.getText().toString();
+                int item_quantity = Integer.parseInt(this.tv_item_quantity.getText().toString());
 
                 String item_name = this.tv_item_name.getText().toString();
 
@@ -143,7 +142,7 @@ public class CardHolderItemMenu extends RecyclerView.ViewHolder implements View.
                         + "\n Quantity: " + item_quantity
                         + "\n Category: " + category);
 
-                dbHelper.addData_items(user_to_add,item_name,item_price_double,item_quantity,userID_to_add,category);
+                dbHelper.addData_items(userID_to_add,item_name,item_price_double,item_quantity,category);
                 break;
         }
     }

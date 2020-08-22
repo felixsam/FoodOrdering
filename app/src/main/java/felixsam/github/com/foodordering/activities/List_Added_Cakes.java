@@ -69,19 +69,18 @@ public class List_Added_Cakes extends AppCompatActivity {
             int i=0;
             while(data_cakes.moveToNext()){
                 cakes = new ItemModel(data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),
-                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
-                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
-                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
-                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)),
+                        "FIRST_NAME",
+                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
+                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
+                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)),
                         data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
                 Log.d(TAG, "onCreate: colID is: " + data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
 
                 cakeList.add(i, cakes);
-               Log.i(TAG,data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))+" "
-                        +data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)) +" "
-                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)) + " "
-                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL7_QUANTITY)) + " " +
+               Log.i(TAG, data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)) +" "
+                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)) + " "
+                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)) + " " +
                         +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
                 );
                 Log.i(TAG,cakeList.get(i).getName());

@@ -64,7 +64,7 @@ public class CheckoutActivity extends AppCompatActivity{
         Double sub_total = 0.00;
 
         //get the data and append to a list
-        Cursor data = mDatabaseHelper.getData_checkout(username,userID);
+        Cursor data = mDatabaseHelper.getData_checkout(userID);
         int numRows = data.getCount();
         if(numRows == 0){
             Log.d(TAG,"Number of Rows is: " + numRows);
@@ -74,10 +74,10 @@ public class CheckoutActivity extends AppCompatActivity{
             int i = 0;
             while(data.moveToNext()){
                 //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
-                Checkout checkout = new Checkout(data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME)),
+                Checkout checkout = new Checkout("username",
                         data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
-                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME)),
-                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE)),
+                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
+                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
                         data.getInt(data.getColumnIndex("total_quantity")),
                         data.getDouble(data.getColumnIndex("total_price")));
                 sub_total += data.getDouble(data.getColumnIndex("total_price"));
@@ -114,7 +114,7 @@ public class CheckoutActivity extends AppCompatActivity{
                     Log.d(TAG,"INSERTION FAILED");
                 }
                 Integer orderID = mDatabaseHelper.getOrderID(userID,currentDateTimeString);
-                Cursor add_order = mDatabaseHelper.getData_foodid_checkout(username,userID);
+                Cursor add_order = mDatabaseHelper.getData_foodid_checkout(userID);
                 int numRows = add_order.getCount();
                 if(numRows == 0){
                     Log.d(TAG,"Number of Rows is: " + numRows);
@@ -126,10 +126,9 @@ public class CheckoutActivity extends AppCompatActivity{
                         //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
                         Log.d(TAG, "ENTRY NUMBER: " + i );
                         Log.d(TAG, " COL_ID " +  add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID))
-                        + " \n FIRST_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL3_FIRST_NAME))
                         + " \n USER_ID " + add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
-                        + " \n ITEM_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL5_ITEM_NAME))
-                        + " \n PRICE " + add_order.getDouble(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL6_PRICE))
+                        + " \n ITEM_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME))
+                        + " \n PRICE " + add_order.getDouble(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE))
                         );
                         int itemID = add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID));
                         mDatabaseHelper.setOrderID(itemID,orderID);
