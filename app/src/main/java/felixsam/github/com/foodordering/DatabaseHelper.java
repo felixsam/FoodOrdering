@@ -378,6 +378,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public String getItemName(int itemId){
+        String itemName = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL3_ITEM_NAME +
+                " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL1_ID + " = '" + itemId + "'",null);
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            itemName = data.getString(data.getColumnIndex(ITEMS_COL3_ITEM_NAME));
+        }
+        return itemName;
+
+    }
+
     public void delData_items(Integer itemID,String ITEM_NAME){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME_ITEMS + " WHERE "
@@ -441,6 +456,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return data_userID;
     }
+
 
     public void setOrderID(Integer itemID, Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
