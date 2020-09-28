@@ -14,6 +14,7 @@ import org.robolectric.annotation.Config;
 import felixsam.github.com.foodordering.DatabaseHelper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 @RunWith(RobolectricTestRunner.class)
@@ -34,6 +35,13 @@ public class AddItemTest {
         String itemName = dbHelper.getItemName(1);
         assertEquals("drinkName",itemName);
 
+    }
+
+    @Test
+    public void deleteItem(){
+        dbHelper.addData_items(1,"drinkName",12.34,4, "DRINKS");
+        dbHelper.delData_items(1,"drinkName");
+        assertFalse(dbHelper.existItem(1));
     }
 
     @After

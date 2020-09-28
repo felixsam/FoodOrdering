@@ -378,6 +378,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean existItem(int itemId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT *" +
+                " FROM " + TABLE_NAME_ITEMS +
+                " WHERE " + ITEMS_COL1_ID + " = '" + itemId + "'",null);
+
+        if (data.getCount() == 0){
+            data.close();
+            return false;
+        }
+
+        data.close();
+        return true;
+    }
+
     public String getItemName(int itemId){
         String itemName = "";
         SQLiteDatabase db = this.getWritableDatabase();
