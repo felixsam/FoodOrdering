@@ -428,14 +428,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public void updateItemCategory(Integer itemID, String newCategory, String itemName){
+    public void updateItemCategory(Integer itemID, String newCategory){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL5_QUANTITY +
-                " = '" + newCategory + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + itemName + "'";
+        String query = "UPDATE " + TABLE_NAME_ITEMS +
+                " SET " + ITEMS_COL6_CATEGORY + " = '" + newCategory + "'" +
+                " WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'";
+
         Log.d(TAG, "updateItemCategory: query: " + query);
         Log.d(TAG, "updateItemCategory: Setting Category to " + newCategory);
         db.execSQL(query);
+    }
+
+    public String getItemCategory(Integer itemId){
+        String itemCategory = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL6_CATEGORY +
+                " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL1_ID + " = '" + itemId + "'",null);
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            itemCategory = data.getString(data.getColumnIndex(ITEMS_COL6_CATEGORY));
+        }
+
+        return itemCategory;
+
     }
 
 
@@ -447,6 +464,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "updateItemPrice: query: " + query);
         Log.d(TAG, "updateItemPrice: Setting new Price to " + newPrice);
         db.execSQL(query);
+    }
+
+    public double getItemPrice(Integer itemId){
+        double itemPrice = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL4_PRICE +
+                " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL1_ID + " = '" + itemId + "'",null);
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            itemPrice = data.getDouble(data.getColumnIndex(ITEMS_COL4_PRICE));
+        }
+        return itemPrice;
     }
 
     public Cursor getItemContents(String category) {

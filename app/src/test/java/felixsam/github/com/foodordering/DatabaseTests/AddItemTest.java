@@ -31,7 +31,7 @@ public class AddItemTest {
 
     @Test
     public void getItemName(){
-        dbHelper.addData_items(1,"drinkName",12.34,4, "DRINKS");
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
         String itemName = dbHelper.getItemName(1);
         assertEquals("drinkName",itemName);
 
@@ -39,9 +39,42 @@ public class AddItemTest {
 
     @Test
     public void deleteItem(){
-        dbHelper.addData_items(1,"drinkName",12.34,4, "DRINKS");
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.delData_items(1,"drinkName");
         assertFalse(dbHelper.existItem(1));
+    }
+
+    @Test
+    public void getItemPrice(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        double itemPrice = dbHelper.getItemPrice(1);
+        assertEquals(12.34,itemPrice,0.001);
+
+    }
+
+    @Test
+    public void updateItemPrice(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.updateItemPrice(1,3.33,"drinkName");
+
+        double updatedItemPrice = dbHelper.getItemPrice(1);
+
+        assertEquals(3.33,updatedItemPrice,0.001);
+    }
+
+    @Test
+    public void getItemCategory(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        String itemCategory = dbHelper.getItemCategory(1);
+        assertEquals("DRINKS",itemCategory);
+    }
+
+    @Test
+    public void updateItemCategory(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.updateItemCategory(1,"CAKES");
+        String itemCategory = dbHelper.getItemCategory(1);
+        assertEquals("CAKES",itemCategory);
     }
 
     @After
