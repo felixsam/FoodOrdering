@@ -77,6 +77,16 @@ public class AddItemTest {
         assertEquals("CAKES",itemCategory);
     }
 
+    @Test
+    public void getOrderId(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.setOrderID(1,8);
+        int orderId = dbHelper.getOrderId(1);
+
+        assertEquals(8,orderId);
+    }
+
+
     @After
     public void tearDown(){
         dbHelper.close();
