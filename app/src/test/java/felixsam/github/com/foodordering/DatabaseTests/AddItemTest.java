@@ -86,6 +86,24 @@ public class AddItemTest {
         assertEquals(8,orderId);
     }
 
+    @Test
+    public void getItemQuantity(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        int itemQuantity = dbHelper.getItemQuantity(1);
+
+        assertEquals(3,itemQuantity);
+    }
+
+    @Test
+    public void updateItemQuantity(){
+        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.updateItemQuantity(1,8);
+
+        int updatedItemQuantity = dbHelper.getItemQuantity(1);
+
+        assertEquals(8,updatedItemQuantity);
+    }
+
 
     @After
     public void tearDown(){

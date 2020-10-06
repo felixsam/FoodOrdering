@@ -66,7 +66,7 @@ public class DialogFragment_Edit_ItemEntry extends DialogFragment {
             public void onClick(View v) {
 
                 Integer new_quantity = Integer.valueOf(et_item_quantity.getText().toString());
-                dbHelper.updateItemQuantity(col_id,new_quantity,item_name);
+                dbHelper.updateItemQuantity(col_id,new_quantity);
                 dismiss();
                 getActivity().recreate();
             }

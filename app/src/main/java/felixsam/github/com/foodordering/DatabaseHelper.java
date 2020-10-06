@@ -420,14 +420,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public void updateItemQuantity(Integer itemID, Integer newQuantity, String itemName){
+    public void updateItemQuantity(Integer itemID, Integer newQuantity){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL5_QUANTITY +
-                " = '" + newQuantity + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'" +
-                " AND " + ITEMS_COL3_ITEM_NAME + " = '" + itemName + "'";
+                " = '" + newQuantity + "' WHERE " + ITEMS_COL1_ID + " = '" + itemID + "'";
+
         Log.d(TAG, "updateItemQuantity: query: " + query);
         Log.d(TAG, "updateItemQuantity: Setting Quantity to " + newQuantity);
         db.execSQL(query);
+    }
+
+    public int getItemQuantity(Integer itemId){
+        int itemQuantity = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL5_QUANTITY +
+                " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL1_ID + " = '" + itemId + "'",null);
+
+        if (data.getCount() > 0 ){
+            data.moveToFirst();
+            itemQuantity = data.getInt(data.getColumnIndex(ITEMS_COL5_QUANTITY));
+        }
+
+        return itemQuantity;
     }
 
     public void updateItemCategory(Integer itemID, String newCategory){
