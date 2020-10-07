@@ -625,6 +625,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public boolean existOrder(int orderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT *" +
+                " FROM " + TABLE_NAME_ORDERS +
+                " WHERE " + ORDERS_COL1_ID + " = '" + orderId + "'",null);
+
+        if (data.getCount() == 0){
+            data.close();
+            return false;
+        }
+
+        data.close();
+        return true;
+    }
 
     public String getorderDate(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
