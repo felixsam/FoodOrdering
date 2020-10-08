@@ -15,6 +15,8 @@ import java.util.Date;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk={Build.VERSION_CODES.O_MR1})
 
@@ -36,8 +38,19 @@ public class AddOrderTest {
 
     }
 
+    @Test
+    public void getOrderDate(){
+        Date date = new Date();
+        dbHelper.addData_newOrder(1,date.toString());
+        String dateString = dbHelper.getorderDate(1);
+
+        assertEquals(date.toString(),dateString);
+
+    }
+
     @After
     public void tearDown(){
+
         dbHelper.close();
     }
 }
