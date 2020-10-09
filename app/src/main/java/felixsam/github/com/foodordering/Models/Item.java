@@ -9,6 +9,17 @@ public class Item {
     private String category;
     private int orderId;
 
+    public Item(int itemId, int userId, String name, double price, int quantity, String category, int orderId) {
+        this.itemId = itemId;
+        this.userId = userId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.orderId = orderId;
+    }
+
+
     public int getItemId() {
         return itemId;
     }
