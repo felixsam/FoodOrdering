@@ -77,7 +77,36 @@ public class Item {
     }
 
 
+    //Show itemName as a string
+    @Override
+    public String toString(){
+        return name;
+    }
 
+    //Equality Check
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj)
+            return true;
+
+        // it checks if the argument is of the type Item by comparing the classes
+        // of the passed argument and this object.
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        // type casting of the argument.
+        Item item = (Item) obj;
+        if(item.getItemId() == this.itemId &&
+                (item.getUserId() == this.userId) &&
+                (item.getName().equals(this.name)) &&
+                (item.getPrice() == this.price) &&
+                (item.getQuantity() == this.quantity) &&
+                (item.getCategory().equals(this.category)) &&
+                (item.getOrderId() == this.orderId))
+            return true;
+
+        return false;
+    }
 
 
 

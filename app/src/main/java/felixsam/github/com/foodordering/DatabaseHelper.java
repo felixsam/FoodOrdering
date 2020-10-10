@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import felixsam.github.com.foodordering.Models.Item;
 import felixsam.github.com.foodordering.Models.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -77,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ITEMS_COL4_PRICE + " DOUBLE, " +
                         ITEMS_COL5_QUANTITY + " INTEGER," +
                         ITEMS_COL6_CATEGORY + " TEXT, " +
-                        ITEMS_COL7_ORDERID + " INTEGER," +
+                        ITEMS_COL7_ORDERID + " INTEGER DEFAULT 0, " +
                         " CONSTRAINT FK_USERID" +
                         " FOREIGN KEY " + "(" + ITEMS_COL2_USER_ID + ")" +
                         " REFERENCES " + TABLE_NAME_USERS + " (" + USERS_COL1_ID + ")"
@@ -494,6 +497,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             itemPrice = data.getDouble(data.getColumnIndex(ITEMS_COL4_PRICE));
         }
         return itemPrice;
+    }
+
+    public ArrayList<Item> getItemContentsByCategory(String category){
+        ArrayList<Item> itemList = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data_category = db.rawQuery("SELECT * " +
+                "FROM " + TABLE_NAME_ITEMS +
+                " WHERE " + ITEMS_COL6_CATEGORY + " = " + "'" + category + "'"
+                + " AND " + ITEMS_COL7_ORDERID + " = 0", null);
+
+        if (data_category.getCount()==0){
+            Log.d(TAG,"No data entries");
+        }
+
+        while(data_category.moveToNext()){
+
+            Item item = new Item(data_category.getInt(data_category.getColumnIndex(ITEMS_COL1_ID)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL2_USER_ID)),
+                    data_category.getString(data_category.getColumnIndex(ITEMS_COL3_ITEM_NAME)),
+                    data_category.getDouble(data_category.getColumnIndex(ITEMS_COL4_PRICE)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL5_QUANTITY)),
+                    data_category.getString(data_category.getColumnIndex(ITEMS_COL6_CATEGORY)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL7_ORDERID))
+            );
+
+            itemList.add(item);
+        }
+
+        return itemList;
     }
 
     public Cursor getItemContents(String category) {
