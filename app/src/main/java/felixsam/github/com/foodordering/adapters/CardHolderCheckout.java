@@ -58,11 +58,11 @@ public class CardHolderCheckout extends RecyclerView.ViewHolder{
     public void bindCheckoutItem(Checkout checkout){
         this.checkout_model = checkout;
 
-        Glide.with(mcontext).load(item_ImageMap.get(checkout.getItem_name())).into(this.item_image);
+        Glide.with(mcontext).load(item_ImageMap.get(checkout.getItemName())).into(this.item_image);
 
-        this.tv_item_name.setText(checkout_model.getItem_name());
+        this.tv_item_name.setText(checkout_model.getItemName());
         this.tv_item_price.setText("Price: $"+ checkout_model.getPrice());
-        this.tv_item_quantity.setText("Quantity: " +checkout_model.getTotal_quantity().toString());
-        this.tv_total_item_price.setText("Total Price: $" + checkout_model.getTotal_Amount());
+        this.tv_item_quantity.setText("Quantity: " +checkout_model.getTotalQuantity().toString());
+        this.tv_total_item_price.setText("Total Price: $" + checkout_model.getTotalAmount());
     }
 }

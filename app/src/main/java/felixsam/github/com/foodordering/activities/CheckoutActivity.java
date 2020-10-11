@@ -74,7 +74,7 @@ public class CheckoutActivity extends AppCompatActivity{
             int i = 0;
             while(data.moveToNext()){
                 //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
-                Checkout checkout = new Checkout("username",
+                Checkout checkout = new Checkout(
                         data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
                         data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
                         data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),

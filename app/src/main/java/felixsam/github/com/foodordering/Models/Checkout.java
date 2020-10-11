@@ -1,82 +1,106 @@
 package felixsam.github.com.foodordering.Models;
 
-public class Checkout {
-    private String user;
-    private Integer user_id;
-    private String item_name;
-    private double item_price;
-    private Integer total_quantity;
-    private double Total_Amount;
+import java.util.Comparator;
 
-    public Checkout(String username,Integer userid, String name_item, double price_item,Integer total_item_quantity,double total_price){
-        user = username;
-        user_id = userid;
-        item_name = name_item;
-        item_price = price_item;
-        total_quantity = total_item_quantity;
-        Total_Amount = total_price;
+public class Checkout implements Comparable<Checkout> {
+    private Integer userId;
+    private String itemName;
+    private double itemPrice;
+    private Integer totalQuantity;
+    private double totalAmount;
+
+    public Checkout(Integer userId, String itemName, double itemPrice, Integer totalQuantity, double totalAmount){
+        this.userId = userId;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.totalQuantity = totalQuantity;
+        this.totalAmount = totalAmount;
 
     }
-
-
-    //Username
-    public String getUserName(){
-        return user ;
-    }
-
-    public void setUserName(String new_username){
-        user = new_username;
-    }
-
 
     //User ID
-    public Integer getuserId(){
-        return user_id;
+    public Integer getUserId(){
+        return userId;
     }
 
-    public void setUser_id(Integer new_userid){
-        user_id = new_userid;
+    public void setUserId(Integer newUserId){
+        userId = newUserId;
     }
 
 
 
     //Item Name
-    public String getItem_name(){
-        return item_name;
+    public String getItemName(){
+        return itemName;
     }
 
-    public void setItem_name(String new_name){
-        item_name = new_name;
+    public void setItemName(String newName){
+        itemName = newName;
     }
 
 
     //Item Price for 1 item
     public double getPrice(){
-        return item_price;
+        return itemPrice;
     }
 
-    public void setPrice(double new_price){
-        item_price = new_price;
+    public void setPrice(double newPrice){
+        itemPrice = newPrice;
     }
 
 
     //Total Quantity
-    public Integer getTotal_quantity(){
-        return total_quantity;
+    public Integer getTotalQuantity(){
+        return totalQuantity;
     }
 
-    public void setTotal_quantity(Integer new_quantity){
-        total_quantity = new_quantity;
+    public void setTotalQuantity(Integer newTotalQuantity){
+        totalQuantity = newTotalQuantity;
     }
 
 
     //Total Amount
-    public double getTotal_Amount(){
-        return Total_Amount;
+    public double getTotalAmount(){
+        return totalAmount;
     }
 
-    public void setTotalAmount(double new_totalamount){
+    public void setTotalAmount(double newTotalAmount){
 
-        Total_Amount = new_totalamount;
+        totalAmount = newTotalAmount;
     }
+
+    //Show Checkout as a string
+    @Override
+    public String toString(){
+        return itemName;
+    }
+
+    //Equality Check
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+
+        // it checks if the argument is of the type Item by comparing the classes
+        // of the passed argument and this object.
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        // type casting of the argument.
+        Checkout checkout = (Checkout) obj;
+        if(checkout.getUserId() == this.userId &&
+                (checkout.getItemName().equals(this.itemName)) &&
+                (checkout.getPrice() == this.itemPrice) &&
+                (Math.abs(checkout.getTotalQuantity() - this.totalQuantity) < 0.01) &&
+                (Math.abs(checkout.getTotalAmount() - this.totalAmount) < 0.01))
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public int compareTo(Checkout another){
+        return itemName.compareTo(another.itemName);
+    }
+
 }

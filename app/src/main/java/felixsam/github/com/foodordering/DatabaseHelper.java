@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import felixsam.github.com.foodordering.Models.Checkout;
 import felixsam.github.com.foodordering.Models.Item;
 import felixsam.github.com.foodordering.Models.User;
 
@@ -539,16 +540,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return data_category;
     }
-
-    public Cursor getItemContents_by_userID(Integer userID) {
+    public ArrayList<Item> getItemContentsByUserId(int UserId){
+        ArrayList<Item> itemList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data_userID = db.rawQuery("SELECT * " +
+        Cursor data_category = db.rawQuery("SELECT * " +
                 "FROM " + TABLE_NAME_ITEMS +
-                " WHERE " + ITEMS_COL2_USER_ID + " = " + "'" + userID + "'"  , null);
-        if (data_userID.getCount()==0){
-            System.out.println("Zero Count");
+                " WHERE " + ITEMS_COL2_USER_ID + " = " + "'" + UserId + "'"
+                + " AND " + ITEMS_COL7_ORDERID + " = 0", null);
+
+        if (data_category.getCount()==0){
+            Log.d(TAG,"No data entries");
         }
-        return data_userID;
+
+        while(data_category.moveToNext()){
+
+            Item item = new Item(data_category.getInt(data_category.getColumnIndex(ITEMS_COL1_ID)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL2_USER_ID)),
+                    data_category.getString(data_category.getColumnIndex(ITEMS_COL3_ITEM_NAME)),
+                    data_category.getDouble(data_category.getColumnIndex(ITEMS_COL4_PRICE)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL5_QUANTITY)),
+                    data_category.getString(data_category.getColumnIndex(ITEMS_COL6_CATEGORY)),
+                    data_category.getInt(data_category.getColumnIndex(ITEMS_COL7_ORDERID))
+            );
+
+            itemList.add(item);
+        }
+
+        return itemList;
     }
 
 
@@ -613,6 +631,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
 
     }
+
+    public ArrayList<Checkout> getCheckoutItems(Integer userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Checkout> checkoutList = new ArrayList<>();
+
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL2_USER_ID + ", " +
+                        ITEMS_COL3_ITEM_NAME + ", " +
+                        ITEMS_COL4_PRICE + ", total_quantity" +
+                        ", total_price" +
+                        " FROM " +
+                                "(SELECT *, SUM(" + ITEMS_COL5_QUANTITY + ") AS total_quantity" +
+                                    ", SUM(" + ITEMS_COL4_PRICE + "*" +
+                                    ITEMS_COL5_QUANTITY + ") AS total_price" +
+                                " FROM " + TABLE_NAME_ITEMS +
+                                " WHERE " + ITEMS_COL7_ORDERID + " = 0" +
+                                " GROUP BY " + ITEMS_COL2_USER_ID + "," + ITEMS_COL3_ITEM_NAME + ")" +
+                        " WHERE " + ITEMS_COL2_USER_ID + " = " + "'" + userId + "'" +
+                            " AND " + ITEMS_COL7_ORDERID + " = 0" +
+                        " GROUP BY " + ITEMS_COL3_ITEM_NAME + "," + ITEMS_COL2_USER_ID,null);
+
+        if (data.getCount()==0){
+            Log.d(TAG,"No data entries");
+        }
+
+        while(data.moveToNext()){
+
+            Checkout checkoutItem = new Checkout(data.getInt(data.getColumnIndex(ITEMS_COL2_USER_ID)),
+                    data.getString(data.getColumnIndex(ITEMS_COL3_ITEM_NAME)),
+                    data.getDouble(data.getColumnIndex(ITEMS_COL4_PRICE)),
+                    data.getInt(data.getColumnIndex("total_quantity")),
+                    data.getDouble(data.getColumnIndex("total_price"))
+            );
+
+            checkoutList.add(checkoutItem);
+        }
+
+        return checkoutList;
+
+    }
+
 
     public Cursor getData_foodid_checkout(Integer user_id){
         SQLiteDatabase db = this.getWritableDatabase();
