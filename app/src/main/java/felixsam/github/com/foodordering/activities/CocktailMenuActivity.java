@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class CocktailMenuActivity extends AppCompatActivity {
     private AdapterCocktail adapter_cocktail;
     private ArrayList<Cocktail> cocktail_list;
     private ArrayList<Cocktail> cocktail_list_default;
+    ProgressBar simpleProgressBar;
 
     @Override
     protected  void onCreate(Bundle savedInstance){
@@ -48,10 +51,11 @@ public class CocktailMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cocktail);
         this.setTitle("Cocktail Search");
         mQueue = Volley.newRequestQueue(this);
+        simpleProgressBar = findViewById(R.id.progressBar_cocktail);
+        simpleProgressBar.setVisibility(View.VISIBLE);
 
         cocktail_list = new ArrayList<Cocktail>();
         cocktail_list_default = new ArrayList<Cocktail>();
-
 
         recyclerView = findViewById(R.id.rv_cocktail_search_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -159,9 +163,11 @@ public class CocktailMenuActivity extends AppCompatActivity {
                             }
                             adapter_cocktail = new AdapterCocktail(cocktail_list, CocktailMenuActivity.this);
                             recyclerView.setAdapter(adapter_cocktail);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -200,13 +206,20 @@ public class CocktailMenuActivity extends AppCompatActivity {
 
 
     private void load_default_cocktail_list(){
+        adapter_cocktail = new AdapterCocktail(cocktail_list_default, CocktailMenuActivity.this);
+
         for (char letter = 'a'; letter <= 'z' ; letter++){
             search_cocktail_by_letter(letter);
+
         }
-        adapter_cocktail = new AdapterCocktail(cocktail_list_default, CocktailMenuActivity.this);
+
+        //search_cocktail_by_letter('a');
         recyclerView.setAdapter(adapter_cocktail);
-        recyclerView.smoothScrollToPosition(0);
+
+        //recyclerView.smoothScrollToPosition(0);
+
     }
+
     private void search_cocktail_by_letter(char search_item_letter){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(search_item_letter);
 
@@ -215,6 +228,7 @@ public class CocktailMenuActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+
                             JSONArray jsonArray = response.getJSONArray("drinks");
                             String result = "";
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -249,6 +263,10 @@ public class CocktailMenuActivity extends AppCompatActivity {
                                 cocktail_list_default.add(new_cocktail);
                             }
                             Collections.sort(cocktail_list_default);
+
+                            adapter_cocktail.notifyDataSetChanged();
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
