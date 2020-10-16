@@ -2,7 +2,7 @@ package felixsam.github.com.foodordering.Models;
 
 public class Order {
 
-    private String user;
+    private Integer userId;
     private String item_name;
     private double Price;
     private Integer Quantity;
@@ -11,13 +11,13 @@ public class Order {
     private String order_date;
     private double total_price;
 
-    public Order(String username,String name_items, double price_item,double totalprice,String date,Integer order_ID, Integer quantity_item){
-        OrderID = order_ID;
-        user = username;
-        item_name = name_items;
-        total_price = totalprice;
-        Price = price_item;
-        Quantity = quantity_item;
+    public Order(Integer userId, String nameItem, double price, double totalPrice, String date, Integer orderId, Integer quantity){
+        OrderID = orderId;
+        this.userId = userId;
+        item_name = nameItem;
+        total_price = totalPrice;
+        Price = price;
+        Quantity = quantity;
         order_date = date;
     }
 
@@ -48,7 +48,13 @@ public class Order {
         total_price = new_price;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public double getPrice(){
 
@@ -70,14 +76,7 @@ public class Order {
         Quantity = new_quantity;
     }
 
-    public String getUserName(){
-        return user ;
-    }
 
-    public void setUserName(String new_username){
-
-        user = new_username;
-    }
 
     public Integer getTotal_Amount(){
 

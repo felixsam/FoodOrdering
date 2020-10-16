@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import felixsam.github.com.foodordering.Models.Checkout;
 import felixsam.github.com.foodordering.Models.Item;
+import felixsam.github.com.foodordering.Models.Order;
 import felixsam.github.com.foodordering.Models.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -636,6 +637,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Checkout> checkoutList = new ArrayList<>();
 
+
         Cursor data = db.rawQuery("SELECT " + ITEMS_COL2_USER_ID + ", " +
                         ITEMS_COL3_ITEM_NAME + ", " +
                         ITEMS_COL4_PRICE + ", total_quantity" +
@@ -693,6 +695,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getData_orders(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + ITEMS_COL7_ORDERID
+                + ", " + ITEMS_COL2_USER_ID
                 + ", " + ITEMS_COL3_ITEM_NAME
                 + ", " + ITEMS_COL4_PRICE
                 + ", " + "SUM(" + ITEMS_COL4_PRICE + ") AS 'TOTAL_ITEMS_PRICE'"
@@ -704,6 +707,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
+    public ArrayList<Order> getOrdersByOrderId(Integer OrderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ArrayList<Order> orderList =  new ArrayList<>();
+        String date = getorderDate(OrderId);
+
+        Cursor data = db.rawQuery("SELECT " + ITEMS_COL7_ORDERID
+                + ", " + ITEMS_COL2_USER_ID
+                + ", " + ITEMS_COL3_ITEM_NAME
+                + ", " + ITEMS_COL4_PRICE
+                + ", " + "SUM(" + ITEMS_COL4_PRICE + ") AS 'TOTAL_ITEMS_PRICE'"
+                + ", " + "SUM(" + ITEMS_COL5_QUANTITY + ") AS " + ITEMS_COL5_QUANTITY
+                + " FROM " + TABLE_NAME_ITEMS
+                + " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderId
+                + " GROUP BY " + ITEMS_COL3_ITEM_NAME,null);
+
+        if (data.getCount() == 0){
+
+            Order orderItem = new Order(data.getInt(data.getColumnIndex(ITEMS_COL2_USER_ID)),
+                    data.getString(data.getColumnIndex(ITEMS_COL3_ITEM_NAME)),
+                    data.getDouble(data.getColumnIndex(ITEMS_COL4_PRICE)),
+                    data.getDouble(data.getColumnIndex("TOTAL_ITEMS_PRICE")),
+                    date,
+                    data.getInt(data.getColumnIndex(ITEMS_COL7_ORDERID)),
+                    data.getInt(data.getColumnIndex(ITEMS_COL5_QUANTITY))
+                    );
+            orderList.add(orderItem);
+        }
+
+        return orderList;
+    }
 
     public Cursor get_allorders(){
         SQLiteDatabase db = this.getWritableDatabase();
