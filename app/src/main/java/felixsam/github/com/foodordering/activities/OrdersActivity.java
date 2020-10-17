@@ -53,7 +53,8 @@ public class OrdersActivity extends AppCompatActivity {
 
             int i = 0;
             while(data.moveToNext()){
-                Order order = new Order("FIRST_NAME"
+                //TODO: Get UserId from previous activity
+                Order order = new Order(1
                         , data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME))
                         , data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE))
                         , data.getDouble(data.getColumnIndex("TOTAL_ITEMS_PRICE"))
