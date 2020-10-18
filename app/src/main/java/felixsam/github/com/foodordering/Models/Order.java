@@ -96,4 +96,35 @@ public class Order {
         OrderID = new_orderID;
     }
 
+    //Show itemName as a string
+    @Override
+    public String toString(){
+        return item_name;
+    }
+
+    //Equality Check
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj)
+            return true;
+
+        // it checks if the argument is of the type Item by comparing the classes
+        // of the passed argument and this object.
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        // type casting of the argument.
+        Order order = (Order) obj;
+        if(order.getUserId() == this.userId &&
+                (order.get_item_name().equals(this.item_name)) &&
+                (order.getPrice() == this.Price) &&
+                (order.get_totalPrice() == this.total_price) &&
+                (order.get_date().equals(this.order_date)) &&
+                (order.getOrderID() == this.OrderID) &&
+                (order.getQuantity() == this.Quantity))
+            return true;
+
+        return false;
+    }
+
 }

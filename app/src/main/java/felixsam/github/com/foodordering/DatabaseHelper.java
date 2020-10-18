@@ -723,8 +723,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderId
                 + " GROUP BY " + ITEMS_COL3_ITEM_NAME,null);
 
-        if (data.getCount() == 0){
+        if (data.getCount() != 0){
+            Log.d(TAG,"No entries");
 
+        }
+
+        while (data.moveToNext()){
             Order orderItem = new Order(data.getInt(data.getColumnIndex(ITEMS_COL2_USER_ID)),
                     data.getString(data.getColumnIndex(ITEMS_COL3_ITEM_NAME)),
                     data.getDouble(data.getColumnIndex(ITEMS_COL4_PRICE)),
@@ -732,7 +736,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     date,
                     data.getInt(data.getColumnIndex(ITEMS_COL7_ORDERID)),
                     data.getInt(data.getColumnIndex(ITEMS_COL5_QUANTITY))
-                    );
+            );
             orderList.add(orderItem);
         }
 
@@ -782,7 +786,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //ADD TO Orders TABLE
-    public boolean addData_newOrder(Integer userID, String date) {
+    public boolean addOrder(Integer userID, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 

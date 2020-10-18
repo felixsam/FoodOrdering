@@ -18,6 +18,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk={Build.VERSION_CODES.O_MR1})
@@ -34,7 +35,7 @@ public class AddOrderTest {
     @Test
     public void addNewOrder(){
         Date date = new Date();
-        dbHelper.addData_newOrder(1,date.toString());
+        dbHelper.addOrder(1,date.toString());
 
         assert(dbHelper.existOrder(1));
 
@@ -43,7 +44,7 @@ public class AddOrderTest {
     @Test
     public void getOrderDate(){
         Date date = new Date();
-        dbHelper.addData_newOrder(1,date.toString());
+        dbHelper.addOrder(1,date.toString());
         String dateString = dbHelper.getorderDate(1);
 
         assertEquals(date.toString(),dateString);
@@ -77,6 +78,43 @@ public class AddOrderTest {
 
 
     }
+
+    @Test
+    public void getOrderList(){
+        ArrayList<Order> expectedOrderList = new ArrayList<>();
+
+        //Populate database with items
+        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
+        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
+        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
+
+        Date date = new Date();
+        //Set Order ID
+        dbHelper.setOrderID(1,1);
+        dbHelper.setOrderID(2,1);
+        dbHelper.setOrderID(3,1);
+
+        dbHelper.addOrder(1,date.toString());
+
+        expectedOrderList.add(new Order(1,"One",12.34,12.34,date.toString(),1,3));
+        expectedOrderList.add(new Order(1,"Two",12.34,12.34,date.toString(),1,3));
+        expectedOrderList.add(new Order(1,"Three",12.34,12.34,date.toString(),1,3));
+
+        ArrayList<Order> actualOrderList = dbHelper.getOrdersByOrderId(1);
+
+
+        for (int i = 0; i < expectedOrderList.size();i++){
+            System.out.println(expectedOrderList.get(i));
+        }
+
+        for (int i = 0; i < actualOrderList.size();i++){
+            System.out.println(actualOrderList.get(i));
+        }
+
+        assertTrue(actualOrderList.containsAll(expectedOrderList));
+    }
+
+
 
     @After
     public void tearDown(){
