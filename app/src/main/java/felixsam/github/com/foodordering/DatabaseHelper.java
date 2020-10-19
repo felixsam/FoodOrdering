@@ -800,12 +800,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public void deleteOrder(Integer OrderID){
+//    public void deleteOrder(Integer OrderID){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        String query = "UPDATE " + TABLE_NAME_ITEMS +
+//                " SET " + ITEMS_COL7_ORDERID + " = NULL" +
+//                " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderID + "'";
+//
+//        db.execSQL(query);
+//    }
+
+    public void deleteOrder(Integer OrderId){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String query = "UPDATE " + TABLE_NAME_ITEMS +
-                " SET " + ITEMS_COL7_ORDERID + " = NULL" +
-                " WHERE " + ITEMS_COL7_ORDERID + " = " + OrderID + "'";
+        String query = "DELETE FROM " + TABLE_NAME_ORDERS +
+                " WHERE " + ORDERS_COL1_ID + " = '" + OrderId + "'";
 
         db.execSQL(query);
     }

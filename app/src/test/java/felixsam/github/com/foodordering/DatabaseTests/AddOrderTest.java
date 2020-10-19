@@ -18,6 +18,7 @@ import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.Models.Order;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
@@ -40,6 +41,18 @@ public class AddOrderTest {
         assert(dbHelper.existOrder(1));
 
     }
+
+
+    @Test
+    public void deleteOrder(){
+        Date date = new Date();
+        dbHelper.addOrder(1,date.toString());
+        dbHelper.deleteOrder(1);
+
+        assertFalse(dbHelper.existOrder(1));
+    }
+
+
 
     @Test
     public void getOrderDate(){
