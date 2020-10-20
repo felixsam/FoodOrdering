@@ -577,10 +577,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " SET " + ITEMS_COL7_ORDERID + " = " + OrderID
                 + " WHERE " + ITEMS_COL1_ID + " = " + "'" + itemID + "'";
 
-        Log.d(TAG, "updateItemQuantity: query: " + query);
-        Log.d(TAG, "updateItemQuantity: Setting OrderID to " + OrderID);
+        Log.d(TAG, "setOrderId: query: " + query);
+        Log.d(TAG, "setOrderId: Setting OrderID to " + OrderID);
         db.execSQL(query);
     }
+
+    public void updateOrderId(Integer itemID, Integer oldOrderId,Integer newOrderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME_ITEMS
+                + " SET " + ITEMS_COL7_ORDERID + " = " + newOrderId
+                + " WHERE " + ITEMS_COL1_ID + " = " + "'" + itemID + "'"
+                + " AND " + ITEMS_COL7_ORDERID + " = " + "'" + oldOrderId + "'";
+
+        Log.d(TAG, "updateOrderId: query: " + query);
+        Log.d(TAG, "updateOrderId: Setting OrderID to " + newOrderId);
+        db.execSQL(query);
+    }
+
 
     public int getOrderId(Integer itemId){
         int orderId = 0;
