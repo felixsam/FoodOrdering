@@ -107,7 +107,7 @@ public class CheckoutActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                boolean flag = mDatabaseHelper.addData_newOrder(userID,currentDateTimeString);
+                boolean flag = mDatabaseHelper.addOrder(userID,currentDateTimeString);
                 if (flag == TRUE){
                     Log.d(TAG,"INSERTED CORRECTLY");
                 }else{
