@@ -1,4 +1,4 @@
-package felixsam.github.com.foodordering.DatabaseTests;
+package felixsam.github.com.foodordering.DatabaseTests.Checkout;
 
 import android.os.Build;
 
