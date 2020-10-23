@@ -53,21 +53,6 @@ public class AddItemTest {
 
 
     @Test
-    public void getItemCategory(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
-        String itemCategory = dbHelper.getItemCategory(1);
-        assertEquals("DRINKS",itemCategory);
-    }
-
-    @Test
-    public void updateItemCategory(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
-        dbHelper.updateItemCategory(1,"CAKES");
-        String itemCategory = dbHelper.getItemCategory(1);
-        assertEquals("CAKES",itemCategory);
-    }
-
-    @Test
     public void getOrderId(){
         dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.setOrderID(1,8);
@@ -95,30 +80,7 @@ public class AddItemTest {
     }
 
 
-    @Test
-    public void getItemsByCategory(){
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
 
-        ArrayList<Item> itemsExpected = new ArrayList<>();
-
-        itemsExpected.add(new Item(1,1,"One",12.34,3,"DRINKS",0));
-        itemsExpected.add(new Item(2,1,"Two",12.34,3,"DRINKS",0));
-        itemsExpected.add(new Item(3,1,"Three",12.34,3,"DRINKS",0));
-
-        for (int i = 0; i< itemsExpected.size();i++){
-            System.out.println(itemsExpected.get(i));
-        }
-
-        ArrayList<Item> itemsActual = dbHelper.getItemContentsByCategory("DRINKS");
-
-        for (int i = 0; i< itemsActual.size();i++){
-            System.out.println(itemsActual.get(i));
-        }
-
-        assertEquals(itemsExpected,itemsActual);
-    }
 
 
     @After
