@@ -92,40 +92,6 @@ public class AddOrderTest {
 
     }
 
-    @Test
-    public void getOrderList(){
-        ArrayList<Order> expectedOrderList = new ArrayList<>();
-
-        //Populate database with items
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
-
-        Date date = new Date();
-        //Set Order ID
-        dbHelper.setOrderID(1,1);
-        dbHelper.setOrderID(2,1);
-        dbHelper.setOrderID(3,1);
-
-        dbHelper.addOrder(1,date.toString());
-
-        expectedOrderList.add(new Order(1,"One",12.34,12.34,date.toString(),1,3));
-        expectedOrderList.add(new Order(1,"Two",12.34,12.34,date.toString(),1,3));
-        expectedOrderList.add(new Order(1,"Three",12.34,12.34,date.toString(),1,3));
-
-        ArrayList<Order> actualOrderList = dbHelper.getOrdersByOrderId(1);
-
-
-        for (int i = 0; i < expectedOrderList.size();i++){
-            System.out.println(expectedOrderList.get(i));
-        }
-
-        for (int i = 0; i < actualOrderList.size();i++){
-            System.out.println(actualOrderList.get(i));
-        }
-
-        assertTrue(actualOrderList.containsAll(expectedOrderList));
-    }
 
 
 
