@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Api;
 
 import net.steamcrafted.materialiconlib.MaterialMenuInflater;
 
@@ -34,6 +35,11 @@ import java.util.Collections;
 import felixsam.github.com.foodordering.Models.Cocktail;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.AdapterCocktail;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CocktailMenuActivity extends AppCompatActivity {
 
@@ -115,6 +121,7 @@ public class CocktailMenuActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 
@@ -220,6 +227,18 @@ public class CocktailMenuActivity extends AppCompatActivity {
 
     }
 
+    private void searchCocktailRetrofit(char letter){
+        String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(letter);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+
+
+
+    }
     private void search_cocktail_by_letter(char search_item_letter){
         String url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + String.valueOf(search_item_letter);
 
