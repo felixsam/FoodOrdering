@@ -4,17 +4,32 @@ public class User {
 
     private String userName;
     private String firstName;
-
-
     private String lastName;
+    private String password;
+
     private int UserID;
     private String role;
 
 
-    public User(int userID, String Name, String user){
+    public User(int userID, String fName, String user){
         UserID = userID;
-        firstName = Name;
+        firstName = fName;
         userName = user;
+    }
+
+    public User(int userID,String fName, String lName, String username){
+        UserID = userID;
+        firstName = fName;
+        lastName = lName;
+        userName = username;
+    }
+
+    public User(int userID,String fName, String lName, String username, String pWord){
+        UserID = userID;
+        firstName = fName;
+        lastName = lName;
+        userName = username;
+        password = pWord;
     }
 
     public String getFirstName() {
