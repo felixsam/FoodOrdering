@@ -127,6 +127,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_USERS, null);
     }
 
+    public ArrayList<User> getAllUsers(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<User> userList = new ArrayList<>();
+
+        Cursor data = db.rawQuery("SELECT *"
+                + " FROM " + TABLE_NAME_USERS, null);
+
+        if (data.getCount() != 0){
+            Log.d(TAG,"No entries");
+
+        }
+
+        while (data.moveToNext()){
+            User user = new User(data.getInt(data.getColumnIndex(USERS_COL1_ID)),
+                    data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME)),
+                    data.getString(data.getColumnIndex(USERS_COL7_USERNAME))
+            );
+            userList.add(user);
+        }
+
+        return userList;
+    }
+
     public int getUserID(String username){
         int userID = -1;
 
@@ -361,6 +384,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteUser: query: " + query);
         db.execSQL(query);
     }
+
+
 
 
     /*******************************************************************************************************************************************************
