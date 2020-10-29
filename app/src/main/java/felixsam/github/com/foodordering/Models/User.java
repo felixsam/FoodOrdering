@@ -7,6 +7,8 @@ public class User {
     private String lastName;
     private String password;
 
+    private String phoneNumber;
+
     private int UserID;
     private String role;
 
@@ -32,12 +34,30 @@ public class User {
         password = pWord;
     }
 
+    public User(int userID,String fName, String lName, String username, String pWord, String pNumber){
+        UserID = userID;
+        firstName = fName;
+        lastName = lName;
+        userName = username;
+        password = pWord;
+        phoneNumber = pNumber;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLastName() {
