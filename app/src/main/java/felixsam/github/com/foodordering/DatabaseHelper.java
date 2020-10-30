@@ -144,6 +144,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     data.getString(data.getColumnIndex(USERS_COL2_FIRST_NAME)),
                     data.getString(data.getColumnIndex(USERS_COL7_USERNAME))
             );
+
+            String lastName = data.getString(data.getColumnIndex(USERS_COL3_LAST_NAME));
+            String role = data.getString(data.getColumnIndex(USERS_COL6_ROLE));
+            String phoneNumber = data.getString(data.getColumnIndex(USERS_COL4_PHONE_NUMBER));
+
+            if (lastName != null){
+                user.setLastName(lastName);
+            }
+
+            if (role != null){
+                user.setRole(role);
+            }
+
+            if (phoneNumber != null){
+                user.setPhoneNumber(phoneNumber);
+            }
+
             userList.add(user);
         }
 
