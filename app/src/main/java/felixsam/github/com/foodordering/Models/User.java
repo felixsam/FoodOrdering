@@ -99,4 +99,27 @@ public class User {
         return userName;
     }
 
+    //Equality Check
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj)
+            return true;
+
+        // it checks if the argument is of the type User by comparing the classes
+        // of the passed argument and this object.
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        // type casting of the argument.
+        User user = (User) obj;
+        if(user.getUserID() == this.UserID &&
+                (user.getFirstName().equals(this.firstName)) &&
+                (user.getLastName().equals(this.lastName)) &&
+                (user.getRole().equals(this.role)) &&
+                (user.getPhoneNumber().equals(this.phoneNumber)))
+            return true;
+
+        return false;
+    }
+
 }
