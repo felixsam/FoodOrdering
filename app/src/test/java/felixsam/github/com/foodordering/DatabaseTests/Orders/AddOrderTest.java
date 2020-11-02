@@ -92,6 +92,19 @@ public class AddOrderTest {
 
     }
 
+    @Test
+    public void updateOrderId(){
+        //Populate database with items
+        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
+
+        //Set Order ID
+        dbHelper.setOrderID(1,8);
+
+        dbHelper.updateOrderId(1,8,3);
+
+        assertEquals(3,dbHelper.getOrderId(1));
+    }
+
 
 
 
