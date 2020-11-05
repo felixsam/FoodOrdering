@@ -114,10 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    /*******************************************************************************************************************************************************
-     SQL QUERIES FOR CUSTOMERS
-     *******************************************************************************************************************************************************/
-
+//region SQL QUERIES FOR USERS
     public Cursor getUserIdAndName(){
         SQLiteDatabase db_customer = this.getWritableDatabase();
 
@@ -127,6 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + TABLE_NAME_USERS, null);
     }
 
+    /**
+     * Gets all the users in the USERS Table
+     */
     public ArrayList<User> getAllUsers(){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<User> userList = new ArrayList<>();
@@ -167,6 +167,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
+    /**
+     * Get the UserID for a given username
+     */
     public int getUserID(String username){
         int userID = -1;
 
@@ -183,7 +186,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //get username of first entry in customers table
+    /**
+     * Get the first entry in the USERS Table
+     */
     public String getTopUserName(){
         String username = "";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -196,6 +201,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return username;
     }
 
+
+    /**
+     * Get the Password for a given username
+     */
     public String getPassword(String username){
         String password = "";
 
@@ -210,6 +219,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return password;
     }
 
+    /**
+     * update the selected username's password
+     */
     public void updatePassword(String username,String oldPassword, String newPassword){
 
         if (!oldPassword.equals(getPassword(username))){
@@ -226,6 +238,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Get the User Model for a username
+     */
     public User getUser(String username){
         User user;
 
@@ -251,8 +266,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //check for existence of username
-    public boolean exists_username(String username){
+    /**
+     * Check for existence of username
+     */
+    public boolean usernameExists(String username){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT 1"
                 + " FROM " + TABLE_NAME_USERS
@@ -261,6 +278,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data.getCount() != 0;
     }
 
+    /**
+     * update the selected username's password
+     */
     public String getUserName(Integer userID){
         //String userID_str = userID.toString();
         String username = "";
@@ -402,8 +422,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-
-
+//endregion
 
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ITEMS
