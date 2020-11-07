@@ -424,11 +424,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 //endregion
 
+
+    //region ITEMS TABLE
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ITEMS
      *******************************************************************************************************************************************************/
     //ADD TO ITEMS TABLE
-    public boolean addData_items(int userId, String itemName, double price, int quantity, String itemCategory) {
+    public boolean addItem(int userId, String itemName, double price, int quantity, String itemCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -476,7 +478,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public void delData_items(Integer itemID,String ITEM_NAME){
+    public void deleteItem(Integer itemID, String ITEM_NAME){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME_ITEMS + " WHERE "
                 + ITEMS_COL1_ID + " = '" + itemID + "'" +
@@ -670,6 +672,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return orderId;
     }
 
+    //endregion
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR CHECKOUT
      *******************************************************************************************************************************************************/
