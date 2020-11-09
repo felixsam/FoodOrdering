@@ -282,7 +282,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * update the selected username's password
+     * get the username from the userID
      */
     public String getUserName(Integer userID){
         //String userID_str = userID.toString();
@@ -298,7 +298,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return username;
 
     }
-    public String getUserLastName(String username){
+
+    /**
+     * get the last name from the username
+     */
+    public String getLastName(String username){
         String last_name = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT " + USERS_COL3_LAST_NAME
@@ -314,7 +318,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public String getUserFirstName(String username){
+    /**
+     * get the first name from te username
+     */
+    public String getFirstName(String username){
         String last_name = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT " + USERS_COL2_FIRST_NAME
@@ -330,8 +337,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
-    public String getUserPhoneNumber(String username){
+    /**
+     * get the phone number associated with the username
+     */
+    public String getPhoneNumber(String username){
         String phone_number = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT " + USERS_COL4_PHONE_NUMBER
@@ -413,7 +422,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Delete from database
+     * Delete user from database
      * @param id
      *
      */
