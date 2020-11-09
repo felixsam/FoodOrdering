@@ -20,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "myDatabase";
 
+    //region TABLES
     //TABLE: CUSTOMERS
     public static final String TABLE_NAME_USERS = "users";
     public static final String USERS_COL1_ID = "_id";
@@ -47,6 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ORDERS_COL2_CUSTOMER_ID = "CUST_ID";
     public static final String ORDERS_COL3_DATE = "DATE";
     public static final String ORDERS_COL4_STATUS = "STATUS";
+
+    //endregion
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
@@ -425,11 +428,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //endregion
 
 
-    //region ITEMS TABLE
+    //region SQL QUERIES FOR ITEMS
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ITEMS
      *******************************************************************************************************************************************************/
-    //ADD TO ITEMS TABLE
+    /**
+     * Add an Item to the Items Table
+     */
     public boolean addItem(int userId, String itemName, double price, int quantity, String itemCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -446,6 +451,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    /**
+     * Check if an item exists
+     */
     public boolean existItem(int itemId){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT *" +
@@ -461,6 +469,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    /**
+     * Gets item name
+     */
     public String getItemName(int itemId){
         String itemName = "";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -477,7 +488,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
+    /**
+     * Delete an item with ItemID
+     */
     public void deleteItem(Integer itemID, String ITEM_NAME){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME_ITEMS + " WHERE "
@@ -488,6 +501,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    /**
+     * update ItemQuantity for itemID
+     */
     public void updateItemQuantity(Integer itemID, Integer newQuantity){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL5_QUANTITY +
@@ -498,6 +514,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    /**
+     * Get Item Quantity
+     */
     public int getItemQuantity(Integer itemId){
         int itemQuantity = -1;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -513,6 +532,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return itemQuantity;
     }
 
+    /**
+     * Update Item Category
+     */
     public void updateItemCategory(Integer itemID, String newCategory){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS +
@@ -524,6 +546,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    /**
+     * Get Item Category
+     */
     public String getItemCategory(Integer itemId){
         String itemCategory = "";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -540,6 +565,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Update Item Price
+     */
     public void updateItemPrice(Integer itemID, double newPrice, String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS + " SET " + ITEMS_COL4_PRICE +
@@ -550,6 +578,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    /**
+     * Get item Price
+     */
     public double getItemPrice(Integer itemId){
         double itemPrice = 0;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -564,6 +595,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return itemPrice;
     }
 
+    /**
+     * Get all the Items belonging to a category
+     */
     public ArrayList<Item> getItemContentsByCategory(String category){
         ArrayList<Item> itemList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -634,6 +668,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * set OrderID for an Item after placing an order
+     */
     public void setOrderID(Integer itemID, Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME_ITEMS
@@ -657,7 +694,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-
+    /**
+     * Get the orderID of an Item
+     */
     public int getOrderId(Integer itemId){
         int orderId = 0;
         SQLiteDatabase db = this.getWritableDatabase();
