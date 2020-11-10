@@ -721,6 +721,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //endregion
+
+
+    //region SQL QUERIES FOR CHECKOUT
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR CHECKOUT
      *******************************************************************************************************************************************************/
@@ -757,7 +760,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
 
     }
-
+    /**
+     * get the Items that will be checked out for userId
+     */
     public ArrayList<Checkout> getCheckoutItems(Integer userId){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Checkout> checkoutList = new ArrayList<>();
@@ -798,7 +803,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
     public Cursor getData_foodid_checkout(Integer user_id){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -812,7 +816,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
-
+//endregion
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ORDERS
      *******************************************************************************************************************************************************/
