@@ -319,7 +319,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * get the first name from te username
+     * get the first name from the username
      */
     public String getFirstName(String username){
         String last_name = "";
@@ -817,6 +817,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 //endregion
+
+
+    //region SQLQUERIES FOR ORDERS
     /*******************************************************************************************************************************************************
      SQL QUERIES FOR ORDERS
      *******************************************************************************************************************************************************/
@@ -882,6 +885,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * check if an order exists
+     */
     public boolean existOrder(int orderId){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT *" +
@@ -896,6 +902,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         data.close();
         return true;
     }
+
 
     public String getorderDate(Integer OrderID){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -914,7 +921,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //ADD TO Orders TABLE
+    /**
+     * add an order to the order table
+     */
+
     public boolean addOrder(Integer userID, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -939,6 +949,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        db.execSQL(query);
 //    }
 
+    /**
+     * delete an Order
+     */
     public void deleteOrder(Integer OrderId){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -948,7 +961,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    //Get orderID
+    /**
+     * get the orderID
+     */
     public Integer getOrderID(Integer userID,String date){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -968,4 +983,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return orderID;
 
     }
+
+    //endregion
 }
