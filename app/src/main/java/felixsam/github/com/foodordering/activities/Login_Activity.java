@@ -1,7 +1,6 @@
 package felixsam.github.com.foodordering.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,11 +26,11 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
 
     private final String TAG = Login_Activity.class.getSimpleName();
 
-    private AutoCompleteTextView autocomplete_text_username;
-    private TextInputEditText autocomplete_text_password;
+    private AutoCompleteTextView autoCompleteTextUsername;
+    private TextInputEditText autoCompleteTextPassword;
     private final Globals g = Globals.getInstance();
-    private Boolean flag_users_exist = Boolean.FALSE;
-    private ArrayAdapter<User> adapter_dropdown_username;
+    private Boolean flagUsersExist = Boolean.FALSE;
+    private ArrayAdapter<User> adapterDropdownUsername;
     private DatabaseHelper database;
 
     @Override
@@ -39,63 +38,31 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        autocomplete_text_username = findViewById(R.id.dropdown_username);
-        autocomplete_text_password = findViewById(R.id.text_password);
+        autoCompleteTextUsername = findViewById(R.id.dropdown_username);
+        autoCompleteTextPassword = findViewById(R.id.text_password);
 
-        Button btn_login = findViewById(R.id.btn_login);
-        Button btn_register = findViewById(R.id.login_btn_signup);
+        Button btnLogin = findViewById(R.id.btn_login);
+        Button btnSignUp = findViewById(R.id.login_btn_signup);
 
         database = new DatabaseHelper(this);
 
         //For development
         //pre-fill username for quick login
-        autocomplete_text_username.setText(database.getTopUserName());
-        autocomplete_text_password.setText(database.getPassword(database.getTopUserName()));
+        autoCompleteTextUsername.setText(database.getTopUserName());
+        autoCompleteTextPassword.setText(database.getPassword(database.getTopUserName()));
 
         ArrayList<User> list_users = new ArrayList<>();
 
-        btn_login.setOnClickListener(this);
-        btn_register.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
 
         //hide support bar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
-        //populate username dropdown
-        Cursor data_customers = database.getUserIdAndName();
-        int data_entries = data_customers.getCount();
-
-        if (data_entries == 0) {
-            Log.i(TAG, "Number of Rows is: " + data_entries);
-            Log.i(TAG, "Empty Database: no users");
-        } else {
-            //Users exist in the database
-            flag_users_exist = Boolean.TRUE;
-            Log.i(TAG, "Number of Rows is: " + data_entries);
-
-            int i = 0;
-            while (data_customers.moveToNext()) {
-                Log.i(TAG,"New User");
-                User user = new User(data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.USERS_COL1_ID)),
-                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL2_FIRST_NAME)),
-                        data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL7_USERNAME))
-                );
-
-                Log.i(TAG,"Adding user: " + data_customers.getInt(data_customers.getColumnIndex(DatabaseHelper.USERS_COL1_ID)) + " \n"
-                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL2_FIRST_NAME)) + " \n"
-                        + data_customers.getString(data_customers.getColumnIndex(DatabaseHelper.USERS_COL7_USERNAME))
-                );
-
-                list_users.add(i, user);
-                Log.i(TAG,"Username added to list_users: " + list_users.get(i).getUserName());
-                i++;
-            }
-
-            adapter_dropdown_username = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
-            autocomplete_text_username.setAdapter(adapter_dropdown_username);
-        }
-
-
+        list_users = database.getAllUsers();
+        adapterDropdownUsername = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
+        autoCompleteTextUsername.setAdapter(adapterDropdownUsername);
 
     }
 
@@ -103,9 +70,9 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onResume(){
         super.onResume();
-        if (flag_users_exist == Boolean.TRUE){
-            adapter_dropdown_username.notifyDataSetChanged();
-            autocomplete_text_username.setAdapter(adapter_dropdown_username);
+        if (flagUsersExist == Boolean.TRUE){
+            adapterDropdownUsername.notifyDataSetChanged();
+            autoCompleteTextUsername.setAdapter(adapterDropdownUsername);
         }
 
     }
@@ -118,14 +85,14 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
 
             case R.id.btn_login:
-                String username = autocomplete_text_username.getText().toString();
+                String username = autoCompleteTextUsername.getText().toString();
 
-                if (!database.exists_username(username)){
+                if (!database.usernameExists(username)){
                     Snackbar.make(findViewById(android.R.id.content),"Cannot login, username does not exist",Snackbar.LENGTH_LONG).show();
                     break;
                 }
 
-                if (flag_users_exist == Boolean.TRUE && database.exists_username(username)){
+                if (flagUsersExist == Boolean.TRUE && database.usernameExists(username)){
                     User login_user = database.getUser(username);
                     String login_name = login_user.getFirstName();
                     int login_id = login_user.getUserID();
