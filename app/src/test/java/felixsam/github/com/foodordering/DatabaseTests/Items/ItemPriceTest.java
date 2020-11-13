@@ -32,7 +32,7 @@ public class ItemPriceTest {
 
     @Test
     public void getItemPrice(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         double itemPrice = dbHelper.getItemPrice(1);
         assertEquals(12.34,itemPrice,0.001);
 
@@ -40,7 +40,7 @@ public class ItemPriceTest {
 
     @Test
     public void updateItemPrice(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.updateItemPrice(1,3.33,"drinkName");
 
         double updatedItemPrice = dbHelper.getItemPrice(1);

@@ -33,20 +33,20 @@ public class userDetailsTest {
     public void testGetPhoneNumber(){
         dbHelper.addNewUser("First","Last","123","username","password");
 
-        assertEquals("123",dbHelper.getUserPhoneNumber("username"));
+        assertEquals("123",dbHelper.getPhoneNumber("username"));
     }
 
     @Test
     public void testGetLastName(){
         dbHelper.addNewUser("First","Last","123","username","password");
 
-        assertEquals("Last",dbHelper.getUserLastName("username"));
+        assertEquals("Last",dbHelper.getLastName("username"));
     }
 
     @Test
     public void testGetFirstName(){
         dbHelper.addNewUser("First","Last","123","username","password");
-        assertEquals("First",dbHelper.getUserFirstName("username"));
+        assertEquals("First",dbHelper.getFirstName("username"));
     }
 
     @After

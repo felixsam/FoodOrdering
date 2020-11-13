@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
-import felixsam.github.com.foodordering.Models.Order;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -67,9 +66,9 @@ public class AddOrderTest {
     @Test
     public void getOrderId(){
         //Populate database with items
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"One",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Two",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Three",12.34,3, "DRINKS");
 
         //Set Order ID
         dbHelper.setOrderID(1,8);
@@ -95,7 +94,7 @@ public class AddOrderTest {
     @Test
     public void updateOrderId(){
         //Populate database with items
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"One",12.34,3, "DRINKS");
 
         //Set Order ID
         dbHelper.setOrderID(1,8);

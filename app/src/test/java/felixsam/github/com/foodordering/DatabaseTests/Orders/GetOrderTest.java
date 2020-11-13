@@ -35,9 +35,9 @@ public class GetOrderTest {
         ArrayList<Order> expectedOrderList = new ArrayList<>();
 
         //Populate database with items
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"One",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Two",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Three",12.34,3, "DRINKS");
 
         Date date = new Date();
         //Set Order ID

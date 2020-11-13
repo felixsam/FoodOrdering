@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +11,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-
 import felixsam.github.com.foodordering.DatabaseHelper;
-import felixsam.github.com.foodordering.Models.Item;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -37,7 +33,7 @@ public class AddItemTest {
 
     @Test
     public void getItemName(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         String itemName = dbHelper.getItemName(1);
         assertEquals("drinkName",itemName);
 
@@ -45,8 +41,8 @@ public class AddItemTest {
 
     @Test
     public void deleteItem(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
-        dbHelper.delData_items(1,"drinkName");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.deleteItem(1,"drinkName");
         assertFalse(dbHelper.existItem(1));
     }
 
@@ -54,7 +50,7 @@ public class AddItemTest {
 
     @Test
     public void getOrderId(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.setOrderID(1,8);
         int orderId = dbHelper.getOrderId(1);
 
@@ -63,7 +59,7 @@ public class AddItemTest {
 
     @Test
     public void getItemQuantity(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         int itemQuantity = dbHelper.getItemQuantity(1);
 
         assertEquals(3,itemQuantity);
@@ -71,7 +67,7 @@ public class AddItemTest {
 
     @Test
     public void updateItemQuantity(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.updateItemQuantity(1,8);
 
         int updatedItemQuantity = dbHelper.getItemQuantity(1);

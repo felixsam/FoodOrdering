@@ -56,7 +56,7 @@ public class UsernameUserIdTest {
     @Test
     public void testUsernameExists(){
         dbHelper.addNewUser("First","Last","123","usernameExists","password");
-        assertTrue( dbHelper.exists_username("usernameExists") );
+        assertTrue( dbHelper.usernameExists("usernameExists") );
     }
 
 
@@ -66,7 +66,7 @@ public class UsernameUserIdTest {
         dbHelper.addNewUser("First","Last","123","usernameExists","password");
         int userId = dbHelper.getUserID("username");
         dbHelper.deleteUser(userId);
-        assertFalse(dbHelper.exists_username("username"));
+        assertFalse(dbHelper.usernameExists("username"));
     }
 
 

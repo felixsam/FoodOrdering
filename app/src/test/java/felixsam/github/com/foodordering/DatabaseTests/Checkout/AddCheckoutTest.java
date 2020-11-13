@@ -34,9 +34,9 @@ public class AddCheckoutTest {
 
     @Test
     public void getCheckoutItems(){
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"One",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Two",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Three",12.34,3, "DRINKS");
 
         ArrayList<Checkout> expectedCheckout = new ArrayList<>();
         expectedCheckout.add(new Checkout(1,"One",12.34,3,37.02));

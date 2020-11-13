@@ -33,14 +33,14 @@ public class ItemCategoryTest {
 
     @Test
     public void getItemCategory(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         String itemCategory = dbHelper.getItemCategory(1);
         assertEquals("DRINKS",itemCategory);
     }
 
     @Test
     public void updateItemCategory(){
-        dbHelper.addData_items(1,"drinkName",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"drinkName",12.34,3, "DRINKS");
         dbHelper.updateItemCategory(1,"CAKES");
         String itemCategory = dbHelper.getItemCategory(1);
         assertEquals("CAKES",itemCategory);
@@ -48,9 +48,9 @@ public class ItemCategoryTest {
 
     @Test
     public void getItemsByCategory(){
-        dbHelper.addData_items(1,"One",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Two",12.34,3, "DRINKS");
-        dbHelper.addData_items(1,"Three",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"One",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Two",12.34,3, "DRINKS");
+        dbHelper.addItem(1,"Three",12.34,3, "DRINKS");
 
         ArrayList<Item> itemsExpected = new ArrayList<>();
 
