@@ -142,7 +142,7 @@ public class CardHolderItemMenu extends RecyclerView.ViewHolder implements View.
                         + "\n Quantity: " + item_quantity
                         + "\n Category: " + category);
 
-                dbHelper.addData_items(userID_to_add,item_name,item_price_double,item_quantity,category);
+                dbHelper.addItem(userID_to_add,item_name,item_price_double,item_quantity,category);
                 break;
         }
     }

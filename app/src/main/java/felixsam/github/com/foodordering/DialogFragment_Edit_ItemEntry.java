@@ -55,7 +55,7 @@ public class DialogFragment_Edit_ItemEntry extends DialogFragment {
         (rootView.findViewById(R.id.full_screen_dialog_btn_delete)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.delData_items(col_id,item_name);
+                dbHelper.deleteItem(col_id,item_name);
                 dismiss();
                 getActivity().recreate();
             }
