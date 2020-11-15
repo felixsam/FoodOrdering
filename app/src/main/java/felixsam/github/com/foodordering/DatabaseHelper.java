@@ -115,18 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-
-//region SQL QUERIES FOR USERS
-    public Cursor getUserIdAndName(){
-        SQLiteDatabase db_customer = this.getWritableDatabase();
-
-        return db_customer.rawQuery("SELECT " + USERS_COL1_ID
-                + ", " + USERS_COL2_FIRST_NAME
-                + ", " + USERS_COL7_USERNAME
-                + " FROM " + TABLE_NAME_USERS, null);
-    }
-
+//region USER SQL QUERIES
     /**
      * Gets all the users in the USERS Table
      */
