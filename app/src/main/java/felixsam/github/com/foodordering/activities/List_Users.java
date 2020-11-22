@@ -20,7 +20,6 @@ public class List_Users extends AppCompatActivity {
     private static final String TAG = List_Users.class.getSimpleName();
 
     private DatabaseHelper mDatabaseHelper;
-    private User user;
     private ListUsersAdapter adapter;
 
     @Override
@@ -34,29 +33,6 @@ public class List_Users extends AppCompatActivity {
 
 
         Log.i(TAG, "Displaying data in the ListView.");
-
-        //create the list adapter and set the adapter
-//        usersList = new ArrayList<>();
-//        Cursor user_data = mDatabaseHelper.getUserIdAndName();
-//        int numRows = user_data.getCount();
-//        if(numRows == 0){
-//            Log.d(TAG,"No rows to populate list " + numRows);
-//        }else{
-//            Log.i(TAG,"Number of Rows is: " + numRows);
-//
-//            int i = 0;
-//            while(user_data.moveToNext()){
-//                Log.i(TAG,"New User Entry: ");
-//                Log.i(TAG,user_data.getInt(0) +" "
-//                        + user_data.getString(1) + " "
-//                        + user_data.getString(2));
-//
-//                user = new User(user_data.getInt(user_data.getColumnIndex(mDatabaseHelper.USERS_COL1_ID)),
-//                        user_data.getString(user_data.getColumnIndex(mDatabaseHelper.USERS_COL2_FIRST_NAME)),
-//                        user_data.getString(user_data.getColumnIndex(mDatabaseHelper.USERS_COL7_USERNAME)));
-//                usersList.add(i, user);
-//                i++;
-//            }
 
         ArrayList<User> usersList = mDatabaseHelper.getAllUsers();
         adapter = new ListUsersAdapter(usersList,List_Users.this);
