@@ -64,26 +64,26 @@ public class CheckoutActivity extends AppCompatActivity{
         Double sub_total = 0.00;
 
         //get the data and append to a list
-        Cursor data = mDatabaseHelper.getData_checkout(userID);
-        int numRows = data.getCount();
-        if(numRows == 0){
-            Log.d(TAG,"Number of Rows is: " + numRows);
-            toastMessage("The Database is empty :( ");
-        }else{
-            Log.d(TAG,"Number of Rows is: " + numRows);
-            int i = 0;
-            while(data.moveToNext()){
-                //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
-                Checkout checkout = new Checkout(
-                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
-                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
-                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
-                        data.getInt(data.getColumnIndex("total_quantity")),
-                        data.getDouble(data.getColumnIndex("total_price")));
-                sub_total += data.getDouble(data.getColumnIndex("total_price"));
-                checkout_list.add(i, checkout);
-                i++;
-            }
+//        Cursor data = mDatabaseHelper.getData_checkout(userID);
+        checkout_list = mDatabaseHelper.getCheckoutItems(userID);
+//        int numRows = data.getCount();
+//        if(numRows == 0){
+//            Log.d(TAG,"Number of Rows is: " + numRows);
+//            toastMessage("The Database is empty :( ");
+//        }else{
+//            Log.d(TAG,"Number of Rows is: " + numRows);
+//            int i = 0;
+//            while(data.moveToNext()){
+//                Checkout checkout = new Checkout(
+//                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
+//                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
+//                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
+//                        data.getInt(data.getColumnIndex("total_quantity")),
+//                        data.getDouble(data.getColumnIndex("total_price")));
+//                sub_total += data.getDouble(data.getColumnIndex("total_price"));
+//                checkout_list.add(i, checkout);
+//                i++;
+//            }
 
             //truncate to 2 decimal places
             DecimalFormat df = new DecimalFormat("#.##");
@@ -100,7 +100,7 @@ public class CheckoutActivity extends AppCompatActivity{
             rv_checkout.setHasFixedSize(true);
             rv_checkout.setAdapter(adapter);
 
-        }
+       // }
 
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -135,12 +135,7 @@ public class CheckoutActivity extends AppCompatActivity{
                         i++;
                     }
                 }
-                //toastMessage("Checkout successful");
-                //Snackbar.make(findViewById(android.R.id.content),"Checkout successful",Snackbar.LENGTH_LONG).show();
-                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //getApplicationContext().startActivity(intent);
                 finish();
-                //Snackbar.make(findViewById(android.R.id.content),"Checkout successful",Snackbar.LENGTH_LONG).show();
 
 
             }
