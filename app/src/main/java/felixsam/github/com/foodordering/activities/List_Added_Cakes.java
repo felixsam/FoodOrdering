@@ -21,6 +21,7 @@ import java.util.Objects;
 
 import felixsam.github.com.foodordering.DatabaseHelper;
 import felixsam.github.com.foodordering.DialogFragment_Edit_ItemEntry;
+import felixsam.github.com.foodordering.Models.Item;
 import felixsam.github.com.foodordering.Models.ItemModel;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.adapters.ItemListAdapter;
@@ -57,35 +58,44 @@ public class List_Added_Cakes extends AppCompatActivity {
         //hide support bar
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        cakeList = new ArrayList<>();
+
+
 
         //Populate list of added cakes
-        Cursor data_cakes = myDB.getItemContents("CAKE");
-        int cake_entries = data_cakes.getCount();
-        if(cake_entries == 0){
-            Toast.makeText(List_Added_Cakes.this,"List is Empty",Toast.LENGTH_LONG).show();
-        }else{
-            Log.d(TAG,"Number of Rows is: " + cake_entries);
-            int i=0;
-            while(data_cakes.moveToNext()){
-                cakes = new ItemModel(data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),
-                        "FIRST_NAME",
-                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
-                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
-                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)),
-                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
-                );
-                Log.d(TAG, "onCreate: colID is: " + data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
 
-                cakeList.add(i, cakes);
-               Log.i(TAG, data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)) +" "
-                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)) + " "
-                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)) + " " +
-                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
-                );
-                Log.i(TAG,cakeList.get(i).getName());
-                i++;
-            }
+        cakeList = myDB.getItemListByCategory("CAKE");
+
+
+
+
+//        Cursor data_cakes = myDB.getItemContents("CAKE");
+//        int cake_entries = data_cakes.getCount();
+//        if(cake_entries == 0){
+//            Toast.makeText(List_Added_Cakes.this,"List is Empty",Toast.LENGTH_LONG).show();
+//        }else{
+//            Log.d(TAG,"Number of Rows is: " + cake_entries);
+//            int i=0;
+//            while(data_cakes.moveToNext()){
+//                cakes = new ItemModel(data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)),
+//                        "FIRST_NAME",
+//                        data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
+//                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
+//                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)),
+//                        data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
+//                );
+//                Log.d(TAG, "onCreate: colID is: " + data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID)));
+//
+//                cakeList.add(i, cakes);
+//               Log.i(TAG, data_cakes.getString(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)) +" "
+//                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)) + " "
+//                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL5_QUANTITY)) + " " +
+//                        +data_cakes.getInt(data_cakes.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
+//                );
+//                Log.i(TAG,cakeList.get(i).getName());
+//                i++;
+//            }
+
+
 
             ItemListAdapter customAdapterItemList_cakes =  new ItemListAdapter(this,R.layout.adapter_item_list_columns, cakeList);
             listview_cakes = findViewById(R.id.lv_itemlist);
@@ -119,7 +129,7 @@ public class List_Added_Cakes extends AppCompatActivity {
                 }
             });
 
-        }
+//        }
 
     }
 }

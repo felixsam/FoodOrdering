@@ -92,7 +92,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     break;
                 }
 
-                if (flagUsersExist == Boolean.TRUE && database.usernameExists(username)){
+                if (database.usernameExists(username)){
                     User login_user = database.getUser(username);
                     String login_name = login_user.getFirstName();
                     int login_id = login_user.getUserID();
