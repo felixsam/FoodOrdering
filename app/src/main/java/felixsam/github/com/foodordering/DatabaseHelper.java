@@ -830,7 +830,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + ", " + ITEMS_COL3_ITEM_NAME
                         + ", " + ITEMS_COL4_PRICE
                         + " FROM " + TABLE_NAME_ITEMS
-                        + " WHERE " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL7_ORDERID + " IS NULL";
+                        + " WHERE " + ITEMS_COL2_USER_ID + " = " + user_id + " AND " + ITEMS_COL7_ORDERID + " = 0";
         return db.rawQuery(query, null);
     }
 

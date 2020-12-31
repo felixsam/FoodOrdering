@@ -63,44 +63,27 @@ public class CheckoutActivity extends AppCompatActivity{
         tv_username.setText("Name: " + username);
         Double sub_total = 0.00;
 
-        //get the data and append to a list
-//        Cursor data = mDatabaseHelper.getData_checkout(userID);
+
         checkout_list = mDatabaseHelper.getCheckoutItems(userID);
-//        int numRows = data.getCount();
-//        if(numRows == 0){
-//            Log.d(TAG,"Number of Rows is: " + numRows);
-//            toastMessage("The Database is empty :( ");
-//        }else{
-//            Log.d(TAG,"Number of Rows is: " + numRows);
-//            int i = 0;
-//            while(data.moveToNext()){
-//                Checkout checkout = new Checkout(
-//                        data.getInt(data.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID)),
-//                        data.getString(data.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME)),
-//                        data.getDouble(data.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE)),
-//                        data.getInt(data.getColumnIndex("total_quantity")),
-//                        data.getDouble(data.getColumnIndex("total_price")));
-//                sub_total += data.getDouble(data.getColumnIndex("total_price"));
-//                checkout_list.add(i, checkout);
-//                i++;
-//            }
 
-            //truncate to 2 decimal places
-            DecimalFormat df = new DecimalFormat("#.##");
-            Double tax = sub_total*0.12;
-            Double grand_total = sub_total + tax;
+        for (int i = 0; i< checkout_list.size();i++){
+            sub_total += checkout_list.get(i).getTotalAmount();
+        }
+
+        //truncate to 2 decimal places
+        DecimalFormat df = new DecimalFormat("#.##");
+        Double tax = sub_total*0.12;
+        Double grand_total = sub_total + tax;
 
 
 
-            tv_subtotal.setText("Subtotal: $" + df.format(sub_total));
-            tv_tax.setText("Tax (12%): $" + df.format(tax));
-            tv_total.setText("Total Price: $" + df.format(grand_total));
-            CheckoutAdapter adapter = new CheckoutAdapter(this, R.layout.adapter_checkout_single_item, checkout_list);
-            rv_checkout.setLayoutManager(new LinearLayoutManager(this));
-            rv_checkout.setHasFixedSize(true);
-            rv_checkout.setAdapter(adapter);
-
-       // }
+        tv_subtotal.setText("Subtotal: $" + df.format(sub_total));
+        tv_tax.setText("Tax (12%): $" + df.format(tax));
+        tv_total.setText("Total Price: $" + df.format(grand_total));
+        CheckoutAdapter adapter = new CheckoutAdapter(this, R.layout.adapter_checkout_single_item, checkout_list);
+        rv_checkout.setLayoutManager(new LinearLayoutManager(this));
+        rv_checkout.setHasFixedSize(true);
+        rv_checkout.setAdapter(adapter);
 
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
