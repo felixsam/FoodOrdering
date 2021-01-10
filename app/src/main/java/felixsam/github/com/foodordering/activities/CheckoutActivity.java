@@ -34,8 +34,6 @@ public class CheckoutActivity extends AppCompatActivity{
 
     private final Globals g = Globals.getInstance();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
