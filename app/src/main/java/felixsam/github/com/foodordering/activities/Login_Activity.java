@@ -51,7 +51,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         autoCompleteTextUsername.setText(database.getTopUserName());
         autoCompleteTextPassword.setText(database.getPassword(database.getTopUserName()));
 
-        ArrayList<User> list_users = new ArrayList<>();
+        ArrayList<User> listUsernames = new ArrayList<>();
 
         btnLogin.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
@@ -60,8 +60,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
-        list_users = database.getAllUsers();
-        adapterDropdownUsername = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_users);
+        listUsernames = database.getAllUsers();
+        adapterDropdownUsername = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listUsernames);
         autoCompleteTextUsername.setAdapter(adapterDropdownUsername);
 
     }
@@ -93,13 +93,13 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 }
 
                 if (database.usernameExists(username)){
-                    User login_user = database.getUser(username);
-                    String login_name = login_user.getFirstName();
-                    int login_id = login_user.getUserID();
+                    User loginUsername = database.getUser(username);
+                    String loginFirstName = loginUsername.getFirstName();
+                    int loginUserId = loginUsername.getUserID();
 
-                    Log.i(TAG,"Setting global user - Login Name: " + login_name + "\n UserID: " + login_id);
-                    g.setUser(login_name);
-                    g.setUser_ID(login_id);
+                    Log.i(TAG,"Setting global user - Login Name: " + loginFirstName + "\n UserID: " + loginUserId);
+                    g.setUser(loginFirstName);
+                    g.setUser_ID(loginUserId);
 
                     intent = new Intent(Login_Activity.this, MainActivity.class);
                     startActivity(intent);
