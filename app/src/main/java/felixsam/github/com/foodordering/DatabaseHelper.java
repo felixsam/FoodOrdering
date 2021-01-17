@@ -821,6 +821,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void checkoutItems(Integer userId, Integer orderId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        String query = "UPDATE " + TABLE_NAME_ITEMS
+                + " SET " + ITEMS_COL7_ORDERID + " = " + orderId
+                + " WHERE " + ITEMS_COL2_USER_ID + " = " + "'" + userId + "'"
+                + " AND " + ITEMS_COL7_ORDERID + " = 0";
+
+        db.execSQL(query);
+
+    }
+
     public Cursor getData_foodid_checkout(Integer user_id){
         SQLiteDatabase db = this.getWritableDatabase();
 

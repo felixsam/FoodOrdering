@@ -94,28 +94,35 @@ public class CheckoutActivity extends AppCompatActivity{
                 }else{
                     Log.d(TAG,"INSERTION FAILED");
                 }
+
+
+
+
+
                 Integer orderID = mDatabaseHelper.getOrderID(userID,currentDateTimeString);
-                Cursor add_order = mDatabaseHelper.getData_foodid_checkout(userID);
-                int numRows = add_order.getCount();
-                if(numRows == 0){
-                    Log.d(TAG,"Number of Rows is: " + numRows);
-                    toastMessage("Nothing to add to Order");
-                }else{
-                    Log.d(TAG,"Number of Rows is: " + numRows);
-                    int i = 0;
-                    while(add_order.moveToNext()){
-                        //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
-                        Log.d(TAG, "ENTRY NUMBER: " + i );
-                        Log.d(TAG, " COL_ID " +  add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID))
-                        + " \n USER_ID " + add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
-                        + " \n ITEM_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME))
-                        + " \n PRICE " + add_order.getDouble(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE))
-                        );
-                        int itemID = add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID));
-                        mDatabaseHelper.setOrderID(itemID,orderID);
-                        i++;
-                    }
-                }
+//                Cursor add_order = mDatabaseHelper.getData_foodid_checkout(userID);
+//                int numRows = add_order.getCount();
+//                if(numRows == 0){
+//                    Log.d(TAG,"Number of Rows is: " + numRows);
+//                    toastMessage("Nothing to add to Order");
+//                }else{
+//                    Log.d(TAG,"Number of Rows is: " + numRows);
+//                    int i = 0;
+//                    while(add_order.moveToNext()){
+//                        //System.out.println(data.getString(1)+" "+data.getInt(2)+" "+data.getString(3)+ " " +data.getInt(4)+" " + data.getInt(5) + " " + data.getInt(6));
+//                        Log.d(TAG, "ENTRY NUMBER: " + i );
+//                        Log.d(TAG, " COL_ID " +  add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID))
+//                        + " \n USER_ID " + add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL2_USER_ID))
+//                        + " \n ITEM_NAME " + add_order.getString(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL3_ITEM_NAME))
+//                        + " \n PRICE " + add_order.getDouble(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL4_PRICE))
+//                        );
+//                        int itemID = add_order.getInt(add_order.getColumnIndex(DatabaseHelper.ITEMS_COL1_ID));
+//                        mDatabaseHelper.setOrderID(itemID,orderID);
+//                        i++;
+//                    }
+//                }
+
+                mDatabaseHelper.checkoutItems(userID,orderID);
                 finish();
 
 
