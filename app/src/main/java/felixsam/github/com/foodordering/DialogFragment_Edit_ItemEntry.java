@@ -52,6 +52,9 @@ public class DialogFragment_Edit_ItemEntry extends DialogFragment {
             }
         });
 
+
+
+        //Delete Item
         (rootView.findViewById(R.id.full_screen_dialog_btn_delete)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,12 +64,14 @@ public class DialogFragment_Edit_ItemEntry extends DialogFragment {
             }
         });
 
+
+        //Update Quantity
         (rootView.findViewById(R.id.full_screen_dialog_btn_update)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Integer new_quantity = Integer.valueOf(et_item_quantity.getText().toString());
-                dbHelper.updateItemQuantity(col_id,new_quantity);
+                Integer newQuantity = Integer.valueOf(et_item_quantity.getText().toString());
+                dbHelper.updateItemQuantity(col_id,newQuantity);
                 dismiss();
                 getActivity().recreate();
             }
