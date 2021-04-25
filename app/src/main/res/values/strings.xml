@@ -56,5 +56,12 @@
     <!-- Adapter Menu Item Card -->
 
 
+    <!-- Adapter Menu Item Card -->
+    <string name="menu_home">Home</string>
+    <string name="menu_foodMenu">Menu</string>
+    <string name="menu_cart">Cart</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_profile">Profile</string>
+    <!-- Adapter Menu Item Card -->
 
 </resources>

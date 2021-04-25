@@ -4,18 +4,28 @@
     android:layout_height="match_parent">
 
     <item
-        android:id="@+id/bottom_navigation_item_logs"
-        android:icon="@drawable/cake_menu"
-        android:title="logs" />
+        android:id="@+id/bottom_navigation_item_home"
+        android:icon="@drawable/material_home"
+        android:title="@string/menu_home" />
 
     <item
-        android:id="@+id/bottom_navigation_item_progress"
-        android:icon="@drawable/drink_menu"
-        android:title="progress" />
+        android:id="@+id/bottom_navigation_item_discover"
+        android:icon="@drawable/material_restaurant_menu"
+        android:title="@string/menu_foodMenu" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_checkout"
+        android:icon="@drawable/material_cart"
+        android:title="@string/menu_cart" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_favourites"
+        android:icon="@drawable/material_star"
+        android:title="@string/menu_favourites" />
 
     <item
         android:id="@+id/bottom_navigation_item_profile"
-        android:icon="@drawable/drink_icon_androi"
-        android:title="profile"/>
+        android:icon="@drawable/material_profile"
+        android:title="@string/menu_profile"/>
 
 </menu>
