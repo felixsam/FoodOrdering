@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import felixsam.github.com.foodordering.adapters.AdapterMenu;
 import felixsam.github.com.foodordering.adapters.AdapterOrderItems;
 
 public class fragmentMenu extends DialogFragment {
@@ -76,18 +77,18 @@ public class fragmentMenu extends DialogFragment {
         };
 
 
-        AdapterOrderItems adapterOrderItems = new AdapterOrderItems(getActivity(),cardImages,cardNames,cardDescriptions);
+        AdapterMenu adapterMenu = new AdapterMenu(getActivity(),cardImages,cardNames,cardDescriptions);
 
-        //GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2,GridLayoutManager.VERTICAL,false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2,GridLayoutManager.VERTICAL,false);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvMenu.getContext(),
                 layoutManager.getOrientation());
         rvMenu.addItemDecoration(dividerItemDecoration);
         rvMenu.setLayoutManager(layoutManager);
         rvMenu.setNestedScrollingEnabled(false);
         rvMenu.setHasFixedSize(true);
-        rvMenu.setAdapter(adapterOrderItems);
+        rvMenu.setAdapter(adapterMenu);
 
 
         return rootView;
