@@ -28,12 +28,12 @@ public class fragmentProfile extends DialogFragment {
 
         ArrayList<Integer> cardImages = new ArrayList<Integer>(){
             {
-                add(R.drawable.drink_menu);
-                add(R.drawable.cake_menu);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
                 add(R.drawable.customer_list);
+                add(R.drawable.folder_bills);
+                add(R.drawable.delivery);
+                add(R.drawable.window_settings);
+                add(R.drawable.agreement);
+                add(R.drawable.sign_out);
             }
         };
         ArrayList<String> cardDescriptions = new ArrayList<String>(){

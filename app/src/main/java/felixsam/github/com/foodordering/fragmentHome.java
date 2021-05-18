@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,61 +26,108 @@ public class fragmentHome extends DialogFragment {
         RecyclerView rvMostRecent = rootView.findViewById(R.id.rv_home_mostRecent);
         RecyclerView rvMostPopular = rootView.findViewById(R.id.rv_home_mostPopular);
 
+        SearchView searchHome = rootView.findViewById(R.id.searchView_Home);
+
+        searchHome.setQueryHint("Search");
+
+
         ArrayList<Integer> cardImages = new ArrayList<Integer>() {
             {
-                add(R.drawable.cake_cheesecake);
-                add(R.drawable.cake_lemon_blueberry);
-                add(R.drawable.cake_chocolate);
-                add(R.drawable.cake_vanilla_sponge);
-                add(R.drawable.cake_angel);
-                add(R.drawable.cake_mango);
-                add(R.drawable.cake_oreo);
-                add(R.drawable.cake_strawberry);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
-                add(R.drawable.customer_list);
+                add(R.drawable.chicken_salad);
+                add(R.drawable.ribeye_steak);
+                add(R.drawable.cucumber_salad);
+                add(R.drawable.hamburger);
+                add(R.drawable.thai_noodle);
             }
         };
 
         ArrayList<String> cardNames = new ArrayList<String>() {
             {
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
+                add("Chicken Salad");
+                add("Rib-eye Steak");
+                add("Cucumber Salad");
+                add("Hamburger");
+                add("Thai noodle");
             }
         };
 
         ArrayList<String> cardDescriptions = new ArrayList<String>() {
             {
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
+                add("Salad");
+                add("Main Course");
+                add("Salad");
+                add("Main Course");
+                add("Appetizer");
+            }
+        };
+
+        ArrayList<Integer> cardImages2 = new ArrayList<Integer>() {
+            {
+                add(R.drawable.hamburger);
+                add(R.drawable.beef_noodle_soup);
+                add(R.drawable.brussel_sprout_sandwich);
+                add(R.drawable.pork_chop);
+                add(R.drawable.cucumber_salad);
+            }
+        };
+
+        ArrayList<String> cardNames2 = new ArrayList<String>() {
+            {
+                add("Hamburger");
+                add("Beef Noodle Soup");
+                add("Brussel Sprout Sandwich");
+                add("Pork Chop");
+                add("Cucumber Salad");
+            }
+        };
+
+        ArrayList<String> cardDescriptions2 = new ArrayList<String>() {
+            {
+                add("Main Course");
+                add("Noodles");
+                add("Appetizer");
+                add("Main Course");
+                add("Salad");
+            }
+        };
+
+        ArrayList<Integer> cardImages3 = new ArrayList<Integer>() {
+            {
+                add(R.drawable.brussel_sprout_sandwich);
+                add(R.drawable.scallops);
+                add(R.drawable.hamburger);
+                add(R.drawable.ribeye_steak);
+                add(R.drawable.beef_noodle_soup);
+                add(R.drawable.cuban_sandwich);
+            }
+        };
+
+        ArrayList<String> cardNames3 = new ArrayList<String>() {
+            {
+                add("Brussel Sprout Sandwich");
+                add("Scallops");
+                add("Hamburger");
+                add("Rib-eye Steak");
+                add("Beef Noodle Soup");
+                add("Cuban Sandwich");
+            }
+        };
+
+        ArrayList<String> cardDescriptions3 = new ArrayList<String>() {
+            {
+                add("Appetizer");
+                add("Hors d'oeuvre");
+                add("Main Course");
+                add("Main Course");
+                add("Soups");
+                add("Appetizer");
             }
         };
 
 
         AdapterHome adapterHome = new AdapterHome(getActivity(), cardImages, cardNames, cardDescriptions);
-        AdapterHome adapterHomeMostRecent = new AdapterHome(getActivity(), cardImages, cardNames, cardDescriptions);
-        AdapterHome adapterHomeMostPopular = new AdapterHome(getActivity(), cardImages, cardNames, cardDescriptions);
+        AdapterHome adapterHomeMostRecent = new AdapterHome(getActivity(), cardImages2, cardNames2, cardDescriptions2);
+        AdapterHome adapterHomeMostPopular = new AdapterHome(getActivity(), cardImages3, cardNames3, cardDescriptions3);
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -100,22 +148,22 @@ public class fragmentHome extends DialogFragment {
 
 
 
-        rvTrending.addItemDecoration(dividerItemDecoration);
+       // rvTrending.addItemDecoration(dividerItemDecoration);
         rvTrending.setLayoutManager(layoutManager);
         rvTrending.setNestedScrollingEnabled(false);
         rvTrending.setHasFixedSize(true);
         rvTrending.setAdapter(adapterHome);
 
-        rvMostPopular.addItemDecoration(dividerItemDecorationMostPopular);
+        //rvMostPopular.addItemDecoration(dividerItemDecorationMostPopular);
         rvMostPopular.setLayoutManager(layoutManagerMostPopular);
         rvMostPopular.setNestedScrollingEnabled(false);
         rvMostPopular.setHasFixedSize(true);
         rvMostPopular.setAdapter(adapterHomeMostPopular);
 
-        rvMostRecent.addItemDecoration(dividerItemDecorationMostRecent);
+        //rvMostRecent.addItemDecoration(dividerItemDecorationMostRecent);
         rvMostRecent.setLayoutManager(layoutManagerMostRecent);
         rvMostRecent.setNestedScrollingEnabled(false);
-        rvMostRecent.setHasFixedSize(true);
+        rvMostRecent.setHasFixedSize(false);
         rvMostRecent.setAdapter(adapterHomeMostRecent);
 
 

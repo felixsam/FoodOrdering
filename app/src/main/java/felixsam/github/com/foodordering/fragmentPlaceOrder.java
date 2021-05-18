@@ -29,43 +29,43 @@ public class fragmentPlaceOrder extends DialogFragment {
         TextView tvTaxAmount = rootView.findViewById(R.id.tv_placeOrder_taxPrice);
         TextView tvTotalAmount = rootView.findViewById(R.id.tv_placeOrder_totalPrice);
 
-        tvTableNumber.setText("Table #8");
-        tvSubtotalAmount.setText("$888");
-        tvTaxAmount.setText("$888");
-        tvTotalAmount.setText("$888");
+        tvTableNumber.setText("Table #7");
+        tvSubtotalAmount.setText("$123");
+        tvTaxAmount.setText("$123");
+        tvTotalAmount.setText("$123");
 
 
 
         ArrayList<Integer> cardImages = new ArrayList<Integer>(){
             {
-                add(R.drawable.drink_menu);
-                add(R.drawable.cake_menu);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
-                add(R.drawable.customer_list);
+                add(R.drawable.ribeye_steak);
+                add(R.drawable.cuban_sandwich);
+                add(R.drawable.pork_chop);
+                add(R.drawable.hamburger);
+                add(R.drawable.thai_noodle);
+                add(R.drawable.chicken_salad);
             }
         };
 
         ArrayList<String> cardNames = new ArrayList<String>(){
             {
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
+                add("Rib-eye Steak");
+                add("Cuban Sandwich");
+                add("Pork Chop");
+                add("Hamburger");
+                add("Thai Noodle");
+                add("Chicken Salad");
             }
         };
 
         ArrayList<String> cardDescriptions = new ArrayList<String>(){
             {
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
+                add("Main Course");
+                add("Appetizer");
+                add("Hors d'oeuvre");
+                add("Main Course");
+                add("Soups");
+                add("Salads");
             }
         };
 

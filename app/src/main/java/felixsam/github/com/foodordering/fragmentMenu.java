@@ -25,54 +25,54 @@ public class fragmentMenu extends DialogFragment {
 
 
 
-        ArrayList<Integer> cardImages = new ArrayList<Integer>(){
+        ArrayList<Integer> cardImages = new ArrayList<Integer>() {
             {
-                add(R.drawable.drink_menu);
-                add(R.drawable.cake_menu);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
-                add(R.drawable.customer_list);
-                add(R.drawable.drink_menu);
-                add(R.drawable.cake_menu);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
-                add(R.drawable.customer_list);
+                add(R.drawable.chicken_salad);
+                add(R.drawable.chicken_wings);
+                add(R.drawable.beef_noodle_soup);
+                add(R.drawable.cucumber_salad);
+                add(R.drawable.hamburger);
+                add(R.drawable.scallops);
+                add(R.drawable.ribeye_steak);
+                add(R.drawable.thai_noodle);
+                add(R.drawable.brussel_sprout_sandwich);
+                add(R.drawable.cuban_sandwich);
+                add(R.drawable.pork_chop);
+                add(R.drawable.shrimp);
             }
         };
 
         ArrayList<String> cardNames = new ArrayList<String>(){
             {
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
+                add("Chicken Salad");
+                add("Chicken Wings");
+                add("Beef Noodle Soup");
+                add("Cucumber Salad");
+                add("Hamburger");
+                add("Scallops");
+                add("Rib-eye Steak");
+                add("Thai Noodle");
+                add("Brussel Sprout Sandwich");
+                add("Cuban Sandwich");
+                add("Pork Chop");
+                add("Shrimp");
             }
         };
 
         ArrayList<String> cardDescriptions = new ArrayList<String>(){
             {
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
+                add("Salad");
+                add("Appetizer");
+                add("Soup");
+                add("Salad");
+                add("Main Course");
+                add("Appetizer");
+                add("Main Course");
+                add("Noodles");
+                add("Appetizer");
+                add("Appetizer");
+                add("Main Course");
+                add("Hors d'oeuvre");
             }
         };
 
@@ -84,7 +84,7 @@ public class fragmentMenu extends DialogFragment {
         //LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvMenu.getContext(),
                 layoutManager.getOrientation());
-        rvMenu.addItemDecoration(dividerItemDecoration);
+        //rvMenu.addItemDecoration(dividerItemDecoration);
         rvMenu.setLayoutManager(layoutManager);
         rvMenu.setNestedScrollingEnabled(false);
         rvMenu.setHasFixedSize(true);

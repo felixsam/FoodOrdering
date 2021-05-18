@@ -26,34 +26,34 @@ public class fragmentFavourites extends DialogFragment {
 
         ArrayList<Integer> cardImages = new ArrayList<Integer>(){
             {
-                add(R.drawable.drink_menu);
-                add(R.drawable.cake_menu);
-                add(R.drawable.cocktail_menu);
-                add(R.drawable.checkout_menu);
-                add(R.drawable.order_menu);
-                add(R.drawable.customer_list);
+                add(R.drawable.cuban_sandwich);
+                add(R.drawable.chicken_salad);
+                add(R.drawable.shrimp);
+                add(R.drawable.beef_noodle_soup);
+                add(R.drawable.hamburger);
+                add(R.drawable.ribeye_steak);
             }
         };
 
         ArrayList<String> cardNames = new ArrayList<String>(){
             {
-                add("Name 1");
-                add("Name 2");
-                add("Name 3");
-                add("Name 4");
-                add("Name 5");
-                add("Name 6");
+                add("Cuban Sandwich");
+                add("Chicken Salad");
+                add("Shrimp");
+                add("Beef Noodle Soup");
+                add("Hamburger");
+                add("Rib-eye Steak");
             }
         };
 
         ArrayList<String> cardDescriptions = new ArrayList<String>(){
             {
-                add("Customer List");
-                add("Order List");
-                add("Delivery Support");
-                add("Settings");
-                add("Terms of use");
-                add("Sign out");
+                add("Appetizer");
+                add("Salad");
+                add("Hors d'oeuvre");
+                add("Main Course");
+                add("Main Course");
+                add("Main Course");
             }
         };
 
@@ -62,7 +62,7 @@ public class fragmentFavourites extends DialogFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvFavouritesList.getContext(),
                 layoutManager.getOrientation());
-        rvFavouritesList.addItemDecoration(dividerItemDecoration);
+        //rvFavouritesList.addItemDecoration(dividerItemDecoration);
         rvFavouritesList.setLayoutManager(layoutManager);
         rvFavouritesList.setNestedScrollingEnabled(false);
         rvFavouritesList.setAdapter(adapterFavourites);
