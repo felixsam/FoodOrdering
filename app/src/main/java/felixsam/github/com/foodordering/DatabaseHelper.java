@@ -788,6 +788,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor data = db.rawQuery("SELECT " + ITEMS_COL2_USER_ID + ", " +
                         ITEMS_COL3_ITEM_NAME + ", " +
+                        ITEMS_COL6_CATEGORY + ", " +
                         ITEMS_COL4_PRICE + ", total_quantity" +
                         ", total_price" +
                         " FROM " +
@@ -813,6 +814,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     data.getInt(data.getColumnIndex("total_quantity")),
                     data.getDouble(data.getColumnIndex("total_price"))
             );
+
+            //Placeholder set Category for item Description
+            checkoutItem.setCategory(data.getString(data.getColumnIndex(ITEMS_COL6_CATEGORY)));
 
             checkoutList.add(checkoutItem);
         }

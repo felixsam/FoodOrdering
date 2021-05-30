@@ -9,6 +9,10 @@ public class Checkout implements Comparable<Checkout> {
     private Integer totalQuantity;
     private double totalAmount;
 
+
+    //Add category placeholder
+    private String category;
+
     public Checkout(Integer userId, String itemName, double itemPrice, Integer totalQuantity, double totalAmount){
         this.userId = userId;
         this.itemName = itemName;
@@ -16,6 +20,15 @@ public class Checkout implements Comparable<Checkout> {
         this.totalQuantity = totalQuantity;
         this.totalAmount = totalAmount;
 
+    }
+
+    //Category
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     //User ID
