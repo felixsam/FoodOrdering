@@ -4,13 +4,17 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +54,62 @@ public class fragmentCocktailMenu extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.activity_cocktail, container, false);
 
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = rootView.findViewById(R.id.navBar_cocktail);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_navigation_item_favourites);
+
+
+        //bottom hav handler
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                //initialize fragment Manager
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                switch (item.getItemId()){
+                    case R.id.bottom_navigation_item_home:
+                        System.out.println("Home");
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_menu:
+                        System.out.println("Menu");
+                        fragmentMenu fragmentMenu = new fragmentMenu();
+                        transaction.add(android.R.id.content,fragmentMenu).addToBackStack(null).commit();
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_checkout:
+                        System.out.println("Checkout");
+
+                        fragmentPlaceOrder fragmentPlaceOrder = new fragmentPlaceOrder();
+                        transaction.add(android.R.id.content,fragmentPlaceOrder).addToBackStack(null).commit();
+                        dismiss();
+
+                        break;
+
+                    case R.id.bottom_navigation_item_favourites:
+                        System.out.println("Cocktail Menu");
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_profile:
+                        System.out.println("Profile");
+
+                        fragmentProfile fragmentProfile = new fragmentProfile();
+                        transaction.add(android.R.id.content,fragmentProfile).addToBackStack(null).commit();
+                        dismiss();
+
+                        break;
+                }
+                return true;
+            }
+        });
+        //End of bottom hav handler
+
         recyclerView = rootView.findViewById(R.id.rv_cocktail_search_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
@@ -64,7 +125,8 @@ public class fragmentCocktailMenu extends DialogFragment {
                 //json_search_cocktail(query);
                 search_cocktail_name(query);
 
-                return false;
+                search_cocktail.clearFocus();
+                return true;
             }
 
             @Override

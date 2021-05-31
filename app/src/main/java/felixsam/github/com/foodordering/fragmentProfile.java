@@ -3,13 +3,19 @@ package felixsam.github.com.foodordering;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +31,10 @@ public class fragmentProfile extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         RecyclerView rvProfileList = rootView.findViewById(R.id.rv_profileList);
+
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = rootView.findViewById(R.id.navBar_Menu_Profile);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_navigation_item_profile);
 
         ArrayList<Integer> cardImages = new ArrayList<Integer>(){
             {
@@ -56,6 +66,54 @@ public class fragmentProfile extends DialogFragment {
         rvProfileList.setNestedScrollingEnabled(false);
         rvProfileList.setAdapter(adapterProfileCards);
 
+        //bottom hav handler
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                //initialize fragment Manager
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                switch (item.getItemId()){
+                    case R.id.bottom_navigation_item_home:
+                        System.out.println("Home");
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_menu:
+                        System.out.println("Menu");
+                        fragmentMenu fragmentMenu = new fragmentMenu();
+                        transaction.add(android.R.id.content,fragmentMenu).addToBackStack(null).commit();
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_checkout:
+                        System.out.println("Checkout");
+
+                        fragmentPlaceOrder fragmentPlaceOrder = new fragmentPlaceOrder();
+                        transaction.add(android.R.id.content,fragmentPlaceOrder).addToBackStack(null).commit();
+                        dismiss();
+
+                        break;
+
+                    case R.id.bottom_navigation_item_favourites:
+                        System.out.println("Cocktail Menu");
+                        fragmentCocktailMenu fragmentCocktailMenu = new fragmentCocktailMenu();
+                        transaction.add(android.R.id.content,fragmentCocktailMenu).addToBackStack(null).commit();
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_profile:
+                        System.out.println("Profile");
+
+                        break;
+                }
+                return true;
+            }
+        });
+        //End of bottom hav handler
 
         return rootView;
     }

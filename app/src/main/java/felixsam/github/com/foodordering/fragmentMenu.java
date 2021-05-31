@@ -2,14 +2,21 @@ package felixsam.github.com.foodordering;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -23,7 +30,9 @@ public class fragmentMenu extends DialogFragment {
         View rootView = inflater.inflate(R.layout.fragment_menu,container,false);
         RecyclerView rvMenu = rootView.findViewById(R.id.rv_menuList);
 
-
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = rootView.findViewById(R.id.navBar_Menu);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_navigation_item_menu);
 
         ArrayList<Integer> cardImages = new ArrayList<Integer>() {
             {
@@ -52,7 +61,7 @@ public class fragmentMenu extends DialogFragment {
                 add("Scallops");
                 add("Rib-eye Steak");
                 add("Thai Noodle");
-                add("Brussel Sprout Sandwich");
+                add("Sprout Sandwich");
                 add("Cuban Sandwich");
                 add("Pork Chop");
                 add("Shrimp");
@@ -76,8 +85,25 @@ public class fragmentMenu extends DialogFragment {
             }
         };
 
+        ArrayList<String> cardPrices = new ArrayList<String>(){
+            {
+                add("$1.99");
+                add("$2.99");
+                add("$3.99");
+                add("$1.99");
+                add("$2.99");
+                add("$3.99");
+                add("$1.99");
+                add("$2.99");
+                add("$3.99");
+                add("$1.99");
+                add("$2.99");
+                add("$3.99");
+            }
+        };
 
-        AdapterMenu adapterMenu = new AdapterMenu(getActivity(),cardImages,cardNames,cardDescriptions);
+
+        AdapterMenu adapterMenu = new AdapterMenu(getActivity(),cardImages,cardNames,cardDescriptions,cardPrices);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2,GridLayoutManager.VERTICAL,false);
 
@@ -89,6 +115,59 @@ public class fragmentMenu extends DialogFragment {
         rvMenu.setNestedScrollingEnabled(false);
         rvMenu.setHasFixedSize(true);
         rvMenu.setAdapter(adapterMenu);
+
+
+
+        //bottom hav handler
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                //initialize fragment Manager
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                switch (item.getItemId()){
+                    case R.id.bottom_navigation_item_home:
+                        System.out.println("Home");
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_menu:
+                        System.out.println("Menu");
+                        break;
+
+                    case R.id.bottom_navigation_item_checkout:
+                        System.out.println("Checkout");
+
+                        fragmentPlaceOrder fragmentPlaceOrder = new fragmentPlaceOrder();
+                        transaction.add(android.R.id.content,fragmentPlaceOrder).addToBackStack(null).commit();
+                        dismiss();
+
+                        break;
+
+                    case R.id.bottom_navigation_item_favourites:
+                        System.out.println("Cocktail Menu");
+                        //fragmentFavourites fragmentFavourite = new fragmentFavourites();
+                        fragmentCocktailMenu fragmentCocktailMenu = new fragmentCocktailMenu();
+                        transaction.add(android.R.id.content,fragmentCocktailMenu).addToBackStack(null).commit();
+                        dismiss();
+                        break;
+
+                    case R.id.bottom_navigation_item_profile:
+                        System.out.println("Profile");
+
+                        fragmentProfile fragmentProfile = new fragmentProfile();
+                        transaction.add(android.R.id.content,fragmentProfile).addToBackStack(null).commit();
+                        dismiss();
+
+                        break;
+                }
+                return true;
+            }
+        });
+        //End of bottom hav handler
 
 
         return rootView;

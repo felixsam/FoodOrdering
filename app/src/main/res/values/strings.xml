@@ -2,7 +2,7 @@
     <string name="app_name">Foodíí</string>
 
     <!-- Activity Login -->
-    <string name="text_login">Sign In</string>
+    <string name="text_login">Sign In to Continue</string>
     <string name="btn_login">Login</string>
     <string name="btn_register">Sign Up</string>
     <string name="hint_username">User Name</string>
@@ -60,7 +60,9 @@
     <string name="menu_home">Home</string>
     <string name="menu_foodMenu">Menu</string>
     <string name="menu_cart">Cart</string>
+    <string name="menu_placeOrder">Place Order</string>
     <string name="menu_favourites">Favourites</string>
+    <string name="menu_cocktails">Cocktails</string>
     <string name="menu_profile">Profile</string>
     <!-- Adapter Menu Item Card -->
 

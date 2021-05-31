@@ -2,9 +2,11 @@ package felixsam.github.com.foodordering.adapters;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +23,9 @@ public class CardHolderCheckout extends RecyclerView.ViewHolder{
     private final TextView tv_item_quantity;
     private final TextView tv_item_price;
     private final TextView tv_total_item_price;
+    private final CardView cardView;
+    private final Button btn_edit;
+    private final Button btn_delete;
     private Checkout checkout_model;
     private final Map<String,Integer> item_ImageMap;
     private final ImageView item_image;
@@ -48,11 +53,14 @@ public class CardHolderCheckout extends RecyclerView.ViewHolder{
 
 
         this.mcontext = context;
+        this.cardView = itemView.findViewById(R.id.cvAdapterCheckout);
         this.item_image = itemView.findViewById(R.id.adapter_checkout_item_image);
         this.tv_item_name = itemView.findViewById(R.id.tv_checkout_item_name);
         this.tv_item_price = itemView.findViewById(R.id.tv_checkout_item_price);
         this.tv_item_quantity = itemView.findViewById(R.id.tv_checkout_item_total_quantity);
         this.tv_total_item_price = itemView.findViewById(R.id.tv_checkout_item_total_price);
+        this.btn_edit = itemView.findViewById(R.id.adapter_checkout_btn_edit);
+        this.btn_delete = itemView.findViewById(R.id.adapter_checkout_btn_delete);
     }
 
     public void bindCheckoutItem(Checkout checkout){
@@ -64,5 +72,17 @@ public class CardHolderCheckout extends RecyclerView.ViewHolder{
         this.tv_item_price.setText("Price: $"+ checkout_model.getPrice());
         this.tv_item_quantity.setText("Quantity: " +checkout_model.getTotalQuantity().toString());
         this.tv_total_item_price.setText("Total Price: $" + checkout_model.getTotalAmount());
+    }
+
+    public CardView getCardView(){
+        return this.cardView;
+    }
+
+    public Button getBtn_edit(){
+        return this.btn_edit;
+    }
+
+    public Button getBtn_delete(){
+        return this.btn_delete;
     }
 }

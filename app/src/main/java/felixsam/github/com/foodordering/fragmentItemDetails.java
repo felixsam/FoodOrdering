@@ -30,7 +30,7 @@ import static java.lang.Integer.valueOf;
 public class fragmentItemDetails extends DialogFragment {
 
     double itemPrice;
-    DecimalFormat df = new DecimalFormat("#.##");
+    DecimalFormat df = new DecimalFormat("#.00");
     String itemName;
     int currentQuantity;
     String category;
@@ -44,6 +44,8 @@ public class fragmentItemDetails extends DialogFragment {
         TextView itemDesc = rootView.findViewById(R.id.tv_itemDetailsDescription);
         TextView tv_Quantity = rootView.findViewById(R.id.tv_itemDetailsQuantity);
         itemPrice = Double.parseDouble(getArguments().getString("ITEM_PRICE").replaceAll("[^\\d.]", ""));
+        currentQuantity = 1;
+
 
         ImageButton btn_minusQuantity = rootView.findViewById(R.id.btn_itemDetailsMinusQuantity);
         ImageButton btn_plusQuantity = rootView.findViewById(R.id.btn_itemDetailsPlusQuantity);
@@ -118,6 +120,7 @@ public class fragmentItemDetails extends DialogFragment {
                         + "\n Category: " + category);
 
                 dbHelper.addItem(userId,itemName,itemPrice,currentQuantity,category);
+                dismiss();
             }
         });
 

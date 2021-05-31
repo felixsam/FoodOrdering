@@ -102,7 +102,6 @@ public class CheckoutActivity extends AppCompatActivity{
                 }
 
 
-
                 Integer orderID = mDatabaseHelper.getOrderID(userID,currentDateTimeString);
 
                 mDatabaseHelper.checkoutItems(userID,orderID);

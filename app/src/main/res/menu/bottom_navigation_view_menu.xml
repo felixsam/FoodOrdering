@@ -9,19 +9,19 @@
         android:title="@string/menu_home" />
 
     <item
-        android:id="@+id/bottom_navigation_item_discover"
-        android:icon="@drawable/material_restaurant_menu"
+        android:id="@+id/bottom_navigation_item_menu"
+        android:icon="@drawable/material_menu"
         android:title="@string/menu_foodMenu" />
 
     <item
         android:id="@+id/bottom_navigation_item_checkout"
-        android:icon="@drawable/material_cart"
-        android:title="@string/menu_cart" />
+        android:icon="@drawable/material_restaurant_menu"
+        android:title="@string/menu_placeOrder" />
 
     <item
         android:id="@+id/bottom_navigation_item_favourites"
-        android:icon="@drawable/material_star"
-        android:title="@string/menu_favourites" />
+        android:icon="@drawable/ic_baseline_wine_bar_24"
+        android:title="@string/menu_cocktails" />
 
     <item
         android:id="@+id/bottom_navigation_item_profile"

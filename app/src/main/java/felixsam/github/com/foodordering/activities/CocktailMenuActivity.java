@@ -57,7 +57,6 @@ public class CocktailMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cocktail);
         this.setTitle("Cocktail Search");
         mQueue = Volley.newRequestQueue(this);
-        simpleProgressBar = findViewById(R.id.progressBar_cocktail);
         simpleProgressBar.setVisibility(View.VISIBLE);
 
         cocktail_list = new ArrayList<Cocktail>();

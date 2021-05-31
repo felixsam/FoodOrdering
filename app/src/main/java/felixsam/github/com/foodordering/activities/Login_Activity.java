@@ -51,8 +51,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         autoCompleteTextUsername.setText(database.getTopUserName());
         autoCompleteTextPassword.setText(database.getPassword(database.getTopUserName()));
 
-        ArrayList<User> listUsernames = new ArrayList<>();
-
         btnLogin.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
 
@@ -60,7 +58,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
-        listUsernames = database.getAllUsers();
+        ArrayList<User> listUsernames = database.getAllUsers();
         adapterDropdownUsername = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listUsernames);
         autoCompleteTextUsername.setAdapter(adapterDropdownUsername);
 

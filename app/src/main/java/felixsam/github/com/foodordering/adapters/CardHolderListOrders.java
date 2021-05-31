@@ -46,7 +46,18 @@ public class CardHolderListOrders extends RecyclerView.ViewHolder{
         item_ImageMap.put("Mocha",R.drawable.drink_mocha);
         item_ImageMap.put("Pumpkin Spice Latte",R.drawable.drink_pumpkin_spice);
 
-
+        item_ImageMap.put("Chicken Salad",R.drawable.chicken_salad);
+        item_ImageMap.put("Chicken Wings",R.drawable.chicken_wings);
+        item_ImageMap.put("Beef Noodle Soup",R.drawable.beef_noodle_soup);
+        item_ImageMap.put("Cucumber Salad",R.drawable.cucumber_salad);
+        item_ImageMap.put("Hamburger",R.drawable.hamburger);
+        item_ImageMap.put("Scallops",R.drawable.scallops);
+        item_ImageMap.put("Rib-eye Steak",R.drawable.ribeye_steak);
+        item_ImageMap.put("Thai Noodle",R.drawable.thai_noodle);
+        item_ImageMap.put("Sprout Sandwich",R.drawable.brussel_sprout_sandwich);
+        item_ImageMap.put("Cuban Sandwich",R.drawable.cuban_sandwich);
+        item_ImageMap.put("Pork Chop",R.drawable.pork_chop);
+        item_ImageMap.put("Shrimp",R.drawable.shrimp);
 
         this.mcontext = context;
         this.item_image = itemView.findViewById(R.id.adapter_order_single_item_image);

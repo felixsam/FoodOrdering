@@ -1,9 +1,13 @@
 package felixsam.github.com.foodordering.adapters;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
+import felixsam.github.com.foodordering.DialogFragment_Edit_ItemEntry;
 import felixsam.github.com.foodordering.R;
 import felixsam.github.com.foodordering.activities.AddCustomerActivity;
 import felixsam.github.com.foodordering.activities.CakeMenuActivity;
@@ -22,6 +27,9 @@ import felixsam.github.com.foodordering.activities.DrinkMenuActivity;
 import felixsam.github.com.foodordering.activities.List_Orders;
 import felixsam.github.com.foodordering.activities.MainActivity;
 import felixsam.github.com.foodordering.activities.MapActivity;
+import felixsam.github.com.foodordering.fragmentCakeMenu;
+import felixsam.github.com.foodordering.fragmentCheckout;
+import felixsam.github.com.foodordering.fragmentCocktailMenu;
 
 public class AdapterDashboardCards extends RecyclerView.Adapter<AdapterDashboardCards.MyViewHolder>{
     private Context mContext;
@@ -74,14 +82,40 @@ public class AdapterDashboardCards extends RecyclerView.Adapter<AdapterDashboard
                     Intent intent = new Intent(v.getContext(), DrinkMenuActivity.class);
                     mContext.startActivity(intent);
                 }else if (position == 1) {
-                    Intent intent = new Intent(v.getContext(), CakeMenuActivity.class);
-                    mContext.startActivity(intent);
+
+
+                    FragmentManager fragmentManger = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                    fragmentCakeMenu newFragment = new fragmentCakeMenu();
+                    FragmentTransaction transaction = fragmentManger.beginTransaction();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    transaction.add(android.R.id.content,newFragment).addToBackStack(null).commit();
+
+
+
+//                    Intent intent = new Intent(v.getContext(), CakeMenuActivity.class);
+//                    mContext.startActivity(intent);
                 }else if (position == 2){
-                    Intent intent = new Intent(v.getContext(), CocktailMenuActivity.class);
-                    mContext.startActivity(intent);
+
+                    FragmentManager fragmentManger = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                    fragmentCocktailMenu newFragment = new fragmentCocktailMenu();
+                    FragmentTransaction transaction = fragmentManger.beginTransaction();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    transaction.add(android.R.id.content,newFragment).addToBackStack(null).commit();
+
+//                    Intent intent = new Intent(v.getContext(), CocktailMenuActivity.class);
+//                    mContext.startActivity(intent);
+
+
                 }else if (position == 3) {
-                    Intent intent = new Intent(v.getContext(), CheckoutActivity.class);
-                    mContext.startActivity(intent);
+
+                    FragmentManager fragmentManger = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                    fragmentCheckout newFragment = new fragmentCheckout();
+                    FragmentTransaction transaction = fragmentManger.beginTransaction();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    transaction.add(android.R.id.content,newFragment).addToBackStack(null).commit();
+
+//                    Intent intent = new Intent(v.getContext(), CheckoutActivity.class);
+//                    mContext.startActivity(intent);
                 }else if (position == 4){
                     Intent intent = new Intent(v.getContext(), List_Orders.class);
                     mContext.startActivity(intent);
